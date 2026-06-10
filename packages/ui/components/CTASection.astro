@@ -1,0 +1,71 @@
+---
+export interface Props {
+  headline: string;
+  body: string;
+  primaryCtaText: string;
+  primaryCtaHref: string;
+  secondaryCtaText?: string;
+  secondaryCtaHref?: string;
+}
+const { headline, body, primaryCtaText, primaryCtaHref, secondaryCtaText, secondaryCtaHref } = Astro.props;
+---
+<section class="section cta-section">
+  <!-- Glowing background orb for the Shine -->
+  <div class="glow-orb orb-accent" style="top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;"></div>
+
+  <div class="container container--narrow reveal" style="position: relative; z-index: 2;">
+    <div class="cta-box">
+      <h2 class="cta-section__headline">{headline}</h2>
+      <p class="cta-section__body">{body}</p>
+      <div class="cta-section__actions">
+        <a href={primaryCtaHref} class="btn btn--primary">{primaryCtaText}</a>
+        {secondaryCtaText && secondaryCtaHref && (
+          <a href={secondaryCtaHref} class="btn btn--secondary">{secondaryCtaText}</a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    background-color: transparent;
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--space-20);
+  }
+
+  .cta-box {
+    background-color: rgba(255, 255, 255, 0.02);
+    backdrop-filter: var(--surface-blur);
+    -webkit-backdrop-filter: var(--surface-blur);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: var(--space-12) var(--space-8);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    position: relative;
+  }
+
+  .cta-section__headline {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-6);
+    color: var(--ink);
+  }
+
+  .cta-section__body {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-inline: auto;
+    margin-bottom: var(--space-8);
+    max-width: var(--max-w-prose);
+  }
+
+  .cta-section__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+  }
+</style>
+

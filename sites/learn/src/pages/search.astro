@@ -1,0 +1,180 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Tìm kiếm — SBB Learn"
+  description="Tìm kiếm tất cả bài viết, cẩm nang, tài liệu và chủ đề kiến thức trên SBB Learn."
+  site="learn"
+  currentPath="/search"
+>
+  <section class="section search-page">
+    <div class="container container--narrow reveal">
+      <h1 class="font-headline search-title">Tìm kiếm tri thức</h1>
+      <p class="search-desc">Tìm kiếm nhanh các bài phân tích, cẩm nang du học, visa J-1 và tài liệu từ SBB.</p>
+
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Nhập từ khóa tìm kiếm (ví dụ: J-1, GRP, CV...)" class="search-input" />
+        <div id="search-results" class="search-results"></div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  // Pagefind Client-side Integration
+  window.addEventListener('DOMContentLoaded', async () => {
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const resultsContainer = document.getElementById('search-results');
+    
+    if (!searchInput || !resultsContainer) return;
+    
+    let pagefind: any;
+    try {
+      const pagefindUrl = '/pagefind/' + 'pagefind.js';
+      // @ts-ignore
+      pagefind = await import(/* @vite-ignore */ pagefindUrl);
+      await pagefind.init();
+    } catch (e) {
+      console.warn("Pagefind index is not available during dev server. Build the project to verify search.", e);
+      resultsContainer.innerHTML = '<p class="search-notice">Tìm kiếm sẽ hoạt động hoàn chỉnh sau khi build dự án (production build). Ở chế độ chạy thử nghiệm (dev server), Pagefind index chưa được khởi tạo.</p>';
+      return;
+    }
+    
+    searchInput.addEventListener('input', async (e: any) => {
+      const query = e.target.value.trim();
+      if (query.length < 2) {
+        resultsContainer.innerHTML = '';
+        return;
+      }
+      
+      resultsContainer.innerHTML = '<p class="search-loading">Đang tìm kiếm...</p>';
+      
+      const search = await pagefind.search(query);
+      if (search.results.length === 0) {
+        resultsContainer.innerHTML = '<p class="search-empty">Không tìm thấy bài viết hoặc tài liệu nào phù hợp.</p>';
+        return;
+      }
+      
+      resultsContainer.innerHTML = '';
+      
+      // Load top 10 results
+      const topResults = search.results.slice(0, 10);
+      for (const result of topResults) {
+        const data = await result.data();
+        
+        const resultItem = document.createElement('div');
+        resultItem.className = 'search-result-item';
+        
+        // Structure and render the result
+        resultItem.innerHTML = `
+          <h3 class="search-result-item__title">
+            <a href="${data.url}">${data.meta.title || 'Bài viết'}</a>
+          </h3>
+          <p class="search-result-item__excerpt">${data.excerpt || ''}</p>
+        `;
+        resultsContainer.appendChild(resultItem);
+      }
+    });
+  });
+</script>
+
+<style>
+  .search-page {
+    padding-block: var(--space-16);
+  }
+  .search-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-2);
+  }
+  .search-desc {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-10);
+  }
+
+  .search-box {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .search-input {
+    width: 100%;
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-full);
+    background: var(--paper-warm);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: var(--text-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+    background: var(--paper);
+  }
+
+  .search-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+  }
+
+  :global(.search-result-item) {
+    background: var(--paper-warm);
+    border: 1px solid var(--line);
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+  :global(.search-result-item:hover) {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  
+  :global(.search-result-item__title) {
+    font-size: var(--text-lg);
+    font-family: var(--font-body);
+    font-weight: var(--weight-semibold);
+    margin-bottom: var(--space-2);
+  }
+  :global(.search-result-item__title a) {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  :global(.search-result-item__title a:hover) {
+    color: var(--accent);
+  }
+  
+  :global(.search-result-item__excerpt) {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+  
+  :global(.search-result-item__excerpt mark) {
+    background: rgba(46, 74, 63, 0.15);
+    color: var(--accent);
+    font-weight: var(--weight-semibold);
+    padding-inline: 2px;
+  }
+
+  :global(.search-notice, .search-loading, .search-empty) {
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+    text-align: center;
+    padding-block: var(--space-8);
+  }
+  
+  :global(.search-notice) {
+    background: var(--paper-warm);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+  }
+</style>

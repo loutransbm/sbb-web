@@ -1,0 +1,221 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import SectionBlock from '@ui/components/SectionBlock.astro';
+import ProgramCard from '@ui/components/ProgramCard.astro';
+---
+
+<PageLayout
+  title="SBB Learn — Trung tâm tri thức chuẩn bị ra nước ngoài"
+  description="Thư viện bài học, lộ trình học tập, cẩm nang và hướng dẫn từng bước để bạn tự tin làm việc quốc tế."
+  site="learn"
+  currentPath="/"
+>
+  <div class="learn-home">
+    <!-- Hero / Intro -->
+    <section class="section learn-hero">
+      <div class="container container--narrow text-center reveal">
+        <h1 class="font-headline learn-hero__title">Chuẩn bị kỹ, đi xa hơn.</h1>
+        <p class="learn-hero__subtitle">
+          SBB Learn là thư viện tri thức mở, cung cấp tài liệu và lộ trình học tập độc lập để bạn tự chuẩn bị năng lực trước khi nộp hồ sơ bất kỳ chương trình nào.
+        </p>
+
+        <!-- Search CTA -->
+        <div class="search-cta">
+          <a href="/search" class="search-cta__button">
+            <span class="search-cta__icon">🔍</span>
+            <span class="search-cta__placeholder">Tìm kiếm bài viết, tài liệu, chủ đề...</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topics Grid -->
+    <section class="section learn-topics">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 class="font-headline section-title">Các chủ đề kiến thức chính</h2>
+          <p class="section-subtitle">Chọn chủ đề bạn muốn bắt đầu học để nâng cấp bản thân.</p>
+        </div>
+
+        <div class="grid-3">
+          <ProgramCard
+            title="Tư duy ra thế giới"
+            description="Tìm hiểu thế giới quan, rèn luyện tư duy phản biện, cách giải quyết vấn đề và chuẩn bị tâm thế vững vàng khi đi xa."
+            href="/tu-duy-ra-the-gioi"
+          />
+          <ProgramCard
+            title="Reality Check"
+            description="Những sự thật chân thực về cuộc sống, làm việc và chi phí tại nước ngoài giúp bạn đưa ra quyết định tỉnh táo."
+            href="/reality-check"
+          />
+          <ProgramCard
+            title="Internship J-1 Mỹ"
+            description="Mọi quy định về visa J-1, cách phỏng vấn với host company ở Mỹ, chuẩn bị hồ sơ và kinh nghiệm làm việc thực tế."
+            href="/internship-j1"
+          />
+          <ProgramCard
+            title="GRP Foundation"
+            description="Lộ trình nâng cấp năng lực làm việc thực tế, tác phong làm việc chuẩn quốc tế và ngoại ngữ chuyên ngành."
+            href="/grp"
+          />
+          <ProgramCard
+            title="Office Tour"
+            description="Kinh nghiệm thực hành, trải nghiệm văn hóa và cẩm nang từ những chuyến đi thực tế ngắn hạn vào doanh nghiệp."
+            href="/office-tour"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning Paths & Parent Corner Section -->
+    <section class="section learn-features">
+      <div class="container grid-2">
+        <div class="feature-card reveal">
+          <h3 class="font-headline feature-card__title">Lộ trình học tập</h3>
+          <p class="feature-card__desc">
+            Bạn muốn đi làm ở Mỹ nhưng chưa biết bắt đầu từ đâu? Xem lộ trình học tập được thiết kế sẵn theo từng bước từ khám phá đến hành động.
+          </p>
+          <a href="/paths" class="btn btn--primary">Xem các lộ trình</a>
+        </div>
+
+        <div class="feature-card reveal">
+          <h3 class="font-headline feature-card__title">Dành cho Phụ huynh</h3>
+          <p class="feature-card__desc">
+            Không gian cung cấp góc nhìn, thông tin chính xác về an toàn, tài chính và định hướng nghề nghiệp giúp cha mẹ đồng hành cùng con cái.
+          </p>
+          <a href="/parent-corner" class="btn btn--secondary">Góc phụ huynh</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Free Resources CTA -->
+    <section class="section resources-cta">
+      <div class="container container--narrow text-center reveal">
+        <h2 class="font-headline" style="font-size: var(--text-2xl); margin-bottom: var(--space-4);">Tài liệu miễn phí</h2>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-8);">
+          Tải các mẫu CV chuẩn ATS, checklist chuẩn bị phỏng vấn, cẩm nang visa được tổng hợp bởi đội ngũ SBB.
+        </p>
+        <a href="/resources" class="btn btn--ghost">Tải tài liệu ngay &rarr;</a>
+      </div>
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .learn-hero {
+    background: var(--paper-warm);
+    border-bottom: 1px solid var(--line);
+    padding-block: var(--space-16);
+  }
+  .learn-hero__title {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+  }
+  .learn-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin-inline: auto;
+    margin-bottom: var(--space-8);
+    line-height: var(--leading-relaxed);
+  }
+
+  .search-cta {
+    max-width: 500px;
+    margin-inline: auto;
+  }
+  .search-cta__button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-5);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    color: var(--text-muted);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+  .search-cta__button:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+    color: var(--ink-soft);
+  }
+  .search-cta__icon {
+    font-size: var(--text-lg);
+  }
+
+  .learn-topics {
+    padding-block: var(--space-16);
+  }
+  .section-header {
+    margin-bottom: var(--space-10);
+    text-align: center;
+  }
+  .section-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-2);
+  }
+  .section-subtitle {
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  @media (min-width: 640px) {
+    .grid-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .learn-features {
+    border-top: 1px solid var(--line);
+    padding-block: var(--space-16);
+    background: var(--paper-warm);
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  @media (min-width: 768px) {
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .feature-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .feature-card__title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-3);
+    color: var(--accent);
+  }
+  .feature-card__desc {
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-6);
+  }
+
+  .resources-cta {
+    border-top: 1px solid var(--line);
+    padding-block: var(--space-16);
+  }
+</style>

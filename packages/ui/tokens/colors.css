@@ -1,0 +1,46 @@
+/* ============================================
+   SBB Design Tokens — Colors (OmniDigital Orange & Black Theme)
+   ============================================ */
+
+:root {
+  /* Core Palette */
+  --paper:       #070201;      /* Main deep warm black background */
+  --paper-2:     #120603;      /* Secondary dark warm gray background */
+  --ink:         #FFFFFF;      /* Primary white text */
+  --ink-soft:    #C5C5C7;      /* Secondary light gray text */
+  --ink-muted:   #747476;      /* Muted captions */
+  --on-ink:      #070201;      /* Dark text on light tags */
+  
+  /* Midnight black for full-bleed contrast */
+  --ink-heavy:   #000000;
+  
+  /* Accent Palette (Omni Orange) */
+  --accent:      #FF5E3A;      /* Vibrant neon orange */
+  --accent-2:    #FF8D60;      /* Secondary warm orange */
+  --accent-light:rgba(255, 94, 58, 0.1); /* Translucent orange */
+  
+  /* Borders and Grid dots */
+  --line:        #26262A;      /* Dark gray line for borders */
+  --line-dark:   #3A3A40;
+  --grid-dot:    rgba(255, 255, 255, 0.05); /* Dot grid color */
+  
+  /* Semantic Mapping */
+  --bg-primary:   var(--paper);
+  --bg-secondary: var(--paper-2);
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-soft);
+  --text-muted:   var(--ink-muted);
+  --border:       var(--line);
+  --interactive:  var(--accent);
+  --interactive-hover: var(--accent-2);
+  
+  /* Surface overlays */
+  --surface-card:    #120603;
+  --surface-overlay: #1C0A05;
+  
+  /* Neo-Brutalist shadows (contrast orange/white shadows instead of black) */
+  --shadow-sm: 2px 2px 0px var(--accent);
+  --shadow-md: 4px 4px 0px var(--accent);
+  --shadow-lg: 6px 6px 0px var(--accent);
+}
+

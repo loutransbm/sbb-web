@@ -1,0 +1,35 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import HubLayout from '@ui/components/HubLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('learn');
+const parentArticles = allArticles
+  .filter(art => art.data.lang_kinh === 'phu-huynh')
+  .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+
+const articlesData = parentArticles.map(art => ({
+  title: art.data.title,
+  slug: art.id,
+  excerpt: art.data.description,
+  date: art.data.published.toLocaleDateString('vi-VN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
+  href: `/${art.data.cum_chinh}/${art.id}`
+}));
+---
+
+<PageLayout
+  title="Góc Phụ Huynh — SBB Learn"
+  description="Các bài viết, phân tích chi tiết giúp cha mẹ đồng hành tốt nhất cùng con trên con đường bước ra thế giới."
+  site="learn"
+  currentPath="/parent-corner"
+>
+  <HubLayout
+    title="Góc Phụ Huynh"
+    description="Chia sẻ, giải đáp thắc mắc về an toàn, tài chính và định hướng phát triển sự nghiệp quốc tế cho con cái."
+    articles={articlesData}
+  />
+</PageLayout>

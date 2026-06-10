@@ -1,0 +1,180 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import EmptyState from '@ui/components/EmptyState.astro';
+import CTASection from '@ui/components/CTASection.astro';
+
+const blocks = [
+  {
+    num: '01',
+    title: 'Vì sao SBB tồn tại',
+    body: 'Vì đi ra thế giới không nên là đặc quyền. Nhưng đi mà không sẵn sàng thì phí. SBB tồn tại để rút ngắn khoảng cách giữa "muốn đi" và "đi được thật".',
+  },
+  {
+    num: '02',
+    title: 'Vai trò trong cộng đồng',
+    body: 'SBB kết nối những người trẻ muốn đi thật với những cơ hội nghề thật ở nước ngoài. Đồng thời xây dựng cộng đồng để người đi trước dẫn đường cho người đi sau.',
+  },
+];
+---
+
+<PageLayout
+  title="Về SBB"
+  description="SBB là ai, vì sao tồn tại, và điều SBB không phải."
+  site="sbb"
+  currentPath="/about"
+>
+
+  <!-- ===== Mở đầu ===== -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="reveal">
+        <span class="eyebrow">About SBB</span>
+        <h1 class="title">SBB là ai</h1>
+        <p class="intro">SBB là những người đã đi trước bạn một đoạn đường. Đủ gần để hiểu bạn đang lo gì, đủ thẳng để nói thật, và đủ trách nhiệm để không buông tay bạn giữa chừng.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Hai khối đầu ===== -->
+  <section class="section block">
+    <div class="container container--narrow">
+      {blocks.map((b) => (
+        <article class="abblock reveal">
+          <span class="abblock__num">{b.num}</span>
+          <div>
+            <h2 class="abblock__title">{b.title}</h2>
+            <p class="abblock__body">{b.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== Reality Check (full-bleed) ===== -->
+  <section class="reality">
+    <div class="container container--narrow reveal">
+      <span class="eyebrow eyebrow--accent">Reality Check</span>
+      <h2 class="reality__title">Điều SBB <span class="accent-text">không phải</span>.</h2>
+      <p class="reality__statement">SBB không phải công ty du học, không phải môi giới visa, không phải đội sale chạy số.</p>
+    </div>
+  </section>
+
+  <!-- ===== Triết lý + Câu chuyện ===== -->
+  <section class="section block">
+    <div class="container container--narrow">
+      <article class="abblock reveal">
+        <span class="abblock__num">03</span>
+        <div>
+          <h2 class="abblock__title">Triết lý</h2>
+          <p class="statement">SBB làm kinh doanh để nuôi được việc chúng tôi tin. Nếu một chương trình kiếm ra tiền nhưng không tốt cho người học, đó không phải đường SBB đi.</p>
+        </div>
+      </article>
+
+      <article class="abblock reveal">
+        <span class="abblock__num">04</span>
+        <div>
+          <h2 class="abblock__title">Câu chuyện SBB</h2>
+          <EmptyState message="Đang cập nhật" />
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <CTASection
+    headline="Bước tiếp theo"
+    body="Xem chương trình phù hợp, hoặc ghé cộng đồng để nghe tiếng nói thật từ người đã đi."
+    primaryCtaText="Xem chương trình"
+    primaryCtaHref="/programs"
+    secondaryCtaText="Vào cộng đồng"
+    secondaryCtaHref="/community"
+  />
+
+</PageLayout>
+
+<style>
+  .eyebrow {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-5);
+  }
+  .eyebrow--accent { color: var(--accent-2); }
+  .accent-text { color: var(--accent); }
+
+  .title {
+    font-size: var(--text-4xl);
+    text-transform: none;
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-6);
+  }
+  .intro {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .block { padding-block: clamp(2.5rem, 2rem + 3vw, 4.5rem); }
+
+  .abblock {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-6);
+    padding-block: var(--space-8);
+    border-top: 1px solid var(--line);
+  }
+  .abblock:first-child { border-top: none; padding-top: 0; }
+  .abblock__num {
+    font-family: var(--font-headline);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    color: var(--accent);
+    line-height: 1;
+  }
+  .abblock__title {
+    font-size: var(--text-2xl);
+    text-transform: none;
+    margin-bottom: var(--space-4);
+  }
+  .abblock__body {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+  .statement {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    font-style: italic;
+    line-height: var(--leading-snug);
+    color: var(--ink-soft);
+    border-left: 3px solid var(--accent);
+    padding-left: var(--space-5);
+  }
+
+  /* Reality full-bleed */
+  .reality {
+    background-color: var(--ink-heavy);
+    background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+    background-size: 22px 22px;
+    padding-block: clamp(3.5rem, 3rem + 5vw, 7rem);
+    border-block: 1px solid var(--line);
+  }
+  .reality__title {
+    font-size: var(--text-4xl);
+    text-transform: none;
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-6);
+  }
+  .reality__statement {
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl);
+    font-style: italic;
+    line-height: var(--leading-snug);
+    color: var(--ink-soft);
+    border-left: 3px solid var(--accent);
+    padding-left: var(--space-6);
+    max-width: none;
+  }
+</style>

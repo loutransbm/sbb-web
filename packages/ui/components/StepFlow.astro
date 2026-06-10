@@ -1,0 +1,93 @@
+---
+export interface Props {
+  steps: { title: string; description: string }[];
+  ctaText?: string;
+  ctaHref?: string;
+}
+const { steps, ctaText, ctaHref } = Astro.props;
+---
+<div class="step-flow reveal">
+  <div class="step-flow__list">
+    {steps.map((step, i) => (
+      <div class="step-flow__item">
+        <div class="step-flow__marker">
+          <span class="step-flow__number">{String(i + 1).padStart(2, '0')}</span>
+          {i < steps.length - 1 && <span class="step-flow__line" aria-hidden="true"></span>}
+        </div>
+        <div class="step-flow__content">
+          <h3 class="step-flow__title">{step.title}</h3>
+          <p class="step-flow__desc">{step.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+  {ctaText && ctaHref && (
+    <a href={ctaHref} class="btn btn--primary step-flow__cta">{ctaText}</a>
+  )}
+</div>
+
+<style>
+  .step-flow { max-width: var(--max-w-content); position: relative; }
+  .step-flow__list { display: flex; flex-direction: column; }
+  .step-flow__item {
+    display: flex;
+    gap: var(--space-6);
+    position: relative;
+  }
+  .step-flow__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .step-flow__number {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    background-color: rgba(255, 255, 255, 0.04);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+    font-family: var(--font-headline);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    flex-shrink: 0;
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+  .step-flow__item:hover .step-flow__number {
+    transform: scale(1.05);
+    background-color: var(--accent);
+    color: #FFFFFF;
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(255, 94, 58, 0.3);
+  }
+  .step-flow__line {
+    width: 0;
+    border-left: 1.5px dotted rgba(255, 255, 255, 0.25); /* Translucent dotted line representing paths */
+    flex: 1;
+    min-height: 2.5rem;
+    margin-block: var(--space-2);
+  }
+  .step-flow__content {
+    padding-bottom: var(--space-8);
+  }
+  .step-flow__title {
+    font-family: var(--font-headline);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-medium);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+  .step-flow__desc {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: var(--leading-normal);
+  }
+  .step-flow__cta { margin-top: var(--space-4); margin-left: calc(2.25rem + var(--space-6)); }
+  @media (max-width: 480px) {
+    .step-flow__cta { margin-left: 0; }
+  }
+</style>
+

@@ -1,0 +1,172 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import CTASection from '@ui/components/CTASection.astro';
+
+const programs = [
+  {
+    num: '01',
+    title: 'GRP Foundation',
+    tag: 'Nền tảng — bắt buộc',
+    desc: 'Nền chuẩn bị bắt buộc trước khi bước ra. Tư duy, tác phong, năng lực làm việc quốc tế.',
+    href: '/programs/grp',
+  },
+  {
+    num: '02',
+    title: 'Internship / J-1',
+    tag: 'Mũi nhọn hiện tại',
+    desc: 'Đi làm thật ở doanh nghiệp Mỹ theo visa J-1, bằng con đường nghề nghiệp nghiêm túc.',
+    href: '/programs/internship-j1',
+  },
+  {
+    num: '03',
+    title: 'Office Tour',
+    tag: 'Trải nghiệm ngắn',
+    desc: '5 đến 10 ngày vào doanh nghiệp làm việc thật, có người hướng dẫn thật.',
+    href: '/programs/office-tour',
+  },
+  {
+    num: '04',
+    title: 'Đường Úc / 407',
+    tag: 'Chuyên biệt',
+    desc: 'Visa 407 cho một số mảng như Aged Care, Child Care và Hospitality.',
+    href: '/programs/407',
+  },
+];
+---
+
+<PageLayout
+  title="Chương trình"
+  description="Các chương trình trải nghiệm nghề quốc tế của SBB."
+  site="sbb"
+  currentPath="/programs"
+>
+
+  <section class="section">
+    <div class="container">
+      <header class="head reveal">
+        <span class="eyebrow">Chương trình</span>
+        <h1 class="head__title">GRP là cái nền. Trên đó, SBB mở các đường <span class="accent-text">ra thế giới</span>.</h1>
+        <p class="head__lead">Mọi chương trình đều bắt đầu từ GRP, vì SBB không đẩy ai ra thế giới khi họ chưa sẵn sàng. Mũi nhọn hiện tại là thực tập và tu nghiệp quốc tế theo visa J-1 của Mỹ.</p>
+      </header>
+
+      <div class="grid reveal-stagger">
+        {programs.map((p) => (
+          <a href={p.href} class="pcard">
+            <div class="pcard__top">
+              <span class="pcard__num">{p.num}</span>
+              <span class="pcard__tag">{p.tag}</span>
+            </div>
+            <h2 class="pcard__title">{p.title}</h2>
+            <p class="pcard__desc">{p.desc}</p>
+            <span class="pcard__link">Tìm hiểu thêm <span aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    headline="Chưa chắc đường nào hợp?"
+    body="Đặt một buổi nói chuyện. SBB đánh giá hồ sơ và chỉ ra con đường phù hợp nhất với bạn."
+    primaryCtaText="Đặt lịch nói chuyện"
+    primaryCtaHref="/apply"
+    secondaryCtaText="Hiểu về GRP trước"
+    secondaryCtaHref="/programs/grp"
+  />
+
+</PageLayout>
+
+<style>
+  .eyebrow {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-5);
+  }
+  .accent-text { color: var(--accent); }
+
+  .head { max-width: 48rem; margin-bottom: clamp(2.5rem, 2rem + 3vw, 4rem); }
+  .head__title {
+    font-size: var(--text-4xl);
+    line-height: 1.08;
+    letter-spacing: var(--tracking-tight);
+    text-transform: none;
+    margin-bottom: var(--space-5);
+  }
+  .head__lead {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .pcard {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-8) var(--space-6);
+    background-color: var(--surface-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    min-height: 15rem;
+    transition: transform var(--duration-normal) var(--ease-out),
+                border-color var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+  }
+  .pcard:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px -24px rgba(255, 94, 58, 0.5);
+  }
+  .pcard__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-5);
+  }
+  .pcard__num {
+    font-family: var(--font-headline);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    color: var(--accent);
+    line-height: 1;
+  }
+  .pcard__tag {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius-full);
+    padding: 2px 10px;
+  }
+  .pcard__title {
+    font-size: var(--text-2xl);
+    text-transform: none;
+    margin-bottom: var(--space-3);
+  }
+  .pcard__desc {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: var(--leading-normal);
+    margin-bottom: var(--space-6);
+  }
+  .pcard__link {
+    margin-top: auto;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--ink-soft);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+  .pcard:hover .pcard__link { color: var(--accent); }
+</style>

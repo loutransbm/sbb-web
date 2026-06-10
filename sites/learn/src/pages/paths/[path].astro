@@ -1,0 +1,178 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const paths = [
+    { slug: 'chuan-bi-j1-my', title: 'Lộ trình chuẩn bị đi J-1 Mỹ', desc: 'Từ việc hiểu đúng bản chất visa J-1, đánh giá sự phù hợp của bản thân, quy trình kết nối doanh nghiệp đến các bước chuẩn bị trước khi cất cánh.' },
+    { slug: 'tu-duy-toan-cau', title: 'Lộ trình rèn luyện tư duy toàn cầu', desc: 'Xây dựng tác phong làm việc quốc tế, học cách thích nghi với sự bất định và mở rộng thế giới quan ngay tại môi trường học tập hiện tại.' }
+  ];
+  return paths.map(p => ({
+    params: { path: p.slug },
+    props: { path: p.slug, title: p.title, desc: p.desc }
+  }));
+}
+
+const { path, title, desc } = Astro.props;
+
+// Fetch all learn articles matching this learning path
+const allArticles = await getCollection('learn');
+const pathArticles = allArticles
+  .filter(art => art.data.learning_path === path)
+  .sort((a, b) => (a.data.step_number || 0) - (b.data.step_number || 0));
+---
+
+<PageLayout
+  title={`${title} — SBB Learn`}
+  description={desc}
+  site="learn"
+  currentPath={`/paths/${path}`}
+>
+  <section class="section path-detail">
+    <div class="container container--narrow reveal">
+      <a href="/paths" class="back-link">&larr; Quay lại các lộ trình</a>
+      
+      <header class="path-detail__header">
+        <h1 class="font-headline path-detail__title">{title}</h1>
+        <p class="path-detail__desc">{desc}</p>
+      </header>
+
+      {pathArticles.length > 0 ? (
+        <div class="path-timeline">
+          {pathArticles.map((art, i) => (
+            <div class="path-step">
+              <div class="path-step__marker">
+                <span class="path-step__number">{i + 1}</span>
+                {i < pathArticles.length - 1 && <span class="path-step__line"></span>}
+              </div>
+              <div class="path-step__content">
+                <h3 class="path-step__title">
+                  <a href={`/${art.data.cum_chinh}/${art.id}`} class="path-step__link">
+                    {art.data.title}
+                  </a>
+                </h3>
+                <p class="path-step__desc">{art.data.description || 'Bài học của lộ trình.'}</p>
+                <a href={`/${art.data.cum_chinh}/${art.id}`} class="path-step__action">
+                  Bắt đầu học &rarr;
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <p style="color: var(--text-secondary); text-align: center;">Chưa có bài học nào được cấu hình cho lộ trình này.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .path-detail {
+    padding-block: var(--space-12);
+  }
+  .back-link {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: var(--space-6);
+  }
+  .back-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .path-detail__header {
+    margin-bottom: var(--space-12);
+  }
+  .path-detail__title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+  }
+  .path-detail__desc {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .path-timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .path-step {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .path-step__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .path-step__number {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background-color: var(--accent);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+  }
+
+  .path-step__line {
+    width: 2px;
+    flex: 1;
+    min-height: 3rem;
+    background-color: var(--line);
+    margin-block: var(--space-2);
+  }
+
+  .path-step__content {
+    padding-bottom: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .path-step__title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-2);
+  }
+
+  .path-step__link {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .path-step__link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .path-step__desc {
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+  }
+
+  .path-step__action {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .path-step__action:hover {
+    text-decoration: underline;
+  }
+</style>

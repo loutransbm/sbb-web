@@ -1,0 +1,226 @@
+---
+/**
+ * SiteFooter — shared footer across all 3 domains
+ */
+export interface Props {
+  site: 'sbb' | 'news' | 'learn';
+}
+
+const { site } = Astro.props;
+
+const mainLinks = [
+  { label: 'About SBB', href: 'https://sbb.vn/about' },
+  { label: 'Chương trình', href: 'https://sbb.vn/programs' },
+  { label: 'Cộng đồng', href: 'https://sbb.vn/community' },
+  { label: 'Liên hệ', href: 'https://sbb.vn/apply' },
+];
+
+const domainLinks = [
+  { label: 'SBB', href: 'https://sbb.vn', desc: 'Trang chủ' },
+  { label: 'News', href: 'https://news.sbb.vn', desc: 'Tin tức & câu chuyện' },
+  { label: 'Learn', href: 'https://learn.sbb.vn', desc: 'Tìm hiểu' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <!-- Brand -->
+    <div class="footer-brand">
+      <a href="https://sbb.vn" class="footer-logo" aria-label="SBB — Trang chủ">
+        <svg class="logo-star spin-slow" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: var(--space-2); color: var(--accent);">
+          <path d="M12 0L15.5 8.5L24 12L15.5 15.5L12 24L8.5 15.5L0 12L8.5 8.5L12 0Z" fill="currentColor"/>
+        </svg>
+        <span class="footer-logo-text">SBB</span>
+      </a>
+      <p class="footer-tagline">SBB chuẩn bị cho người trẻ Việt đủ sức được tin, được trọng dụng, không chỉ được đi.</p>
+    </div>
+
+    <!-- Nav links -->
+    <nav class="footer-nav" aria-label="Menu phụ">
+      <h4 class="footer-heading">Liên kết</h4>
+      {mainLinks.map((link) => (
+        <a href={link.href} class="footer-link">{link.label}</a>
+      ))}
+    </nav>
+
+    <!-- Domain links -->
+    <nav class="footer-nav" aria-label="Hệ sinh thái SBB">
+      <h4 class="footer-heading">Hệ sinh thái</h4>
+      {domainLinks.map((link) => (
+        <a href={link.href} class="footer-link">
+          <span class="domain-badge">{link.label}</span> — <span class="domain-desc">{link.desc}</span>
+        </a>
+      ))}
+    </nav>
+
+    <!-- Parent shortcut -->
+    <div class="footer-nav">
+      <h4 class="footer-heading">Dành cho phụ huynh</h4>
+      <a href="https://learn.sbb.vn/parent-corner" class="footer-link footer-link--accent">
+        Góc phụ huynh →
+      </a>
+      <a href="https://sbb.vn/apply" class="footer-link">
+        Đặt lịch nói chuyện
+      </a>
+    </div>
+  </div>
+
+  <!-- Giant Outlined Slogan Banner representing the identity -->
+  <div class="footer-slogan-wrap">
+    <div class="footer-slogan-text">SHINE BEYOND BORDERS</div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p class="footer-copy">© {year} SBB. Mọi quyền được bảo lưu.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--paper-2);
+    color: var(--ink-soft);
+    padding-block: var(--space-16) var(--space-8);
+    margin-top: var(--section-py);
+    border-top: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 640px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    }
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .footer-logo-text {
+    font-family: var(--font-headline);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .footer-tagline {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    line-height: var(--leading-normal);
+    max-width: 24rem;
+  }
+
+  .footer-heading {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--ink-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .footer-link {
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: all var(--duration-fast) var(--ease-out);
+    line-height: var(--leading-snug);
+  }
+
+  .footer-link:hover {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  .domain-badge {
+    font-weight: var(--weight-semibold);
+    color: var(--ink);
+  }
+
+  .domain-desc {
+    color: var(--ink-muted);
+  }
+
+  .footer-link--accent {
+    color: var(--ink);
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius-full);
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-body);
+    font-weight: var(--weight-semibold);
+    text-transform: none;
+    text-align: center;
+    width: fit-content;
+  }
+
+  .footer-link--accent:hover {
+    color: var(--on-ink);
+    background-color: var(--accent);
+    border-color: var(--accent);
+    transform: none;
+  }
+
+  /* Giant Outlined Slogan Banner at bottom */
+  .footer-slogan-wrap {
+    margin-block: var(--space-12) var(--space-6);
+    user-select: none;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: var(--space-4) 0;
+  }
+
+  .footer-slogan-text {
+    font-family: var(--font-headline);
+    font-size: clamp(3rem, 1rem + 8vw, 9rem);
+    font-weight: var(--weight-bold);
+    line-height: 0.9;
+    letter-spacing: var(--tracking-wide);
+    text-align: center;
+    white-space: nowrap;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    color: transparent;
+  }
+
+  .footer-bottom {
+    margin-top: var(--space-4);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--line);
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-copy {
+    font-size: var(--text-xs);
+    color: var(--ink-muted);
+  }
+</style>

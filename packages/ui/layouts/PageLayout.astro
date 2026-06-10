@@ -1,0 +1,47 @@
+---
+/**
+ * PageLayout — BaseLayout + SiteHeader + main + SiteFooter
+ */
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../tokens/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonical?: string;
+  site?: 'sbb' | 'news' | 'learn';
+  schemaType?: 'Organization' | 'Article' | 'WebPage';
+  currentPath?: string;
+  /** Header trong suốt, overlay lên hero full-bleed (dùng cho trang chủ kiểu omni) */
+  overlay?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage,
+  canonical,
+  site = 'sbb',
+  schemaType,
+  currentPath = '',
+  overlay = false,
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  canonical={canonical}
+  site={site}
+  schemaType={schemaType}
+>
+  <SiteHeader site={site} currentPath={currentPath} overlay={currentPath === '/' || currentPath === ''} />
+  <main id="main-content">
+    <slot />
+  </main>
+  <SiteFooter site={site} />
+</BaseLayout>

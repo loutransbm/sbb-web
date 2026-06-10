@@ -1,0 +1,94 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import EmptyState from '@ui/components/EmptyState.astro';
+import CTASection from '@ui/components/CTASection.astro';
+
+const blocks = [
+  { title: 'Tiếng nói sinh viên', desc: 'Người đang đi kể lại bằng lời thật của chính họ.' },
+  { title: 'Câu chuyện Alumni', desc: 'Người đã đi và đã về — họ mang gì trở lại.' },
+  { title: 'Mentor & Community', desc: 'Người đi trước dẫn đường cho người đi sau.' },
+  { title: 'Điểm vào cộng đồng', desc: 'Cách tham gia và đồng hành cùng SBB.' },
+];
+---
+<PageLayout title="Cộng đồng SBB" description="Cộng đồng những người trẻ Việt đang đi và đã đi ra thế giới." site="sbb" currentPath="/community">
+
+  <section class="section">
+    <div class="container">
+      <header class="head reveal">
+        <span class="eyebrow">Cộng đồng</span>
+        <h1 class="head__title">Người đi trước <span class="accent-text">dẫn đường</span> cho người đi sau.</h1>
+        <p class="head__lead">Cộng đồng những người trẻ Việt đang đi và đã đi ra thế giới — nơi kinh nghiệm thật được trao tay.</p>
+      </header>
+
+      <div class="cgrid reveal-stagger">
+        {blocks.map((b) => (
+          <div class="ccard">
+            <h2 class="ccard__title">{b.title}</h2>
+            <p class="ccard__desc">{b.desc}</p>
+            <EmptyState message="Đang cập nhật" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    headline="Muốn tham gia?"
+    body="Liên hệ SBB để tìm hiểu cách tham gia cộng đồng và đồng hành cùng những người đi trước."
+    primaryCtaText="Liên hệ SBB"
+    primaryCtaHref="/apply"
+  />
+</PageLayout>
+
+<style>
+  .eyebrow {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-5);
+  }
+  .accent-text { color: var(--accent); }
+
+  .head { max-width: 46rem; margin-bottom: clamp(2.5rem, 2rem + 3vw, 4rem); }
+  .head__title {
+    font-size: var(--text-4xl);
+    line-height: 1.08;
+    letter-spacing: var(--tracking-tight);
+    text-transform: none;
+    margin-bottom: var(--space-5);
+  }
+  .head__lead {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .cgrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+  @media (min-width: 768px) { .cgrid { grid-template-columns: repeat(2, 1fr); } }
+
+  .ccard {
+    padding: var(--space-8) var(--space-6);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background-color: var(--surface-card);
+    transition: border-color var(--duration-normal) var(--ease-out);
+  }
+  .ccard:hover { border-color: var(--line-dark); }
+  .ccard__title {
+    font-size: var(--text-2xl);
+    text-transform: none;
+    margin-bottom: var(--space-2);
+  }
+  .ccard__desc {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: var(--leading-normal);
+  }
+</style>

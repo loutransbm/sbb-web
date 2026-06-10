@@ -1,0 +1,163 @@
+---
+/**
+ * LogoWall — 3 hàng logo chạy vô tận (kiểu omni), logo dạng đồ hoạ SVG.
+ *
+ * ⚠️ Đây là LOGO PLACEHOLDER. Thay bằng file logo thật mà SBB có quyền dùng.
+ *    - Để dùng logo bên thứ ba (UNESCO, tổ chức lớn...) cần có hợp tác/được cấp phép.
+ *    - Cách thay: bỏ ảnh vào /public/logos/ rồi đổi `mark` thành
+ *      `<img src="/logos/ten.svg" alt="Tên" />` trong mảng dưới, hoặc dán SVG mới.
+ */
+
+// Mỗi logo: { name, mark } — mark là SVG monochrome (currentColor).
+type Logo = { name: string; mark: string };
+
+const M = {
+  globe: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="20" cy="20" r="13"/><ellipse cx="20" cy="20" rx="6" ry="13"/><path d="M7 20h26M9 13h22M9 27h22"/></svg>`,
+  shield: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6l11 4v8c0 7-5 12-11 16-6-4-11-9-11-16v-8l11-4z"/><path d="M15 20l4 4 7-8"/></svg>`,
+  hexstar: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 5l13 7.5v15L20 35 7 27.5v-15L20 5z"/><path d="M20 13l2.2 4.6 5 .7-3.6 3.5.9 5L20 24.5l-4.5 2.3.9-5L12.8 18.3l5-.7L20 13z"/></svg>`,
+  concentric: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="20" cy="20" r="13"/><circle cx="20" cy="20" r="7.5"/><circle cx="20" cy="20" r="2.2" fill="currentColor" stroke="none"/></svg>`,
+  peak: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 30l9-15 6 9 4-6 9 12"/><circle cx="29" cy="11" r="3"/></svg>`,
+  book: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 11c-4-2.5-8-3-12-2v18c4-1 8-.5 12 2 4-2.5 8-3 12-2V9c-4-1-8-.5-12 2z"/><path d="M20 11v20"/></svg>`,
+  compass: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="20" cy="20" r="13"/><path d="M25 15l-3 7-7 3 3-7 7-3z" fill="currentColor" stroke="none"/></svg>`,
+  orbit: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="20" cy="20" r="6"/><ellipse cx="20" cy="20" rx="14" ry="6" transform="rotate(35 20 20)"/><circle cx="32" cy="13" r="2.2" fill="currentColor" stroke="none"/></svg>`,
+  grid: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="8" y="8" width="10" height="10" rx="1.5"/><rect x="22" y="8" width="10" height="10" rx="1.5"/><rect x="8" y="22" width="10" height="10" rx="1.5"/><circle cx="27" cy="27" r="5.5"/></svg>`,
+  laurel: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 8v22"/><path d="M20 12c-5 0-8 3-8 8M20 12c5 0 8 3 8 8M20 20c-4 0-7 2.5-7 6M20 20c4 0 7 2.5 7 6"/></svg>`,
+  network: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="14" r="3"/><circle cx="29" cy="12" r="3"/><circle cx="20" cy="28" r="3"/><path d="M13.5 16l4.5 9M27 14.5L22 25M14 14h12"/></svg>`,
+  layers: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 7l13 6.5L20 20 7 13.5 20 7z"/><path d="M7 20l13 6.5L33 20M7 26.5L20 33l13-6.5"/></svg>`,
+};
+
+// Hàng 1, 2, 3 — TODO: thay name + mark bằng logo thật khi có quyền dùng.
+const row1: Logo[] = [
+  { name: 'Global Skills Council', mark: M.globe },
+  { name: 'CIEE', mark: M.shield },
+  { name: 'EduStandards Intl', mark: M.book },
+  { name: 'Competency Board', mark: M.hexstar },
+  { name: 'World Learning', mark: M.orbit },
+  { name: 'Future Workforce', mark: M.peak },
+];
+
+const row2: Logo[] = [
+  { name: 'CETUSA', mark: M.compass },
+  { name: 'Skills Alliance', mark: M.network },
+  { name: 'Global Talent', mark: M.concentric },
+  { name: 'Alliance Abroad', mark: M.laurel },
+  { name: 'Open World', mark: M.grid },
+  { name: 'GES Council', mark: M.layers },
+];
+
+const row3: Logo[] = [
+  { name: 'IEEX', mark: M.hexstar },
+  { name: 'Talent Bridge', mark: M.orbit },
+  { name: 'Intl Exchange', mark: M.globe },
+  { name: 'Standards Org', mark: M.shield },
+  { name: 'Career Frontier', mark: M.compass },
+  { name: 'NextGen Skills', mark: M.network },
+];
+
+const { caption = 'Đồng hành cùng các tổ chức quan tâm tới chuẩn hoá năng lực toàn cầu' } = Astro.props;
+const rows = [
+  { items: row1, dir: 'left', dur: '38s' },
+  { items: row2, dir: 'right', dur: '46s' },
+  { items: row3, dir: 'left', dur: '52s' },
+];
+---
+
+<section class="logowall">
+  <div class="container">
+    <p class="logowall__caption">{caption}</p>
+  </div>
+
+  <div class="logowall__rows">
+    {rows.map((row) => (
+      <div class="lw-row">
+        <div class={`lw-track lw-track--${row.dir}`} style={`--dur:${row.dur}`}>
+          {[...row.items, ...row.items].map((logo) => (
+            <div class="lw-logo" aria-label={logo.name}>
+              <span class="lw-mark" set:html={logo.mark}></span>
+              <span class="lw-name">{logo.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .logowall {
+    padding-block: clamp(3rem, 2.5rem + 3vw, 5rem);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background-color: var(--bg-primary);
+  }
+  .logowall__caption {
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    max-width: 40rem;
+    margin-inline: auto;
+    margin-bottom: var(--space-10);
+  }
+
+  .logowall__rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .lw-row { overflow: hidden; }
+  .lw-track {
+    display: flex;
+    gap: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+    width: max-content;
+    will-change: transform;
+  }
+  .lw-track--left { animation: lw-left var(--dur) linear infinite; }
+  .lw-track--right { animation: lw-right var(--dur) linear infinite; }
+
+  .logowall:hover .lw-track { animation-play-state: paused; }
+
+  @keyframes lw-left  { to { transform: translateX(-50%); } }
+  @keyframes lw-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+  .lw-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+    padding-block: var(--space-2);
+    color: var(--ink-muted);
+    opacity: 0.68;
+    transition: color var(--duration-normal) var(--ease-out),
+                opacity var(--duration-normal) var(--ease-out);
+  }
+  .lw-logo:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+  .lw-mark {
+    display: inline-flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+  }
+  .lw-mark :global(svg) { width: 100%; height: 100%; display: block; }
+  .lw-name {
+    font-family: var(--font-headline);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lw-track { animation: none; }
+    .logowall__rows {
+      overflow-x: auto;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+  }
+</style>

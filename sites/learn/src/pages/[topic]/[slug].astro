@@ -1,0 +1,61 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import ArticleLayout from '@ui/components/ArticleLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allArticles = await getCollection('learn');
+  return allArticles.map(entry => ({
+    params: { topic: entry.data.cum_chinh, slug: entry.id },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const allArticles = await getCollection('learn');
+const readNextResolved = (entry.data.read_next || [])
+  .map(id => allArticles.find(a => a.id === id))
+  .filter(Boolean)
+  .map(a => ({
+    title: a.data.title,
+    slug: a.id,
+    hub: a.data.cum_chinh
+  }));
+
+const topicLabels: Record<string, string> = {
+  'tu-duy-ra-the-gioi': 'Tư duy ra thế giới',
+  'reality-check': 'Reality Check',
+  'internship-j1': 'Internship J-1',
+  'grp': 'GRP Foundation',
+  'office-tour': 'Office Tour'
+};
+
+const breadcrumbs = [
+  { label: 'Học tập', href: '/' },
+  { label: topicLabels[entry.data.cum_chinh] || entry.data.cum_chinh, href: `/${entry.data.cum_chinh}` },
+  { label: entry.data.title }
+];
+const canonicalUrl = `https://learn.sbb.vn/${entry.data.cum_chinh}/${entry.id}`;
+---
+
+<PageLayout
+  title={`${entry.data.title} — SBB Learn`}
+  description={entry.data.description || `Bài học thuộc chuyên đề ${topicLabels[entry.data.cum_chinh]}`}
+  site="learn"
+  currentPath={`/${entry.data.cum_chinh}/${entry.id}`}
+  canonical={canonicalUrl}
+>
+  <ArticleLayout
+    title={entry.data.title}
+    published={entry.data.published.toISOString()}
+    cum_chinh={entry.data.cum_chinh}
+    loai={entry.data.loai}
+    hub={entry.data.hub}
+    readNext={readNextResolved}
+    breadcrumbs={breadcrumbs}
+  >
+    <Content />
+  </ArticleLayout>
+</PageLayout>

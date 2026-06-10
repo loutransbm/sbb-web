@@ -1,0 +1,92 @@
+---
+import Breadcrumb from './Breadcrumb.astro';
+import ClusterBadge from './ClusterBadge.astro';
+import Tag from './Tag.astro';
+import ReadNext from './ReadNext.astro';
+
+export interface Props {
+  title: string;
+  published: string;
+  cum_chinh: string;
+  loai: string;
+  hub: string;
+  readNext: { title: string; slug: string; hub?: string }[];
+  breadcrumbs: { label: string; href?: string }[];
+}
+const { title, published, cum_chinh, loai, hub, readNext, breadcrumbs } = Astro.props;
+
+const dateFormatted = new Date(published).toLocaleDateString('vi-VN', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+---
+<article class="article-layout section">
+  <div class="container container--prose">
+    <Breadcrumb items={breadcrumbs} />
+
+    <header class="article-layout__header">
+      <div class="article-layout__meta">
+        <ClusterBadge cluster={cum_chinh} />
+        <Tag label={loai} />
+        <time class="article-layout__date" datetime={published}>{dateFormatted}</time>
+      </div>
+      <h1 class="article-layout__title">{title}</h1>
+    </header>
+
+    <div class="article-layout__content prose">
+      <slot />
+    </div>
+
+    <ReadNext articles={readNext} />
+  </div>
+</article>
+<style>
+  .article-layout__header { margin-bottom: var(--space-10); }
+  .article-layout__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+  .article-layout__date {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+  .article-layout__title {
+    font-size: var(--text-4xl);
+    line-height: var(--leading-tight);
+  }
+  /* Prose styles for MDX content */
+  .prose :global(h2) {
+    font-size: var(--text-2xl);
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-4);
+  }
+  .prose :global(h3) {
+    font-size: var(--text-xl);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+  }
+  .prose :global(p) {
+    margin-bottom: var(--space-5);
+    line-height: var(--leading-relaxed);
+  }
+  .prose :global(ul), .prose :global(ol) {
+    margin-bottom: var(--space-5);
+    padding-left: var(--space-6);
+  }
+  .prose :global(li) {
+    margin-bottom: var(--space-2);
+    line-height: var(--leading-normal);
+  }
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    padding-left: var(--space-5);
+    margin-block: var(--space-6);
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+  .prose :global(strong) { font-weight: var(--weight-semibold); }
+  .prose :global(a) { color: var(--accent); }
+  .prose :global(a:hover) { color: var(--accent-hover); }
+</style>

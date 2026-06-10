@@ -1,0 +1,51 @@
+---
+export interface Props { title: string; oneLiner: string; }
+const { title, oneLiner } = Astro.props;
+---
+<section class="section pending-page">
+  <div class="container container--narrow">
+    <h1 class="pending-page__title">{title}</h1>
+    <p class="pending-page__liner">{oneLiner}</p>
+    <div class="pending-page__state">
+      <div class="pending-page__badge">Đang cập nhật</div>
+      <p class="pending-page__note">Nội dung chi tiết sẽ sớm được cập nhật. Quay lại sau nhé.</p>
+    </div>
+    <a href="/programs" class="btn btn--secondary pending-page__back">← Quay lại Chương trình</a>
+  </div>
+</section>
+<style>
+  .pending-page { min-height: 50vh; display: flex; align-items: center; }
+  .pending-page__title {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+  }
+  .pending-page__liner {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-12);
+  }
+  .pending-page__state {
+    padding: var(--space-10);
+    border: 1px dashed var(--line-dark);
+    border-radius: var(--radius-lg);
+    background-color: var(--surface-card);
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+  .pending-page__badge {
+    display: inline-block;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--accent-2);
+    background: var(--surface-overlay);
+    padding: var(--space-2) var(--space-5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-4);
+  }
+  .pending-page__note {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+</style>

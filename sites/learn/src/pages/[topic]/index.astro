@@ -1,0 +1,52 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import HubLayout from '@ui/components/HubLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const topics = [
+    { slug: 'tu-duy-ra-the-gioi', label: 'Tư duy ra thế giới', desc: 'Trang bị thế giới quan, tư duy và kỹ năng mềm cốt lõi để bước ra thế giới.' },
+    { slug: 'reality-check', label: 'Reality Check', desc: 'Các bài viết làm rõ các sự thật, thách thức và chuẩn bị tâm lý khi ở nước ngoài.' },
+    { slug: 'internship-j1', label: 'Internship J-1', desc: 'Cẩm nang toàn diện nhất về thực tập tại Mỹ theo diện visa J-1.' },
+    { slug: 'grp', label: 'GRP Foundation', desc: 'Chương trình đào tạo nền tảng năng lực cốt lõi bắt buộc của SBB.' },
+    { slug: 'office-tour', label: 'Office Tour', desc: 'Cẩm nang và kinh nghiệm từ các chương trình trải nghiệm doanh nghiệp ngắn hạn.' }
+  ];
+
+  return topics.map(t => ({
+    params: { topic: t.slug },
+    props: { topic: t.slug, label: t.label, desc: t.desc }
+  }));
+}
+
+const { topic, label, desc } = Astro.props;
+
+const allArticles = await getCollection('learn');
+const filteredArticles = allArticles
+  .filter(art => art.data.cum_chinh === topic)
+  .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+
+const articlesData = filteredArticles.map(art => ({
+  title: art.data.title,
+  slug: art.id,
+  excerpt: art.data.description,
+  date: art.data.published.toLocaleDateString('vi-VN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
+  href: `/${topic}/${art.id}`
+}));
+---
+
+<PageLayout
+  title={`${label} — SBB Learn`}
+  description={desc}
+  site="learn"
+  currentPath={`/${topic}`}
+>
+  <HubLayout
+    title={label}
+    description={desc}
+    articles={articlesData}
+  />
+</PageLayout>

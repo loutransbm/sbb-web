@@ -1,0 +1,79 @@
+---
+export interface Props {
+  quote: string;
+  ctaText: string;
+  ctaHref: string;
+}
+const { quote, ctaText, ctaHref } = Astro.props;
+---
+<section class="section reality-check-block">
+  <!-- Glowing background blobs -->
+  <div class="glow-orb orb-accent" style="top: -100px; right: -50px; opacity: 0.18;"></div>
+  <div class="glow-orb orb-accent" style="bottom: -100px; left: -50px; opacity: 0.15;"></div>
+
+  <div class="container container--narrow reveal" style="position: relative; z-index: 2;">
+    <!-- Sleek Glass Sticker Badge -->
+    <div class="sticker sticker--yellow reality-sticker">Reality Check</div>
+    
+    <div class="reality-check-box glass-panel">
+      <blockquote class="reality-check-block__quote">
+        <p>“{quote}”</p>
+      </blockquote>
+      <a href={ctaHref} class="btn btn--secondary reality-check-block__cta">{ctaText}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reality-check-block {
+    background-color: transparent;
+    padding-block: var(--space-20);
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .reality-sticker {
+    position: absolute;
+    top: calc(var(--space-8) * -1);
+    left: var(--space-4);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wider);
+    z-index: 4;
+  }
+
+  .reality-check-box {
+    padding: var(--space-10) var(--space-8);
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .reality-check-block__quote {
+    border-left: 2px solid var(--accent); /* Sunset Coral Left Line */
+    padding-left: var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+
+  .reality-check-block__quote p {
+    font-family: var(--font-headline);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-relaxed);
+    color: var(--text-primary);
+    max-width: var(--max-w-prose);
+  }
+
+  .reality-check-block__cta {
+    margin-left: var(--space-8);
+  }
+
+  @media (max-width: 640px) {
+    .reality-check-block__cta {
+      margin-left: 0;
+      margin-top: var(--space-4);
+    }
+  }
+</style>
+
+

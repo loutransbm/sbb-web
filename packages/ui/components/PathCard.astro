@@ -1,0 +1,55 @@
+---
+export interface Props {
+  label: string;
+  href: string;
+  description?: string;
+}
+const { label, href, description } = Astro.props;
+---
+<a href={href} class="path-card reveal">
+  <span class="path-card__label">{label}</span>
+  {description && <span class="path-card__desc">{description}</span>}
+  <span class="path-card__arrow" aria-hidden="true">→</span>
+</a>
+
+<style>
+  .path-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-8) var(--space-6);
+    text-decoration: none;
+    color: var(--text-primary);
+    position: relative;
+  }
+
+  .path-card__label {
+    font-family: var(--font-headline);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-snug);
+    color: var(--text-primary);
+  }
+
+  .path-card__desc {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .path-card__arrow {
+    position: absolute;
+    top: var(--space-6);
+    right: var(--space-6);
+    font-size: var(--text-xl);
+    color: var(--accent);
+    transition: transform var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+  }
+
+  .path-card:hover .path-card__arrow {
+    transform: translateX(4px);
+    color: var(--interactive-hover);
+  }
+</style>
+
+

@@ -1,0 +1,81 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import PathCard from '@ui/components/PathCard.astro';
+---
+
+<PageLayout
+  title="Lộ trình học tập — SBB Learn"
+  description="Các lộ trình tự học được cấu trúc theo từng bước giúp bạn chuẩn bị tốt nhất để ra nước ngoài làm việc."
+  site="learn"
+  currentPath="/paths"
+>
+  <section class="section paths-page">
+    <div class="container container--narrow reveal">
+      <h1 class="font-headline paths-title">Lộ trình học tập</h1>
+      <p class="paths-desc">
+        Thay vì đọc các bài viết rời rạc, hãy theo học các lộ trình được sắp xếp từ cơ bản đến nâng cao để chuẩn bị đầy đủ năng lực và tâm thế.
+      </p>
+
+      <div class="paths-list">
+        <div class="path-item">
+          <h2 class="font-headline path-item__title">1. Lộ trình chuẩn bị đi J-1 Mỹ</h2>
+          <p class="path-item__desc">
+            Từ việc hiểu đúng bản chất visa J-1, đánh giá sự phù hợp của bản thân, quy trình kết nối doanh nghiệp đến các bước chuẩn bị trước khi cất cánh.
+          </p>
+          <a href="/paths/chuan-bi-j1-my" class="btn btn--primary">Bắt đầu lộ trình &rarr;</a>
+        </div>
+
+        <div class="path-item">
+          <h2 class="font-headline path-item__title">2. Lộ trình rèn luyện tư duy toàn cầu</h2>
+          <p class="path-item__desc">
+            Xây dựng tác phong làm việc quốc tế, học cách thích nghi với sự bất định và mở rộng thế giới quan ngay tại môi trường học tập hiện tại.
+          </p>
+          <a href="/paths/tu-duy-toan-cau" class="btn btn--secondary">Bắt đầu lộ trình &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .paths-page {
+    padding-block: var(--space-16);
+  }
+  .paths-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-2);
+  }
+  .paths-desc {
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-12);
+  }
+
+  .paths-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .path-item {
+    background: var(--paper-warm);
+    border: 1px solid var(--line);
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .path-item__title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-3);
+    color: var(--accent);
+  }
+
+  .path-item__desc {
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-6);
+  }
+</style>

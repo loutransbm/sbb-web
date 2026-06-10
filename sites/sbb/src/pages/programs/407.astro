@@ -1,0 +1,71 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import CTASection from '@ui/components/CTASection.astro';
+---
+<PageLayout title="Chương trình 407 — Đường Úc" description="Đường Úc qua visa 407 cho Aged Care, Child Care và Hospitality." site="sbb" currentPath="/programs">
+  <section class="section">
+    <div class="container container--narrow">
+      <span class="eyebrow reveal">Chuyên biệt</span>
+      <h1 class="title reveal">Chương trình 407 — Đường Úc</h1>
+      <p class="lead reveal">Ngoài đường Mỹ qua J-1, SBB có đường Úc qua visa 407 cho một số mảng như Aged Care, Child Care và Hospitality. Đây không phải mũi nhọn hiện tại, nhưng nếu bạn đang nhắm các ngành này, hỏi SBB để xem có hợp không.</p>
+
+      <div class="partner-card reveal">
+        <span class="partner-card__label">Đối tác</span>
+        <span class="partner-card__name">Australian Internships</span>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    headline="Muốn tìm hiểu thêm?"
+    body="Đặt lịch nói chuyện để SBB đánh giá xem đường Úc có phù hợp với bạn."
+    primaryCtaText="Đặt lịch nói chuyện"
+    primaryCtaHref="/apply"
+  />
+</PageLayout>
+
+<style>
+  .eyebrow {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-5);
+  }
+  .title {
+    font-size: var(--text-4xl);
+    text-transform: none;
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-6);
+  }
+  .lead {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+  }
+  .partner-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-6);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(160deg, var(--surface-card), var(--bg-primary));
+  }
+  .partner-card__label {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .partner-card__name {
+    font-family: var(--font-headline);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    color: var(--ink);
+  }
+</style>

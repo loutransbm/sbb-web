@@ -1,0 +1,193 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+---
+<PageLayout title="Liên hệ & Đặt lịch" description="Đặt lịch nói chuyện với SBB hoặc gửi thông tin liên hệ." site="sbb" currentPath="/apply">
+
+  <section class="section">
+    <div class="container apply">
+      <!-- Cột trái: dẫn dắt -->
+      <div class="apply__intro reveal">
+        <span class="eyebrow">Liên hệ</span>
+        <h1 class="apply__title">Khi nào bạn thấy sẵn sàng, chúng tôi cùng bạn ngồi nói chuyện một buổi.</h1>
+        <p class="apply__lead">Không chốt sale, không hối. Một buổi nói chuyện thẳng để cùng nhìn xem con đường nào hợp với bạn — kể cả khi câu trả lời là "chưa nên đi vội".</p>
+
+        <ul class="apply__points">
+          <li><span class="apply__dot" aria-hidden="true">↘</span> Đánh giá hồ sơ cá nhân của bạn</li>
+          <li><span class="apply__dot" aria-hidden="true">↘</span> Minh bạch chi phí ngay từ đầu</li>
+          <li><span class="apply__dot" aria-hidden="true">↘</span> Định hướng đúng năng lực, không vẽ vời</li>
+        </ul>
+
+        <div class="apply__booking">
+          <span class="apply__booking-badge">Đang thiết lập</span>
+          <p>Công cụ đặt lịch tự động đang được hoàn thiện. Trong lúc đó, gửi thông tin qua form bên cạnh, SBB sẽ liên hệ lại.</p>
+        </div>
+      </div>
+
+      <!-- Cột phải: form -->
+      <div class="apply__form-wrap reveal">
+        <!-- [PENDING] endpoint — chưa nối backend gửi form -->
+        <form action="#" method="POST" class="cform" id="contact-form">
+          <div class="cform__group">
+            <label for="name" class="cform__label">Họ tên <span class="req">*</span></label>
+            <input type="text" id="name" name="name" required class="cform__input" autocomplete="name" placeholder="Tên của bạn" />
+          </div>
+
+          <div class="cform__group">
+            <label for="contact" class="cform__label">Email hoặc Số điện thoại <span class="req">*</span></label>
+            <input type="text" id="contact" name="contact" required class="cform__input" placeholder="Để SBB liên hệ lại" />
+          </div>
+
+          <fieldset class="cform__group cform__fieldset">
+            <legend class="cform__label">Bạn là</legend>
+            <div class="cform__radios">
+              <label class="cform__radio"><input type="radio" name="role" value="sinh-vien" checked /> <span>Sinh viên</span></label>
+              <label class="cform__radio"><input type="radio" name="role" value="phu-huynh" /> <span>Phụ huynh</span></label>
+              <label class="cform__radio"><input type="radio" name="role" value="khac" /> <span>Khác</span></label>
+            </div>
+          </fieldset>
+
+          <div class="cform__group">
+            <label for="interest" class="cform__label">Ngành / Mối quan tâm</label>
+            <input type="text" id="interest" name="interest" class="cform__input" placeholder="Ví dụ: Hospitality, IT, J-1..." />
+          </div>
+
+          <div class="cform__group">
+            <label for="message" class="cform__label">Lời nhắn</label>
+            <textarea id="message" name="message" rows="4" class="cform__input cform__textarea" placeholder="Bạn muốn SBB biết thêm điều gì?"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--primary cform__submit">Gửi thông tin →</button>
+          <p class="cform__privacy">Thông tin của bạn được bảo mật. SBB không chia sẻ dữ liệu cá nhân với bên thứ ba.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .eyebrow {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-5);
+  }
+
+  .apply {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 2rem + 4vw, 5rem);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .apply { grid-template-columns: 1fr 1fr; }
+  }
+
+  .apply__title {
+    font-size: var(--text-4xl);
+    line-height: 1.08;
+    letter-spacing: var(--tracking-tight);
+    text-transform: none;
+    margin-bottom: var(--space-6);
+  }
+  .apply__lead {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+  }
+  .apply__points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+  .apply__points li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+  }
+  .apply__dot { color: var(--accent); font-weight: var(--weight-bold); }
+
+  .apply__booking {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background-color: var(--surface-card);
+    padding: var(--space-6);
+  }
+  .apply__booking-badge {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--accent-2);
+    margin-bottom: var(--space-3);
+  }
+  .apply__booking p {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  /* Form */
+  .apply__form-wrap {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(160deg, var(--surface-card), var(--bg-primary));
+    padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  }
+  .cform { display: flex; flex-direction: column; gap: var(--space-5); }
+  .cform__group { display: flex; flex-direction: column; gap: var(--space-2); }
+  .cform__fieldset { border: none; padding: 0; margin: 0; }
+
+  .cform__label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--ink-soft);
+  }
+  .req { color: var(--accent); }
+
+  .cform__input {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius-md);
+    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--ink);
+    width: 100%;
+    transition: border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out),
+                background-color var(--duration-fast) var(--ease-out);
+  }
+  .cform__input::placeholder { color: var(--ink-muted); }
+  .cform__input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 3px rgba(255, 94, 58, 0.15);
+  }
+  .cform__textarea { resize: vertical; min-height: 6.5rem; }
+
+  .cform__radios { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-1); }
+  .cform__radio {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+  .cform__radio input[type="radio"] { accent-color: var(--accent); width: 1.1em; height: 1.1em; }
+
+  .cform__submit { align-self: flex-start; margin-top: var(--space-2); }
+  .cform__privacy { font-size: var(--text-xs); color: var(--text-muted); margin: 0; }
+</style>

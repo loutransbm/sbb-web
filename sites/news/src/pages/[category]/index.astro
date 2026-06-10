@@ -1,0 +1,55 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import HubLayout from '@ui/components/HubLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const categories = [
+    { slug: 'tu-duy-ra-the-gioi', label: 'Tư duy ra thế giới', desc: 'Trang bị thế giới quan, góc nhìn đa chiều và tư duy sẵn sàng bước ra toàn cầu.' },
+    { slug: 'reality-check', label: 'Reality Check', desc: 'Những lát cắt chân thật, không tô hồng về cuộc sống và công việc tại nước ngoài.' },
+    { slug: 'internship-j1', label: 'Internship J-1', desc: 'Cẩm nang và chia sẻ thực tế về chương trình Thực tập & Tu nghiệp tại Mỹ.' },
+    { slug: 'grp', label: 'GRP Foundation', desc: 'Hành trình chuẩn bị năng lực cốt lõi trước khi bước ra biển lớn.' },
+    { slug: 'office-tour', label: 'Office Tour', desc: 'Các trải nghiệm thực tiễn ngắn hạn tại các doanh nghiệp nước ngoài.' },
+    { slug: 'tieng-noi-hanh-trinh', label: 'Tiếng nói hành trình', desc: 'Những câu chuyện, chia sẻ từ chính những bạn trẻ đang đi trên con đường của SBB.' }
+  ];
+
+  return categories.map(cat => ({
+    params: { category: cat.slug },
+    props: { category: cat.slug, label: cat.label, desc: cat.desc }
+  }));
+}
+
+const { category, label, desc } = Astro.props;
+
+// Fetch articles belonging to this category
+const allArticles = await getCollection('news');
+const filteredArticles = allArticles
+  .filter(article => article.data.cum_chinh === category)
+  .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+
+// Map to HubLayout format
+const articlesData = filteredArticles.map(article => ({
+  title: article.data.title,
+  slug: article.id,
+  excerpt: article.data.description,
+  date: article.data.published.toLocaleDateString('vi-VN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
+  href: `/${category}/${article.id}`
+}));
+---
+
+<PageLayout
+  title={`${label} — SBB News`}
+  description={desc}
+  site="news"
+  currentPath={`/${category}`}
+>
+  <HubLayout
+    title={label}
+    description={desc}
+    articles={articlesData}
+  />
+</PageLayout>

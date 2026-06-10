@@ -1,0 +1,291 @@
+/* ============================================
+   SBB Global Styles (Neo-Brutalist Editorial)
+   High contrast, thick borders, solid offsets
+   ============================================ */
+
+@import './colors.css';
+@import './typography.css';
+@import './spacing.css';
+
+/* ---- Reset & Base ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: var(--bg-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  min-height: 100dvh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ---- Typography ---- */
+h1, h2, h3, h4 {
+  font-family: var(--font-headline);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: var(--text-hero);
+  font-weight: var(--weight-light);
+}
+
+h2 {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-light);
+}
+
+h3 {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-regular);
+}
+
+h4 { 
+  font-size: var(--text-xl); 
+  font-weight: var(--weight-regular);
+}
+
+p {
+  max-width: var(--max-w-prose);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--interactive);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--interactive-hover);
+  text-decoration-thickness: 2px;
+}
+
+/* ---- Focus states (WCAG) ---- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---- Layout & Containers ---- */
+.container {
+  width: 100%;
+  max-width: var(--max-w-full);
+  margin-inline: auto;
+  padding-inline: var(--section-px);
+  position: relative;
+  z-index: 1;
+}
+
+.container--narrow {
+  max-width: var(--max-w-content);
+}
+
+.container--prose {
+  max-width: var(--max-w-prose);
+}
+
+.section {
+  padding-block: var(--section-py);
+}
+
+/* ---- Buttons (Neo-Brutalist Offsets) ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  padding: var(--space-3) var(--space-6);
+  border: 2px solid var(--text-primary);
+  border-radius: 0px; /* Sharp corners */
+  cursor: pointer;
+  text-decoration: none;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.btn--primary {
+  background-color: var(--accent);
+  color: var(--on-ink);
+  box-shadow: 3px 3px 0px var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+.btn--primary:hover {
+  background-color: var(--accent-2);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px var(--text-primary);
+}
+
+.btn--secondary {
+  background-color: var(--paper-2);
+  color: var(--ink);
+  box-shadow: 3px 3px 0px var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+.btn--secondary:hover {
+  background-color: var(--paper);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px var(--text-primary);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--ink);
+  border-color: transparent;
+  padding-inline: var(--space-2);
+  text-decoration: underline;
+}
+
+.btn--ghost:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ---- Neo-Brutalist Card Resets ---- */
+.path-card, .program-card, .story-card {
+  background-color: var(--bg-secondary) !important;
+  border: 2px solid var(--text-primary) !important;
+  box-shadow: 4px 4px 0px var(--accent) !important; /* Orange brutalist shadow */
+  border-radius: 0px !important; /* Sharp corners */
+  transition: all var(--duration-fast) var(--ease-out) !important;
+}
+
+.path-card:hover, .program-card:hover, .story-card:hover {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--text-primary) !important;
+  transform: translate(-3px, -3px) !important;
+  box-shadow: 7px 7px 0px var(--accent) !important; /* Orange shadow on hover */
+}
+
+/* ---- Highlight Tag (Acid Sticker) ---- */
+.highlight-tag {
+  background-color: var(--accent);
+  color: var(--on-ink);
+  border: 2px solid var(--text-primary);
+  padding: 2px 8px;
+  font-weight: var(--weight-bold);
+  font-family: var(--font-headline);
+  text-transform: uppercase;
+  font-size: var(--text-xs);
+  display: inline-block;
+  box-shadow: 2px 2px 0px var(--text-primary);
+}
+
+/* ---- Divider ---- */
+.divider {
+  border: none;
+  border-top: 2px solid var(--border);
+  margin-block: var(--space-8);
+}
+
+/* ---- Reveal Animation ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---- Heavy Sections (Full-Bleed Contrast) ---- */
+.heavy-section {
+  background-color: var(--ink-heavy) !important;
+  color: var(--on-ink) !important;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.heavy-section h1,
+.heavy-section h2,
+.heavy-section h3,
+.heavy-section h4 {
+  color: var(--on-ink) !important;
+}
+
+.heavy-section p,
+.heavy-section .text-secondary {
+  color: rgba(245, 241, 234, 0.7) !important;
+}
+
+.heavy-section .btn--secondary {
+  background-color: transparent !important;
+  color: var(--on-ink) !important;
+  border-color: rgba(245, 241, 234, 0.4) !important;
+  box-shadow: 3px 3px 0px rgba(245, 241, 234, 0.3) !important;
+}
+
+.heavy-section .btn--secondary:hover {
+  background-color: rgba(245, 241, 234, 0.08) !important;
+  border-color: var(--on-ink) !important;
+  box-shadow: 4px 4px 0px var(--on-ink) !important;
+}
+
+/* ---- Partner / Logo Row Styling ---- */
+.partner-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  opacity: 0.85;
+}
+
+.partner-logo {
+  font-family: var(--font-headline);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--text-secondary);
+}

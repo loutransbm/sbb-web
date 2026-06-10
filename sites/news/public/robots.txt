@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://news.sbb.vn/sitemap.xml

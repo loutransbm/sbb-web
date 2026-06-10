@@ -1,0 +1,165 @@
+---
+/**
+ * BaseLayout — HTML shell cho mọi trang SBB
+ * Loads fonts, design tokens, meta tags, schema.org, viewport reveal script
+ */
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonical?: string;
+  site?: 'sbb' | 'news' | 'learn';
+  schemaType?: 'Organization' | 'Article' | 'WebPage';
+}
+
+const {
+  title,
+  description,
+  ogImage = '',
+  canonical = '',
+  site = 'sbb',
+  schemaType = 'WebPage',
+} = Astro.props;
+
+const siteNames: Record<string, string> = {
+  sbb: 'SBB',
+  news: 'SBB News',
+  learn: 'SBB Learn',
+};
+
+const fullTitle = `${title} — ${siteNames[site]}`;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'SBB',
+  url: 'https://sbb.vn',
+  description: 'SBB chuẩn bị cho người trẻ Việt đủ sức được tin, được trọng dụng, không chỉ được đi.',
+};
+---
+
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+
+  <!-- Canonical -->
+  {canonical && <link rel="canonical" href={canonical} />}
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content={schemaType === 'Article' ? 'article' : 'website'} />
+  <meta property="og:locale" content="vi_VN" />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- Fonts: Cormorant Garamond (Headline) & Be Vietnam Pro (Body/UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Schema.org -->
+  {site === 'sbb' && (
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+  )}
+</head>
+<body>
+  <slot />
+
+  <!-- GSAP & Lenis CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" is:inline></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" is:inline></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.28/dist/lenis.min.js" is:inline></script>
+
+  <!-- Viewport reveal & Smooth Scroll animation -->
+  <script is:inline>
+    // Only run animations if user doesn't prefer reduced motion
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Initialize Lenis
+      if (typeof Lenis !== 'undefined') {
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          touchMultiplier: 1.5,
+        });
+
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Connect Lenis to ScrollTrigger
+        if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
+          lenis.on('scroll', ScrollTrigger.update);
+          gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+          });
+          gsap.ticker.lagSmoothing(0);
+        }
+      }
+
+      // Initialize GSAP reveals
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Stagger list elements reveal
+        gsap.utils.toArray('.reveal-stagger').forEach((container) => {
+          gsap.fromTo(container.children,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.12,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: container,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        });
+
+        // Single element reveals
+        gsap.utils.toArray('.reveal').forEach((el) => {
+          gsap.fromTo(el,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        });
+      }
+    } else {
+      // Fallback: make everything visible immediately
+      document.querySelectorAll('.reveal').forEach((el) => el.style.opacity = 1);
+    }
+  </script>
+</body>
+</html>
+

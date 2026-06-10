@@ -1,0 +1,54 @@
+---
+import StoryCard from './StoryCard.astro';
+import EmptyState from './EmptyState.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  articles: { title: string; slug: string; excerpt?: string; date?: string; href: string }[];
+}
+const { title, description, articles } = Astro.props;
+---
+<section class="section hub-layout">
+  <div class="container">
+    <header class="hub-layout__header reveal">
+      <h1 class="hub-layout__title">{title}</h1>
+      <p class="hub-layout__desc">{description}</p>
+    </header>
+
+    {articles.length > 0 ? (
+      <div class="hub-layout__grid">
+        {articles.map((article) => (
+          <StoryCard
+            title={article.title}
+            excerpt={article.excerpt || ''}
+            href={article.href}
+            date={article.date}
+          />
+        ))}
+      </div>
+    ) : (
+      <EmptyState message="Chưa có bài viết nào trong mục này." />
+    )}
+  </div>
+</section>
+<style>
+  .hub-layout__header { margin-bottom: var(--space-12); max-width: var(--max-w-content); }
+  .hub-layout__title { font-size: var(--text-4xl); margin-bottom: var(--space-4); }
+  .hub-layout__desc {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+  .hub-layout__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  @media (min-width: 640px) {
+    .hub-layout__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .hub-layout__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

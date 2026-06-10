@@ -1,0 +1,177 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import SectionBlock from '@ui/components/SectionBlock.astro';
+---
+
+<PageLayout
+  title="Nhận bản tin từ SBB"
+  description="Đăng ký nhận các bài viết định hướng và Reality Check từ SBB."
+  site="news"
+  currentPath="/subscribe"
+>
+  <div class="subscribe-page section">
+    <div class="container container--narrow reveal">
+      <h1 class="subscribe-title font-headline">Nhận bản tin SBB</h1>
+      <p class="subscribe-desc">
+        Khi có các bài viết Reality Check chất lượng cao, các cập nhật quan trọng từ chính phủ Mỹ/Úc về visa hoặc cẩm nang nghề nghiệp mới, chúng tôi sẽ gửi trực tiếp đến bạn. Không có quảng cáo, không spam.
+      </p>
+
+      <form action="#" method="POST" class="subscribe-form" id="newsletter-form">
+        <div class="form-group">
+          <label for="email" class="form-label">Email của bạn <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="name@example.com" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Bạn là: <span class="required">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="role" value="sinh-vien" checked />
+              <span>Sinh viên / Người đi làm</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="role" value="phu-huynh" />
+              <span>Phụ huynh</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Bạn quan tâm nhất đến:</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="interests" value="j1" />
+              <span>Chương trình J-1 Mỹ</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="interests" value="407" />
+              <span>Chương trình 407 Úc</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="interests" value="reality-check" />
+              <span>Reality Check / Góc nhìn thật</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--block">Đăng ký nhận bản tin</button>
+      </form>
+      
+      <div id="form-success" class="form-success-msg" style="display: none;">
+        <h3>Đăng ký thành công!</h3>
+        <p>Cảm ơn bạn đã quan tâm. Chúng tôi đã ghi nhận email đăng ký của bạn.</p>
+      </div>
+    </div>
+  </div>
+</PageLayout>
+
+<script>
+  const form = document.getElementById('newsletter-form') as HTMLFormElement;
+  const successMsg = document.getElementById('form-success');
+  
+  if (form && successMsg) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Form handling will be implemented later
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+    });
+  }
+</script>
+
+<style>
+  .subscribe-page {
+    padding-block: var(--space-16);
+  }
+  .subscribe-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+  }
+  .subscribe-desc {
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+  }
+  
+  .subscribe-form {
+    background: var(--paper-warm);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  .form-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  
+  .required {
+    color: var(--accent);
+  }
+  
+  .form-input {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: var(--text-base);
+    transition: border-color var(--duration-normal) var(--ease-out);
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  
+  .radio-group, .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-1);
+  }
+  
+  .radio-label, .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-base);
+    cursor: pointer;
+  }
+  
+  .radio-label input, .checkbox-label input {
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: var(--accent);
+  }
+
+  .btn--block {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .form-success-msg {
+    background: var(--paper-warm);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    text-align: center;
+  }
+  .form-success-msg h3 {
+    font-family: var(--font-headline);
+    font-size: var(--text-xl);
+    color: var(--accent);
+    margin-bottom: var(--space-2);
+  }
+</style>

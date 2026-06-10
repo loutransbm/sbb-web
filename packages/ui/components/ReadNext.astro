@@ -1,0 +1,57 @@
+---
+export interface Props {
+  articles: { title: string; slug: string; hub?: string }[];
+}
+const { articles } = Astro.props;
+---
+{articles.length > 0 && (
+  <aside class="read-next" aria-label="Đọc tiếp">
+    <hr class="divider" />
+    <h3 class="read-next__heading">Đọc tiếp</h3>
+    <ul class="read-next__list">
+      {articles.map((article) => (
+        <li>
+          <a href={article.slug.startsWith('http') ? article.slug : `/${article.hub ? article.hub + '/' : ''}${article.slug}`} class="read-next__link">
+            <span class="read-next__title">{article.title}</span>
+            <span class="read-next__arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}
+<style>
+  .read-next { margin-top: var(--space-12); }
+  .read-next__heading {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+  }
+  .read-next__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .read-next__link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+  }
+  .read-next__link:hover {
+    border-color: var(--accent);
+    background-color: var(--accent-light);
+  }
+  .read-next__title { font-weight: var(--weight-medium); font-size: var(--text-base); }
+  .read-next__arrow { color: var(--accent); font-size: var(--text-lg); }
+</style>

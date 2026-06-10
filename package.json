@@ -1,0 +1,21 @@
+{
+  "name": "sbb-web",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev:sbb": "cd sites/sbb && pnpm dev",
+    "dev:news": "cd sites/news && pnpm dev",
+    "dev:learn": "cd sites/learn && pnpm dev",
+    "build": "pnpm -r build",
+    "build:sbb": "cd sites/sbb && pnpm build",
+    "build:news": "cd sites/news && pnpm build",
+    "build:learn": "cd sites/learn && pnpm build",
+    "preview:sbb": "cd sites/sbb && pnpm preview --port 4321",
+    "preview:news": "cd sites/news && pnpm preview --port 4322",
+    "preview:learn": "cd sites/learn && pnpm preview --port 4323"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "dependencies": {
+    "jimp": "^1.6.1"
+  }
+}

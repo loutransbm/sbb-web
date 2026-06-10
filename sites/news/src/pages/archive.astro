@@ -1,0 +1,169 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('news');
+const sortedArticles = allArticles.sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+
+// Group articles by year
+const groupedByYear: Record<number, typeof sortedArticles> = {};
+for (const art of sortedArticles) {
+  const year = art.data.published.getFullYear();
+  if (!groupedByYear[year]) {
+    groupedByYear[year] = [];
+  }
+  groupedByYear[year].push(art);
+}
+
+const years = Object.keys(groupedByYear).map(Number).sort((a, b) => b - a);
+
+const categoryLabels: Record<string, string> = {
+  'tu-duy-ra-the-gioi': 'Tư duy ra thế giới',
+  'reality-check': 'Reality Check',
+  'internship-j1': 'Internship J-1',
+  'grp': 'GRP Foundation',
+  'office-tour': 'Office Tour',
+  'tieng-noi-hanh-trinh': 'Tiếng nói hành trình'
+};
+---
+
+<PageLayout
+  title="Lưu trữ bài viết — SBB News"
+  description="Danh sách toàn bộ các bài viết từ SBB theo thứ tự thời gian."
+  site="news"
+  currentPath="/archive"
+>
+  <section class="section archive-page">
+    <div class="container container--narrow reveal">
+      <h1 class="archive-title font-headline">Lưu trữ bài viết</h1>
+      <p class="archive-desc">Danh sách toàn bộ các bài phân tích, Reality Check và hướng dẫn từ SBB.</p>
+
+      {years.length > 0 ? (
+        <div class="archive-timeline">
+          {years.map(year => (
+            <div class="archive-year-block">
+              <h2 class="archive-year font-headline">{year}</h2>
+              <ul class="archive-list">
+                {groupedByYear[year].map(art => (
+                  <li class="archive-item">
+                    <time class="archive-item__date">
+                      {art.data.published.toLocaleDateString('vi-VN', {
+                        month: '2-digit',
+                        day: '2-digit'
+                      })}
+                    </time>
+                    <div class="archive-item__content">
+                      <a href={`/${art.data.cum_chinh}/${art.id}`} class="archive-item__link">
+                        {art.data.title}
+                      </a>
+                      <span class="archive-item__category">
+                        {categoryLabels[art.data.cum_chinh] || art.data.cum_chinh}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p style="color: var(--text-secondary); text-align: center;">Chưa có bài viết nào trong kho lưu trữ.</p>
+      )}
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .archive-page {
+    padding-block: var(--space-16);
+  }
+  .archive-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-2);
+  }
+  .archive-desc {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-12);
+  }
+
+  .archive-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  .archive-year-block {
+    border-left: 2px solid var(--line);
+    padding-left: var(--space-6);
+    position: relative;
+  }
+
+  .archive-year {
+    font-size: var(--text-2xl);
+    color: var(--accent);
+    margin-bottom: var(--space-4);
+    position: relative;
+  }
+
+  .archive-year::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--space-6) * -1 - 6px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .archive-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .archive-item {
+    display: flex;
+    gap: var(--space-4);
+    align-items: baseline;
+  }
+
+  .archive-item__date {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    font-family: monospace;
+    flex-shrink: 0;
+  }
+
+  .archive-item__content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .archive-item__link {
+    font-size: var(--text-base);
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .archive-item__link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .archive-item__category {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    background: var(--paper-warm);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+  }
+</style>

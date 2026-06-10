@@ -1,0 +1,39 @@
+---
+export interface Props {
+  headline: string;
+  body: string;
+  ctaText?: string;
+  ctaHref?: string;
+  ctaVariant?: 'primary' | 'secondary' | 'ghost';
+  align?: 'left' | 'center';
+  id?: string;
+}
+const { headline, body, ctaText, ctaHref, ctaVariant = 'secondary', align = 'left', id } = Astro.props;
+---
+<section class:list={['section', 'section-block', `align-${align}`]} id={id}>
+  <div class="container container--narrow reveal">
+    <h2 class="section-block__headline">{headline}</h2>
+    <p class="section-block__body">{body}</p>
+    {ctaText && ctaHref && (
+      <a href={ctaHref} class:list={['btn', `btn--${ctaVariant}`, 'section-block__cta']}>
+        {ctaText}
+      </a>
+    )}
+  </div>
+</section>
+<style>
+  .section-block { }
+  .align-center { text-align: center; }
+  .align-center .section-block__body { margin-inline: auto; }
+  .section-block__headline {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-6);
+  }
+  .section-block__body {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+  }
+  .section-block__cta { margin-top: var(--space-2); }
+</style>
