@@ -28,11 +28,8 @@ const year = new Date().getFullYear();
   <div class="container footer-grid">
     <!-- Brand -->
     <div class="footer-brand">
-      <a href="https://sbb.vn" class="footer-logo" aria-label="SBB — Trang chủ">
-        <svg class="logo-star spin-slow" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: var(--space-2); color: var(--accent);">
-          <path d="M12 0L15.5 8.5L24 12L15.5 15.5L12 24L8.5 15.5L0 12L8.5 8.5L12 0Z" fill="currentColor"/>
-        </svg>
-        <span class="footer-logo-text">SBB</span>
+      <a href="https://sbb.vn" class="footer-logo" aria-label="SBB — Shine Beyond Borders">
+        <img src="/brand/sbb-logo-dark.svg" alt="SBB — Shine Beyond Borders" class="footer-logo-img" width="139" height="36" />
       </a>
       <p class="footer-tagline">SBB chuẩn bị cho người trẻ Việt đủ sức được tin, được trọng dụng, không chỉ được đi.</p>
     </div>
@@ -116,11 +113,10 @@ const year = new Date().getFullYear();
     color: var(--ink);
   }
 
-  .footer-logo-text {
-    font-family: var(--font-headline);
-    font-size: var(--text-3xl);
-    font-weight: var(--weight-bold);
-    letter-spacing: var(--tracking-tight);
+  .footer-logo-img {
+    display: block;
+    height: 2.25rem;
+    width: auto;
   }
 
   .footer-tagline {

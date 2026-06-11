@@ -9,14 +9,11 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   currentPath="/"
 >
 
-  <!-- ===== Immersive Omni Hero Section ===== -->
   <section class="omni-hero">
-    <!-- Center Orange/Brown Light Beam Glow Background -->
     <div class="hero-glow-beam"></div>
 
     <div class="container omni-hero__inner">
       
-      <!-- Left Column: Performance Campaigns & Stats -->
       <div class="hero-col hero-col--left">
         <div class="campaign-box hero-anim" style="animation-delay: 0.2s">
           <h2 class="campaign-heading">PRACTICAL<br/>TRAINING</h2>
@@ -32,16 +29,13 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
         </div>
       </div>
 
-      <!-- Center Column: Glossy Central Artwork (The girl on the street photo) -->
       <div class="hero-col hero-col--center hero-anim" style="animation-delay: 0.4s">
         <div class="central-artwork-frame">
           <div class="artwork-image" style="background-image: url('/images/hero_student_transparent.png');"></div>
-          <!-- Abstract 3D Portal shadow layer or glow -->
           <div class="artwork-glow"></div>
         </div>
       </div>
 
-      <!-- Right Column: Marketing Agency & Stats -->
       <div class="hero-col hero-col--right">
         <div class="stat-card stat-card--right hero-anim" style="animation-delay: 1.0s">
           <div class="stat-number">5,000+</div>
@@ -60,7 +54,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
         </div>
       </div>
 
-      <!-- Bottom Floating Giant Heading and Social Links -->
       <div class="hero-bottom-row">
         <div class="giant-bg-text hero-anim" style="animation-delay: 1.2s">SBB</div>
         <div class="social-links hero-anim" style="animation-delay: 1.4s">
@@ -82,7 +75,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     </div>
   </section>
 
-  <!-- ===== Partner Marquee Section ===== -->
   <section class="partner-marquee-section">
     <div class="partner-text-block reveal">
       <h2 class="partner-headline">
@@ -96,7 +88,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       </p>
     </div>
 
-                            <div class="marquee-wrapper">
+    <div class="marquee-wrapper">
       <div class="marquee-track">
         <div class="marquee-content">
           <div class="partner-logo"><img src="/images/partners/marriott.png" alt="Marriott" /></div>
@@ -202,20 +194,15 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     </div>
   </section>
 
-  <!-- ===== Cinema Results Section (Omni Clone) ===== -->
   <section class="cinema-results-section" id="results">
-    <!-- Ambient Wall Lighting -->
     <div class="wall-glow-top"></div>
     <div class="wall-glow-left"></div>
     <div class="wall-glow-right"></div>
     
     <div class="cinema-stage reveal">
       <div class="premium-display">
-        <!-- Outer metallic frame -->
         <div class="display-bezel">
-          <!-- Inner screen -->
           <div class="cinema-screen">
-            <!-- Subtle glass reflection overlay -->
             <div class="glass-glare"></div>
             <div class="screen-content">
               <div class="screen-left">
@@ -243,7 +230,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
               </div>
               <div class="screen-right">
                 <div class="cinema-portrait">
-                  <!-- Using an img tag to allow mix-blend-mode color grading overlays on top -->
                   <div class="portrait-img" style="background-image: url('/images/sbb_founder.jpg');"></div>
                   <div class="portrait-grade"></div>
                 </div>
@@ -252,18 +238,15 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           </div>
         </div>
       </div>
-      <!-- Stage Floor for 3D reflection -->
       <div class="cinema-floor"></div>
     </div>
   </section>
 
-  <!-- ===== Services Visual Catalog Section ===== -->
   <section class="services-catalog-section" id="services">
     <div class="services-container">
       <h2 class="services-heading reveal">PROGRAMS</h2>
       
       <div class="services-grid">
-        <!-- 01: Global Internship -->
         <div class="service-card reveal s-pos-1">
           <div class="s-card-number">01</div>
           <div class="s-card-icon-wrapper">
@@ -275,7 +258,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           </div>
         </div>
         
-        <!-- 02: Office Tour -->
         <div class="service-card reveal s-pos-2">
           <div class="s-card-number">02</div>
           <div class="s-card-icon-wrapper">
@@ -283,11 +265,10 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           </div>
           <div class="s-card-content">
             <h3 class="s-card-title">OFFICE TOUR</h3>
-            <p class="s-card-desc">Trải nghiệm không gian làm việc thực tế tại các tập đoàn đa quốc gia, mở rộng mạng lưới quan hệ và cảm hứng nghề&nbsp;nghiệp.</p>
+            <p class="s-card-desc">Trải nghiệm không gian làm việc thực tế tại các tập đoàn đa quốc gia, mở rộng mạng lưới quan hệ và cảm hứng nghề nghiệp.</p>
           </div>
         </div>
 
-        <!-- 03: GRP Foundation -->
         <div class="service-card reveal s-pos-3">
           <div class="s-card-number">03</div>
           <div class="s-card-icon-wrapper">
@@ -299,7 +280,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           </div>
         </div>
 
-        <!-- 04: Career Training Global -->
         <div class="service-card reveal s-pos-4">
           <div class="s-card-number">04</div>
           <div class="s-card-icon-wrapper">
@@ -314,11 +294,9 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     </div>
   </section>
 
-  <!-- ===== Case Studies Section ===== -->
   <section class="case-studies-section" id="results">
     <div class="cs-container">
       
-      <!-- Huge Typography Header -->
       <div class="cs-header reveal">
         <div class="cs-line cs-line-1">
           <span class="cs-text-white">THIS IS WHAT</span>
@@ -337,16 +315,13 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
         </div>
       </div>
 
-      <!-- Tabs -->
       <div class="cs-tabs reveal">
         <button class="cs-tab active" data-tab="1">CASE STUDY #1</button>
         <button class="cs-tab" data-tab="2">CASE STUDY #2</button>
         <button class="cs-tab" data-tab="3">CASE STUDY #3</button>
       </div>
 
-      <!-- Case Study Cards Container -->
       <div class="cs-cards-wrapper reveal">
-        <!-- Card 1 (Active) -->
         <div class="cs-card active" id="cs-card-1">
           <div class="cs-card-left">
             <h3 class="cs-card-title">CASE<br/>STUDY #1</h3>
@@ -363,7 +338,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           </div>
           
           <div class="cs-card-right">
-            <!-- Line Chart SVG -->
             <div class="cs-chart-container">
               <svg viewBox="0 0 600 300" class="cs-line-chart" preserveAspectRatio="none">
                 <defs>
@@ -376,14 +350,11 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
                     <stop offset="100%" stop-color="rgba(255, 110, 39, 0)" />
                   </linearGradient>
                 </defs>
-                <!-- Filled area under the line -->
                 <path class="cs-chart-fill" d="M 0,170 L 60,200 L 100,240 L 140,245 L 170,130 L 210,110 L 270,110 L 290,160 L 310,130 L 350,110 L 400,110 L 430,200 L 490,170 L 530,110 L 560,50 L 560,300 L 0,300 Z" fill="url(#cs-fill-grad)" />
-                <!-- The stroke line -->
                 <path class="cs-chart-line" d="M 0,170 L 60,200 L 100,240 L 140,245 L 170,130 L 210,110 L 270,110 L 290,160 L 310,130 L 350,110 L 400,110 L 430,200 L 490,170 L 530,110 L 560,50" fill="none" stroke="url(#cs-line-grad)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
               </svg>
             </div>
             
-            <!-- Stats -->
             <div class="cs-stats-row">
               <div class="cs-stat-item">
                 <div class="cs-stat-value">>2.3X</div>
@@ -401,7 +372,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           </div>
         </div>
 
-        <!-- Card 2 (Placeholder) -->
         <div class="cs-card" id="cs-card-2">
           <div class="cs-card-left">
             <h3 class="cs-card-title">CASE<br/>STUDY #2</h3>
@@ -435,7 +405,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           </div>
         </div>
 
-        <!-- Card 3 (Placeholder) -->
         <div class="cs-card" id="cs-card-3">
           <div class="cs-card-left">
             <h3 class="cs-card-title">CASE<br/>STUDY #3</h3>
@@ -501,12 +470,13 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     height: 100vh;
     min-height: 650px;
     position: relative;
+    z-index: 2; /* Nâng Hero lên trên để ánh sáng lan xuống phần dưới */
     /* Dark background with subtle ambient reflection (hắt sáng nhẹ) from the top */
-    background: radial-gradient(circle at top center, rgba(255, 90, 0, 0.15) 0%, #0a0200 80%);
+    background: radial-gradient(circle at top center, rgba(255, 90, 0, 0.15) 0%, #0a0200 95%);
     display: flex;
     align-items: center;
     padding-top: 6rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 0;
     box-sizing: border-box;
   }
   
@@ -515,8 +485,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     content: "";
     position: absolute;
     inset: 0;
-    opacity: 0.35;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 85%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 0%, black 85%, transparent 100%);
     pointer-events: none;
@@ -532,7 +502,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     transform-origin: top center;
     transform: translateX(-50%) rotate(12deg);
     width: 650px;
-    height: 110%; /* Fades out smoothly into the section below */
+    height: 125%; /* Kéo tia sáng dài ra để tràn sang Section 2 */
     background: radial-gradient(
       ellipse 100% 100% at top center,
       rgba(235, 75, 0, 1.0) 0%,
@@ -821,7 +791,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     background-size: contain; 
     background-position: center center;
     background-repeat: no-repeat;
-    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7)) saturate(1.1) contrast(1.05); 
+    filter: drop-shadow(0 22px 45px rgba(0, 0, 0, 0.55)) saturate(1.18) contrast(1.14) brightness(1.04);
     transform: scale(1.6) translateY(8%);
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     
@@ -862,19 +832,19 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
 
   /* --- Partner Marquee Section --- */
   .partner-marquee-section {
-    min-height: auto;
-    padding-top: 4rem; 
-    padding-bottom: 12rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4rem; 
-    position: relative;
-    z-index: 10;
-    margin-top: 0;
-    background: linear-gradient(to bottom, #0a0200 0%, #070201 100%);
-  }
+  min-height: auto;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem; 
+  position: relative;
+  z-index: 1;
+  margin-top: -2px; 
+  background: linear-gradient(to bottom, rgba(235, 75, 0, 0.05) 0%, #0a0200 15%, #070201 100%);
+}
   
   .partner-text-block {
     text-align: center;
@@ -1538,15 +1508,15 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   /* ============================================
      Cinema Results Section (Omni Clone)
      ============================================ */
-  .cinema-results-section {
-    padding-block: 8rem;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    /* Elevated z-index to allow its ambient glows to spill naturally OVER the marquee section above it */
-    z-index: 15;
-    background-color: #070201; /* Extremely dark warm black */
-  }
+ .cinema-results-section {
+  padding-top: 6rem; /* Tăng từ 2rem lên 6rem để đẩy khối tivi xuống xa hơn */
+  padding-bottom: 8rem; 
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 15;
+  background-color: #070201; 
+}
 
   /* Ambient wall lights that spill from the screen */
   .wall-glow-top, .wall-glow-left, .wall-glow-right {
