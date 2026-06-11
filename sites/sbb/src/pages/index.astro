@@ -471,8 +471,12 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     min-height: 650px;
     position: relative;
     z-index: 2; /* Nâng Hero lên trên để ánh sáng lan xuống phần dưới */
-    /* Dark background with subtle ambient reflection (hắt sáng nhẹ) from the top */
-    background: radial-gradient(circle at top center, rgba(255, 90, 0, 0.15) 0%, #0a0200 95%);
+    /* Dark background with subtle ambient reflection (hắt sáng nhẹ) from the top.
+       Lớp linear phủ đáy: ép mép đáy hero phẳng đều #0a0200 (xoá lệch màu radial ở giữa)
+       -> khớp tuyệt đối với section 2, không còn đường kẻ. Vầng cam phía trên giữ nguyên. */
+    background:
+      linear-gradient(to bottom, rgba(10, 2, 0, 0) 58%, #0a0200 86%),
+      radial-gradient(circle at top center, rgba(255, 90, 0, 0.15) 0%, #0a0200 95%);
     display: flex;
     align-items: center;
     padding-top: 6rem;
@@ -850,8 +854,9 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   gap: 4rem; 
   position: relative;
   z-index: 1;
-  margin-top: -2px; 
-  background: linear-gradient(to bottom, rgba(235, 75, 0, 0.05) 0%, #0a0200 15%, #070201 100%);
+  margin-top: -1px; /* chồng nhẹ 1px để không bao giờ hở mạch sub-pixel */
+  /* Bắt đầu ĐÚNG bằng màu đáy hero (#0a0200) rồi tối dần xuống #070201 -> nối liền mạch, không còn đường kẻ */
+  background: linear-gradient(to bottom, #0a0200 0%, #080201 50%, #070201 100%);
 }
   
   .partner-text-block {
