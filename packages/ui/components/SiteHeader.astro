@@ -81,10 +81,16 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
     border-bottom: none;
     padding-top: var(--space-6);
     pointer-events: none;
-    transition: padding var(--duration-normal) var(--ease-out);
+    transition: padding var(--duration-normal) var(--ease-out),
+                transform var(--duration-normal) var(--ease-out);
+    will-change: transform;
   }
   .site-header.is-scrolled {
     padding-top: var(--space-3);
+  }
+  /* Ẩn khi cuộn xuống, hiện lại khi cuộn lên */
+  .site-header.is-hidden {
+    transform: translateY(-130%);
   }
 
   /* Overlay trong suốt trên hero (mặc định đã là trong suốt nhờ floating capsule) */
@@ -255,9 +261,28 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
 
 <script>
   const header = document.getElementById('site-header');
+  let lastY = window.scrollY;
 
-  // Solid background sau khi cuộn
-  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 40);
+  const onScroll = () => {
+    const y = window.scrollY;
+
+    // Nền trong suốt sau khi cuộn
+    header?.classList.toggle('is-scrolled', y > 40);
+
+    // Ẩn khi cuộn xuống, hiện khi cuộn lên (bỏ qua rung lắc nhỏ)
+    const delta = y - lastY;
+    if (Math.abs(delta) > 4) {
+      if (delta > 0 && y > 120) {
+        header?.classList.add('is-hidden');     // cuộn xuống → ẩn
+      } else if (delta < 0) {
+        header?.classList.remove('is-hidden');  // cuộn lên → hiện
+      }
+      lastY = y;
+    }
+
+    // Luôn hiện khi ở gần đỉnh trang
+    if (y <= 80) header?.classList.remove('is-hidden');
+  };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 </script>
