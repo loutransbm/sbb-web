@@ -2245,20 +2245,25 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   }
 
   .cs-glass-pill {
+    /* Dùng đúng thiết kế 2 card nổi trên hero (.stat-card) -> gọn, compact */
     display: inline-flex;
     flex-direction: column;
-    justify-content: center;
+    flex-shrink: 0; /* không cho headline (flex) bóp pill khi phụ đề xuống dòng */
+    gap: var(--space-2);
     background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 1.5rem 2.5rem;
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    box-shadow: 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: var(--space-4) var(--space-5);
+    width: 260px; /* bề rộng cố định = card hero, tránh bị row-flex của headline bóp lại */
+    text-align: left;
+    box-shadow:
       0 40px 80px -10px rgba(0, 0, 0, 0.5),
       0 20px 40px -5px rgba(0, 0, 0, 0.3),
       0 0 80px rgba(255, 80, 20, 0.15),
       inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    /* giữ vị trí chồng nhẹ lên headline */
     margin-left: -4rem;
     transform: translateY(1.5rem);
     position: relative;
@@ -2266,21 +2271,27 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   }
 
   .cs-glass-title {
-    font-size: 1.5rem;
-    color: #fff;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+    /* khớp .stat-number của hero */
+    font-family: var(--font-headline);
+    font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+    font-weight: var(--weight-bold);
+    color: #FFFFFF;
+    line-height: 1;
+    letter-spacing: normal; /* reset letter-spacing âm kế thừa từ headline (gây chồng chữ) */
+    white-space: normal;    /* reset nowrap kế thừa */
   }
 
   .cs-glass-sub {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
+    /* khớp .stat-text của hero + cho phép xuống dòng */
+    font-size: 11px;
     font-weight: 400;
-    letter-spacing: 0;
     text-transform: none;
-    line-height: 1.2;
-    margin-top: 0.3rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: var(--leading-normal);
+    letter-spacing: normal; /* reset letter-spacing âm kế thừa từ headline */
+    margin: 0;
+    max-width: 25ch;
+    white-space: normal; /* ghi đè nowrap kế thừa từ headline -> phụ đề tự xuống dòng */
   }
 
   /* Tabs */
@@ -2297,7 +2308,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     padding: 1rem 2.5rem;
     border-radius: 100px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 400; /* bỏ in đậm */
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -2320,6 +2331,12 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     min-height: 600px;
     overflow: hidden;
     border-radius: 48px;
+    /* Viền cam gradient: border trong suốt + 2 lớp bg (padding-box che giữa, gradient ở border-box) */
+    border: 1px solid transparent;
+    background:
+      linear-gradient(#0a0503, #0a0503) padding-box,
+      linear-gradient(150deg, #FFB07A 0%, #FF7A3C 38%, #FF5E3A 62%, #C73B0A 100%) border-box;
+    box-shadow: 0 0 55px -12px rgba(255, 92, 42, 0.16); /* quầng ấm nhẹ quanh card */
     touch-action: pan-y; /* vuốt ngang -> JS xử lý; vẫn cuộn dọc bình thường */
   }
   /* Rail trượt ngang chứa 3 card */
