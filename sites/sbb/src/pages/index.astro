@@ -249,6 +249,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       <h2 class="services-heading reveal">PROGRAMS</h2>
       
       <div class="services-grid">
+        <div class="services-row services-row--top">
         <div class="service-card reveal s-pos-1">
           <div class="s-card-number">01</div>
           <div class="s-card-icon-wrapper">
@@ -270,7 +271,9 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
             <p class="s-card-desc">Trải nghiệm không gian làm việc thực tế tại các tập đoàn đa quốc gia, mở rộng mạng lưới quan hệ và cảm hứng nghề nghiệp.</p>
           </div>
         </div>
+        </div>
 
+        <div class="services-row services-row--bottom">
         <div class="service-card reveal s-pos-3">
           <div class="s-card-number">03</div>
           <div class="s-card-icon-wrapper">
@@ -291,6 +294,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
             <h3 class="s-card-title">CAREER TRAINING GLOBAL</h3>
             <p class="s-card-desc">Chương trình đào tạo nghề nghiệp qua thực hành và làm việc trong các môi trường quốc tế thực tế có trả lương.</p>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -1882,50 +1886,71 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   }
 
   .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(280px, 400px));
-    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
     row-gap: 6rem;
     max-width: 1300px;
     margin: 0 auto;
   }
 
-  /* Staggered Layout Positioning */
-  .s-pos-1 { grid-column: 1; }
-  .s-pos-2 { grid-column: 3; }
-  .s-pos-3 { grid-column: 1; }
-  .s-pos-4 { grid-column: 3; }
+  .services-row {
+    display: flex;
+    gap: 2rem;
+  }
+  /* Hàng trên (card 1·2): dàn ra hai mép */
+  .services-row--top { justify-content: space-between; }
+  /* Hàng dưới (card 3·4): chụm thành cặp căn giữa */
+  .services-row--bottom { justify-content: center; gap: 3rem; }
+
+  /* Card rộng cố định để 2 hàng flex căn đúng (bố cục so le: 1·2 ngoài, 3·4 giữa) */
+  .service-card { flex: 0 0 400px; width: 400px; max-width: 400px; }
 
   .service-card {
-    background-color: #070201;
-    background-image: radial-gradient(circle at 100% 100%, rgba(255, 120, 0, 1.0) 0%, rgba(255, 80, 0, 0.95) 30%, rgba(235, 60, 0, 0.4) 60%, transparent 90%);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border-radius: 40px;
+    background-color: #0d0907;
+    /* 3 lớp sáng để card NỔI khỏi nền đen:
+       (0) ambient mát phủ nửa trên -> mặt kính sáng hơn nền, hết "chìm";
+       (1) pool ấm DÂNG tới vùng icon (đèn rọi vào icon, khớp ánh bake sẵn: icon đổ bóng lên trên-trái => nguồn sáng dưới-phải);
+       (2) nền cam chính từ đáy-phải. */
+    background-image:
+      linear-gradient(180deg,
+        rgba(210,214,230,0.13) 0%,
+        rgba(210,214,230,0.045) 26%,
+        transparent 54%),
+      radial-gradient(72% 60% at 56% 46%,
+        rgba(255,128,62,0.20) 0%,
+        rgba(255,98,46,0.07) 44%,
+        transparent 70%),
+      radial-gradient(150% 138% at 100% 104%,
+        rgba(255,124,54,0.60) 0%,
+        rgba(255,94,38,0.30) 26%,
+        rgba(255,76,28,0.12) 48%,
+        transparent 73%);
+    border-radius: 34px;
     min-height: 460px;
     position: relative;
     overflow: visible;
-    border: 1.5px solid transparent;
+    border: 1px solid rgba(255,255,255,0.16);
     background-clip: padding-box;
-    box-shadow: 
-      inset 0 0 80px rgba(0, 0, 0, 0.95),
-      inset 0 1px 1px rgba(255, 255, 255, 0.25),
-      inset 0 -1px 1px rgba(255, 255, 255, 0.05),
-      0 20px 40px rgba(0, 0, 0, 0.5),
-      0 0 0 1.5px rgba(255, 255, 255, 0.12),
-      0 0 0 3px rgba(255, 255, 255, 0.04);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.34),            /* mép trên glass sáng rõ */
+      inset 0 -46px 92px -44px rgba(255,102,42,0.26),   /* ánh cam ấm hắt từ đáy */
+      0 0 0 1px rgba(255,255,255,0.045),                /* hairline ngoài -> viền tách nền */
+      0 18px 50px -18px rgba(0,0,0,0.9),
+      0 0 95px 8px rgba(150,142,165,0.055),             /* quầng trung tính rộng -> card nổi khỏi đen */
+      0 14px 82px -14px rgba(255,120,70,0.18);          /* quầng ấm phía dưới */
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
   }
-  
+
   .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 
-      inset 0 0 80px rgba(0, 0, 0, 0.95),
-      inset 0 1px 2px rgba(255, 255, 255, 0.35),
-      inset 0 -1px 1px rgba(255, 255, 255, 0.08),
-      0 30px 60px rgba(0, 0, 0, 0.8),
-      0 0 0 1.5px rgba(255, 255, 255, 0.2),
-      0 0 0 3px rgba(255, 255, 255, 0.06);
+    transform: translateY(-10px);
+    border-color: rgba(255,255,255,0.26);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.42),
+      inset 0 -54px 100px -44px rgba(255,112,48,0.34),
+      0 0 0 1px rgba(255,255,255,0.07),
+      0 40px 78px -20px rgba(0,0,0,0.95),
+      0 0 110px 8px rgba(160,150,175,0.07),
+      0 16px 100px -12px rgba(255,124,74,0.28);
   }
 
   /* SVG Noise Filter */
@@ -1933,7 +1958,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     content: "";
     position: absolute;
     inset: 0;
-    opacity: 0.35;
+    opacity: 0.05; /* giảm mạnh noise (0.35 -> 0.05) cho bề mặt nét căng, hết grain */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 1;
@@ -1950,10 +1975,11 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   .s-card-number {
     top: 2rem;
     left: 2rem;
-    font-size: 1.25rem;
+    font-size: 1.55rem;
     font-family: var(--font-headline);
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.92); /* số rõ, nét hơn (cũ 0.6 quá chìm) */
+    letter-spacing: 0.02em;
   }
 
   .s-card-icon-wrapper {
@@ -1964,6 +1990,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     justify-content: center;
     align-items: center;
     pointer-events: none;
+    filter: contrast(1.08) saturate(1.12); /* tăng tương phản + bão hoà cho ảnh 3D căng nét */
   }
 
   /* Extreme 3D Typography */
@@ -2370,37 +2397,33 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
 
   .s-card-title {
     font-family: var(--font-headline);
-    font-size: 1.4rem;
-    font-weight: 400;
+    font-size: 1.55rem;
+    font-weight: 700; /* đậm gọn, sắc (cũ 400 hơi mỏng/nhạt) */
     color: #fff;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.012em;
   }
 
   .s-card-desc {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.66); /* sáng hơn chút cho dễ đọc trên kính tối */
     line-height: 1.5;
     font-weight: 400;
   }
 
   @media (max-width: 1024px) {
-    .services-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3rem;
-      justify-content: center;
-    }
-    .s-pos-1, .s-pos-2, .s-pos-3, .s-pos-4 {
-      grid-column: auto;
-    }
+    /* Tablet: 2 hàng tự xuống dòng, căn giữa */
+    .services-row { flex-wrap: wrap; justify-content: center; gap: 3rem; }
+    .service-card { flex: 0 1 400px; }
   }
 
   @media (max-width: 600px) {
-    .services-grid {
-      grid-template-columns: 1fr;
-    }
+    /* Mobile: card chiếm full chiều ngang */
     .service-card {
+      flex-basis: 100%;
+      width: 100%;
+      max-width: 100%;
       aspect-ratio: auto;
       min-height: 450px;
     }
