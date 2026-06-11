@@ -556,6 +556,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   .hero-col--left {
     align-items: flex-start;
     gap: var(--space-5);
+    position: relative;
+    z-index: 15; /* Đưa cột trái (chứa card 86%) lên TRƯỚC chữ SBB (SBB ở z-index 10) */
   }
   .hero-col--right {
     align-items: flex-end;
@@ -732,12 +734,18 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   @media (min-width: 992px) {
     .stat-card--left {
       margin-top: var(--space-3);
-      transform: translate(1.5rem, 85px) !important; /* Adjusted so it rests just perfectly around the peak of the SBB text */
+      transform: translate(1.5rem, 72px) !important; /* Dịch card lên trên một chút so với chữ SBB */
       position: relative;
       z-index: 5 !important;
+      /* Đổ bóng đậm xuống dưới để hắt lên chữ SBB, tạo cảm giác card nổi phía trước */
+      box-shadow:
+        0 30px 42px -14px rgba(0, 0, 0, 0.9),
+        0 48px 90px -12px rgba(0, 0, 0, 0.55),
+        0 0 90px rgba(255, 80, 20, 0.18),
+        inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
     }
     .stat-card--left:hover {
-      transform: translate(1.5rem, 70px) !important; /* Float UP 15px */
+      transform: translate(1.5rem, 57px) !important; /* Float UP 15px */
       box-shadow: 
         0 60px 120px -10px rgba(0, 0, 0, 0.6),
         0 40px 60px -5px rgba(0, 0, 0, 0.4),
