@@ -1,0 +1,97 @@
+---
+/*
+  Layout.astro — Shine Beyond Borders
+  ------------------------------------
+  File layout dùng chung cho mọi trang. Đã gắn sẵn favicon, thẻ social share (OG),
+  và màu thương hiệu. Đặt file này vào: src/layouts/Layout.astro
+
+  CÁCH DÙNG trong mỗi trang (vd src/pages/index.astro):
+
+      ---
+      import Layout from "../layouts/Layout.astro";
+      ---
+      <Layout title="Trang chủ" description="Mô tả ngắn của trang">
+        <h1>Nội dung trang ở đây</h1>
+      </Layout>
+
+  Props:
+    - title       : tiêu đề trang (hiện trên tab + khi share). Có sẵn mặc định.
+    - description : mô tả ngắn cho SEO + social share. Tùy chọn.
+    - image       : ảnh share riêng cho trang này. Mặc định dùng /brand/og-image.png
+*/
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Shine Beyond Borders",
+  description = "Shine Beyond Borders — đồng hành cùng bạn trên hành trình học tập và làm việc quốc tế.",
+  image = "/brand/og-image.png",
+} = Astro.props;
+
+// Tự dùng URL tuyệt đối cho ảnh share NẾU đã khai báo `site` trong astro.config.mjs.
+// Chưa có tên miền cũng không lỗi — sẽ tự dùng đường dẫn tương đối.
+const ogImage = Astro.site ? new URL(image, Astro.site).href : image;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    <!-- Favicon (tile nền tối, đọc rõ trên tab sáng lẫn tối) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
+
+    <!-- Open Graph (Facebook, Zalo, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {canonical && <meta property="og:url" content={canonical} />}
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>
+
+<!--
+  Màu thương hiệu + reset cơ bản (dùng chung toàn site).
+  Gọi màu trong CSS bằng: var(--sbb-orange) / var(--sbb-black) / var(--sbb-white)
+  Nếu không cần, xóa nguyên khối <style> dưới đây.
+-->
+<style is:global>
+  :root {
+    --sbb-orange: #E05C1A;
+    --sbb-black: #1A1A1A;
+    --sbb-white: #FFFFFF;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+</style>
