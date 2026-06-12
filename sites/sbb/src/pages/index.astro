@@ -804,12 +804,23 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
         var poster = img ? img.getAttribute('src') : '';
         var src = poster.replace('/images/tiktok/', '/videos/').replace(/\.jpg$/, '.mp4');
         var id = card.getAttribute('data-tt');
-        lbFrame.innerHTML = '<video class="mv-lb-video" src="' + src + '" poster="' + poster + '" controls autoplay playsinline loop preload="auto" style="display:block;width:auto;height:auto;max-width:96vw;max-height:86vh;border-radius:16px;background:#000;"></video>';
+        // muted + autoplay -> phát NGAY trên MỌI thiết bị (mobile/khách mới chặn autoplay-có-tiếng) -> bắt đầu CÂM rồi cho bật tiếng
+        lbFrame.innerHTML =
+          '<video class="mv-lb-video" src="' + src + '" poster="' + poster + '" autoplay muted loop playsinline controls preload="auto" style="display:block;width:auto;height:auto;max-width:96vw;max-height:86vh;border-radius:16px;background:#000;"></video>'
+          + '<button class="mv-lb-sound" type="button" aria-label="Bật tiếng">&#128266; Bật tiếng</button>';
         if (lbTt) lbTt.href = 'https://www.tiktok.com/@duyendao222/video/' + id;
         lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
         var v = lbFrame.querySelector('video');
-        if (v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }  // play() trong cú click -> được phép có tiếng
+        var sb = lbFrame.querySelector('.mv-lb-sound');
+        if (v) {
+          v.muted = true;
+          var p = v.play(); if (p && p.catch) p.catch(function () {});   // autoplay câm -> luôn chạy
+          if (sb) {
+            sb.addEventListener('click', function () { v.muted = false; v.volume = 1; if (v.paused) { var q = v.play(); if (q && q.catch) q.catch(function () {}); } sb.style.display = 'none'; });
+            v.addEventListener('volumechange', function () { if (!v.muted) sb.style.display = 'none'; });  // tự bật tiếng qua control -> ẩn nút
+          }
+        }
       }
       function closeLightbox() {
         if (!lb || !lb.classList.contains('is-open')) return;
@@ -3328,6 +3339,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   }
   .mv-lb-tt:hover { color: #ff8d60; border-color: #ff8d60; }
   :global(.mv-lb-video) { display: block; width: auto; height: auto; max-width: 96vw; max-height: 86vh; border-radius: 16px; background: #000; }
+  :global(.mv-lb-sound) { position: absolute; top: 0.8rem; left: 50%; transform: translateX(-50%); z-index: 3; border: 0; border-radius: 999px; cursor: pointer; background: rgba(255, 94, 58, 0.94); color: #fff; font: 600 0.9rem/1 'Be Vietnam Pro', system-ui, sans-serif; letter-spacing: 0.02em; padding: 0.55rem 1.05rem; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4); }
+  :global(.mv-lb-sound:hover) { background: #ff5e3a; }
   .mv-lb-close {
     position: absolute; top: 1.1rem; right: 1.3rem; z-index: 2;
     width: 2.8rem; height: 2.8rem; border-radius: 50%;
