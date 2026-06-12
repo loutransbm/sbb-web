@@ -1,0 +1,143 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+
+const categories = [
+  {
+    tag: 'Câu chuyện',
+    title: 'Câu chuyện học viên',
+    body: 'Hành trình thật của những người đã đi — từ ngày còn loay hoay đến lúc đứng vững ở môi trường quốc tế.',
+  },
+  {
+    tag: 'Reality Check',
+    title: 'Reality Check',
+    body: 'Sự thật trần trụi về làm việc ở nước ngoài. Đủ thẳng để bạn chuẩn bị đúng, không vỡ mộng giữa đường.',
+  },
+  {
+    tag: 'Tiếng nói SV',
+    title: 'Tiếng nói sinh viên',
+    body: 'Góc nhìn chưa qua chỉnh sửa từ chính người trẻ đang đi — điều họ tiếc, điều họ học, điều họ muốn nhắn lại.',
+  },
+  {
+    tag: 'Cập nhật',
+    title: 'Cập nhật chương trình',
+    body: 'Thông tin mới nhất về các chương trình Internship J-1, GRP Foundation và lịch tuyển sinh từng kỳ.',
+  },
+];
+
+const featured = [
+  {
+    tag: 'Câu chuyện',
+    date: '12.06.2026',
+    title: 'Từ phòng trọ Hà Nội đến gian bếp ở Colorado',
+    body: 'Minh kể lại 6 tháng đầu trên đất Mỹ: cú sốc ngôn ngữ, ca làm 10 tiếng, và khoảnh khắc nhận ra mình đã thật sự trưởng thành.',
+  },
+  {
+    tag: 'Reality Check',
+    date: '08.06.2026',
+    title: 'Lương cao ở nước ngoài: phần họ không kể bạn nghe',
+    body: 'Con số trên giấy và số tiền thật sự còn lại sau thuế, nhà ở, đi lại. Một bài tính sòng phẳng để bạn không ảo tưởng.',
+  },
+  {
+    tag: 'Tiếng nói SV',
+    date: '03.06.2026',
+    title: '"Mình ước có ai nói thật với mình sớm hơn"',
+    body: 'Ba bạn sinh viên vừa kết thúc kỳ thực tập chia sẻ thẳng điều họ tiếc nhất — và điều họ sẽ làm khác nếu được quay lại.',
+  },
+  {
+    tag: 'Cập nhật',
+    date: '01.06.2026',
+    title: 'Internship J-1 mùa Thu 2026 chính thức mở đơn',
+    body: 'Toàn bộ thông tin về vị trí, thời gian, điều kiện và lộ trình chuẩn bị cho kỳ tuyển sinh sắp tới của chương trình.',
+  },
+  {
+    tag: 'Câu chuyện',
+    date: '27.05.2026',
+    title: 'Cô gái Quảng Nam và bài học từ lần bị từ chối visa',
+    body: 'Thất bại lần đầu không phải dấu chấm hết. Hành trình làm lại hồ sơ, luyện phỏng vấn và đậu ở lần thứ hai.',
+  },
+  {
+    tag: 'Reality Check',
+    date: '21.05.2026',
+    title: 'Đi để trải nghiệm hay đi để xây sự nghiệp?',
+    body: 'Hai con đường rất khác nhau, đòi hỏi sự chuẩn bị rất khác nhau. Xác định đúng trước khi bạn đặt chân lên máy bay.',
+  },
+];
+---
+
+<PageLayout
+  title="News"
+  description="Câu chuyện thật của học viên, reality check không tô vẽ, và tiếng nói sinh viên trên hành trình bước ra thế giới."
+  site="sbb"
+  currentPath="/news"
+>
+  <!-- ===== HERO ===== -->
+  <section class="o-hero">
+    <div class="container">
+      <span class="o-eyebrow">News</span>
+      <h1 class="o-mega">CÂU CHUYỆN<br /><span class="o-accent">THẬT</span></h1>
+      <p class="o-lead">Không phải tin tức đánh bóng. Đây là nơi học viên kể lại hành trình thật của mình, là những reality check không tô vẽ, và là tiếng nói chưa qua chỉnh sửa của người trẻ đang bước ra thế giới.</p>
+    </div>
+  </section>
+
+  <!-- ===== CATEGORIES ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Chuyên mục</span>
+        <h2 class="o-head-title">WHAT WE <span class="o-stroke">COVER</span></h2>
+        <p class="o-head-desc">Bốn dòng nội dung, một mục tiêu: cho bạn thấy bức tranh thật trước khi bạn quyết định đi.</p>
+      </div>
+      <div class="o-grid o-grid--4">
+        {categories.map((c) => (
+          <article class="o-card">
+            <span class="o-card__tag">{c.tag}</span>
+            <h3 class="o-card__title">{c.title}</h3>
+            <p class="o-card__body">{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED STORIES ===== -->
+  <section class="o-section o-section--tint o-section--glow">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Mới nhất</span>
+        <h2 class="o-head-title">FEATURED <span class="o-stroke">STORIES</span></h2>
+        <p class="o-head-desc">Những bài đáng đọc nhất tuần này — chọn lọc từ chính trải nghiệm của cộng đồng SBB.</p>
+      </div>
+      <div class="o-grid o-grid--3">
+        {featured.map((a) => (
+          <a href="/news" class="o-card">
+            <span class="o-card__tag">{a.tag}</span>
+            <h3 class="o-card__title">{a.title}</h3>
+            <p class="o-card__body">{a.body}</p>
+            <p class="o-card__body" style="margin-top:1.1rem;font-size:0.82rem;color:var(--ink-muted);letter-spacing:0.04em;text-transform:uppercase;">{a.date}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATEMENT ===== -->
+  <section class="o-section">
+    <div class="container">
+      <p class="o-statement o-statement--full">
+        Chúng tôi không kể chuyện cổ tích. Chúng tôi kể <span class="o-accent">sự thật</span> — để bạn đi với đôi mắt mở to.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="o-cta">
+    <div class="container">
+      <h2 class="o-cta__title">ĐỪNG BỎ LỠ</h2>
+      <p class="o-cta__sub">Đăng ký nhận tin để không lỡ câu chuyện nào: reality check định kỳ, lịch tuyển sinh và những bài viết thật từ người đã đi.</p>
+      <div class="o-actions">
+        <a href="/apply" class="o-btn o-btn--primary">Đăng ký nhận tin</a>
+        <a href="/learn" class="o-btn o-btn--ghost">Khám phá hành trình</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

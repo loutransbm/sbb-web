@@ -1,7 +1,187 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
-import PendingPage from '@ui/components/PendingPage.astro';
+
+const statement =
+  'GRP không dạy bạn cách “được đi”. GRP chuẩn bị để bạn được tin và được trọng dụng khi đã đi.';
+
+const highlights = [
+  'Chuẩn hoá năng lực hội nhập theo tiêu chí UNESCO (SDG4 & SDG8).',
+  'Được kiểm định bởi ABE — đối tác đánh giá năng lực quốc tế.',
+  'Là nền chung bắt buộc dưới mọi con đường: J-1, Office Tour và đường Úc 407.',
+  'Tập trung vào tư duy, tác phong và năng lực làm việc thật — không học vẹt.',
+];
+
+const pillars = [
+  {
+    num: '01',
+    title: 'Tư duy toàn cầu',
+    body: 'Hiểu cách thế giới vận hành, biết mình đứng ở đâu và muốn đi tới đâu. Bỏ tâm thế “đi cho biết”, thay bằng tâm thế người đi làm nghề nghiêm túc ở môi trường quốc tế.',
+  },
+  {
+    num: '02',
+    title: 'Tác phong chuyên nghiệp',
+    body: 'Cách giao tiếp, làm việc và ứng xử để được tin tưởng trong một doanh nghiệp nước ngoài. Đúng giờ, đúng cam kết, đúng chuẩn — những thứ quyết định bạn được giữ lại hay không.',
+  },
+  {
+    num: '03',
+    title: 'Năng lực & ngoại ngữ',
+    body: 'Ngoại ngữ đủ để làm việc, kỹ năng đủ để đóng góp. GRP rèn phần năng lực lõi giúp bạn vượt qua phỏng vấn và làm thật ngay từ ngày đầu, chứ không bơi giữa chừng.',
+  },
+];
+
+const standards = [
+  { t: 'UNESCO SDG4', d: 'Giáo dục có chất lượng — khung tham chiếu để chuẩn hoá năng lực hội nhập.' },
+  { t: 'UNESCO SDG8', d: 'Việc làm bền vững — định hướng người học tới nghề nghiệp tử tế, dài hạn.' },
+  { t: 'Kiểm định ABE', d: 'Năng lực được đánh giá bởi một đối tác độc lập, không phải tự SBB phong.' },
+];
+
+const stats = [
+  { num: '01', label: 'Nền chung bắt buộc' },
+  { num: '03', label: 'Trụ năng lực cốt lõi' },
+  { num: '04', label: 'Con đường ra thế giới' },
+];
+
+const steps = [
+  {
+    num: '01',
+    title: 'Đặt một buổi nói chuyện',
+    body: 'Bắt đầu bằng cuộc trò chuyện thẳng thắn. SBB lắng nghe mục tiêu và đánh giá hồ sơ của bạn một cách trung thực trước khi nói tới bất kỳ con đường nào.',
+  },
+  {
+    num: '02',
+    title: 'Vào GRP Foundation',
+    body: 'Bạn bước vào phần nền: rèn tư duy, tác phong và năng lực làm việc quốc tế. Đây là chặng bắt buộc — không có đường tắt vòng qua GRP.',
+  },
+  {
+    num: '03',
+    title: 'Chọn đúng con đường',
+    body: 'Khi nền đã vững, SBB chỉ ra chương trình phù hợp nhất với năng lực và mục tiêu của bạn — J-1, Office Tour hay đường Úc 407 — chứ không đẩy bạn vào cái dễ bán.',
+  },
+  {
+    num: '04',
+    title: 'Đi thật và được đồng hành',
+    body: 'Bạn đi làm thật ở môi trường quốc tế với một nền tảng đã được chuẩn bị kỹ. SBB không buông tay giữa chừng, đồng hành tới khi bạn thật sự vững vàng.',
+  },
+];
 ---
-<PageLayout title="GRP Foundation" description="Nền chuẩn bị bắt buộc trước khi bước ra thế giới." site="sbb" currentPath="/programs">
-  <PendingPage title="GRP Foundation" oneLiner="Nền chuẩn bị bắt buộc trước khi bước ra thế giới." />
+
+<PageLayout
+  title="GRP Foundation"
+  description="Global Readiness Programme (GRP) — nền chuẩn bị bắt buộc trước khi bước ra thế giới. Chuẩn hoá năng lực hội nhập theo tiêu chí UNESCO (SDG4 & SDG8), kiểm định bởi ABE."
+  site="sbb"
+  currentPath="/programs/grp"
+>
+  <!-- ===== HERO ===== -->
+  <section class="o-hero">
+    <div class="container">
+      <span class="o-eyebrow">Programs — Nền tảng bắt buộc</span>
+      <h1 class="o-mega">GRP<br />FOUNDATION</h1>
+      <p class="o-lead">Global Readiness Programme — phần nền chuẩn bị <span style="color: var(--accent);">bắt buộc</span> trước khi bạn bước ra thế giới. Tư duy, tác phong và năng lực làm việc quốc tế, để bạn được tin và trọng dụng, không chỉ “được đi”.</p>
+    </div>
+  </section>
+
+  <!-- ===== OVERVIEW ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-split o-split--top">
+        <div>
+          <span class="o-head-eyebrow">Tổng quan</span>
+          <p class="o-statement">{statement}</p>
+        </div>
+        <div>
+          <ul class="o-checks">
+            {highlights.map((h) => (
+              <li>{h}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHAT YOU BUILD ===== -->
+  <section class="o-section o-section--tint o-section--glow">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Ba trụ năng lực</span>
+        <h2 class="o-head-title">WHAT YOU <span class="o-stroke">BUILD</span></h2>
+        <p class="o-head-desc">GRP không phải một khoá học cho có. Đây là phần nền dựng trên ba trụ năng lực — thứ quyết định bạn được tin tưởng hay bị bỏ lại ở môi trường quốc tế.</p>
+      </div>
+
+      <div class="o-grid o-grid--3">
+        {pillars.map((p) => (
+          <article class="o-card">
+            <span class="o-card__num">{p.num}</span>
+            <h3 class="o-card__title">{p.title}</h3>
+            <p class="o-card__body">{p.body}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="o-stats o-mt-lg">
+        {stats.map((st) => (
+          <div>
+            <div class="o-stat__num">{st.num}</div>
+            <div class="o-stat__label">{st.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STANDARDS ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Chuẩn & kiểm định</span>
+        <h2 class="o-head-title">BUILT ON <span class="o-stroke">STANDARDS</span></h2>
+        <p class="o-head-desc">Năng lực hội nhập của GRP được chuẩn hoá theo tiêu chí UNESCO và kiểm định độc lập bởi ABE — để “sẵn sàng” là một thước đo thật, không phải lời tự khen.</p>
+      </div>
+
+      <div class="o-grid o-grid--3">
+        {standards.map((s) => (
+          <article class="o-card">
+            <span class="o-card__tag">Standard</span>
+            <h3 class="o-card__title">{s.t}</h3>
+            <p class="o-card__body">{s.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PATH / STEPS ===== -->
+  <section class="o-section o-section--tint o-section--glow">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Lộ trình</span>
+        <h2 class="o-head-title">HOW IT <span class="o-stroke">FITS</span></h2>
+        <p class="o-head-desc">Mọi con đường ra thế giới đều đi qua GRP. Đây là vị trí của phần nền trong hành trình của bạn — và một người đi cùng trên đó.</p>
+      </div>
+
+      <div class="o-rows">
+        {steps.map((s) => (
+          <article class="o-row">
+            <span class="o-row__num">{s.num}</span>
+            <div>
+              <h3 class="o-row__title">{s.title}</h3>
+              <p class="o-row__body">{s.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="o-cta">
+    <div class="container">
+      <h2 class="o-cta__title">SẴN SÀNG ĐẶT NỀN?</h2>
+      <p class="o-cta__sub">GRP là điểm xuất phát chung cho mọi con đường. Đặt một buổi nói chuyện để SBB đánh giá hồ sơ và chỉ cho bạn bước đi tiếp theo.</p>
+      <div class="o-actions">
+        <a href="/apply" class="o-btn o-btn--primary">Đăng ký tư vấn</a>
+        <a href="/programs" class="o-btn o-btn--ghost">Xem chương trình khác</a>
+      </div>
+    </div>
+  </section>
 </PageLayout>

@@ -12,8 +12,9 @@
 ## Stack & Deploy
 - **Framework:** Astro
 - **Deploy:** Vercel
-- **CSS:** [FILL IN]
-- **Component library:** [FILL IN or none]
+- **CSS:** Design tokens (`packages/ui/tokens/*.css`) + **omni-kit** (`omni-kit.css`, class `.o-*`) + `<style>` bespoke trong từng `.astro`. KHÔNG framework CSS.
+- **Component library:** Không. Layout/Header/Footer ở `packages/ui`. Homepage = bespoke `<style>`; trang nội dung = omni-kit.
+- **Dev server:** `http://localhost:4323/`. ⚠️ Sửa file ở bản được serve: `C:\Users\Admin\Downloads\New-folder-main (6)\sbb-web` (KHÔNG phải worktree).
 
 ---
 
@@ -101,25 +102,65 @@ Sponsorship/Placement: Alliance Abroad, Metox, Armada
 
 ---
 
-## Homepage Sections (current build — đã có)
-1. Hero — split layout, double-exposure photo, floating stat cards, decorative "SBB" text
-2. Mission statement — "MINDSET. CONDUCT. CAPABILITY." + partner logos rows
-3. Results section — "RESULTS AREN'T A CLAIM FOR US..." + 3 big stats + headshot
-
-## Homepage Sections (cần build tiếp — chưa confirm đầy đủ)
-- Programs section (4 programs)
-- Student success stories / case studies
-- GRP highlight section
-- Office Tour section
-- FAQ
-- CTA / Application form
-- Footer
+## Homepage Sections — thứ tự hiện tại ↔ Omni (đã build đủ)
+HERO → PARTNERS (marquee) → RESULTS (`#results`) → SERVICES (`#services`) → CASE STUDIES (`#case-studies` "THIS IS WHAT / REAL GROWTH" + carousel học viên) → MOMENTS (`#moments` "LIFE BEYOND / BORDERS" = Omni "AD CREATIVES / THAT CONVERT", coverflow) → FAQ → TESTIMONIALS ("WHAT THEY SAY ABOUT US") → CTA ("READY TO SHINE BEYOND BORDERS") → FOOTER.
+Học viên thật xuyên suốt: **Khánh Trọng Giang** (Culinary, Melbourne), **My Linh Le** (Business, Melbourne), **Victoria Tran** (Marketing, Úc).
 
 ---
 
+# ⭐ IMPLEMENTATION MEMORY — đọc kỹ trước khi làm section/trang mới
+
+> Mục tiêu: bám sát Omni, **đồng bộ tuyệt đối** mọi thành phần. Quy trình bắt buộc:
+> **soi Omni → soi SBB (zoom, đọc CSS) → sửa (tái dùng class sẵn có) → zoom verify → mới báo xong.**
+> Người dùng rất khó tính về tiểu tiết; KHÔNG được ẩu, KHÔNG tự chế gây lệch.
+
+## A. Tokens & font
+- Nền `--paper:#110806`, `--paper-2:#1a0d08`. Accent `--accent:#FF5E3A`, `--accent-2:#FF8D60`.
+  `--ink:#fff`, `--ink-soft:#C5C5C7`, `--ink-muted:#747476`, `--line:#26262A`.
+- Header KHỔNG LỒ homepage dùng **`'Inter'` weight 500** (xem `.cs-header`), letter-spacing âm. KHÔNG đổi sang Plus Jakarta.
+- ⚠️ `global.css` còn rule **neo-brutalist** (`!important` trên `.btn/.path-card`…) — KHÔNG tái dùng cho look Omni; dùng omni-kit.
+
+## B. ⭐ CARD KÍNH CHUẨN (glass) — dùng MỌI nơi (gốc từ hero `.stat-card`; đã áp `.cs-glass-pill`)
+```css
+background: linear-gradient(165deg, rgba(80,52,42,.40), rgba(34,20,15,.46) 34%, rgba(17,10,7,.50) 72%, rgba(30,16,12,.47));
+backdrop-filter: blur(14px); border:1px solid transparent; border-radius:20px;
+box-shadow: nhiều lớp tối + 0 0 70px rgba(255,84,24,.12) + inset 0 1px 1px rgba(255,255,255,.16);
+::before { inset:0; padding:1px; border-radius:inherit;          /* viền gradient mảnh */
+  background: linear-gradient(135deg, rgba(255,255,255,.38), rgba(255,255,255,.06) 42%, rgba(255,255,255,.02));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; }
+```
+→ Card mới PHẢI theo công thức này (kính tối glossy ấm + viền gradient). KHÔNG card mờ phẳng.
+**⚠️ Card header `.cs-glass-pill` (case-studies / moments / testimonials) — LỊCH SỬ + CHỐT mới (2026-06-12):**
+- Bối cảnh: hero `.stat-card` "trong & bóng" vì **nền hero là vùng cam rực sáng**. Lo ngại copy y hệt sang section tối sẽ ra **đục/matte** → từng có giai đoạn đổi `.cs-glass-pill` sang "kính trong suốt" (alpha thấp `rgba(255,255,255,.12)…`, `backdrop-filter:none`). Nhưng trên vùng đen, bản trong suốt lại hiện ra **hộp xám phẳng** → user KHÔNG thích.
+- 🔑 Thủ phạm "đục" thật sự KHÔNG phải do copy hero, mà do **lớp grain matte `::after`** (feTurbulence fractalNoise) từng áp lên `.cs-glass-pill` — hero `.stat-card` KHÔNG có lớp này. Gỡ nó đi là hết đục.
+- ✅ CHỐT mới (user duyệt): `.cs-glass-pill` = **Y HỆT hero `.stat-card`** → nền gradient nâu ấm `rgba(80,52,42,.40) … rgba(30,16,12,.47)` + `backdrop-filter: blur(14px)` + viền gradient `::before` + box-shadow hero (đã có quầng ấm `0 0 70px rgba(255,84,24,.12)` TRONG shadow — KHÔNG thêm quầng-sau-card rời). **Đã gỡ `.cs-glass-pill` khỏi nhóm grain `::after`** (chỉ còn `.service-card`/`.cs-card`). Giữ nguyên size/vị trí pill cho bố cục header.
+
+## C. ⭐ HEADER SECTION LỚN (Omni "AD CREATIVES / THAT CONVERT")
+Cascade chéo 2 dòng: **dòng 1 trái (chữ lớn) + card kính** kéo sát cuối chữ (`margin-left:-4rem`) hạ xuống (`translateY(2.6rem)`, `z-index:20`) **đổ bóng đè lên dòng 2**; **dòng 2 lùi phải, chữ cuối mờ dần trắng→xám** (gradient text); mô tả ở phải dưới dòng 2. Font Inter 500.
+Classes dùng chung: `.cs-header .cs-line .cs-line-1 .cs-glass-pill .cs-glass-title .cs-glass-sub`.
+- Case-studies = gốc. Moments tái dùng `.cs-header`/`.cs-line`/`.cs-glass-pill`, **KHÔNG override cỡ chữ** (đồng bộ tuyệt đối). Riêng (2026-06-12, theo user): `.mvh-line2 .mvh-fade { margin-right: 2.39em }` để **mép trái BORDERS thẳng hàng REAL GROWTH/LOOKS LIKE** (hết lùi phải); `.mvh-fade` = **trắng đặc** (đã bỏ gradient mờ vì làm chữ trông nhỏ/yếu hơn). **Đã bỏ đoạn mô tả `.mvh-desc`** (theo user). Coverflow `.mv-track` = **9 card clip TikTok** (@duyendao222). Kiểu **facade cho nhẹ**: card = thumbnail `/images/tiktok/clip-01..09.jpg` + nút `.mv-play`, `data-tt`=video id. **Bấm card → lightbox `#mv-lightbox`** chèn **blockquote `.tiktok-embed` (`data-video-id`) + (re-)load `https://www.tiktok.com/embed.js`** — widget CHÍNH THỨC, embed.js tự quét blockquote → render player iframe chạy được. ⚠️ KHÔNG nhúng iframe THẲNG `embed/v2` HAY `player/v1` — cả hai load 200 nhưng **KHÔNG render player chạy** khi nhúng trực tiếp (thiếu handshake của embed.js). Mỗi lần mở: **gỡ + thêm lại `<script id="tt-embed-js" src=".../embed.js">`** để ép embed.js quét blockquote mới (đã verify tạo được iframe + `window.tiktokEmbed`). Có link dự phòng **"Mở trên TikTok"** (`.mv-lb-tt`). Đóng (nút/backdrop/Esc) thì gỡ iframe để dừng video → **chỉ 1 player tải khi xem, trang vẫn mượt**. Thumbnail lấy qua oEmbed `https://www.tiktok.com/oembed?url=...` rồi resize-về-local (PowerShell System.Drawing, UA browser). JS coverflow = **virtual ring / VÒNG LẶP vô tận**: `.mv-track` `position:relative` cao cố định (560px; mobile 138vw), card `position:absolute` neo tâm (`left/top:50%` + `translate(-50%,-50%)`), mỗi card định vị theo `off = wrap(i - pos)` (modulo N) → **luôn cân 2 bên, không trống**. ⚠️ `place()` render **ĐỒNG BỘ** (init + kéo) — KHÔNG được chỉ dựa vào `requestAnimationFrame` cho lần render đầu vì **tab preview ẩn làm rAF NGỪNG** (frame không chạy → card trắng); `frame()` chỉ dùng rAF để ease (autoplay 4.2s / mũi tên). Kéo ngang xoay vòng, chạm mở clip; nút mũi tên đã bỏ `backdrop-filter` (đắt khi cuộn). 17 ảnh cũ (`/images/moments/*`, 3 học sinh `/images/students/*`) còn trên disk nhưng KHÔNG dùng nữa. Testimonials cũng tái dùng `.cs-header`.
+
+## D. ⭐ SEAM 2 section — xóa "đường ray"
+2 section cùng `--paper`. Vạch xuất hiện khi 1 bên có quầng sáng đột ngột ở ranh giới. Fix (gương đối xứng):
+- Section trên `::after` quầng đáy `radial-gradient(ellipse 60% 305px at 50% 100%, rgba(255,108,50,.10), transparent 62%)`.
+- Section dưới `::before` quầng đỉnh `…at 50% 0%…` **cùng màu/độ đậm/bán kính 305px** → ranh giới giữa vũng sáng liền, hết vạch.
+- ⚠️ DPR 1.755: screenshot MCP ~1.07x nên hairline thiết bị KHÔNG hiện → chẩn đoán bằng logic + zoom, nhờ user xác nhận.
+
+## E. omni-kit (`packages/ui/tokens/omni-kit.css`) — trang nội dung (`.o-*`)
+`.o-hero`(eyebrow+`.o-mega`+`.o-lead`) · `.o-section`(`--tint/--glow`) · `.o-head`(`.o-head-title`+`.o-stroke`) · `.o-card`(`__tag/__title/__body/__num`) · `.o-grid`(`--2/3/4`) · `.o-rows/.o-row` · `.o-split` · `.o-statement` · `.o-stats/.o-stat__num` · `.o-deny`(gạch ngang) · `.o-checks`(✓) · `.o-pill` · `.o-btn`(`--primary/--ghost`) · `.o-cta`. Accent `.o-accent`/`.o-stroke`.
+> Cần card "xịn" trên trang nội dung → dùng **card kính chuẩn (mục B)** thay `.o-card` nhạt để đồng bộ homepage.
+
+## F. Trang & nav (đã gộp learn+news vào sbb, BỎ subdomain)
+Nav nội bộ: `/ /about /programs /news /learn /community /apply`. Đã dựng first-pass (omni-kit): about, programs + `programs/{grp,internship-j1,office-tour,407}`, community, apply, `learn/index`, `news/index`. Cấu trúc: `.o-hero` → 2–4 section kit → `.o-cta`.
+⚠️ **Còn nợ:** trang con sâu learn/news (bài viết, danh mục, lộ trình, `/learn/parent-corner`) — link tạm về hub. Các trang nội dung **chưa soi Omni kỹ từng trang** → khi quay lại phải soi lại.
+
+## G. "ĐỪNG" (lỗi đã mắc)
+- ❌ Đổi font header (lỡ để Jakarta 800 thay Inter 500). ❌ Tự chế card khác card chuẩn (mục B).
+- ❌ Quầng sáng một phía ở ranh giới → đường ray. ❌ Báo "xong" khi chưa zoom kiểm tra.
+- ❌ Dựng hàng loạt trang mà không soi Omni từng trang.
+
 ## Decisions Log
-*(Cập nhật khi có quyết định mới trong session)*
-- [ ] Exact hex values — chưa confirm từ file gốc
-- [ ] Font family — chưa fill in
-- [ ] CSS approach — chưa fill in
-- [ ] Remaining pages beyond homepage — chưa scope
+- ✅ Tokens/hex: lấy từ `packages/ui/tokens/colors.css` (xem mục A). Font header lớn = Inter 500.
+- ✅ CSS: tokens + omni-kit + bespoke `<style>`. ✅ learn+news gộp vào sbb (bỏ subdomain).
+- ✅ Card chuẩn = glass hero (mục B). ✅ Seam = gương đối xứng (mục D).
+- ⏳ Trang nội dung: cần soi Omni & tinh chỉnh từng trang. ⏳ Trang con learn/news chưa dựng.

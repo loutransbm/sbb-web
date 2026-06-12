@@ -9,16 +9,16 @@ export interface Props {
 const { site } = Astro.props;
 
 const mainLinks = [
-  { label: 'About SBB', href: 'https://sbb.vn/about' },
-  { label: 'Chương trình', href: 'https://sbb.vn/programs' },
-  { label: 'Cộng đồng', href: 'https://sbb.vn/community' },
-  { label: 'Liên hệ', href: 'https://sbb.vn/apply' },
+  { label: 'About SBB', href: '/about' },
+  { label: 'Chương trình', href: '/programs' },
+  { label: 'Cộng đồng', href: '/community' },
+  { label: 'Liên hệ', href: '/apply' },
 ];
 
 const domainLinks = [
-  { label: 'SBB', href: 'https://sbb.vn', desc: 'Trang chủ' },
-  { label: 'News', href: 'https://news.sbb.vn', desc: 'Tin tức & câu chuyện' },
-  { label: 'Learn', href: 'https://learn.sbb.vn', desc: 'Tìm hiểu' },
+  { label: 'SBB', href: '/', desc: 'Trang chủ' },
+  { label: 'News', href: '/news', desc: 'Tin tức & câu chuyện' },
+  { label: 'Learn', href: '/learn', desc: 'Tìm hiểu' },
 ];
 
 const year = new Date().getFullYear();
@@ -28,7 +28,7 @@ const year = new Date().getFullYear();
   <div class="container footer-grid">
     <!-- Brand -->
     <div class="footer-brand">
-      <a href="https://sbb.vn" class="footer-logo" aria-label="SBB — Shine Beyond Borders">
+      <a href="/" class="footer-logo" aria-label="SBB — Shine Beyond Borders">
         <img src="/brand/sbb-logo-dark.svg" alt="SBB — Shine Beyond Borders" class="footer-logo-img" width="139" height="36" />
       </a>
       <p class="footer-tagline">SBB chuẩn bị cho người trẻ Việt đủ sức được tin, được trọng dụng, không chỉ được đi.</p>
@@ -55,10 +55,10 @@ const year = new Date().getFullYear();
     <!-- Parent shortcut -->
     <div class="footer-nav">
       <h4 class="footer-heading">Dành cho phụ huynh</h4>
-      <a href="https://learn.sbb.vn/parent-corner" class="footer-link footer-link--accent">
+      <a href="/learn/parent-corner" class="footer-link footer-link--accent">
         Góc phụ huynh →
       </a>
-      <a href="https://sbb.vn/apply" class="footer-link">
+      <a href="/apply" class="footer-link">
         Đặt lịch nói chuyện
       </a>
     </div>

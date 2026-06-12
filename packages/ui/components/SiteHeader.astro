@@ -15,8 +15,8 @@ const sbbLinks = [
   { label: 'Home', href: '/' },
   { label: 'About SBB', href: '/about' },
   { label: 'Programs', href: '/programs' },
-  { label: 'News', href: 'https://news.sbb.vn' },
-  { label: 'Learn', href: 'https://learn.sbb.vn' },
+  { label: 'News', href: '/news' },
+  { label: 'Learn', href: '/learn' },
   { label: 'Community', href: '/community' },
   { label: 'Liên hệ', href: '/apply' },
 ];
@@ -104,10 +104,10 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
     align-items: center;
     gap: var(--space-4);
     min-height: 3.5rem; /* Fixed comfortable height */
-    background-color: rgba(20, 20, 22, 0.05);
-    backdrop-filter: blur(28px) saturate(140%);
-    -webkit-backdrop-filter: blur(28px) saturate(140%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: transparent;        /* Omni: nền trong suốt hoàn toàn */
+    backdrop-filter: blur(10px);          /* Omni: kính mờ blur 10px */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Omni: viền trắng mảnh, rõ */
     border-radius: 100px;
     padding-left: 1.5rem;  /* Optical alignment: more left padding */
     padding-right: 0.5rem; /* Optical alignment: less right padding because CTA has internal padding */

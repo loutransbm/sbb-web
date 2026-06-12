@@ -1,497 +1,268 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
-import StepFlow from '@ui/components/StepFlow.astro';
-import CTASection from '@ui/components/CTASection.astro';
+
+// ===== Intern vs Trainee =====
+const tracks = [
+  {
+    num: '01',
+    title: 'Intern',
+    body: 'Dành cho sinh viên đang học đại học/cao đẳng, hoặc đã tốt nghiệp không quá 12 tháng tính đến thời điểm nộp hồ sơ.',
+    detail: 'Thời gian thực tập tối đa: 12 tháng.',
+  },
+  {
+    num: '02',
+    title: 'Trainee',
+    body: 'Dành cho người có bằng đại học/cao đẳng cộng ít nhất 1 năm kinh nghiệm liên quan, HOẶC có 5 năm kinh nghiệm trong lĩnh vực liên quan (không yêu cầu bằng cấp).',
+    detail: 'Thời gian tu nghiệp tối đa: 18 tháng. Riêng ngành Hospitality tối đa 12 tháng (trừ vị trí quản lý).',
+  },
+];
+
+// ===== Stat chips =====
+const stats = [
+  { num: '18', label: 'Tháng tu nghiệp tối đa' },
+  { num: 'J-1', label: 'Visa Exchange Visitor' },
+  { num: '300K+', label: 'Người đến Mỹ mỗi năm' },
+  { num: '10+', label: 'Nhóm ngành tiếp nhận' },
+];
+
+// ===== Industries =====
+const industries = [
+  'Hospitality & Tourism — Du lịch, Khách sạn',
+  'Business & Commerce — Kinh doanh, Thương mại',
+  'Finance & Accounting — Tài chính, Kế toán',
+  'Information Technology — Công nghệ thông tin',
+  'Engineering — Kỹ thuật',
+  'Architecture & Design — Kiến trúc, Thiết kế',
+  'Media & Communications — Truyền thông',
+  'Sciences — Khoa học ứng dụng',
+  'Agriculture — Nông nghiệp công nghệ cao',
+  'Arts & Culture — Nghệ thuật, Văn hóa',
+];
+
+// ===== Process steps =====
+const steps = [
+  {
+    num: '01',
+    title: 'Tìm hiểu & đánh giá ban đầu',
+    body: 'Nói chuyện thẳng thắn với SBB để hiểu rõ hồ sơ của bạn có thật sự hợp với J-1 hay không.',
+  },
+  {
+    num: '02',
+    title: 'Chuẩn bị nền tảng với GRP',
+    body: 'Xây dựng tư duy toàn cầu, tác phong chuyên nghiệp và ngoại ngữ trước khi bước vào phỏng vấn.',
+  },
+  {
+    num: '03',
+    title: 'Kết nối host company tại Mỹ',
+    body: 'Tìm kiếm doanh nghiệp tiếp nhận và phỏng vấn trực tiếp cho vị trí thực tập của bạn.',
+  },
+  {
+    num: '04',
+    title: 'Sponsor xét duyệt DS-2019',
+    body: 'Tổ chức bảo trợ được Bộ Ngoại giao Mỹ cấp phép duyệt hồ sơ và cấp DS-2019 cho hành trình.',
+  },
+  {
+    num: '05',
+    title: 'Phỏng vấn visa & khởi hành',
+    body: 'Nhận visa J-1, hoàn tất chuẩn bị hành lý và bay sang Mỹ bắt đầu làm việc thật.',
+  },
+];
+
+// ===== Reality-check truths =====
+const truths = [
+  {
+    title: 'Đào tạo, không phải lao động giá rẻ',
+    body: 'Visa J-1 được thiết kế để học hỏi và phát triển chuyên môn thật qua một Training Plan chi tiết. Bạn được trả lương bình đẳng, và doanh nghiệp Mỹ có nghĩa vụ đào tạo bạn — không phải bóc lột sức lao động.',
+  },
+  {
+    title: 'Quy tắc cư trú 2 năm',
+    body: 'Một số trường hợp (nhận tài trợ chính phủ hoặc thuộc danh sách ngành khan hiếm) yêu cầu bạn quay về Việt Nam tối thiểu 2 năm sau chương trình mới được chuyển sang visa định cư hoặc làm việc dài hạn tại Mỹ.',
+  },
+  {
+    title: 'Chính sách có thể thay đổi',
+    body: 'Quy định nhập cảnh và quản lý visa của Mỹ có thể biến động. SBB cam kết đồng hành và xử lý linh hoạt, nhưng không ai có thể cam kết trước quyết định pháp lý của cơ quan ngoại giao Mỹ.',
+  },
+];
+
+// ===== Sponsors =====
+const sponsors = ['CIEE', 'CETUSA', 'Alliance Abroad (AAG)', 'IEEX'];
 ---
 
 <PageLayout
   title="Thực tập & Tu nghiệp Quốc tế J-1"
-  description="Chương trình thực tập và tu nghiệp quốc tế tại Mỹ theo visa J-1 Exchange Visitor."
+  description="Chương trình thực tập và tu nghiệp quốc tế tại Mỹ theo visa J-1 Exchange Visitor — đi làm thật ở doanh nghiệp Mỹ."
   site="sbb"
-  currentPath="/programs"
+  currentPath="/programs/internship-j1"
 >
-
-  <!-- Block 1: Mở đầu Hero -->
-  <section class="section">
-    <div class="container container--narrow">
-      <div class="reveal">
-        <span class="eyebrow-label">CHƯƠNG TRÌNH</span>
-        <h1 class="display-heading">Đi làm thật ở doanh nghiệp Mỹ</h1>
-        <p class="j1-intro">Mỗi năm, hơn 300.000 người từ khắp thế giới đến Mỹ theo visa J-1 Exchange Visitor (tính cả các hạng mục). Đây không phải visa du học thông thường. Đây là con đường nghề nghiệp nghiêm túc giúp bạn trải nghiệm môi trường làm việc thực tế, nâng tầm năng lực và mang giá trị quốc tế về.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Block 2: Intern hay Trainee -->
-  <section class="section border-t" id="intern-or-trainee">
+  <!-- ===== HERO ===== -->
+  <section class="o-hero">
     <div class="container">
-      <div class="reveal" style="margin-bottom: var(--space-8);">
-        <span class="eyebrow-label">COMPARISON</span>
-        <h2 class="section-heading">Bạn là Intern hay Trainee?</h2>
-      </div>
-
-      <div class="comparison-grid">
-        <!-- Card 1: Intern -->
-        <div class="numbered-card reveal">
-          <span class="card-num">01</span>
-          <h3 class="comparison-card__title">Intern</h3>
-          <div class="comparison-card__body">
-            <p>Dành cho sinh viên đang học đại học/cao đẳng hoặc đã tốt nghiệp không quá 12 tháng tính đến lúc nộp hồ sơ.</p>
-            <p class="comparison-card__detail">Thời gian thực tập tối đa: <strong>12 tháng</strong>.</p>
-          </div>
-        </div>
-
-        <!-- Card 2: Trainee -->
-        <div class="numbered-card reveal">
-          <span class="card-num">02</span>
-          <h3 class="comparison-card__title">Trainee</h3>
-          <div class="comparison-card__body">
-            <p>Dành cho người có bằng đại học/cao đẳng cộng thêm ít nhất 1 năm kinh nghiệm liên quan, HOẶC có 5 năm kinh nghiệm làm việc trong lĩnh vực liên quan (không yêu cầu bằng cấp).</p>
-            <p class="comparison-card__detail">Thời gian tu nghiệp tối đa: <strong>18 tháng</strong>.</p>
-            <p class="comparison-card__note">Riêng ngành Hospitality: tối đa 12 tháng (trừ vị trí quản lý).</p>
-          </div>
-        </div>
+      <span class="o-eyebrow">Chương trình · Internship J-1</span>
+      <h1 class="o-mega">ĐI LÀM THẬT<br />Ở DOANH NGHIỆP <span class="o-accent">MỸ</span></h1>
+      <p class="o-lead">
+        Mỗi năm hơn 300.000 người từ khắp thế giới đến Mỹ theo visa J-1 Exchange Visitor. Đây không phải visa du học thông thường — đây là con đường nghề nghiệp nghiêm túc để bạn trải nghiệm môi trường làm việc thực tế, nâng tầm năng lực và mang giá trị quốc tế trở về.
+      </p>
+      <div class="o-actions o-mt-lg">
+        <a href="/apply" class="o-btn o-btn--primary">Đăng ký tư vấn</a>
+        <a href="#how" class="o-btn o-btn--ghost">Xem lộ trình</a>
       </div>
     </div>
   </section>
 
-  <!-- AnchorStat: Dữ kiện thật làm điểm neo thị giác -->
-  <section class="section section-stat border-t">
-    <div class="container container--narrow reveal text-center">
-      <div class="anchor-stat">
-        <span class="anchor-stat__num">TỐI ĐA 18 THÁNG</span>
-        <p class="anchor-stat__caption">Thời gian tu nghiệp nghề nghiệp tại Mỹ theo visa J-1</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Block 3: Ngành nào đi được -->
-  <section class="section border-t" id="industries">
-    <div class="container container--narrow">
-      <div class="reveal" style="margin-bottom: var(--space-8);">
-        <span class="eyebrow-label">FIELDS</span>
-        <h2 class="section-heading">Ngành nào đi được?</h2>
-      </div>
-
-      <div class="industry-grid reveal">
-        <div class="industry-item">Hospitality & Tourism (Du lịch - Khách sạn)</div>
-        <div class="industry-item">Business & Commerce (Kinh doanh - Thương mại)</div>
-        <div class="industry-item">Finance & Accounting (Tài chính - Kế toán)</div>
-        <div class="industry-item">Information Technology (Công nghệ thông tin)</div>
-        <div class="industry-item">Engineering (Kỹ thuật)</div>
-        <div class="industry-item">Architecture & Design (Kiến trúc - Thiết kế)</div>
-        <div class="industry-item">Media & Communications (Truyền thông)</div>
-        <div class="industry-item">Sciences (Khoa học ứng dụng)</div>
-        <div class="industry-item">Agriculture (Nông nghiệp công nghệ cao)</div>
-        <div class="industry-item">Arts & Culture (Nghệ thuật - Văn hóa)</div>
-      </div>
-      <p class="industry-note reveal">(*) Khả năng có suất thực tế tùy thuộc vào ngành nghề và thời điểm tuyển dụng của host company.</p>
-    </div>
-  </section>
-
-  <!-- Block 4: Đi như thế nào -->
-  <section class="section border-t" id="how">
-    <div class="container container--narrow">
-      <div class="reveal" style="margin-bottom: var(--space-8);">
-        <span class="eyebrow-label">PROCESS</span>
-        <h2 class="section-heading">Đi như thế nào?</h2>
-      </div>
-
-      <StepFlow
-        steps={[
-          { title: 'Tìm hiểu & đánh giá ban đầu', description: 'Nói chuyện thẳng thắn với SBB để hiểu rõ hồ sơ của bạn có hợp với J-1 hay không.' },
-          { title: 'Chuẩn bị nền tảng với GRP', description: 'Xây dựng tư duy toàn cầu, tác phong chuyên nghiệp, và ngoại ngữ trước khi phỏng vấn.' },
-          { title: 'Kết nối host company tại Mỹ', description: 'Tìm kiếm doanh nghiệp tiếp nhận và phỏng vấn trực tiếp vị trí thực tập.' },
-          { title: 'Đối tác Sponsor xét duyệt DS-2019', description: 'Sponsor do Bộ Ngoại giao Mỹ cấp phép duyệt hồ sơ bảo trợ hành trình.' },
-          { title: 'Phỏng vấn Visa & Khởi hành', description: 'Nhận visa J-1, hoàn tất chuẩn bị hành lý và bay sang Mỹ làm việc.' },
-        ]}
-      />
-      <div class="cost-note reveal">
-        <p><strong>Lưu ý về chi phí:</strong> SBB không đưa ra một biểu giá chung chung. Chi phí thực tế phụ thuộc vào ngành nghề của bạn, thời lượng và bang bạn làm việc. Mọi chi phí sẽ được minh bạch chi tiết ngay từ buổi trao đổi đầu tiên.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Block 5: Sự thật nên biết (Heavy Section) -->
-  <section class="section heavy-section" id="truths">
-    <div class="container container--narrow reveal">
-      <div style="margin-bottom: var(--space-10);">
-        <span class="eyebrow-label" style="color: var(--accent-2);">REALITY CHECK</span>
-        <h2>Sự thật nên biết</h2>
-      </div>
-
-      <div class="truth-grid">
-        <div class="truth-card">
-          <h3 class="truth-card__title">Đào tạo, không phải đi làm thuê giá rẻ</h3>
-          <p>Visa J-1 được thiết kế cho việc học hỏi và phát triển chuyên môn thực tế thông qua Training Plan chi tiết. Bạn được trả lương bình đẳng, nhưng doanh nghiệp Mỹ có nghĩa vụ đào tạo bạn, không phải bóc lột sức lao động.</p>
+  <!-- ===== OVERVIEW + STATS ===== -->
+  <section class="o-section o-section--glow">
+    <div class="container">
+      <div class="o-split o-split--top">
+        <div>
+          <span class="o-head-eyebrow">Tổng quan</span>
+          <p class="o-statement">
+            Một chương trình nghề <span class="o-accent">đúng nghĩa</span> — không phải điểm dừng du lịch.
+          </p>
         </div>
-        <div class="truth-card">
-          <h3 class="truth-card__title">Quy tắc cư trú 2 năm (Two-Year Rule)</h3>
-          <p>Có một số trường hợp (như nhận tài trợ chính phủ hoặc thuộc danh sách ngành khan hiếm) yêu cầu bạn phải quay về Việt Nam tối thiểu 2 năm sau chương trình mới được chuyển đổi sang visa định cư hoặc làm việc dài hạn tại Mỹ.</p>
-        </div>
-        <div class="truth-card">
-          <h3 class="truth-card__title">Chính sách có thể thay đổi</h3>
-          <p>Quy định nhập cảnh và quản lý visa của chính phủ Mỹ có thể biến động. SBB cam kết đồng hành và xử lý linh hoạt, nhưng không ai có thể can thiệp hoặc cam kết trước quyết định pháp lý của cơ quan ngoại giao Mỹ.</p>
+        <div>
+          <ul class="o-checks">
+            <li>Làm việc trực tiếp tại host company được Mỹ cấp phép, theo Training Plan rõ ràng.</li>
+            <li>Được trả lương bình đẳng như nhân sự bản địa cùng vị trí.</li>
+            <li>Bảo trợ bởi Designated Sponsor do Bộ Ngoại giao Mỹ chỉ định.</li>
+            <li>SBB và GRP đồng hành từ đánh giá hồ sơ đến ngày khởi hành.</li>
+          </ul>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Block 6: Đối tác -->
-  <section class="section border-t" id="partners">
-    <div class="container container--narrow text-center">
-      <div class="reveal" style="margin-bottom: var(--space-8);">
-        <span class="eyebrow-label">SPONSORS</span>
-        <h2 class="section-heading">Designated Sponsors bảo trợ</h2>
-      </div>
-      <p class="partners-desc reveal">SBB hợp tác làm việc chặt chẽ cùng các tổ chức được Bộ Ngoại giao Mỹ cấp phép bảo trợ chương trình:</p>
-      
-      <div class="partner-row reveal">
-        <span class="partner-logo">CIEE</span>
-        <span class="partner-logo">CETUSA</span>
-        <span class="partner-logo">Alliance Abroad (AAG)</span>
-        <span class="partner-logo">IEEX</span>
-      </div>
-      <p class="partners-subtext reveal">và các tổ chức bảo trợ uy tín khác.</p>
-    </div>
-  </section>
+      <hr class="o-divider" />
 
-  <!-- Block 7: Accordion FAQ -->
-  <section class="section border-t" id="faq">
-    <div class="container container--narrow">
-      <div class="reveal" style="margin-bottom: var(--space-8);">
-        <span class="eyebrow-label">FAQ</span>
-        <h2 class="section-heading">Câu hỏi thường gặp</h2>
-      </div>
-
-      <div class="faq-accordion reveal">
-        <details class="faq-item">
-          <summary class="faq-question">Chương trình J-1 có giới hạn độ tuổi không?</summary>
-          <div class="faq-answer">
-            <p>Visa J-1 không giới hạn cứng độ tuổi trần, tuy nhiên bạn cần đáp ứng điều kiện về thời điểm tốt nghiệp (dưới 12 tháng đối với Intern) hoặc có kinh nghiệm làm việc thực tế (đối với Trainee) để đảm bảo hồ sơ thuyết phục Bộ Ngoại giao Mỹ.</p>
+      <div class="o-stats">
+        {stats.map((s) => (
+          <div>
+            <div class="o-stat__num">{s.num}</div>
+            <div class="o-stat__label">{s.label}</div>
           </div>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">Tôi có được tự do chọn bang hoặc thành phố thực tập không?</summary>
-          <div class="faq-answer">
-            <p>Hồ sơ của bạn được kết nối với doanh nghiệp Mỹ phù hợp. Vị trí làm việc phụ thuộc vào việc doanh nghiệp tuyển dụng đặt trụ sở ở đâu. SBB ưu tiên kết nối với các doanh nghiệp uy tín, có môi trường hỗ trợ tốt hơn là chỉ nhắm vào các bang trung tâm.</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">Tỷ lệ đạt visa J-1 tại đại sứ quán Mỹ là bao nhiêu?</summary>
-          <div class="faq-answer">
-            <p>J-1 là diện visa trao đổi văn hóa có tỷ lệ xét duyệt tương đối cởi mở hơn so với visa lao động thuần túy. Tuy nhiên, việc phỏng vấn thành công đòi hỏi bạn phải chứng minh được kế hoạch đào tạo thực tế rõ ràng và sự gắn kết quay trở về nước sau chương trình. SBB và GRP sẽ cùng bạn chuẩn bị kỹ lưỡng nội dung này.</p>
-          </div>
-        </details>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- Block 8: CTA cuối -->
-  <CTASection
-    headline="Bắt đầu hành trình J-1"
-    body="Đặt lịch nói chuyện trực tiếp để SBB đánh giá hồ sơ cá nhân và tư vấn con đường phù hợp nhất cho bạn."
-    primaryCtaText="Đặt lịch nói chuyện về J-1"
-    primaryCtaHref="/apply"
-    secondaryCtaText="Hiểu sâu trên Learn"
-    secondaryCtaHref="https://learn.sbb.vn/internship-j1"
-  />
+  <!-- ===== INTERN OR TRAINEE ===== -->
+  <section class="o-section o-section--tint">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Bạn là ai</span>
+        <h2 class="o-head-title">INTERN OR <span class="o-stroke">TRAINEE</span></h2>
+        <p class="o-head-desc">Hai hướng đi, hai bộ điều kiện. Xác định đúng nhóm của bạn ngay từ đầu để chuẩn bị hồ sơ thuyết phục nhất.</p>
+      </div>
 
+      <div class="o-grid o-grid--2">
+        {tracks.map((t) => (
+          <article class="o-card">
+            <span class="o-card__num">{t.num}</span>
+            <h3 class="o-card__title">{t.title}</h3>
+            <p class="o-card__body">{t.body}</p>
+            <p class="o-card__body" style="margin-top:1rem;color:#fff;font-weight:600;">{t.detail}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INDUSTRIES ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Ngành nghề</span>
+        <h2 class="o-head-title">WHERE YOU <span class="o-stroke">GO</span></h2>
+        <p class="o-head-desc">Mười nhóm ngành chính đang tiếp nhận ứng viên J-1. Suất thực tế tùy thuộc ngành nghề và thời điểm tuyển dụng của host company.</p>
+      </div>
+
+      <div class="o-grid o-grid--2">
+        {industries.map((name) => (
+          <article class="o-card">
+            <p class="o-card__body" style="color:#fff;font-weight:600;">{name}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="o-section o-section--tint o-section--glow" id="how">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Lộ trình</span>
+        <h2 class="o-head-title">HOW IT <span class="o-stroke">WORKS</span></h2>
+        <p class="o-head-desc">Năm bước rõ ràng từ buổi nói chuyện đầu tiên đến ngày bạn đặt chân tới Mỹ.</p>
+      </div>
+
+      <div class="o-rows">
+        {steps.map((s) => (
+          <article class="o-row">
+            <span class="o-row__num">{s.num}</span>
+            <div>
+              <h3 class="o-row__title">{s.title}</h3>
+              <p class="o-row__body">{s.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="o-note o-mt-lg" style="max-width:62ch;">
+        <strong style="color:#fff;">Về chi phí:</strong> SBB không đưa ra biểu giá chung chung. Chi phí thực tế phụ thuộc vào ngành nghề, thời lượng và bang bạn làm việc — và sẽ được minh bạch chi tiết ngay từ buổi trao đổi đầu tiên.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== REALITY CHECK ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Reality Check</span>
+        <h2 class="o-head-title">THE TRUTH <span class="o-stroke">FIRST</span></h2>
+        <p class="o-head-desc">Ba sự thật chúng tôi muốn bạn biết trước khi quyết định — để bạn đi với đôi mắt mở.</p>
+      </div>
+
+      <div class="o-grid o-grid--3">
+        {truths.map((t) => (
+          <article class="o-card">
+            <span class="o-card__tag">Lưu ý</span>
+            <h3 class="o-card__title">{t.title}</h3>
+            <p class="o-card__body">{t.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SPONSORS ===== -->
+  <section class="o-section o-section--tint">
+    <div class="container">
+      <div class="o-split o-split--top">
+        <div>
+          <span class="o-head-eyebrow">Sponsors</span>
+          <h2 class="o-statement">Được bảo trợ bởi tổ chức <span class="o-accent">chính danh</span>.</h2>
+        </div>
+        <div>
+          <p class="o-note" style="max-width:54ch;margin-bottom:1.6rem;">
+            SBB hợp tác chặt chẽ cùng các Designated Sponsor được Bộ Ngoại giao Mỹ cấp phép bảo trợ chương trình:
+          </p>
+          <div class="o-actions">
+            {sponsors.map((name) => (
+              <span class="o-pill"><b>{name}</b></span>
+            ))}
+          </div>
+          <p class="o-note" style="margin-top:1.4rem;font-style:italic;">và các tổ chức bảo trợ uy tín khác.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="o-cta">
+    <div class="container">
+      <h2 class="o-cta__title">BẮT ĐẦU HÀNH TRÌNH J-1</h2>
+      <p class="o-cta__sub">Đặt lịch nói chuyện trực tiếp để SBB đánh giá hồ sơ cá nhân và tư vấn con đường phù hợp nhất cho bạn.</p>
+      <div class="o-actions">
+        <a href="/apply" class="o-btn o-btn--primary">Đăng ký tư vấn</a>
+        <a href="/programs" class="o-btn o-btn--ghost">Xem chương trình khác</a>
+      </div>
+    </div>
+  </section>
 </PageLayout>
-
-<style>
-  .eyebrow-label {
-    display: block;
-    font-family: var(--font-body);
-    font-size: var(--text-xs);
-    font-weight: var(--weight-bold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: var(--space-4);
-  }
-
-  .display-heading {
-    font-family: var(--font-headline);
-    font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
-    line-height: 1.05;
-    letter-spacing: var(--tracking-tight);
-    margin-bottom: var(--space-6);
-    color: var(--text-primary);
-    text-transform: uppercase;
-  }
-
-  .j1-intro {
-    font-size: var(--text-xl);
-    color: var(--text-secondary);
-    line-height: var(--leading-relaxed);
-    max-width: var(--max-w-prose);
-  }
-
-  .section-heading {
-    font-family: var(--font-headline);
-    font-size: var(--text-3xl);
-    font-weight: var(--weight-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-  }
-
-  .border-t {
-    border-top: 1px solid var(--border);
-  }
-
-  /* Comparison Grid */
-  .comparison-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-  }
-
-  @media (min-width: 768px) {
-    .comparison-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .numbered-card {
-    border: 1px solid var(--line);
-    background-color: var(--surface-card);
-    padding: var(--space-8) var(--space-6);
-    position: relative;
-    border-radius: var(--radius-lg);
-    transition: border-color var(--duration-normal) var(--ease-out),
-                transform var(--duration-normal) var(--ease-out);
-  }
-  .numbered-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-  }
-
-  .card-num {
-    position: absolute;
-    top: var(--space-4);
-    right: var(--space-6);
-    font-family: var(--font-headline);
-    font-size: var(--text-4xl);
-    font-weight: var(--weight-bold);
-    color: rgba(255, 255, 255, 0.07);
-  }
-
-  .comparison-card__title {
-    font-family: var(--font-headline);
-    font-size: var(--text-2xl);
-    font-weight: var(--weight-bold);
-    margin-bottom: var(--space-4);
-    color: var(--accent);
-    text-transform: uppercase;
-  }
-
-  .comparison-card__body p {
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    line-height: var(--leading-normal);
-    margin-bottom: var(--space-4);
-  }
-
-  .comparison-card__detail {
-    font-size: var(--text-base);
-    color: var(--text-primary) !important;
-    border-top: 1px solid var(--line);
-    padding-top: var(--space-3);
-  }
-
-  .comparison-card__note {
-    font-size: var(--text-sm) !important;
-    font-style: italic;
-    color: var(--text-muted) !important;
-  }
-
-  /* AnchorStat block */
-  .anchor-stat {
-    display: inline-block;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-xl);
-    background: radial-gradient(circle at 50% 0%, rgba(255, 94, 58, 0.12), var(--surface-card) 70%);
-    padding: var(--space-8) var(--space-12);
-  }
-
-  .anchor-stat__num {
-    display: block;
-    font-family: var(--font-headline);
-    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
-    font-weight: var(--weight-bold);
-    color: var(--accent-2);
-    line-height: 1;
-    margin-bottom: var(--space-2);
-  }
-
-  .anchor-stat__caption {
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    color: var(--text-secondary);
-    letter-spacing: var(--tracking-wide);
-    margin: 0;
-  }
-
-  /* Industry Grid */
-  .industry-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-3);
-  }
-
-  @media (min-width: 576px) {
-    .industry-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .industry-item {
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    padding: var(--space-3) var(--space-4);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    background-color: var(--surface-card);
-    transition: background-color var(--duration-fast) var(--ease-out),
-                border-color var(--duration-fast) var(--ease-out),
-                color var(--duration-fast) var(--ease-out);
-  }
-
-  .industry-item:hover {
-    background-color: var(--surface-overlay);
-    border-color: var(--accent);
-    color: var(--ink);
-  }
-
-  .industry-note {
-    font-size: var(--text-sm);
-    color: var(--text-muted);
-    font-style: italic;
-    margin-top: var(--space-4);
-  }
-
-  /* StepFlow Cost Note */
-  .cost-note {
-    margin-top: var(--space-8);
-    padding: var(--space-6);
-    border: 2px dashed var(--line);
-    font-style: italic;
-  }
-
-  .cost-note p {
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    line-height: var(--leading-normal);
-    margin: 0;
-  }
-
-  /* Truths Section */
-  .truth-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-    margin-top: var(--space-10);
-  }
-
-  @media (min-width: 768px) {
-    .truth-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .truth-card {
-    border-left: 2px solid var(--accent-2);
-    padding-left: var(--space-5);
-  }
-
-  .truth-card__title {
-    font-family: var(--font-headline);
-    font-size: var(--text-xl);
-    font-weight: var(--weight-bold);
-    color: var(--on-ink);
-    margin-bottom: var(--space-3);
-    text-transform: uppercase;
-  }
-
-  .truth-card p {
-    font-size: var(--text-base);
-    color: rgba(245, 241, 234, 0.7);
-    line-height: var(--leading-normal);
-  }
-
-  /* Partners Section */
-  .partners-desc {
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    margin-bottom: var(--space-6);
-  }
-
-  .partner-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-8);
-    margin-block: var(--space-6) var(--space-4);
-  }
-
-  .partner-logo {
-    font-family: var(--font-headline);
-    font-size: var(--text-xl);
-    font-weight: var(--weight-bold);
-    color: var(--text-primary);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-  }
-
-  .partners-subtext {
-    font-size: var(--text-xs);
-    color: var(--text-muted);
-    font-style: italic;
-  }
-
-  /* FAQ Accordion */
-  .faq-accordion {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .faq-item {
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    background-color: var(--surface-card);
-    overflow: hidden;
-    transition: border-color var(--duration-fast) var(--ease-out);
-  }
-
-  .faq-item[open] {
-    border-color: var(--line-dark);
-  }
-
-  .faq-question {
-    font-family: var(--font-headline);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-semibold);
-    padding: var(--space-4) var(--space-6);
-    cursor: pointer;
-    user-select: none;
-    outline: none;
-    color: var(--text-primary);
-  }
-
-  .faq-answer {
-    padding: 0 var(--space-6) var(--space-5);
-    border-top: 1px solid var(--line);
-  }
-
-  .faq-answer p {
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    line-height: var(--leading-normal);
-    margin: var(--space-4) 0 0;
-  }
-</style>

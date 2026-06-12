@@ -1,7 +1,193 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
-import PendingPage from '@ui/components/PendingPage.astro';
+
+// ===== Overview rows =====
+const overview = [
+  {
+    num: '01',
+    title: 'Vào tận văn phòng, không đứng ngoài nhìn',
+    body: 'Bạn không tham quan kiểu khách du lịch. Bạn bước vào văn phòng những tập đoàn toàn cầu, ngồi cùng người làm thật, làm việc thật và quan sát cách một tổ chức lớn vận hành mỗi ngày.',
+  },
+  {
+    num: '02',
+    title: 'Đồng sáng lập cùng Career Mates',
+    body: 'Office Tour được SBB đồng sáng lập với Career Mates. Mạng lưới doanh nghiệp và cách tổ chức được dựng để mỗi ngày bạn ở đó đều có giá trị, có người hướng dẫn thật chứ không bỏ mặc.',
+  },
+  {
+    num: '03',
+    title: 'Một bước thử trước khi cam kết đường dài',
+    body: 'Chưa chắc mình hợp với môi trường quốc tế? Office Tour là cách thử ngắn hạn, ít rủi ro — để bạn cảm nhận thật trước khi quyết định đi xa hơn với J-1 hay các con đường dài hạn.',
+  },
+];
+
+// ===== What you'll see (cards) =====
+const experiences = [
+  {
+    tag: 'Top Global Companies',
+    title: 'Bên trong tập đoàn toàn cầu',
+    body: 'Đặt chân vào những cái tên hàng đầu như JP Morgan và nhiều tập đoàn quốc tế khác — mỗi doanh nghiệp dành trọn 2 ngày để bạn quan sát và trải nghiệm từ bên trong.',
+  },
+  {
+    tag: 'Real Work',
+    title: 'Làm việc thật, hướng dẫn thật',
+    body: 'Không phải nghe thuyết trình rồi về. Bạn được giao việc, tham gia nhịp làm việc và có người trong doanh nghiệp dẫn dắt, giải đáp ngay tại chỗ.',
+  },
+  {
+    tag: 'Culture & Travel',
+    title: 'Trải nghiệm kết hợp khám phá',
+    body: 'Giữa những ngày trong văn phòng là thời gian khám phá thành phố, văn hóa và con người bản địa — để chuyến đi vừa là bước nghề, vừa là một hành trình đáng nhớ.',
+  },
+  {
+    tag: 'Flexible Packages',
+    title: 'Nhiều gói thời gian linh hoạt',
+    body: 'Từ 5 đến 10 ngày, có các gói thời gian khác nhau để bạn chọn theo lịch và mục tiêu của mình — đủ ngắn để bắt đầu, đủ sâu để thấy rõ.',
+  },
+];
+
+// ===== Stats =====
+const stats = [
+  { num: '5–10', label: 'Ngày trong doanh nghiệp' },
+  { num: '02', label: 'Ngày cho mỗi công ty' },
+  { num: '∞', label: 'Góc nhìn về nghề toàn cầu' },
+];
+
+// ===== Agenda / how it works =====
+const agenda = [
+  {
+    num: '01',
+    title: 'Chọn gói và chốt lịch',
+    body: 'Bắt đầu bằng một cuộc trao đổi để hiểu mục tiêu của bạn. SBB tư vấn gói thời gian phù hợp và sắp xếp lịch trình rõ ràng trước khi đi.',
+  },
+  {
+    num: '02',
+    title: 'Chuẩn bị trước khi vào doanh nghiệp',
+    body: 'Bạn được hướng dẫn về tác phong, cách quan sát và đặt câu hỏi, để mỗi ngày trong văn phòng đều khai thác được nhiều nhất chứ không lãng phí.',
+  },
+  {
+    num: '03',
+    title: 'Vào từng công ty, mỗi nơi 2 ngày',
+    body: 'Lần lượt bước vào các tập đoàn trong lịch trình. Mỗi doanh nghiệp 2 ngày làm việc và quan sát thật, có người hướng dẫn đi cùng bạn suốt quá trình.',
+  },
+  {
+    num: '04',
+    title: 'Khám phá và đúc kết',
+    body: 'Đan xen là thời gian trải nghiệm văn hóa bản địa. Khép lại hành trình, bạn nhìn lại điều mình học được và cùng SBB định hình bước đi tiếp theo.',
+  },
+];
 ---
-<PageLayout title="Office Tour" description="5 đến 10 ngày vào doanh nghiệp làm việc thật, có hướng dẫn thật." site="sbb" currentPath="/programs">
-  <PendingPage title="Office Tour" oneLiner="5 đến 10 ngày vào doanh nghiệp làm việc thật, có hướng dẫn thật." />
+
+<PageLayout
+  title="Office Tour"
+  description="5 đến 10 ngày vào doanh nghiệp toàn cầu làm việc thật, có hướng dẫn thật — đồng sáng lập cùng Career Mates."
+  site="sbb"
+  currentPath="/programs/office-tour"
+>
+  <!-- ===== HERO ===== -->
+  <section class="o-hero">
+    <div class="container">
+      <span class="o-eyebrow">Programs · Office Tour</span>
+      <h1 class="o-mega">BƯỚC VÀO<br /><span class="o-accent">VĂN PHÒNG</span> THẾ GIỚI</h1>
+      <p class="o-lead">5 đến 10 ngày bước vào doanh nghiệp toàn cầu, làm việc thật và có người hướng dẫn thật. Một bước thử ngắn, ít rủi ro, trước khi bạn cam kết một con đường dài hơi ra thế giới.</p>
+    </div>
+  </section>
+
+  <!-- ===== OVERVIEW ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Tổng quan</span>
+        <h2 class="o-head-title">THE <span class="o-stroke">IDEA</span></h2>
+        <p class="o-head-desc">Office Tour không phải một chuyến tham quan. Đây là cách ngắn nhất để cảm nhận nghề nghiệp toàn cầu từ bên trong — thật, gần và có người dẫn đường.</p>
+      </div>
+      <div class="o-rows">
+        {overview.map((b) => (
+          <article class="o-row">
+            <span class="o-row__num">{b.num}</span>
+            <div>
+              <h3 class="o-row__title">{b.title}</h3>
+              <p class="o-row__body">{b.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHAT YOU'LL SEE ===== -->
+  <section class="o-section o-section--tint o-section--glow">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Trải nghiệm</span>
+        <h2 class="o-head-title">WHAT YOU'LL <span class="o-stroke">SEE</span></h2>
+        <p class="o-head-desc">Mỗi ngày trong Office Tour được dựng để bạn vừa thấy cách vận hành thật, vừa được làm, vừa được khám phá.</p>
+      </div>
+
+      <div class="o-grid o-grid--2">
+        {experiences.map((e) => (
+          <article class="o-card">
+            <span class="o-card__tag">{e.tag}</span>
+            <h3 class="o-card__title">{e.title}</h3>
+            <p class="o-card__body">{e.body}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="o-stats o-mt-lg">
+        {stats.map((st) => (
+          <div>
+            <div class="o-stat__num">{st.num}</div>
+            <div class="o-stat__label">{st.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATEMENT ===== -->
+  <section class="o-section">
+    <div class="container">
+      <p class="o-statement o-statement--full">
+        Đi xa không phải để chụp ảnh trước trụ sở đẹp. Đi để hiểu mình <span class="o-accent">làm được gì</span> trong một môi trường thật — trước khi đặt cược cả một chặng đường.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== AGENDA ===== -->
+  <section class="o-section o-section--tint">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Lịch trình</span>
+        <h2 class="o-head-title">HOW IT <span class="o-stroke">RUNS</span></h2>
+        <p class="o-head-desc">Một hành trình gọn gàng, có chuẩn bị và có người đi cùng — từ lúc chốt lịch tới khi đúc kết.</p>
+      </div>
+
+      <div class="o-rows">
+        {agenda.map((s) => (
+          <article class="o-row">
+            <span class="o-row__num">{s.num}</span>
+            <div>
+              <h3 class="o-row__title">{s.title}</h3>
+              <p class="o-row__body">{s.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="o-note o-mt-lg" style="max-width: 60ch;">
+        Lưu ý: lịch trình và danh sách doanh nghiệp có thể thay đổi theo từng đợt và từng gói thời gian. Mọi chi tiết và chi phí sẽ được SBB trao đổi minh bạch ngay từ buổi nói chuyện đầu tiên.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="o-cta">
+    <div class="container">
+      <h2 class="o-cta__title">THỬ MỘT BƯỚC<br />RA THẾ GIỚI?</h2>
+      <p class="o-cta__sub">Đăng ký tham gia Office Tour để bước vào doanh nghiệp toàn cầu, hoặc xem các chương trình khác của SBB để chọn con đường phù hợp nhất với bạn.</p>
+      <div class="o-actions">
+        <a href="/apply" class="o-btn o-btn--primary">Đăng ký tham gia</a>
+        <a href="/programs" class="o-btn o-btn--ghost">Xem chương trình khác</a>
+      </div>
+    </div>
+  </section>
 </PageLayout>

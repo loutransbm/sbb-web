@@ -1,71 +1,223 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
-import CTASection from '@ui/components/CTASection.astro';
----
-<PageLayout title="Chương trình 407 — Đường Úc" description="Đường Úc qua visa 407 cho Aged Care, Child Care và Hospitality." site="sbb" currentPath="/programs">
-  <section class="section">
-    <div class="container container--narrow">
-      <span class="eyebrow reveal">Chuyên biệt</span>
-      <h1 class="title reveal">Chương trình 407 — Đường Úc</h1>
-      <p class="lead reveal">Ngoài đường Mỹ qua J-1, SBB có đường Úc qua visa 407 cho một số mảng như Aged Care, Child Care và Hospitality. Đây không phải mũi nhọn hiện tại, nhưng nếu bạn đang nhắm các ngành này, hỏi SBB để xem có hợp không.</p>
 
-      <div class="partner-card reveal">
-        <span class="partner-card__label">Đối tác</span>
-        <span class="partner-card__name">Australian Internships</span>
+// Số liệu nhanh về chương trình 407 — Đường Úc
+const stats = [
+  { num: '407', label: 'Loại visa (Training)' },
+  { num: 'ÚC', label: 'Điểm đến' },
+  { num: '03', label: 'Mảng ngành trọng tâm' },
+];
+
+// Các mảng ngành 407 phù hợp
+const fields = [
+  {
+    num: '01',
+    tag: 'Aged Care',
+    title: 'Chăm sóc người cao tuổi',
+    body: 'Một trong những mảng nhu cầu lớn và ổn định nhất tại Úc. Hợp với người muốn theo nghề chăm sóc bài bản, có tâm và có nghề.',
+  },
+  {
+    num: '02',
+    tag: 'Child Care',
+    title: 'Chăm sóc & giáo dục trẻ',
+    body: 'Môi trường làm việc đề cao chuẩn mực và sự tận tâm. Phù hợp nếu bạn yêu thích công việc với trẻ nhỏ và muốn học cách làm chuyên nghiệp.',
+  },
+  {
+    num: '03',
+    tag: 'Hospitality',
+    title: 'Du lịch & Khách sạn',
+    body: 'Mảng dịch vụ rộng, dễ tiếp cận với người có nền tảng ngoại ngữ và tác phong tốt — cũng là thế mạnh quen thuộc của hệ sinh thái SBB.',
+  },
+];
+
+// Điều kiện nền tảng nên có
+const eligibility = [
+  'Nhắm đúng một trong các mảng Aged Care, Child Care hoặc Hospitality.',
+  'Có nền tảng ngoại ngữ đủ dùng cho công việc và phỏng vấn.',
+  'Tác phong nghiêm túc, sẵn sàng làm thật và học thật ở môi trường quốc tế.',
+  'Hồ sơ rõ ràng, trung thực — yếu tố quyết định khi đối tác xét duyệt.',
+];
+
+// Các bước đi đường Úc
+const steps = [
+  {
+    num: '01',
+    title: 'Đánh giá ban đầu',
+    body: 'Nói chuyện thẳng thắn với SBB để xem hồ sơ của bạn có thật sự hợp với đường Úc qua visa 407 hay không. Không hợp, SBB nói thẳng.',
+  },
+  {
+    num: '02',
+    title: 'Chuẩn bị nền tảng',
+    body: 'Xây dựng tư duy toàn cầu, tác phong chuyên nghiệp và ngoại ngữ trước khi bước vào quá trình xét duyệt và kết nối vị trí.',
+  },
+  {
+    num: '03',
+    title: 'Kết nối qua đối tác',
+    body: 'Hồ sơ được làm việc cùng đối tác Australian Internships để tìm vị trí tiếp nhận phù hợp với ngành bạn nhắm tới.',
+  },
+  {
+    num: '04',
+    title: 'Xét duyệt & khởi hành',
+    body: 'Hoàn tất hồ sơ bảo trợ, xin visa 407 và chuẩn bị sang Úc bắt đầu hành trình làm việc thực tế.',
+  },
+];
+
+// Sự thật nên biết
+const truths = [
+  {
+    title: 'Đào tạo, không phải lao động giá rẻ',
+    body: 'Visa 407 là diện training — bạn sang Úc để học nghề và nâng năng lực thực tế, không phải để làm thuê giá rẻ. Điều này định hình cả cách SBB chuẩn bị hồ sơ cho bạn.',
+  },
+  {
+    title: 'Không phải mũi nhọn hiện tại',
+    body: 'Mũi nhọn của SBB vẫn là đường Mỹ qua J-1. Đường Úc dành cho người nhắm đúng các ngành phù hợp — nên hãy hỏi để biết bạn có thật sự hợp hay không.',
+  },
+  {
+    title: 'Chính sách có thể thay đổi',
+    body: 'Quy định visa và nhập cảnh của Úc có thể biến động theo thời điểm. SBB đồng hành và xử lý linh hoạt, nhưng không cam kết thay cho quyết định của cơ quan chức năng.',
+  },
+];
+---
+
+<PageLayout
+  title="Chương trình 407 — Đường Úc"
+  description="Đường Úc qua visa 407 cho Aged Care, Child Care và Hospitality — đào tạo nghề thực tế cùng đối tác Australian Internships."
+  site="sbb"
+  currentPath="/programs/407"
+>
+  <!-- ===== HERO ===== -->
+  <section class="o-hero">
+    <div class="container">
+      <span class="o-eyebrow">Chương trình · Đường Úc</span>
+      <h1 class="o-mega">VISA <span class="o-accent">407</span><br />ĐƯỜNG ÚC</h1>
+      <p class="o-lead">Ngoài đường Mỹ qua J-1, SBB có đường Úc qua visa 407 cho một số mảng nghề như Aged Care, Child Care và Hospitality. Đây không phải mũi nhọn hiện tại, nhưng nếu bạn đang nhắm đúng các ngành này, hãy hỏi SBB để xem có hợp không.</p>
+      <div class="o-stats o-mt-lg">
+        {stats.map((s) => (
+          <div>
+            <div class="o-stat__num">{s.num}</div>
+            <div class="o-stat__label">{s.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <CTASection
-    headline="Muốn tìm hiểu thêm?"
-    body="Đặt lịch nói chuyện để SBB đánh giá xem đường Úc có phù hợp với bạn."
-    primaryCtaText="Đặt lịch nói chuyện"
-    primaryCtaHref="/apply"
-  />
-</PageLayout>
+  <!-- ===== OVERVIEW ===== -->
+  <section class="o-section o-section--glow">
+    <div class="container">
+      <div class="o-split o-split--top">
+        <div>
+          <span class="o-head-eyebrow">Tổng quan</span>
+          <h2 class="o-statement">Một con đường nghề <span class="o-accent">nghiêm túc</span> tới Úc.</h2>
+        </div>
+        <div>
+          <ul class="o-checks">
+            <li>Visa 407 là diện training — sang Úc để học nghề và làm thật, không phải du học thuần tuý.</li>
+            <li>Tập trung vào các mảng nhu cầu cao và ổn định tại Úc.</li>
+            <li>Triển khai cùng đối tác đào tạo quốc tế Australian Internships.</li>
+            <li>Cùng tinh thần với hệ SBB: chuẩn bị để bạn được tin và trọng dụng, không chỉ “được đi”.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<style>
-  .eyebrow {
-    display: inline-block;
-    font-size: var(--text-xs);
-    font-weight: var(--weight-bold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: var(--space-5);
-  }
-  .title {
-    font-size: var(--text-4xl);
-    text-transform: none;
-    letter-spacing: var(--tracking-tight);
-    margin-bottom: var(--space-6);
-  }
-  .lead {
-    font-size: var(--text-lg);
-    color: var(--text-secondary);
-    line-height: var(--leading-relaxed);
-    margin-bottom: var(--space-8);
-  }
-  .partner-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    padding: var(--space-6);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    background: linear-gradient(160deg, var(--surface-card), var(--bg-primary));
-  }
-  .partner-card__label {
-    font-size: var(--text-xs);
-    font-weight: var(--weight-bold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .partner-card__name {
-    font-family: var(--font-headline);
-    font-size: var(--text-xl);
-    font-weight: var(--weight-semibold);
-    color: var(--ink);
-  }
-</style>
+  <!-- ===== FIELDS / WHAT YOU GET ===== -->
+  <section class="o-section o-section--tint">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Mảng ngành</span>
+        <h2 class="o-head-title">WHAT YOU <span class="o-stroke">GET</span></h2>
+        <p class="o-head-desc">Visa 407 mở đường vào những mảng nghề mà nước Úc đang thật sự cần người. Đây là ba hướng SBB tập trung.</p>
+      </div>
+      <div class="o-grid o-grid--3">
+        {fields.map((f) => (
+          <article class="o-card">
+            <span class="o-card__num">{f.num}</span>
+            <span class="o-card__tag">{f.tag}</span>
+            <h3 class="o-card__title">{f.title}</h3>
+            <p class="o-card__body">{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ELIGIBILITY ===== -->
+  <section class="o-section o-section--glow">
+    <div class="container">
+      <div class="o-split o-split--top">
+        <div>
+          <span class="o-head-eyebrow">Điều kiện</span>
+          <h2 class="o-head-title">ARE YOU A <span class="o-stroke">FIT</span></h2>
+          <p class="o-head-desc">Đường Úc không hợp với tất cả mọi người. Dưới đây là những điều nên có trước khi bạn nghĩ tới visa 407.</p>
+        </div>
+        <div>
+          <ul class="o-checks">
+            {eligibility.map((e) => (
+              <li>{e}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STEPS ===== -->
+  <section class="o-section o-section--tint">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Lộ trình</span>
+        <h2 class="o-head-title">HOW IT <span class="o-stroke">WORKS</span></h2>
+        <p class="o-head-desc">Bốn bước từ buổi nói chuyện đầu tiên đến lúc bạn đặt chân sang Úc — minh bạch ngay từ đầu.</p>
+      </div>
+      <div class="o-rows">
+        {steps.map((s) => (
+          <article class="o-row">
+            <span class="o-row__num">{s.num}</span>
+            <div>
+              <h3 class="o-row__title">{s.title}</h3>
+              <p class="o-row__body">{s.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REALITY CHECK + PARTNER ===== -->
+  <section class="o-section o-section--glow">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Reality Check</span>
+        <h2 class="o-head-title">THE <span class="o-stroke">TRUTH</span></h2>
+        <p class="o-head-desc">SBB chọn nói thật trước. Đây là những điều bạn nên biết trước khi đi đường Úc.</p>
+      </div>
+      <div class="o-grid o-grid--3 o-mb-lg">
+        {truths.map((t) => (
+          <article class="o-card">
+            <h3 class="o-card__title">{t.title}</h3>
+            <p class="o-card__body">{t.body}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="o-pill" style="border-radius: 24px; padding: 1rem 1.4rem;">
+        <span>Đối tác triển khai</span>
+        <b>Australian Internships</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="o-cta">
+    <div class="container">
+      <h2 class="o-cta__title">ĐƯỜNG ÚC<br />CÓ HỢP VỚI BẠN?</h2>
+      <p class="o-cta__sub">Đặt lịch nói chuyện để SBB đánh giá thẳng thắn xem visa 407 có phải con đường phù hợp với bạn — hoặc xem các chương trình khác.</p>
+      <div class="o-actions">
+        <a href="/apply" class="o-btn o-btn--primary">Đăng ký tư vấn</a>
+        <a href="/programs" class="o-btn o-btn--ghost">Xem chương trình khác</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

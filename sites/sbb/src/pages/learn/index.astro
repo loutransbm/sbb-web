@@ -1,0 +1,159 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+
+// 100% static content — no content collections, no extra components.
+const topics = [
+  {
+    tag: 'Ngôn ngữ',
+    title: 'Tiếng Anh ứng dụng',
+    body: 'Không học ngữ pháp suông. Tập trung vào tiếng Anh dùng thật trong phỏng vấn, email công việc và giao tiếp hằng ngày nơi công sở quốc tế.',
+  },
+  {
+    tag: 'Nghề nghiệp',
+    title: 'Kỹ năng nghề',
+    body: 'Tác phong làm việc chuẩn quốc tế, kỹ năng chuyên ngành và cách thể hiện năng lực để được tin tưởng và trọng dụng từ ngày đầu.',
+  },
+  {
+    tag: 'Hồ sơ',
+    title: 'Hồ sơ & Visa',
+    body: 'Hiểu đúng bản chất từng loại visa, chuẩn bị CV chuẩn ATS, thư động lực và bộ hồ sơ sẵn sàng cho mọi vòng xét duyệt.',
+  },
+  {
+    tag: 'Văn hoá',
+    title: 'Văn hoá làm việc',
+    body: 'Cách thích nghi với môi trường đa văn hoá, giao tiếp với sếp và đồng nghiệp nước ngoài, tránh những cú sốc văn hoá đầu tiên.',
+  },
+  {
+    tag: 'Tài chính',
+    title: 'Tài chính du học',
+    body: 'Dự trù chi phí thật, quản lý dòng tiền khi sống ở nước ngoài và lập kế hoạch tài chính tỉnh táo trước khi lên đường.',
+  },
+  {
+    tag: 'Tương lai',
+    title: 'Định cư & Phát triển',
+    body: 'Tầm nhìn dài hạn: từ một chuyến đi ngắn hạn đến con đường phát triển sự nghiệp và định cư bền vững ở môi trường quốc tế.',
+  },
+];
+
+const paths = [
+  {
+    num: '01',
+    title: 'Khám phá & Định hướng',
+    body: 'Bắt đầu từ Reality Check: hiểu thật về cuộc sống, công việc và chi phí ở nước ngoài. Tự đánh giá xem mình thực sự phù hợp với con đường nào.',
+  },
+  {
+    num: '02',
+    title: 'Xây nền năng lực',
+    body: 'Rèn tiếng Anh ứng dụng và kỹ năng nghề tới mức làm được việc thật. Đây là phần dài nhất, nhưng cũng là phần quyết định bạn đi được xa tới đâu.',
+  },
+  {
+    num: '03',
+    title: 'Chuẩn bị hồ sơ',
+    body: 'Hoàn thiện CV, thư động lực và bộ hồ sơ visa. Luyện phỏng vấn với doanh nghiệp để tự tin bước vào vòng xét duyệt thật.',
+  },
+  {
+    num: '04',
+    title: 'Sẵn sàng cất cánh',
+    body: 'Checklist trước khi đi, chuẩn bị tâm thế và tài chính, kết nối cộng đồng người đi trước để không bao giờ phải bước đi một mình.',
+  },
+];
+
+const parentChecks = [
+  'Thông tin chính xác về an toàn khi con sống và làm việc ở nước ngoài.',
+  'Bức tranh tài chính minh bạch: chi phí thật, không vẽ vời, không giấu giếm.',
+  'Góc nhìn tỉnh táo để cùng con đưa ra quyết định, thay vì lo lắng mơ hồ.',
+  'Cách đồng hành đúng mức — đủ gần để hỗ trợ, đủ rộng để con trưởng thành.',
+];
+---
+
+<PageLayout
+  title="Learn"
+  description="SBB Learn là kho kiến thức và lộ trình chuẩn bị bài bản để bạn tự tin đi học và làm việc ở môi trường quốc tế."
+  site="sbb"
+  currentPath="/learn"
+>
+  <!-- ===== HERO ===== -->
+  <section class="o-hero">
+    <div class="container">
+      <span class="o-eyebrow">Learn</span>
+      <h1 class="o-mega">HỌC ĐỂ<br /><span class="o-accent">ĐI XA</span></h1>
+      <p class="o-lead">SBB Learn là kho kiến thức mở và những lộ trình chuẩn bị bài bản — giúp bạn tự xây dựng năng lực, hiểu đúng thực tế và sẵn sàng đi học, đi làm ở môi trường quốc tế trước khi nộp bất kỳ hồ sơ nào.</p>
+    </div>
+  </section>
+
+  <!-- ===== TOPICS ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Chủ đề kiến thức</span>
+        <h2 class="o-head-title">WHAT YOU <span class="o-stroke">LEARN</span></h2>
+        <p class="o-head-desc">Sáu nhóm kiến thức cốt lõi. Chọn nơi bạn đang yếu nhất để bắt đầu — không cần học theo thứ tự, chỉ cần bắt đầu.</p>
+      </div>
+      <div class="o-grid o-grid--3">
+        {topics.map((t) => (
+          <a href="/learn" class="o-card">
+            <span class="o-card__tag">{t.tag}</span>
+            <h3 class="o-card__title">{t.title}</h3>
+            <p class="o-card__body">{t.body}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PATHS ===== -->
+  <section class="o-section o-section--tint o-section--glow">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Lộ trình</span>
+        <h2 class="o-head-title">YOUR <span class="o-stroke">PATH</span></h2>
+        <p class="o-head-desc">Thay vì đọc những bài viết rời rạc, đi theo bốn chặng được sắp xếp từ định hướng đến hành động — để mỗi bước đều có lý do.</p>
+      </div>
+      <div class="o-rows">
+        {paths.map((p) => (
+          <article class="o-row">
+            <span class="o-row__num">{p.num}</span>
+            <div>
+              <h3 class="o-row__title">{p.title}</h3>
+              <p class="o-row__body">{p.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARENT CORNER ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-split">
+        <div>
+          <span class="o-head-eyebrow">Góc phụ huynh</span>
+          <h2 class="o-statement">Cho con đi xa, <span class="o-accent">cha mẹ cũng cần đồng hành</span>.</h2>
+        </div>
+        <div>
+          <ul class="o-checks">
+            {parentChecks.map((c) => (
+              <li>{c}</li>
+            ))}
+          </ul>
+          <div class="o-actions o-mt-lg">
+            <a href="/learn/parent-corner" class="o-btn o-btn--ghost">Vào góc phụ huynh</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="o-cta">
+    <div class="container">
+      <h2 class="o-cta__title">BẮT ĐẦU HỌC HÔM NAY</h2>
+      <p class="o-cta__sub">Kiến thức là phần bạn có thể chủ động ngay bây giờ. Chọn một lộ trình, hoặc ghé cộng đồng để nghe tiếng nói thật từ những người đã đi trước.</p>
+      <div class="o-actions">
+        <a href="/programs" class="o-btn o-btn--primary">Xem chương trình</a>
+        <a href="/community" class="o-btn o-btn--ghost">Vào cộng đồng</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

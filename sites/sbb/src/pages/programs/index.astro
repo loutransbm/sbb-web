@@ -1,172 +1,140 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
-import CTASection from '@ui/components/CTASection.astro';
 
 const programs = [
   {
-    num: '01',
-    title: 'GRP Foundation',
     tag: 'Nền tảng — bắt buộc',
-    desc: 'Nền chuẩn bị bắt buộc trước khi bước ra. Tư duy, tác phong, năng lực làm việc quốc tế.',
+    title: 'GRP Foundation',
+    body: 'Nền chuẩn bị bắt buộc trước khi bước ra thế giới. Tư duy, tác phong và năng lực làm việc quốc tế — để bạn được tin và trọng dụng, không chỉ “được đi”.',
     href: '/programs/grp',
   },
   {
-    num: '02',
-    title: 'Internship / J-1',
     tag: 'Mũi nhọn hiện tại',
-    desc: 'Đi làm thật ở doanh nghiệp Mỹ theo visa J-1, bằng con đường nghề nghiệp nghiêm túc.',
+    title: 'Thực tập & Tu nghiệp J-1',
+    body: 'Đi làm thật ở doanh nghiệp Mỹ theo visa J-1 Exchange Visitor. Không phải du học — đây là con đường nghề nghiệp nghiêm túc để nâng tầm năng lực và mang giá trị quốc tế về.',
     href: '/programs/internship-j1',
   },
   {
-    num: '03',
-    title: 'Office Tour',
     tag: 'Trải nghiệm ngắn',
-    desc: '5 đến 10 ngày vào doanh nghiệp làm việc thật, có người hướng dẫn thật.',
+    title: 'Office Tour',
+    body: 'Từ 5 đến 10 ngày vào doanh nghiệp làm việc thật, có người hướng dẫn thật. Một bước thử trước khi bạn cam kết đường dài.',
     href: '/programs/office-tour',
   },
   {
-    num: '04',
-    title: 'Đường Úc / 407',
-    tag: 'Chuyên biệt',
-    desc: 'Visa 407 cho một số mảng như Aged Care, Child Care và Hospitality.',
+    tag: 'Chuyên biệt — Đường Úc',
+    title: 'Chương trình 407',
+    body: 'Đường Úc qua visa 407 cho một số mảng như Aged Care, Child Care và Hospitality. Không phải mũi nhọn hiện tại, nhưng nếu bạn nhắm các ngành này, hãy hỏi SBB.',
     href: '/programs/407',
   },
+];
+
+const steps = [
+  {
+    num: '01',
+    title: 'Đặt một buổi nói chuyện',
+    body: 'Bắt đầu bằng một cuộc trò chuyện thẳng thắn. SBB lắng nghe mục tiêu của bạn và đánh giá hồ sơ một cách trung thực.',
+  },
+  {
+    num: '02',
+    title: 'Đi qua GRP Foundation',
+    body: 'Mọi con đường đều bắt đầu từ GRP. Đây là phần nền giúp bạn vững tư duy, tác phong và năng lực trước khi bước ra thế giới.',
+  },
+  {
+    num: '03',
+    title: 'Chọn đúng con đường',
+    body: 'Dựa trên năng lực và mục tiêu, SBB chỉ ra chương trình phù hợp nhất — J-1, Office Tour hay đường Úc 407 — chứ không đẩy bạn vào cái dễ bán.',
+  },
+  {
+    num: '04',
+    title: 'Đi thật và được đồng hành',
+    body: 'Bạn đi làm thật ở môi trường quốc tế. SBB không buông tay giữa chừng — đồng hành tới khi bạn thật sự vững vàng.',
+  },
+];
+
+const stats = [
+  { num: '300K+', label: 'Người đến Mỹ mỗi năm qua J-1' },
+  { num: '01', label: 'Nền chung — GRP bắt buộc' },
+  { num: '04', label: 'Con đường ra thế giới' },
 ];
 ---
 
 <PageLayout
   title="Chương trình"
-  description="Các chương trình trải nghiệm nghề quốc tế của SBB."
+  description="Các chương trình trải nghiệm nghề quốc tế của SBB — từ nền tảng GRP đến thực tập J-1, Office Tour và đường Úc 407."
   site="sbb"
   currentPath="/programs"
 >
-
-  <section class="section">
+  <!-- ===== HERO ===== -->
+  <section class="o-hero">
     <div class="container">
-      <header class="head reveal">
-        <span class="eyebrow">Chương trình</span>
-        <h1 class="head__title">GRP là cái nền. Trên đó, SBB mở các đường <span class="accent-text">ra thế giới</span>.</h1>
-        <p class="head__lead">Mọi chương trình đều bắt đầu từ GRP, vì SBB không đẩy ai ra thế giới khi họ chưa sẵn sàng. Mũi nhọn hiện tại là thực tập và tu nghiệp quốc tế theo visa J-1 của Mỹ.</p>
-      </header>
+      <span class="o-eyebrow">Programs</span>
+      <h1 class="o-mega">GRP LÀ CÁI NỀN.<br />TRÊN ĐÓ, CÁC ĐƯỜNG <span class="o-accent">RA THẾ GIỚI</span></h1>
+      <p class="o-lead">Mọi chương trình đều bắt đầu từ GRP, vì SBB không đẩy ai ra thế giới khi họ chưa sẵn sàng. Mũi nhọn hiện tại là thực tập và tu nghiệp quốc tế theo visa J-1 của Mỹ.</p>
+    </div>
+  </section>
 
-      <div class="grid reveal-stagger">
+  <!-- ===== WHAT WE OFFER ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Các chương trình</span>
+        <h2 class="o-head-title">WHAT WE <span class="o-stroke">OFFER</span></h2>
+        <p class="o-head-desc">Bốn con đường, một điểm xuất phát. Chọn cái phù hợp với mục tiêu của bạn — hoặc để SBB giúp bạn chọn.</p>
+      </div>
+
+      <div class="o-grid o-grid--2">
         {programs.map((p) => (
-          <a href={p.href} class="pcard">
-            <div class="pcard__top">
-              <span class="pcard__num">{p.num}</span>
-              <span class="pcard__tag">{p.tag}</span>
-            </div>
-            <h2 class="pcard__title">{p.title}</h2>
-            <p class="pcard__desc">{p.desc}</p>
-            <span class="pcard__link">Tìm hiểu thêm <span aria-hidden="true">→</span></span>
+          <a class="o-card" href={p.href}>
+            <span class="o-card__tag">{p.tag}</span>
+            <h3 class="o-card__title">{p.title}</h3>
+            <p class="o-card__body">{p.body}</p>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <CTASection
-    headline="Chưa chắc đường nào hợp?"
-    body="Đặt một buổi nói chuyện. SBB đánh giá hồ sơ và chỉ ra con đường phù hợp nhất với bạn."
-    primaryCtaText="Đặt lịch nói chuyện"
-    primaryCtaHref="/apply"
-    secondaryCtaText="Hiểu về GRP trước"
-    secondaryCtaHref="/programs/grp"
-  />
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="o-section o-section--tint o-section--glow">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Lộ trình</span>
+        <h2 class="o-head-title">HOW IT <span class="o-stroke">WORKS</span></h2>
+        <p class="o-head-desc">Không có đường tắt. Có một lộ trình rõ ràng — và một người đi cùng bạn trên đó.</p>
+      </div>
 
+      <div class="o-rows">
+        {steps.map((s) => (
+          <article class="o-row">
+            <span class="o-row__num">{s.num}</span>
+            <div>
+              <h3 class="o-row__title">{s.title}</h3>
+              <p class="o-row__body">{s.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="o-stats o-mt-lg">
+        {stats.map((st) => (
+          <div>
+            <div class="o-stat__num">{st.num}</div>
+            <div class="o-stat__label">{st.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="o-cta">
+    <div class="container">
+      <h2 class="o-cta__title">CHƯA CHẮC ĐƯỜNG NÀO HỢP?</h2>
+      <p class="o-cta__sub">Đặt một buổi nói chuyện. SBB đánh giá hồ sơ và chỉ ra con đường phù hợp nhất với bạn — hoặc ghé cộng đồng để nghe tiếng nói thật từ những người đã đi.</p>
+      <div class="o-actions">
+        <a href="/apply" class="o-btn o-btn--primary">Đặt lịch nói chuyện</a>
+        <a href="/community" class="o-btn o-btn--ghost">Vào cộng đồng</a>
+      </div>
+    </div>
+  </section>
 </PageLayout>
-
-<style>
-  .eyebrow {
-    display: inline-block;
-    font-size: var(--text-xs);
-    font-weight: var(--weight-bold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: var(--space-5);
-  }
-  .accent-text { color: var(--accent); }
-
-  .head { max-width: 48rem; margin-bottom: clamp(2.5rem, 2rem + 3vw, 4rem); }
-  .head__title {
-    font-size: var(--text-4xl);
-    line-height: 1.08;
-    letter-spacing: var(--tracking-tight);
-    text-transform: none;
-    margin-bottom: var(--space-5);
-  }
-  .head__lead {
-    font-size: var(--text-lg);
-    color: var(--text-secondary);
-    line-height: var(--leading-relaxed);
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
-  }
-  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-
-  .pcard {
-    display: flex;
-    flex-direction: column;
-    padding: var(--space-8) var(--space-6);
-    background-color: var(--surface-card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    text-decoration: none;
-    min-height: 15rem;
-    transition: transform var(--duration-normal) var(--ease-out),
-                border-color var(--duration-normal) var(--ease-out),
-                box-shadow var(--duration-normal) var(--ease-out);
-  }
-  .pcard:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent);
-    box-shadow: 0 20px 40px -24px rgba(255, 94, 58, 0.5);
-  }
-  .pcard__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--space-5);
-  }
-  .pcard__num {
-    font-family: var(--font-headline);
-    font-size: var(--text-3xl);
-    font-weight: var(--weight-bold);
-    color: var(--accent);
-    line-height: 1;
-  }
-  .pcard__tag {
-    font-size: var(--text-xs);
-    font-weight: var(--weight-semibold);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--text-muted);
-    border: 1px solid var(--line-dark);
-    border-radius: var(--radius-full);
-    padding: 2px 10px;
-  }
-  .pcard__title {
-    font-size: var(--text-2xl);
-    text-transform: none;
-    margin-bottom: var(--space-3);
-  }
-  .pcard__desc {
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    line-height: var(--leading-normal);
-    margin-bottom: var(--space-6);
-  }
-  .pcard__link {
-    margin-top: auto;
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    color: var(--ink-soft);
-    transition: color var(--duration-fast) var(--ease-out);
-  }
-  .pcard:hover .pcard__link { color: var(--accent); }
-</style>

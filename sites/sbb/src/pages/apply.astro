@@ -1,193 +1,158 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
+
+const steps = [
+  {
+    num: '01',
+    title: 'Để lại thông tin',
+    body: 'Bạn đăng ký qua form hoặc nhắn tin trực tiếp. Chỉ vài dòng về bạn là ai, đang quan tâm điều gì — không cần chuẩn bị gì phức tạp.',
+  },
+  {
+    num: '02',
+    title: 'Đánh giá năng lực miễn phí',
+    body: 'SBB ngồi lại cùng bạn một buổi để nhìn thẳng vào hồ sơ, năng lực và mong muốn. Thẳng thắn, không vẽ vời — kể cả khi câu trả lời là "chưa nên đi vội".',
+  },
+  {
+    num: '03',
+    title: 'Nhận lộ trình cá nhân hoá',
+    body: 'Dựa trên thực tế của bạn, SBB phác ra con đường phù hợp: nên chuẩn bị gì, đi hướng nào, chi phí minh bạch ngay từ đầu. Không cam kết suông.',
+  },
+  {
+    num: '04',
+    title: 'Bắt đầu đồng hành',
+    body: 'Khi bạn sẵn sàng, SBB đi cùng bạn từng bước — tới khi bạn thật sự vững vàng ở môi trường quốc tế, chứ không buông tay giữa chừng.',
+  },
+];
+
+const channels = [
+  'Hotline & Zalo: 09xx xxx xxx — nhắn tin nhanh nhất, phản hồi trong giờ làm việc.',
+  'Email: hello@sbb.vn — gửi hồ sơ hoặc câu hỏi dài, SBB trả lời trong 1–2 ngày.',
+  'Văn phòng: ghé trực tiếp để nói chuyện sâu (vui lòng hẹn trước để SBB sắp xếp thời gian).',
+];
+
+const inputStyle =
+  'width:100%;font-family:var(--font-body);font-size:1rem;padding:0.85rem 1.1rem;border:1px solid rgba(255,255,255,0.14);border-radius:14px;background:rgba(255,255,255,0.03);color:#fff;';
+const labelStyle =
+  'display:block;font-family:var(--font-headline);font-weight:600;font-size:0.8rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:0.55rem;';
 ---
-<PageLayout title="Liên hệ & Đặt lịch" description="Đặt lịch nói chuyện với SBB hoặc gửi thông tin liên hệ." site="sbb" currentPath="/apply">
 
-  <section class="section">
-    <div class="container apply">
-      <!-- Cột trái: dẫn dắt -->
-      <div class="apply__intro reveal">
-        <span class="eyebrow">Liên hệ</span>
-        <h1 class="apply__title">Khi nào bạn thấy sẵn sàng, chúng tôi cùng bạn ngồi nói chuyện một buổi.</h1>
-        <p class="apply__lead">Không chốt sale, không hối. Một buổi nói chuyện thẳng để cùng nhìn xem con đường nào hợp với bạn — kể cả khi câu trả lời là "chưa nên đi vội".</p>
+<PageLayout
+  title="Liên hệ"
+  description="Đặt lịch tư vấn cùng SBB: để lại thông tin, đánh giá năng lực miễn phí và nhận lộ trình cá nhân hoá."
+  site="sbb"
+  currentPath="/apply"
+>
+  <!-- ===== HERO ===== -->
+  <section class="o-hero">
+    <div class="container">
+      <span class="o-eyebrow">Liên hệ</span>
+      <h1 class="o-mega">ĐẶT LỊCH <span class="o-accent">TƯ VẤN</span></h1>
+      <p class="o-lead">Khi nào bạn thấy sẵn sàng, SBB cùng bạn ngồi nói chuyện một buổi. Không chốt sale, không hối — chỉ một buổi nói thẳng để cùng nhìn xem con đường nào thật sự hợp với bạn.</p>
+    </div>
+  </section>
 
-        <ul class="apply__points">
-          <li><span class="apply__dot" aria-hidden="true">↘</span> Đánh giá hồ sơ cá nhân của bạn</li>
-          <li><span class="apply__dot" aria-hidden="true">↘</span> Minh bạch chi phí ngay từ đầu</li>
-          <li><span class="apply__dot" aria-hidden="true">↘</span> Định hướng đúng năng lực, không vẽ vời</li>
-        </ul>
+  <!-- ===== WHAT HAPPENS NEXT ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Quy trình</span>
+        <h2 class="o-head-title">WHAT HAPPENS <span class="o-stroke">NEXT</span></h2>
+        <p class="o-head-desc">Sau khi bạn liên hệ, đây là bốn bước SBB đi cùng bạn — minh bạch từ đầu đến cuối, không ràng buộc, không áp lực.</p>
+      </div>
+      <div class="o-rows">
+        {steps.map((s) => (
+          <article class="o-row">
+            <span class="o-row__num">{s.num}</span>
+            <div>
+              <h3 class="o-row__title">{s.title}</h3>
+              <p class="o-row__body">{s.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-        <div class="apply__booking">
-          <span class="apply__booking-badge">Đang thiết lập</span>
-          <p>Công cụ đặt lịch tự động đang được hoàn thiện. Trong lúc đó, gửi thông tin qua form bên cạnh, SBB sẽ liên hệ lại.</p>
+  <!-- ===== CHANNELS + REASSURANCE ===== -->
+  <section class="o-section o-section--tint o-section--glow">
+    <div class="container">
+      <div class="o-split o-split--top">
+        <div>
+          <span class="o-head-eyebrow">Reach Us</span>
+          <h2 class="o-head-title">TALK TO <span class="o-stroke">SBB</span></h2>
+          <ul class="o-checks o-mt-lg">
+            {channels.map((c) => (<li>{c}</li>))}
+          </ul>
+          <div class="o-actions o-mt-lg">
+            <a href="#contact-form" class="o-btn o-btn--primary">Nhắn tin cho SBB</a>
+            <a href="/programs" class="o-btn o-btn--ghost">Xem chương trình</a>
+          </div>
+        </div>
+        <div>
+          <p class="o-statement">Bạn không cần sẵn sàng hoàn hảo. Bạn chỉ cần <span class="o-accent">sẵn sàng bắt đầu</span> một cuộc trò chuyện.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Cột phải: form -->
-      <div class="apply__form-wrap reveal">
-        <!-- [PENDING] endpoint — chưa nối backend gửi form -->
-        <form action="#" method="POST" class="cform" id="contact-form">
-          <div class="cform__group">
-            <label for="name" class="cform__label">Họ tên <span class="req">*</span></label>
-            <input type="text" id="name" name="name" required class="cform__input" autocomplete="name" placeholder="Tên của bạn" />
+  <!-- ===== FORM ===== -->
+  <section class="o-section" id="contact-form">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Để lại thông tin</span>
+        <h2 class="o-head-title">SEND A <span class="o-stroke">MESSAGE</span></h2>
+        <p class="o-head-desc">Điền vài dòng để SBB hiểu bạn hơn trước buổi nói chuyện. Thông tin của bạn được bảo mật, SBB sẽ liên hệ lại sớm nhất.</p>
+      </div>
+
+      <div class="o-card" style="max-width:46rem;">
+        <form action="#" method="POST" style="display:flex;flex-direction:column;gap:1.4rem;">
+          <div>
+            <label for="name" style={labelStyle}>Họ tên <span style="color:var(--accent);">*</span></label>
+            <input type="text" id="name" name="name" required autocomplete="name" placeholder="Tên của bạn" style={inputStyle} />
           </div>
 
-          <div class="cform__group">
-            <label for="contact" class="cform__label">Email hoặc Số điện thoại <span class="req">*</span></label>
-            <input type="text" id="contact" name="contact" required class="cform__input" placeholder="Để SBB liên hệ lại" />
+          <div>
+            <label for="contact" style={labelStyle}>Email hoặc số điện thoại <span style="color:var(--accent);">*</span></label>
+            <input type="text" id="contact" name="contact" required placeholder="Để SBB liên hệ lại" style={inputStyle} />
           </div>
 
-          <fieldset class="cform__group cform__fieldset">
-            <legend class="cform__label">Bạn là</legend>
-            <div class="cform__radios">
-              <label class="cform__radio"><input type="radio" name="role" value="sinh-vien" checked /> <span>Sinh viên</span></label>
-              <label class="cform__radio"><input type="radio" name="role" value="phu-huynh" /> <span>Phụ huynh</span></label>
-              <label class="cform__radio"><input type="radio" name="role" value="khac" /> <span>Khác</span></label>
+          <div>
+            <span style={labelStyle}>Bạn là</span>
+            <div style="display:flex;flex-wrap:wrap;gap:1.4rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;color:var(--ink-soft);"><input type="radio" name="role" value="sinh-vien" checked style="accent-color:var(--accent);width:1.1em;height:1.1em;" /> <span>Sinh viên</span></label>
+              <label style="display:flex;align-items:center;gap:0.5rem;color:var(--ink-soft);"><input type="radio" name="role" value="phu-huynh" style="accent-color:var(--accent);width:1.1em;height:1.1em;" /> <span>Phụ huynh</span></label>
+              <label style="display:flex;align-items:center;gap:0.5rem;color:var(--ink-soft);"><input type="radio" name="role" value="khac" style="accent-color:var(--accent);width:1.1em;height:1.1em;" /> <span>Khác</span></label>
             </div>
-          </fieldset>
-
-          <div class="cform__group">
-            <label for="interest" class="cform__label">Ngành / Mối quan tâm</label>
-            <input type="text" id="interest" name="interest" class="cform__input" placeholder="Ví dụ: Hospitality, IT, J-1..." />
           </div>
 
-          <div class="cform__group">
-            <label for="message" class="cform__label">Lời nhắn</label>
-            <textarea id="message" name="message" rows="4" class="cform__input cform__textarea" placeholder="Bạn muốn SBB biết thêm điều gì?"></textarea>
+          <div>
+            <label for="interest" style={labelStyle}>Ngành / Mối quan tâm</label>
+            <input type="text" id="interest" name="interest" placeholder="Ví dụ: Hospitality, IT, J-1..." style={inputStyle} />
           </div>
 
-          <button type="submit" class="btn btn--primary cform__submit">Gửi thông tin →</button>
-          <p class="cform__privacy">Thông tin của bạn được bảo mật. SBB không chia sẻ dữ liệu cá nhân với bên thứ ba.</p>
+          <div>
+            <label for="message" style={labelStyle}>Lời nhắn</label>
+            <textarea id="message" name="message" rows="4" placeholder="Bạn muốn SBB biết thêm điều gì?" style={inputStyle + 'resize:vertical;min-height:7rem;'}></textarea>
+          </div>
+
+          <div class="o-actions" style="margin-top:0.4rem;">
+            <button type="submit" class="o-btn o-btn--primary">Gửi thông tin</button>
+          </div>
+          <p style="font-size:0.85rem;color:var(--ink-muted);line-height:1.6;margin:0;">Thông tin của bạn được bảo mật. SBB không chia sẻ dữ liệu cá nhân với bên thứ ba.</p>
         </form>
       </div>
     </div>
   </section>
 
+  <!-- ===== CTA ===== -->
+  <section class="o-cta">
+    <div class="container">
+      <h2 class="o-cta__title">SẴN SÀNG NÓI CHUYỆN?</h2>
+      <p class="o-cta__sub">Một buổi trò chuyện thẳng thắn không khiến bạn mất gì, nhưng có thể giúp bạn nhìn rõ con đường phía trước.</p>
+      <div class="o-actions">
+        <a href="#contact-form" class="o-btn o-btn--primary">Nhắn tin cho SBB</a>
+        <a href="/programs" class="o-btn o-btn--ghost">Xem chương trình</a>
+      </div>
+    </div>
+  </section>
 </PageLayout>
-
-<style>
-  .eyebrow {
-    display: inline-block;
-    font-size: var(--text-xs);
-    font-weight: var(--weight-bold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: var(--space-5);
-  }
-
-  .apply {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(2.5rem, 2rem + 4vw, 5rem);
-    align-items: start;
-  }
-  @media (min-width: 900px) {
-    .apply { grid-template-columns: 1fr 1fr; }
-  }
-
-  .apply__title {
-    font-size: var(--text-4xl);
-    line-height: 1.08;
-    letter-spacing: var(--tracking-tight);
-    text-transform: none;
-    margin-bottom: var(--space-6);
-  }
-  .apply__lead {
-    font-size: var(--text-lg);
-    color: var(--text-secondary);
-    line-height: var(--leading-relaxed);
-    margin-bottom: var(--space-8);
-  }
-  .apply__points {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    margin-bottom: var(--space-8);
-  }
-  .apply__points li {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-  }
-  .apply__dot { color: var(--accent); font-weight: var(--weight-bold); }
-
-  .apply__booking {
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    background-color: var(--surface-card);
-    padding: var(--space-6);
-  }
-  .apply__booking-badge {
-    display: inline-block;
-    font-size: var(--text-xs);
-    font-weight: var(--weight-bold);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--accent-2);
-    margin-bottom: var(--space-3);
-  }
-  .apply__booking p {
-    font-size: var(--text-sm);
-    color: var(--text-muted);
-    line-height: var(--leading-normal);
-    margin: 0;
-  }
-
-  /* Form */
-  .apply__form-wrap {
-    border: 1px solid var(--line);
-    border-radius: var(--radius-xl);
-    background: linear-gradient(160deg, var(--surface-card), var(--bg-primary));
-    padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  }
-  .cform { display: flex; flex-direction: column; gap: var(--space-5); }
-  .cform__group { display: flex; flex-direction: column; gap: var(--space-2); }
-  .cform__fieldset { border: none; padding: 0; margin: 0; }
-
-  .cform__label {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    color: var(--ink-soft);
-  }
-  .req { color: var(--accent); }
-
-  .cform__input {
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    padding: var(--space-3) var(--space-4);
-    border: 1px solid var(--line-dark);
-    border-radius: var(--radius-md);
-    background-color: rgba(255, 255, 255, 0.03);
-    color: var(--ink);
-    width: 100%;
-    transition: border-color var(--duration-fast) var(--ease-out),
-                box-shadow var(--duration-fast) var(--ease-out),
-                background-color var(--duration-fast) var(--ease-out);
-  }
-  .cform__input::placeholder { color: var(--ink-muted); }
-  .cform__input:focus {
-    outline: none;
-    border-color: var(--accent);
-    background-color: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 0 0 3px rgba(255, 94, 58, 0.15);
-  }
-  .cform__textarea { resize: vertical; min-height: 6.5rem; }
-
-  .cform__radios { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-1); }
-  .cform__radio {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    cursor: pointer;
-  }
-  .cform__radio input[type="radio"] { accent-color: var(--accent); width: 1.1em; height: 1.1em; }
-
-  .cform__submit { align-self: flex-start; margin-top: var(--space-2); }
-  .cform__privacy { font-size: var(--text-xs); color: var(--text-muted); margin: 0; }
-</style>

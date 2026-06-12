@@ -4,8 +4,8 @@
 
 :root {
   /* Core Palette */
-  --paper:       #070201;      /* Main deep warm black background */
-  --paper-2:     #120603;      /* Secondary dark warm gray background */
+  --paper:       #110806;      /* Main background — đen ấm pha cam, khớp Omni rgb(17,8,6) (sáng & thoáng, không đen kịt) */
+  --paper-2:     #1a0d08;      /* Secondary surface — ấm hơn paper một bậc để phân lớp */
   --ink:         #FFFFFF;      /* Primary white text */
   --ink-soft:    #C5C5C7;      /* Secondary light gray text */
   --ink-muted:   #747476;      /* Muted captions */

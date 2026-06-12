@@ -1,94 +1,120 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
-import EmptyState from '@ui/components/EmptyState.astro';
-import CTASection from '@ui/components/CTASection.astro';
 
-const blocks = [
-  { title: 'Tiếng nói sinh viên', desc: 'Người đang đi kể lại bằng lời thật của chính họ.' },
-  { title: 'Câu chuyện Alumni', desc: 'Người đã đi và đã về — họ mang gì trở lại.' },
-  { title: 'Mentor & Community', desc: 'Người đi trước dẫn đường cho người đi sau.' },
-  { title: 'Điểm vào cộng đồng', desc: 'Cách tham gia và đồng hành cùng SBB.' },
+const offers = [
+  {
+    tag: 'Mentor',
+    title: 'Người đi trước dẫn đường',
+    body: 'Kết nối trực tiếp với những người đã đi và đã về. Họ chỉ cho bạn đường đi thật, cảnh báo những hố bạn không nhìn thấy, và nói thẳng điều bạn cần nghe.',
+  },
+  {
+    tag: 'Sự kiện',
+    title: 'Meetup & chia sẻ thật',
+    body: 'Workshop, talk và buổi gặp offline định kỳ. Nghe câu chuyện chưa được kể, hỏi thẳng những điều khó hỏi, và mở rộng mạng lưới của riêng bạn.',
+  },
+  {
+    tag: 'Đồng hành',
+    title: 'Hỗ trợ khi ở nước ngoài',
+    body: 'Đặt chân tới nơi xa lạ không còn đơn độc. Cộng đồng SBB ở nhiều quốc gia sẵn sàng đỡ bạn những ngày đầu — từ chỗ ở, thủ tục, tới cú sốc văn hoá.',
+  },
+  {
+    tag: 'Tiếng nói',
+    title: 'Tiếng nói sinh viên',
+    body: 'Người đang đi kể lại bằng lời thật của chính họ. Không kịch bản, không tô hồng — chỉ là trải nghiệm sống của những người trẻ Việt đang ở giữa hành trình.',
+  },
+  {
+    tag: 'Alumni',
+    title: 'Câu chuyện người đã về',
+    body: 'Những người đã đi một vòng thế giới và mang gì đó trở lại. Họ là bằng chứng sống rằng con đường này đi được thật, và sẵn sàng truyền lại cho lớp sau.',
+  },
+  {
+    tag: 'Nhóm',
+    title: 'Nhóm theo ngành & điểm đến',
+    body: 'Tìm đúng người cùng ngành nghề, cùng quốc gia bạn nhắm tới. Trao nhau kinh nghiệm sát sườn thay vì lời khuyên chung chung trên mạng.',
+  },
+];
+
+const stats = [
+  { num: '1.200+', label: 'Thành viên' },
+  { num: '12', label: 'Quốc gia' },
+  { num: '8', label: 'Nhóm ngành' },
+  { num: '40+', label: 'Người đi trước' },
 ];
 ---
-<PageLayout title="Cộng đồng SBB" description="Cộng đồng những người trẻ Việt đang đi và đã đi ra thế giới." site="sbb" currentPath="/community">
 
-  <section class="section">
+<PageLayout
+  title="Cộng đồng"
+  description="Cộng đồng những người trẻ Việt đang đi và đã đi ra thế giới — nơi kinh nghiệm thật được trao tay."
+  site="sbb"
+  currentPath="/community"
+>
+  <!-- ===== HERO ===== -->
+  <section class="o-hero">
     <div class="container">
-      <header class="head reveal">
-        <span class="eyebrow">Cộng đồng</span>
-        <h1 class="head__title">Người đi trước <span class="accent-text">dẫn đường</span> cho người đi sau.</h1>
-        <p class="head__lead">Cộng đồng những người trẻ Việt đang đi và đã đi ra thế giới — nơi kinh nghiệm thật được trao tay.</p>
-      </header>
+      <span class="o-eyebrow">Community</span>
+      <h1 class="o-mega">NGƯỜI ĐI TRƯỚC<br /><span class="o-accent">DẪN ĐƯỜNG</span></h1>
+      <p class="o-lead">Cộng đồng những người trẻ Việt đang đi và đã đi ra thế giới — nơi kinh nghiệm thật được trao tay, người đi trước dẫn đường cho người đi sau, và không ai phải đi một mình.</p>
+    </div>
+  </section>
 
-      <div class="cgrid reveal-stagger">
-        {blocks.map((b) => (
-          <div class="ccard">
-            <h2 class="ccard__title">{b.title}</h2>
-            <p class="ccard__desc">{b.desc}</p>
-            <EmptyState message="Đang cập nhật" />
+  <!-- ===== WHAT THE COMMUNITY OFFERS ===== -->
+  <section class="o-section">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Bạn nhận được gì</span>
+        <h2 class="o-head-title">WHAT YOU <span class="o-stroke">GET</span></h2>
+        <p class="o-head-desc">Không phải một group im lặng để thả tim. Đây là nơi kinh nghiệm thật được trao tay — từ người đã đi, cho người sắp đi.</p>
+      </div>
+      <div class="o-grid o-grid--3">
+        {offers.map((o) => (
+          <article class="o-card">
+            <span class="o-card__tag">{o.tag}</span>
+            <h3 class="o-card__title">{o.title}</h3>
+            <p class="o-card__body">{o.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="o-section o-section--tint o-section--glow">
+    <div class="container">
+      <div class="o-head">
+        <span class="o-head-eyebrow">Cộng đồng đang lớn</span>
+        <h2 class="o-head-title">A GROWING <span class="o-stroke">NETWORK</span></h2>
+        <p class="o-head-desc">Những con số dưới đây mang tính minh hoạ cho một cộng đồng đang lớn lên mỗi ngày — và mỗi thành viên là một mắt xích thật.</p>
+      </div>
+      <div class="o-stats">
+        {stats.map((s) => (
+          <div>
+            <div class="o-stat__num">{s.num}</div>
+            <div class="o-stat__label">{s.label}</div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <CTASection
-    headline="Muốn tham gia?"
-    body="Liên hệ SBB để tìm hiểu cách tham gia cộng đồng và đồng hành cùng những người đi trước."
-    primaryCtaText="Liên hệ SBB"
-    primaryCtaHref="/apply"
-  />
+  <!-- ===== STATEMENT ===== -->
+  <section class="o-section">
+    <div class="container">
+      <span class="o-head-eyebrow">Vì sao có cộng đồng này</span>
+      <p class="o-statement o-statement--full">
+        Đi ra thế giới đã khó. Đi <span class="o-accent">một mình</span> còn khó hơn. Ở đây, người đi trước đỡ người đi sau — để không ai bỏ cuộc giữa đường.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="o-cta">
+    <div class="container">
+      <h2 class="o-cta__title">VÀO CỘNG ĐỒNG</h2>
+      <p class="o-cta__sub">Tham gia để nghe tiếng nói thật từ những người đã đi, tìm mentor cùng ngành, và bắt đầu hành trình của bạn với người đồng hành.</p>
+      <div class="o-actions">
+        <a href="/apply" class="o-btn o-btn--primary">Tham gia cộng đồng</a>
+        <a href="/about" class="o-btn o-btn--ghost">Về SBB</a>
+      </div>
+    </div>
+  </section>
 </PageLayout>
-
-<style>
-  .eyebrow {
-    display: inline-block;
-    font-size: var(--text-xs);
-    font-weight: var(--weight-bold);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: var(--space-5);
-  }
-  .accent-text { color: var(--accent); }
-
-  .head { max-width: 46rem; margin-bottom: clamp(2.5rem, 2rem + 3vw, 4rem); }
-  .head__title {
-    font-size: var(--text-4xl);
-    line-height: 1.08;
-    letter-spacing: var(--tracking-tight);
-    text-transform: none;
-    margin-bottom: var(--space-5);
-  }
-  .head__lead {
-    font-size: var(--text-lg);
-    color: var(--text-secondary);
-    line-height: var(--leading-relaxed);
-  }
-
-  .cgrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
-  }
-  @media (min-width: 768px) { .cgrid { grid-template-columns: repeat(2, 1fr); } }
-
-  .ccard {
-    padding: var(--space-8) var(--space-6);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    background-color: var(--surface-card);
-    transition: border-color var(--duration-normal) var(--ease-out);
-  }
-  .ccard:hover { border-color: var(--line-dark); }
-  .ccard__title {
-    font-size: var(--text-2xl);
-    text-transform: none;
-    margin-bottom: var(--space-2);
-  }
-  .ccard__desc {
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    line-height: var(--leading-normal);
-  }
-</style>
