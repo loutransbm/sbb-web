@@ -490,7 +490,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
 
         <button class="mv-nav mv-nav--prev" id="mv-prev" type="button" aria-label="Khoảnh khắc trước">&#8249;</button>
         <button class="mv-nav mv-nav--next" id="mv-next" type="button" aria-label="Khoảnh khắc sau">&#8250;</button>
-        <button class="mv-sound" id="mv-sound" type="button" aria-label="Bật tiếng">Bật tiếng</button>
       </div>
     </div>
   </section>
@@ -847,15 +846,16 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       function curVideo() { return cards[activeI] ? cards[activeI].querySelector('video') : null; }
       function playActive() {
         const v = curVideo();
-        if (v && inView) { v.muted = !soundOn; const p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        if (v && inView) { v.muted = !soundOn; const p = v.play(); if (p && p.catch) p.catch(function () {}); }  // soundOn=true sau tương tác đầu -> có tiếng
       }
-      const soundBtn = document.getElementById('mv-sound');   // nút ngoài track -> bấm luôn ăn, không vướng kéo
-      soundBtn && soundBtn.addEventListener('click', function () {
-        soundOn = !soundOn;
+      // Trình duyệt CẤM autoplay-có-tiếng tới khi user tương tác -> tự bật tiếng ở chạm/click/cuộn ĐẦU TIÊN (không cần nút)
+      function enableSound() {
+        soundOn = true;
         const v = curVideo();
-        if (v) { v.muted = !soundOn; if (soundOn && v.paused) { const p = v.play(); if (p && p.catch) p.catch(function () {}); } }
-        soundBtn.textContent = soundOn ? 'Tắt tiếng' : 'Bật tiếng';
-        soundBtn.classList.toggle('is-on', soundOn);
+        if (v) { v.muted = false; v.volume = 1; const p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      }
+      ['pointerdown', 'mousedown', 'touchstart', 'click', 'keydown'].forEach(function (ev) {
+        window.addEventListener(ev, enableSound, { capture: true, passive: true, once: true });
       });
       // Hiện/ẩn section -> phát/dừng. Dùng getBoundingClientRect (CHUẨN) thay IntersectionObserver
       // vì smooth-scroll Lenis làm IO báo sai (section đang hiện vẫn báo "ngoài tầm" -> tự pause clip).
@@ -3347,20 +3347,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   .mv-card--video.is-active .mv-play { transform: scale(1.06); }
   .mv-card--video:hover .mv-play, .mv-card--video:focus-visible .mv-play { background: #ff5e3a; transform: scale(1.13); }
   .mv-card--video.is-active::after { opacity: 0; }   /* card đang xem: bỏ lớp tối cho rõ clip */
-  /* Nút Bật/Tắt tiếng — nổi giữa-đáy card active */
-  .mv-sound {
-    position: absolute; left: 50%; bottom: 2.6rem; transform: translateX(-50%); z-index: 50;
-    border: 0; border-radius: 999px; cursor: pointer;
-    background: rgba(255, 94, 58, 0.95); color: #fff;
-    font: 600 0.92rem/1 'Be Vietnam Pro', system-ui, sans-serif; letter-spacing: 0.01em;
-    padding: 0.62rem 1.25rem; box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
-    display: inline-flex; align-items: center; gap: 0.4rem; transition: background 0.2s ease, transform 0.2s ease;
-  }
-  .mv-sound::before { content: '\1F507'; font-size: 1.05em; line-height: 1; }   /* 🔇 */
-  .mv-sound.is-on { background: rgba(34, 197, 94, 0.95); }
-  .mv-sound.is-on::before { content: '\1F50A'; }                                /* 🔊 */
-  .mv-sound:hover { background: #ff5e3a; transform: translateX(-50%) scale(1.04); }
-  .mv-sound.is-on:hover { background: #16a34a; }
 
   /* ---- Lightbox phát clip ---- */
   .mv-lightbox {
