@@ -490,6 +490,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
 
         <button class="mv-nav mv-nav--prev" id="mv-prev" type="button" aria-label="Khoảnh khắc trước">&#8249;</button>
         <button class="mv-nav mv-nav--next" id="mv-next" type="button" aria-label="Khoảnh khắc sau">&#8250;</button>
+        <div class="mv-pp" id="mv-pp" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -748,7 +749,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       const prev = document.getElementById('mv-prev');
       const next = document.getElementById('mv-next');
       const stage = track.closest('.mv-stage');
-      let pos = 0, target = 0, raf = null, timer = null, cw = 300, activeI = -1, soundOn = false, inView = false;
+      let pos = 0, target = 0, raf = null, timer = null, cw = 300, activeI = -1, soundOn = false, inView = false, userPaused = false;
 
       function measure() { cw = cards[0].offsetWidth || 300; }
       function wrap(o) { o = ((o % N) + N) % N; if (o > N / 2) o -= N; return o; }  // -> khoảng (-N/2, N/2]
@@ -773,6 +774,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           if (cards[activeI]) { cards[activeI].classList.remove('is-active'); const ov = cards[activeI].querySelector('video'); if (ov) ov.pause(); }
           cards[cur].classList.add('is-active');
           activeI = cur;
+          userPaused = false; stage.classList.remove('is-paused');   // clip mới: phát lại, bỏ overlay pause
           playActive();   // card GIỮA tự phát (câm trừ khi đã Bật tiếng)
         }
       }
@@ -835,13 +837,19 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
       // Kéo ngang để xoay vòng; phân biệt KÉO vs CHẠM (chạm mới mở clip)
-      let down = false, sx = 0, st = 0, drag = 0;
-      track.addEventListener('pointerdown', (e) => { down = true; sx = e.clientX; st = target; drag = 0; track.classList.add('is-grabbing'); stopAuto(); try { track.setPointerCapture(e.pointerId); } catch (_) {} });
+      let down = false, sx = 0, st = 0, drag = 0, downOnActive = false;
+      track.addEventListener('pointerdown', (e) => { down = true; sx = e.clientX; st = target; drag = 0; track.classList.add('is-grabbing'); stopAuto(); const c = e.target.closest && e.target.closest('.mv-card'); downOnActive = !!(c && c.classList.contains('is-active')); try { track.setPointerCapture(e.pointerId); } catch (_) {} });
       track.addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > drag) drag = Math.abs(dx); target = st - dx / (cw * 0.66); pos = target; place(); });
-      const up = () => { if (!down) return; down = false; track.classList.remove('is-grabbing'); target = Math.round(target); animate(); playActive(); };
+      const up = () => { if (!down) return; down = false; track.classList.remove('is-grabbing'); const wasTap = drag < 10; target = Math.round(target); animate(); if (wasTap && downOnActive) toggleActive(); else playActive(); };
       track.addEventListener('pointerup', up);
       track.addEventListener('pointercancel', up);
       track.addEventListener('dragstart', (e) => e.preventDefault());
+      // CHẠM card giữa -> play/pause (hiện overlay ▶ khi pause). Dùng pointerup (đáng tin hơn 'click' với pointer-capture)
+      function toggleActive() {
+        const v = curVideo(); if (!v) return;
+        if (v.paused) { userPaused = false; soundOn = true; v.muted = false; const p = v.play(); if (p && p.catch) p.catch(function () {}); stage.classList.remove('is-paused'); }
+        else { userPaused = true; v.pause(); stage.classList.add('is-paused'); }
+      }
       // --- Phát clip NGAY trong card giữa (không popup) ---
       function curVideo() { return cards[activeI] ? cards[activeI].querySelector('video') : null; }
       function playActive() {
@@ -863,14 +871,14 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       cards.forEach(function (card) {
         const cv = card.querySelector('video');
         if (cv) cv.addEventListener('pause', function () {
-          if (inView && card.classList.contains('is-active')) { const p = cv.play(); if (p && p.catch) p.catch(function () {}); }
+          if (inView && card.classList.contains('is-active') && !userPaused) { const p = cv.play(); if (p && p.catch) p.catch(function () {}); }
         });
       });
       // Section còn dính viewport thì phát; chỉ DỪNG khi cuộn HẲN ra ngoài (ngưỡng rộng -> không nháy khi Lenis cuộn mượt)
       function checkInView() {
         const r = stage.getBoundingClientRect();
         const vis = r.top < window.innerHeight && r.bottom > 0;
-        if (vis !== inView) { inView = vis; if (inView) playActive(); else { const v = curVideo(); if (v) v.pause(); } }
+        if (vis !== inView) { inView = vis; if (inView) { userPaused = false; stage.classList.remove('is-paused'); playActive(); } else { const v = curVideo(); if (v) v.pause(); } }
       }
       setInterval(checkInView, 300);
       window.addEventListener('resize', checkInView);
@@ -3347,6 +3355,19 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   .mv-card--video.is-active .mv-play { transform: scale(1.06); }
   .mv-card--video:hover .mv-play, .mv-card--video:focus-visible .mv-play { background: #ff5e3a; transform: scale(1.13); }
   .mv-card--video.is-active::after { opacity: 0; }   /* card đang xem: bỏ lớp tối cho rõ clip */
+  /* Overlay ▶ hiện khi CHẠM để pause clip giữa */
+  .mv-pp {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.8); z-index: 60;
+    width: 78px; height: 78px; border-radius: 50%; pointer-events: none;
+    background: rgba(8, 4, 3, 0.5); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .mv-pp::after {
+    content: ''; width: 0; height: 0; margin-left: 6px;
+    border-style: solid; border-width: 13px 0 13px 22px; border-color: transparent transparent transparent #fff;
+  }
+  .mv-stage.is-paused .mv-pp { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
   /* ---- Lightbox phát clip ---- */
   .mv-lightbox {
