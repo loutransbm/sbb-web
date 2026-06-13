@@ -155,12 +155,26 @@ Nav nội bộ: `/ /about /programs /news /learn /community /apply`. Đã dựng
 ⚠️ **Còn nợ:** trang con sâu learn/news (bài viết, danh mục, lộ trình, `/learn/parent-corner`) — link tạm về hub. Các trang nội dung **chưa soi Omni kỹ từng trang** → khi quay lại phải soi lại.
 
 ## G. "ĐỪNG" (lỗi đã mắc)
-- ❌ Đổi font header (lỡ để Jakarta 800 thay Inter 500). ❌ Tự chế card khác card chuẩn (mục B).
+- ❌ Đổi font header (lỡ để Jakarta 800/300 thay Inter 500). ❌ Tự chế card khác card chuẩn (mục B).
 - ❌ Quầng sáng một phía ở ranh giới → đường ray. ❌ Báo "xong" khi chưa zoom kiểm tra.
 - ❌ Dựng hàng loạt trang mà không soi Omni từng trang.
+- ❌ Quên `max-width:none` cho body text trong thanh/card → bị cap `<p>` toàn cục `--max-w-prose:672px`, chữ "bo vào góc" hẹp (đã dính ở `.faq-a p`).
+- ❌ Lấy `.services-heading` "PROGRAMS" làm mẫu tiêu đề — nó là **ngoại lệ mảnh** (Plus Jakarta 300); chuẩn là Inter 500 theo `.cs-line-1`.
+
+## H. ⭐ FAQ SECTION (`#faq`) — chốt 2026-06-13
+Layout Omni: chữ **"FAQ" khổng lồ** → **danh sách thanh accordion FULL-WIDTH**. **KHÔNG lead text dưới tiêu đề, KHÔNG CTA banner cuối** (cả hai đã thử rồi BỎ theo user).
+- **`.faq-mega`** = **Inter 500, `clamp(8.5rem,12vw,11rem)`, `letter-spacing:-.085em`, uppercase — KHỚP HỆT `.cs-line-1`** (REAL GROWTH/BORDERS). Từng lỡ để Plus Jakarta 800/300 → user phàn nàn lệch. `margin-bottom`≈94px (cách thanh đầu).
+- **Căn mép:** `.faq-mega` + `.faq-list` break-out sát 2 mép **2rem (32px)** trùng thanh nav — rule `@media(min-width:992px)` dùng biến `--sbw` (= bề rộng scrollbar, set bằng JS cuối body) để trừ, tránh lệch vì `100vw` tính cả scrollbar. Mọi thanh trải 32↔32.
+- **`.faq-item`** (thanh) = `border:1px solid rgba(255,122,64,.30)`, `border-radius:40px`, nền = **2 quầng cam (góc DƯỚI–TRÁI + TRÊN–TRÁI) loang trên `#1a0c08`** (sáng, không matte). Thanh CAO cho thoáng (`.faq-q` padding dọc ~66px). hover/`[open]` viền cam đậm hơn.
+- **`.faq-q`** = font headline (Plus Jakarta) 600 uppercase `clamp(1.15–1.7rem)` **TRẮNG**. **`.faq-icon`** = dấu "+" 42px nét 2px accent; mở ra → "−" (`[open] .faq-icon::after{scaleY(0)}`).
+- **`.faq-a p`** ⚠️ BẮT BUỘC `max-width:none` — `<p>` toàn cục bị cap `--max-w-prose:672px`; thiếu nó câu trả lời "bo vào góc" hẹp 672px thay vì trải full thanh. Lề trái khớp `.faq-q`, lề phải thoáng hơn.
+- **JS:** mở 1 mục → các mục khác tự đóng (`.faq-item` toggle). Mục #1 `open` sẵn.
+- **12 câu** xếp theo phễu chuyển đổi: định vị → đối tượng/điều kiện → tiếng Anh → ngành+điểm đến → lộ trình → chi phí → cam kết → visa/PR → việc làm/thu nhập → ROI (86/93/81%) → rủi ro/đổi ý → đồng hành sau khi sang. ⚠️ Câu giá/visa/hoàn phí **KHÔNG bịa số**, điều hướng về buổi tư vấn.
+- **Ánh sáng lan MOMENTS→FAQ** (mục D): `.moments-section::before` quầng đáy (`at 50% 100%`, vươn 460px lên khu video) + `.faq-section::before` quầng đỉnh (`at 50% 0%`, tan ~300px xuống FAQ), **cùng đỉnh `rgba(255,114,54,.30)` + width 62% NGAY tại mép** → liền mạch không vạch. Đẩy cao/sâu = đổi bán kính dọc, GIỮ đỉnh+width khớp 2 bên.
 
 ## Decisions Log
 - ✅ Tokens/hex: lấy từ `packages/ui/tokens/colors.css` (xem mục A). Font header lớn = Inter 500.
 - ✅ CSS: tokens + omni-kit + bespoke `<style>`. ✅ learn+news gộp vào sbb (bỏ subdomain).
 - ✅ Card chuẩn = glass hero (mục B). ✅ Seam = gương đối xứng (mục D).
 - ⏳ Trang nội dung: cần soi Omni & tinh chỉnh từng trang. ⏳ Trang con learn/news chưa dựng.
+- ✅ FAQ (2026-06-13): 12 câu, thanh full-width + quầng cam, answers full-width, BỎ lead & CTA (mục H). Ánh sáng MOMENTS lan xuống FAQ (seam-match `.30`).
