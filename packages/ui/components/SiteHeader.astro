@@ -111,8 +111,8 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
     border-radius: 100px;
     padding-left: 1.5rem;  /* Optical alignment: more left padding */
     padding-right: 0.5rem; /* Optical alignment: less right padding because CTA has internal padding */
-    width: calc(100% - 2.5rem) !important;
-    max-width: 85rem !important;
+    width: calc(100% - 4rem) !important;   /* Gần sát lề: chừa 2rem mỗi bên (khớp --section-px) */
+    max-width: 120rem !important;          /* Cho thanh dài ra về 2 phía trên màn rộng (cap ~1920px chống kéo dãn trên ultrawide) */
     margin-inline: auto;
     pointer-events: auto;
     transition: background-color var(--duration-normal) var(--ease-out),

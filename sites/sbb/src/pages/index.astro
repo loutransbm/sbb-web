@@ -755,7 +755,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       function wrap(o) { o = ((o % N) + N) % N; if (o > N / 2) o -= N; return o; }  // -> khoảng (-N/2, N/2]
 
       function place() {   // render mọi card theo pos hiện tại — ĐỒNG BỘ, không cần rAF
-        const spacing = cw * 0.66;
+        const spacing = cw * 0.8;   // dải clip rộng hơn, bám gần 2 mép hơn
         for (let i = 0; i < N; i++) {
           const off = wrap(i - pos);
           const ao = Math.abs(off);
@@ -839,7 +839,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       // Kéo ngang để xoay vòng; phân biệt KÉO vs CHẠM (chạm mới mở clip)
       let down = false, sx = 0, st = 0, drag = 0, downOnActive = false;
       track.addEventListener('pointerdown', (e) => { down = true; sx = e.clientX; st = target; drag = 0; track.classList.add('is-grabbing'); stopAuto(); const c = e.target.closest && e.target.closest('.mv-card'); downOnActive = !!(c && c.classList.contains('is-active')); try { track.setPointerCapture(e.pointerId); } catch (_) {} });
-      track.addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > drag) drag = Math.abs(dx); target = st - dx / (cw * 0.66); pos = target; place(); });
+      track.addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > drag) drag = Math.abs(dx); target = st - dx / (cw * 0.8); pos = target; place(); });
       const up = () => { if (!down) return; down = false; track.classList.remove('is-grabbing'); const wasTap = drag < 10; target = Math.round(target); animate(); if (wasTap && downOnActive) toggleActive(); else playActive(); };
       track.addEventListener('pointerup', up);
       track.addEventListener('pointercancel', up);
@@ -912,6 +912,15 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       }
       tabs.forEach((t, i) => t.addEventListener('click', () => show(i)));
     })();
+
+    /* --sbw = bề rộng scrollbar dọc -> để căn cụm tiêu đề sát 2 mép CHUẨN như thanh nav (tránh lệch do 100vw tính cả scrollbar) */
+    (function () {
+      var setSbw = function () {
+        document.documentElement.style.setProperty('--sbw', (window.innerWidth - document.documentElement.clientWidth) + 'px');
+      };
+      setSbw();
+      window.addEventListener('resize', setSbw, { passive: true });
+    })();
   </script>
 </PageLayout>
 
@@ -973,9 +982,9 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   .hero-glow-beam {
     position: absolute;
     top: -8%;
-    left: 48%;
+    left: 65%;
     transform-origin: top center;
-    transform: translateX(-50%) rotate(15deg); /* DẢI sáng kéo từ TOP xuống qua chữ SBB (dưới-trái) rồi tràn xuống Section 2 */
+    transform: translateX(-50%) rotate(23deg); /* Đỉnh sáng dịch sang PHẢI (qua bên phải cô gái), rồi đánh chéo xuống dưới-trái về phía chữ SBB */
     width: 1040px;
     height: 178%; /* kéo dài XUYÊN xuống Section 2 -> 2 section liền khối */
     /* Lõi RỰC (amber gần trắng-cam), đuôi sáng DÀI giữ ấm xuống tận Section 2. Ít blur -> nét căng 8k */
@@ -1024,8 +1033,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     align-items: center;
     z-index: 2;
     position: relative;
-    width: calc(100% - 2.5rem) !important;
-    max-width: 85rem !important;
+    width: calc(100% - 4rem) !important;   /* Khớp mép thanh nav: chừa 2rem mỗi bên */
+    max-width: 120rem !important;          /* Khớp cap thanh nav để SBB & EDUCATION thẳng hàng với mép nav */
     padding-inline: 0 !important;
   }
 
@@ -1035,8 +1044,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       gap: var(--space-4);
       align-items: center;
       padding-top: var(--space-10);
-      width: calc(100% - 2.5rem) !important;
-      max-width: 85rem !important;
+      width: calc(100% - 4rem) !important;   /* Khớp mép thanh nav (2rem mỗi bên) */
+      max-width: 120rem !important;          /* Khớp cap thanh nav */
       margin-inline: auto;
       padding-inline: 0 !important;
       transform: translateY(-3rem); /* Shifting the entire grid (text, cards, girl, bottom row) UP */
@@ -1071,7 +1080,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       padding-right: 0 !important;
     }
     .campaign-box {
-      padding-left: 6.5rem; /* Indented deeper than the SBB text and card */
+      padding-left: 9.5rem; /* Đẩy cụm PRACTICAL TRAINING vào trong; sâu hơn SBB & card */
       position: relative;
       z-index: 10;
       transform: translateY(-2.5rem); /* Lifted the heading up further as requested */
@@ -1258,8 +1267,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       z-index: 5 !important;
       /* Đổ bóng đậm xuống dưới để hắt lên chữ SBB, tạo cảm giác card nổi phía trước */
       box-shadow:
-        0 30px 42px -14px rgba(0, 0, 0, 0.9),
-        0 48px 90px -12px rgba(0, 0, 0, 0.55),
+        0 14px 22px -6px rgba(0, 0, 0, 0.92),   /* bóng tiếp xúc gần -> hằn rõ xuống đỉnh chữ SBB ngay dưới */
+        0 36px 64px -14px rgba(0, 0, 0, 0.6),    /* bóng lớn mềm tạo chiều sâu */
         0 0 90px rgba(255, 80, 20, 0.18),
         inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
     }
@@ -1295,7 +1304,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   .central-artwork-frame {
     position: relative;
     width: 100%;
-    max-width: 400px; /* Reverted to 400px to stop breaking the grid layout */
+    max-width: 460px; /* To hơn 1 chút — khung hero đã rộng nên không vỡ grid */
     aspect-ratio: 3 / 4;
     margin-inline: auto;
     display: flex;
@@ -1312,13 +1321,25 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     transform: perspective(1200px) rotateY(-5deg) rotateX(5deg) rotateZ(0deg) scale(1.05) translateY(-8px);
     box-shadow: none;
   }
+  /* Khi hover ảnh cô gái: nâng cả khu hero LÊN TRÊN thanh điều hướng (fixed, z-index 100)
+     -> cô gái phóng to ĐÈ LÊN nav thay vì bị nav che. :has() = hover phần tử con tác động phần tử cha.
+     Nền hero phía trên trong suốt nên thanh nav vẫn lộ qua, chỉ bị cô gái che ở giữa. */
+  .omni-hero:has(.central-artwork-frame:hover) {
+    z-index: 101;
+  }
   .artwork-image {
     width: 100%;
     height: 100%;
     background-size: contain; 
     background-position: center center;
     background-repeat: no-repeat;
-    filter: drop-shadow(0 22px 45px rgba(0, 0, 0, 0.55)) saturate(1.18) contrast(1.14) brightness(1.04);
+    position: relative;
+    z-index: 2; /* Cô gái nằm TRÊN quầng sáng -> quầng thành backlight tách nền, không phủ lên người */
+    filter:
+      drop-shadow(0 0 2px rgba(255, 246, 230, 0.7))    /* viền sáng mảnh, tách rõ khỏi nền */
+      drop-shadow(0 0 16px rgba(255, 170, 108, 0.6))   /* quầng ấm ôm sát rìa người (rim light) */
+      drop-shadow(0 20px 42px rgba(0, 0, 0, 0.6))      /* bóng đổ giữ chân, tạo chiều sâu */
+      saturate(1.22) contrast(1.2) brightness(1.05);
     transform: scale(1.6) translateY(8%);
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     
@@ -1345,15 +1366,19 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   }
   .artwork-glow {
     position: absolute;
-    bottom: -15%;
+    top: 6%;
+    bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
-    height: 40%;
-    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-    filter: blur(25px);
-    opacity: 0.6;
-    z-index: 1;
+    width: 80%;
+    /* Lõi sáng ấm (gần trắng) sáng hơn nền cam -> tách đầu/vai cô gái khỏi background */
+    background: radial-gradient(ellipse 58% 64% at 62% 34%,
+      rgba(255, 234, 200, 0.92) 0%,
+      rgba(255, 140, 75, 0.5) 38%,
+      transparent 70%);
+    filter: blur(20px);
+    opacity: 0.9;
+    z-index: 1; /* nằm DƯỚI .artwork-image (z-index 2) -> backlight thật sự, không phủ lên người */
     pointer-events: none;
   }
 
@@ -1527,7 +1552,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     z-index: 10; /* Higher than artwork-frame so SBB sits IN FRONT of the girl to hide her legs */
     pointer-events: auto;
     border-top: none;
-    padding-inline: 1.5rem; /* Aligns SBB and social links perfectly with the header logo edge */
+    padding-inline: 0; /* SBB & social chạm mép trong của hero (=2rem) -> thẳng hàng với mép thanh nav */
     padding-top: var(--space-2);
     padding-bottom: 2.5rem; /* Added to push SBB and social logos up from the bottom edge */
     position: relative;
@@ -1558,23 +1583,23 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   }
   @media (min-width: 992px) {
     .giant-bg-text {
-      transform: translateY(0); /* Neutral vertical transform to sit perfectly under the card */
+      transform: translateY(-2.5rem); /* Nâng SBB lên cao hơn về phía card -> card phủ rõ lên đỉnh chữ */
     }
   }
   .social-links {
     display: flex;
     gap: var(--space-5);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-8); /* Kéo cụm icon lên cao hơn 1 chút */
     align-items: center;
   }
   .social-links a {
     display: inline-flex;
-    color: rgba(255, 255, 255, 0.7);
+    color: #FFFFFF; /* Trắng như chữ, không còn mờ */
     transition: color 0.3s ease, transform 0.3s ease;
   }
   .social-links a svg {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     fill: currentColor;
   }
   .social-links a:hover {
@@ -2055,8 +2080,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   justify-content: center;
   position: relative;
   z-index: 15;
-  /* Đáy cinema tối dần nhẹ để nối liền độ tối với Programs (xoá Mach band ở biên, hết vạch kẻ) */
-  background: linear-gradient(to bottom, #110806 0%, #110806 55%, #0e0805 100%);
+  /* Nền phẳng #110806 = base Programs -> không còn chỗ trũng tối (#0e0805) ở biên -> hết Mach band / vết cắt */
+  background: #110806;
 }
 
   /* Ambient wall lights that spill from the screen */
@@ -2080,6 +2105,9 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     width: 25vw;
     height: 100%;
     filter: blur(80px);
+    /* Tan dần về đáy -> KHÔNG bị nền Programs cắt ngang ở biên (xoá vạch sáng tại mạch nối) */
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 86%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 86%);
   }
   .wall-glow-left {
     left: 0;
@@ -2396,7 +2424,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   .services-catalog-section {
     margin-top: 0;
     padding: 8rem 0 9rem; /* bottom giảm 15rem→9rem: kéo case-studies lên gần hơn, vẫn đủ thở */
-    background: linear-gradient(to bottom, #0e0805 0%, var(--paper) 480px); /* đáy cinema (#0e0805) -> base ấm #110806: nối liền, hết khối đen */
+    background: var(--paper); /* phẳng #110806 = đáy cinema -> liền mạch, không còn vết cắt giữa 2 section */
     position: relative;
     z-index: 20;
   }
@@ -2468,6 +2496,11 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     pointer-events: none;
     z-index: 0;
   }
+
+  /* Mạch nối Results -> Programs: nền đã phẳng #110806 nên 2 quầng cam này (spill + floor)
+     nổi lên thành DẢI/VẠCH sáng ở biên. Bỏ hẳn -> mạch tối đều, hoàn toàn liền mạch, hết vết cắt. */
+  .program-light-spill,
+  .cinema-floor { display: none !important; }
 
   .services-heading {
     font-family: var(--font-headline);
@@ -2720,6 +2753,24 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 4rem;
+  }
+
+  /* === Kéo các CỤM TIÊU ĐỀ section ra sát 2 mép, thẳng hàng với mép thanh điều hướng (2rem mỗi bên) ===
+     Break-out khỏi container hẹp; an toàn scrollbar nhờ --sbw (set bằng script cuối body).
+     Áp cho: case-studies / moments / testimonials (.cs-header), PROGRAMS, FAQ. TRỪ section 2. Chỉ desktop. */
+  @media (min-width: 992px) {
+    .cs-header,
+    .services-heading,
+    .faq-mega,
+    .services-grid,
+    .cs-cards-wrapper,
+    .mv-stage {
+      width: calc(100vw - var(--sbw, 0px) - 4rem) !important;
+      max-width: 120rem !important;
+      margin-left: calc(50% - (50vw - var(--sbw, 0px) / 2) + 2rem) !important;
+      margin-right: auto !important;
+      box-sizing: border-box;
+    }
   }
 
   /* Header Typography */
@@ -3471,7 +3522,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     line-height: 0.86;
     letter-spacing: -0.03em;
     color: #fff;
-    margin: 0 0 clamp(2rem, 5vw, 4rem);
+    margin-block: 0 clamp(2rem, 5vw, 4rem); /* chỉ set trên/dưới, chừa margin-left cho break-out căn mép */
   }
   .faq-list { display: flex; flex-direction: column; gap: 1.1rem; max-width: 1180px; }
   .faq-item {
