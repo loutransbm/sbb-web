@@ -4430,8 +4430,9 @@ const team = [
       background:
         radial-gradient(ellipse 82% 92% at 28% 50%, rgba(242, 66, 11, 0.06) 0%, transparent 72%),
         transparent !important;
-      overflow-x: clip !important;
-      overflow-y: visible !important;
+      /* ⚠️ overflow PHẢI = visible (KHÔNG dùng overflow-x:clip — Chrome clip CẢ dọc -> cắt beam ở đáy = VẠCH).
+         Beam tràn tự do; tràn ngang đã do body{overflow-x:hidden} chặn nên không sinh cuộn ngang. */
+      overflow: visible !important;
     }
     /* Section nền sáng -> trong suốt/tối để ăn nền body */
     .partner-marquee-section,
