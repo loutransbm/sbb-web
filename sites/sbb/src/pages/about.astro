@@ -4685,17 +4685,17 @@ const team = [
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
     mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
   }
-  /* Form: spotlight GIỐNG CTA (radial bright core lệch trái + mask fade 2 đầu -> không seam) (user 2026-06-20) */
+  /* Form: KHÔNG clone spotlight CTA (tránh "nhân đôi"). Dùng 1 quầng cam MỀM-RỘNG, DỊU hơn (bỏ stop tối
+     kịch tính) -> cùng tông ấm nhưng khác tính chất, là "fill" chứ không phải spotlight thứ 2. Mask 2 đầu -> không seam. */
   .lead-form::before {
     display: block !important;
-    background: radial-gradient(circle 470px at 25% 42%,
-      rgba(255, 112, 60, 0.80) 0%,
-      rgba(248, 82, 26, 0.70) 30%,
-      rgba(242, 66, 11, 0.50) 55%,
-      rgba(20, 10, 5, 0.85) 85%,
-      rgba(10, 5, 2, 0.95) 100%) !important;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
-            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+    background: radial-gradient(ellipse 72% 88% at 23% 44%,
+      rgba(255, 112, 60, 0.40) 0%,
+      rgba(248, 82, 26, 0.25) 28%,
+      rgba(242, 66, 11, 0.12) 52%,
+      transparent 80%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 88%, transparent 100%) !important;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 88%, transparent 100%) !important;
   }
 
   /* 10) CHỮ = TRẮNG sáng trên nền nâu trầm (như OMNI) */
