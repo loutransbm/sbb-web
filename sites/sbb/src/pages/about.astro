@@ -4416,29 +4416,24 @@ const team = [
     :global(html) { background: #120502 !important; }
     :global(body) {
       background:
+        /* ⭐ SPOTLIGHT hero đặt TRÊN NỀN BODY = 1 lớp LIÊN TỤC suốt hero↔partner -> KHÔNG có mép box
+           nào ở ranh giới -> KHÔNG THỂ sinh vạch (DPR lẻ). Fade hết ~620px, trước ranh giới 782px. */
+        radial-gradient(ellipse 640px 430px at 30% 305px,
+          rgba(255, 112, 60, 0.44) 0%,
+          rgba(248, 82, 26, 0.28) 24%,
+          rgba(242, 66, 11, 0.15) 48%,
+          transparent 74%),
         radial-gradient(120% 55% at 50% -6%, rgba(242, 66, 11, 0.13) 0%, rgba(18, 5, 2, 0) 50%),
         radial-gradient(120% 60% at 50% 116%, rgba(242, 66, 11, 0.10) 0%, rgba(18, 5, 2, 0) 55%),
         #120502 !important;
     }
     /* Tiêu đề TO = TRẮNG (khớp home, KHÔNG để cam). Từ khoá nhấn/số vẫn cam ở chỗ khác. */
     .cs-text-white, .about-verb, .about-tail, .about-tail span, .cs-glass-title { color: #ffffff !important; }
-    /* ⭐ GỐC RỄ ĐƯỜNG SEAM (ghi nhớ): hero nền ĐẶC #120502 -> CHE vầng cam body; partner trong suốt -> LỘ
-       vầng cam -> giáp ranh lệch sáng = ĐƯỜNG KẺ. FIX DỨT ĐIỂM: nền hero = TRANSPARENT HOÀN TOÀN -> lộ
-       body Y HỆT partner -> cùng 1 nền liên tục -> HẾT line. Quầng cam riêng (ambient + beam) chồng LÊN body.
-       overflow-y:visible cho beam tràn xuống; overflow-x:clip chặn tràn ngang. */
-    /* ⭐⭐ SPOTLIGHT = radial-gradient TRONG NỀN (KHÔNG dùng .hero-glow-beam blurred -> KHÔNG có
-       compositing layer riêng -> KHÔNG thể sinh hairline ở DPR lẻ). Nền base TRANSPARENT (lộ body
-       liên tục như partner). Spotlight fade HẾT trước đáy hero -> đáy hero = body thuần -> HẾT seam. */
+    /* ⭐⭐⭐ HERO RỖNG HOÀN TOÀN: background transparent -> hero KHÔNG vẽ gì cả -> ở ranh giới hero↔partner
+       KHÔNG có pixel nào của hero để rasterize -> body (1 lớp liên tục, đã chứa spotlight) lộ qua cả 2
+       section Y HỆT NHAU -> CẤU TRÚC BẤT KHẢ SEAM (DPR lẻ). Mọi glow giờ ở body, KHÔNG ở box hero. */
     .about-hero {
-      background:
-        radial-gradient(ellipse 50% 44% at 30% 40%,
-          rgba(255, 112, 60, 0.46) 0%,
-          rgba(248, 82, 26, 0.30) 22%,
-          rgba(242, 66, 11, 0.16) 46%,
-          rgba(242, 66, 11, 0.05) 62%,
-          transparent 76%),
-        radial-gradient(ellipse 82% 92% at 28% 50%, rgba(242, 66, 11, 0.05) 0%, transparent 72%),
-        transparent !important;
+      background: transparent !important;
       overflow: visible !important;
     }
     /* TẮT beam blurred của about (nguồn gây hairline ở DPR lẻ) — spotlight giờ nằm trong nền */
