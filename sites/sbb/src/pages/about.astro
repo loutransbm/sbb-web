@@ -4422,13 +4422,14 @@ const team = [
     }
     /* Tiêu đề TO = TRẮNG (khớp home, KHÔNG để cam). Từ khoá nhấn/số vẫn cam ở chỗ khác. */
     .cs-text-white, .about-verb, .about-tail, .about-tail span, .cs-glass-title { color: #ffffff !important; }
-    /* Hero: nền TỐI #120502, đáy fade transparent -> lộ body liên tục như section dưới.
-       overflow-y:visible -> BEAM TRÀN TỰ NHIÊN xuống section dưới (KHÔNG bị clip = KHÔNG vạch),
-       quầng sáng nối liền qua ranh giới hero↔partner. overflow-x:clip vẫn chặn tràn ngang. */
+    /* ⭐ GỐC RỄ ĐƯỜNG SEAM (ghi nhớ): hero nền ĐẶC #120502 -> CHE vầng cam body; partner trong suốt -> LỘ
+       vầng cam -> giáp ranh lệch sáng = ĐƯỜNG KẺ. FIX DỨT ĐIỂM: nền hero = TRANSPARENT HOÀN TOÀN -> lộ
+       body Y HỆT partner -> cùng 1 nền liên tục -> HẾT line. Quầng cam riêng (ambient + beam) chồng LÊN body.
+       overflow-y:visible cho beam tràn xuống; overflow-x:clip chặn tràn ngang. */
     .about-hero {
       background:
         radial-gradient(ellipse 82% 92% at 28% 50%, rgba(242, 66, 11, 0.06) 0%, transparent 72%),
-        linear-gradient(to bottom, #120502 0%, #120502 60%, rgba(18, 8, 4, 0.55) 84%, rgba(18, 5, 2, 0) 100%) !important;
+        transparent !important;
       overflow-x: clip !important;
       overflow-y: visible !important;
     }
@@ -4437,11 +4438,10 @@ const team = [
     .about-team, .about-cases {
       background: transparent !important;
     }
-    .partner-marquee-section .hero-seam-bridge {
-      background:
-        radial-gradient(ellipse 56% 305px at 45% 50%, rgba(242, 66, 11, 0.08) 0%, transparent 60%),
-        #120502 !important;
-    }
+    /* Seam-bridge = khối ĐẶC #120502 -> chính nó là 1 lớp CHE body (đúng pattern lỗi) -> BỎ.
+       Partner chồng -1px lấp khe sub-pixel ở DPR lẻ. Giờ hero+partner CÙNG trong suốt -> body liên tục. */
+    .partner-marquee-section .hero-seam-bridge { display: none !important; }
+    .partner-marquee-section { margin-top: -1px !important; }
     /* Glass pill trắng -> dark glass */
     .cs-glass-pill {
       background: rgba(255, 255, 255, 0.045) !important;
