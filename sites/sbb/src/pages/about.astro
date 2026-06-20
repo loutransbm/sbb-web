@@ -4685,7 +4685,18 @@ const team = [
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
     mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
   }
-  .lead-form::before { display: none !important; } /* bỏ ánh sáng thừa ở góc trái form (user 2026-06-20) */
+  /* Form: spotlight GIỐNG CTA (radial bright core lệch trái + mask fade 2 đầu -> không seam) (user 2026-06-20) */
+  .lead-form::before {
+    display: block !important;
+    background: radial-gradient(circle 470px at 25% 42%,
+      rgba(255, 112, 60, 0.80) 0%,
+      rgba(248, 82, 26, 0.70) 30%,
+      rgba(242, 66, 11, 0.50) 55%,
+      rgba(20, 10, 5, 0.85) 85%,
+      rgba(10, 5, 2, 0.95) 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+  }
 
   /* 10) CHỮ = TRẮNG sáng trên nền nâu trầm (như OMNI) */
   .campaign-heading, .agency-heading, .giant-bg-text, .partner-headline,
