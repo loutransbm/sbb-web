@@ -4422,12 +4422,15 @@ const team = [
     }
     /* Tiêu đề TO = TRẮNG (khớp home, KHÔNG để cam). Từ khoá nhấn/số vẫn cam ở chỗ khác. */
     .cs-text-white, .about-verb, .about-tail, .about-tail span, .cs-glass-title { color: #ffffff !important; }
-    /* Hero: nền TỐI #120502 nhưng ĐÁY FADE về transparent -> lộ body liên tục như section dưới
-       => HẾT đường seam hero↔partner (giống cách home .omni-hero xử lý). Wash cam nhẹ lệch trái giữ spotlight. */
+    /* Hero: nền TỐI #120502, đáy fade transparent -> lộ body liên tục như section dưới.
+       overflow-y:visible -> BEAM TRÀN TỰ NHIÊN xuống section dưới (KHÔNG bị clip = KHÔNG vạch),
+       quầng sáng nối liền qua ranh giới hero↔partner. overflow-x:clip vẫn chặn tràn ngang. */
     .about-hero {
       background:
         radial-gradient(ellipse 82% 92% at 28% 50%, rgba(242, 66, 11, 0.06) 0%, transparent 72%),
         linear-gradient(to bottom, #120502 0%, #120502 60%, rgba(18, 8, 4, 0.55) 84%, rgba(18, 5, 2, 0) 100%) !important;
+      overflow-x: clip !important;
+      overflow-y: visible !important;
     }
     /* Section nền sáng -> trong suốt/tối để ăn nền body */
     .partner-marquee-section,
@@ -4602,10 +4605,6 @@ const team = [
       rgba(242, 66, 11, 0.42) 44%,
       rgba(242, 66, 11, 0.18) 64%,
       rgba(18, 5, 2, 0) 85%) !important;
-    /* Fade 2 ĐẦU beam (đặc ở giữa = giữ spotlight) -> đáy beam tan TRƯỚC điểm bị overflow:hidden cắt
-       => HẾT đường kẻ ở seam hero↔partner. */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 8%, #000 18%, #000 80%, transparent 90%) !important;
-            mask-image: linear-gradient(to bottom, transparent 8%, #000 18%, #000 80%, transparent 90%) !important;
   }
 
   /* 5) PARTNER (section 2) — MIRROR glow ĐỈNH (ĐỐI XỨNG HỆT đáy hero) -> 2 nửa liền, xoá mạch.
