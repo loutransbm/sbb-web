@@ -1,29 +1,35 @@
 /* ============================================
-   SBB Design Tokens — Colors (OmniDigital Orange & Black Theme)
+   SBB Design Tokens — Colors (DARK FIRE: nền nâu ấm #120502 · cam đỏ #f2420b chủ đạo · chữ trắng/kem)
+   Cam đỏ #f2420b — MÀU CHỦ ĐẠO DUY NHẤT toàn site (đã bỏ xanh). Nền tối đồng nhất với DARK FIRE của home.
    ============================================ */
 
 :root {
   /* Core Palette */
-  --paper:       #110806;      /* Main background — đen ấm pha cam, khớp Omni rgb(17,8,6) (sáng & thoáng, không đen kịt) */
-  --paper-2:     #1a0d08;      /* Secondary surface — ấm hơn paper một bậc để phân lớp */
-  --ink:         #FFFFFF;      /* Primary white text */
-  --ink-soft:    #C5C5C7;      /* Secondary light gray text */
-  --ink-muted:   #747476;      /* Muted captions */
-  --on-ink:      #070201;      /* Dark text on light tags */
-  
-  /* Midnight black for full-bleed contrast */
-  --ink-heavy:   #000000;
-  
-  /* Accent Palette (Omni Orange) */
-  --accent:      #FF5E3A;      /* Vibrant neon orange */
-  --accent-2:    #FF8D60;      /* Secondary warm orange */
-  --accent-light:rgba(255, 94, 58, 0.1); /* Translucent orange */
-  
-  /* Borders and Grid dots */
-  --line:        #26262A;      /* Dark gray line for borders */
-  --line-dark:   #3A3A40;
-  --grid-dot:    rgba(255, 255, 255, 0.05); /* Dot grid color */
-  
+  --paper:       #120502;      /* Main background — nâu ấm tối (khớp DARK FIRE home, KHÔNG đen kịt) */
+  --paper-2:     #1c0d07;      /* Secondary surface — ấm hơn 1 bậc để phân lớp */
+  --ink:         #FFFFFF;      /* Primary text — trắng */
+  --ink-soft:    #CBBFB6;      /* Secondary — xám-kem ấm */
+  --ink-muted:   #8C7F75;      /* Muted captions */
+  --on-ink:      #FFFFFF;      /* Text trắng trên nền cam/đậm */
+
+  /* "Heavy" / full-bleed contrast blocks — khối cam đặc */
+  --ink-heavy:   #f2420b;
+
+  /* Accent — Cam đỏ #f2420b (thương hiệu, CHỦ ĐẠO, ĐỒNG NHẤT TOÀN SITE) */
+  --accent:      #f2420b;      /* Cam đỏ: nút/tiêu đề lớn/icon/eyebrow */
+  --accent-2:    #ff5c26;      /* Sáng hơn 1 chút — hover/glow (cùng tông) */
+  --accent-light:rgba(242, 66, 11, 0.10);
+
+  /* (Bỏ xanh — GỘP hết về cam đỏ #f2420b để toàn site THUẦN 1 màu chủ đạo) */
+  --blue:        #f2420b;      /* pill title, tab/filter active, số thứ tự -> cam đỏ */
+  --blue-2:      #ff5c26;      /* sáng hơn — hover */
+  --blue-light:  rgba(242, 66, 11, 0.10);
+
+  /* Borders and Grid dots (sáng-trên-tối) */
+  --line:        rgba(255, 255, 255, 0.12);
+  --line-dark:   rgba(255, 255, 255, 0.20);
+  --grid-dot:    rgba(255, 255, 255, 0.05);
+
   /* Semantic Mapping */
   --bg-primary:   var(--paper);
   --bg-secondary: var(--paper-2);
@@ -33,14 +39,13 @@
   --border:       var(--line);
   --interactive:  var(--accent);
   --interactive-hover: var(--accent-2);
-  
-  /* Surface overlays */
-  --surface-card:    #120603;
-  --surface-overlay: #1C0A05;
-  
-  /* Neo-Brutalist shadows (contrast orange/white shadows instead of black) */
-  --shadow-sm: 2px 2px 0px var(--accent);
-  --shadow-md: 4px 4px 0px var(--accent);
-  --shadow-lg: 6px 6px 0px var(--accent);
-}
 
+  /* Surface overlays — card/panel tối trên nền nâu */
+  --surface-card:    #1c0d07;
+  --surface-overlay: #23110a;
+
+  /* Shadows — đậm hơn cho nền tối */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.40);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.50);
+  --shadow-lg: 0 20px 52px rgba(0, 0, 0, 0.60);
+}

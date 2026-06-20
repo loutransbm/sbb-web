@@ -10,8 +10,8 @@ export interface Props {
 const { headline, body, primaryCtaText, primaryCtaHref, secondaryCtaText, secondaryCtaHref } = Astro.props;
 ---
 <section class="section cta-section">
-  <!-- Glowing background orb for the Shine -->
-  <div class="glow-orb orb-accent" style="top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3;"></div>
+  <!-- Soft warm wash behind the orange panel (subtle on light page) -->
+  <div class="glow-orb orb-accent" style="top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.12;"></div>
 
   <div class="container container--narrow reveal" style="position: relative; z-index: 2;">
     <div class="cta-box">
@@ -36,12 +36,10 @@ const { headline, body, primaryCtaText, primaryCtaHref, secondaryCtaText, second
   }
 
   .cta-box {
-    background-color: rgba(255, 255, 255, 0.02);
-    backdrop-filter: var(--surface-blur);
-    -webkit-backdrop-filter: var(--surface-blur);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background-color: var(--accent); /* Orange CTA panel — #f2420b */
+    border: 1px solid rgba(0, 0, 0, 0.10);
     padding: var(--space-12) var(--space-8);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 18px 48px rgba(242, 66, 11, 0.18);
     text-align: center;
     position: relative;
   }
@@ -49,12 +47,12 @@ const { headline, body, primaryCtaText, primaryCtaHref, secondaryCtaText, second
   .cta-section__headline {
     font-size: var(--text-3xl);
     margin-bottom: var(--space-6);
-    color: var(--ink);
+    color: var(--on-ink); /* White on orange panel */
   }
 
   .cta-section__body {
     font-size: var(--text-lg);
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.88); /* Soft white on orange panel */
     line-height: var(--leading-relaxed);
     margin-inline: auto;
     margin-bottom: var(--space-8);
@@ -66,6 +64,32 @@ const { headline, body, primaryCtaText, primaryCtaHref, secondaryCtaText, second
     flex-wrap: wrap;
     gap: var(--space-4);
     justify-content: center;
+  }
+
+  /* On the orange panel: primary = BLUE (pops), secondary = white ghost */
+  .cta-section__actions :global(.btn--primary) {
+    background-color: var(--blue); /* -> #f2420b (đã gộp về cam đỏ) */
+    color: var(--on-ink);
+    border-color: var(--on-ink);
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .cta-section__actions :global(.btn--primary:hover) {
+    background-color: var(--blue-2); /* -> #ff5c26 */
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .cta-section__actions :global(.btn--secondary) {
+    background-color: transparent;
+    color: var(--on-ink);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 3px 3px 0px rgba(255, 255, 255, 0.3);
+  }
+
+  .cta-section__actions :global(.btn--secondary:hover) {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--on-ink);
+    box-shadow: 4px 4px 0px var(--on-ink);
   }
 </style>
 

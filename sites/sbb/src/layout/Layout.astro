@@ -43,6 +43,8 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Trang thiết kế nền SÁNG: chặn Chrome "Auto Dark Mode" bôi xám nền trắng -->
+    <meta name="color-scheme" content="light" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
@@ -82,8 +84,9 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
 -->
 <style is:global>
   :root {
-    --sbb-orange: #E05C1A;
-    --sbb-black: #1A1A1A;
+    color-scheme: only light; /* Trang nền sáng -> chặn Auto Dark Mode trình duyệt (đang bôi XÁM nền trắng dù CSS là #FFFFFF) */
+    --sbb-orange: #f2420b;
+    --sbb-black: #1a1a1a;
     --sbb-white: #FFFFFF;
   }
   * {

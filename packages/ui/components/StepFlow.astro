@@ -46,9 +46,9 @@ const { steps, ctaText, ctaHref } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--border);
-    background-color: rgba(255, 255, 255, 0.04);
-    color: var(--text-primary);
+    border: 1px solid rgba(242, 66, 11, 0.30);
+    background-color: rgba(242, 66, 11, 0.06);
+    color: #f2420b;
     box-shadow: var(--shadow-sm);
     font-family: var(--font-headline);
     font-size: var(--text-sm);
@@ -58,14 +58,14 @@ const { steps, ctaText, ctaHref } = Astro.props;
   }
   .step-flow__item:hover .step-flow__number {
     transform: scale(1.05);
-    background-color: var(--accent);
+    background-color: #f2420b;
     color: #FFFFFF;
-    border-color: var(--accent);
-    box-shadow: 0 0 15px rgba(255, 94, 58, 0.3);
+    border-color: #f2420b;
+    box-shadow: 0 6px 16px rgba(242, 66, 11, 0.22);
   }
   .step-flow__line {
     width: 0;
-    border-left: 1.5px dotted rgba(255, 255, 255, 0.25); /* Translucent dotted line representing paths */
+    border-left: 1.5px dotted rgba(0, 0, 0, 0.20); /* Dark dotted hairline representing paths */
     flex: 1;
     min-height: 2.5rem;
     margin-block: var(--space-2);

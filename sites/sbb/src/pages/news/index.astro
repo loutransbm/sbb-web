@@ -70,12 +70,25 @@ const featured = [
   site="sbb"
   currentPath="/news"
 >
-  <!-- ===== HERO ===== -->
-  <section class="o-hero">
+    <!-- ===== HERO ===== -->
+  <section class="news-hero">
     <div class="container">
-      <span class="o-eyebrow">News</span>
-      <h1 class="o-mega">CÂU CHUYỆN<br /><span class="o-accent">THẬT</span></h1>
-      <p class="o-lead">Không phải tin tức đánh bóng. Đây là nơi học viên kể lại hành trình thật của mình, là những reality check không tô vẽ, và là tiếng nói chưa qua chỉnh sửa của người trẻ đang bước ra thế giới.</p>
+      <div class="cs-header about-hero-head">
+        <div class="cs-line cs-line-1">
+          <span class="cs-text-white">OUR BLOG</span>
+          <div class="cs-glass-pill" style="margin-left: 2rem;">
+            <span class="cs-glass-title">CONTENT HUB</span>
+            <span class="cs-glass-sub" style="max-width: 250px;">A collection of guides, trends, and ideas for marketing and growth.</span>
+          </div>
+        </div>
+        <div class="about-line-2" style="justify-content: flex-start; gap: 0;">
+          <span class="about-verb cs-text-white" style="margin-left: clamp(2.5rem, 7.5vw, 7.5rem);">INSIGHTS</span>
+          <span class="about-tail" style="margin-left: 1.5rem; text-align: left; align-items: flex-start;">
+            <span style="color: rgba(255, 255, 255, 0.55);">&amp; MARKETING</span>
+            <span class="cs-text-white">TRENDS</span>
+          </span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -141,3 +154,55 @@ const featured = [
     </div>
   </section>
 </PageLayout>
+
+<style>
+  .news-hero {
+    position: relative;
+    padding-top: clamp(6rem, 8vw, 9rem);
+    padding-bottom: clamp(3rem, 5vw, 5rem);
+    background: transparent;
+  }
+.cs-header { margin-bottom: 0; font-weight: 500; line-height: 0.95; letter-spacing: -0.045em; font-family: 'Inter', sans-serif; }
+    .cs-line { display: flex; align-items: center; gap: 1.5rem; }
+    /* Cụm "ABOUT SBB INSTITUTE" = HỆT cỡ DÒNG 1 các section homepage (.cs-line-1) */
+    .cs-line-1 { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; white-space: nowrap; position: relative; z-index: 10; }
+.about-line-2 { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; margin-top: 0.5rem; }
+    .about-verb { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9; white-space: nowrap; margin-left: clamp(2.5rem, 7.5vw, 7.5rem); }
+.about-tail { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; line-height: 0.92; text-align: right; }
+    .about-tail span { display: block; white-space: nowrap; }
+
+  .cs-text-white { color: #ffffff !important; }
+  .cs-glass-pill {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    padding: clamp(0.6rem, 1vw, 1.2rem) clamp(1rem, 2vw, 1.8rem);
+    display: inline-flex; flex-direction: column; gap: 0.2rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+  .cs-glass-title {
+    font-family: var(--font-headline); font-weight: 600; font-size: 0.8rem;
+    letter-spacing: 0.15em; color: #F5EDE6; text-transform: uppercase;
+  }
+  .cs-glass-sub {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(0.85rem, 1vw, 0.95rem);
+    line-height: 1.45; color: rgba(255, 255, 255, 0.65); white-space: normal;
+  }
+
+
+@media (max-width: 991px) {
+      .about-hero-wrap { width: calc(100% - 3rem); }  /* mobile: lề 1.5rem mỗi bên cho khớp nav */
+      .cs-line { flex-wrap: wrap; gap: 0.4rem; }
+      .cs-line-1, .about-verb { font-size: clamp(3rem, 13vw, 5rem); white-space: normal; }
+      .about-verb { margin-left: 0; }
+      .about-hero-head .cs-glass-pill { transform: translateY(0); margin-left: 0; margin-top: 1rem; }
+      /* dòng 2 xếp dọc, canh trái cho gọn trên mobile */
+      .about-line-2 { flex-direction: column; align-items: flex-start; margin-top: 0.5rem; gap: 0.2rem; }
+      .about-tail { align-items: flex-start; text-align: left; font-size: clamp(1.9rem, 9vw, 3.4rem); margin-top: 0.4rem; }
+      /* Mobile: tắt thước đo ẩn, lead full-width canh trái như cũ */
+      .about-hero-lead-wrap { width: 100%; max-width: 100%; margin-left: 0; }
+      .lead-width-driver { display: none; }
+      .about-hero-lead { margin-left: 0; max-width: 100%; }
+    }
+</style>

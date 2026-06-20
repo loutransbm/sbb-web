@@ -43,6 +43,8 @@ const orgSchema = {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Site nền SÁNG: chặn Chrome "Auto Dark Mode" bôi xám nền trắng -->
+  <meta name="color-scheme" content="light" />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
 
@@ -79,6 +81,18 @@ const orgSchema = {
 </head>
 <body>
   <slot />
+
+  <!-- --sbw = bề rộng scrollbar dọc -> để break-out cụm tiêu đề sát 2 mép CHUẨN như thanh nav (tránh lệch do 100vw tính cả scrollbar). Dùng chung mọi trang nội dung. -->
+  <script is:inline>
+    (function () {
+      var setSbw = function () {
+        document.documentElement.style.setProperty('--sbw', (window.innerWidth - document.documentElement.clientWidth) + 'px');
+      };
+      setSbw();
+      window.addEventListener('resize', setSbw, { passive: true });
+      window.addEventListener('load', setSbw);
+    })();
+  </script>
 
   <!-- GSAP & Lenis CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" is:inline></script>

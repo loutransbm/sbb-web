@@ -49,9 +49,9 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
 
 <header class:list={['site-header', { 'site-header--overlay': overlay }]} id="site-header">
   <div class="header-inner container">
-    <!-- Logo SBB (bản dark — logo trắng, dùng trên nền tối) -->
+    <!-- Logo SBB (bản cam — ngoặc trắng + S xanh + chữ trắng/xanh, dùng trên nav nền cam) -->
     <a href={logoHref} class="logo" aria-label="SBB — Shine Beyond Borders">
-      <img src="/brand/sbb-logo-dark.svg" alt="SBB — Shine Beyond Borders" class="logo-img" width="124" height="32" />
+      <img src="/brand/sbb-logo-light.svg" alt="SBB — Shine Beyond Borders" class="logo-img" width="124" height="32" />
     </a>
 
     <!-- Menu giữa -->
@@ -104,10 +104,11 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
     align-items: center;
     gap: var(--space-4);
     min-height: 3.5rem; /* Fixed comfortable height */
-    background-color: transparent;        /* Omni: nền trong suốt hoàn toàn */
-    backdrop-filter: blur(10px);          /* Omni: kính mờ blur 10px */
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Omni: viền trắng mảnh, rõ */
+    background: transparent; /* Nav TRONG SUỐT tối giản — logo + menu nổi thẳng trên hero */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid transparent;
+    box-shadow: none;
     border-radius: 100px;
     padding-left: 1.5rem;  /* Optical alignment: more left padding */
     padding-right: 0.5rem; /* Optical alignment: less right padding because CTA has internal padding */
@@ -121,9 +122,11 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
                 min-height var(--duration-normal) var(--ease-out);
   }
   .site-header.is-scrolled .header-inner {
-    background-color: transparent;
-    border-color: transparent;
-    box-shadow: none;
+    background: rgba(18, 5, 2, 0.72); /* kính NÂU TỐI mờ khi cuộn -> chữ kem rõ trên dark fire */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 20px -8px rgba(0, 0, 0, 0.5);
     min-height: 2.85rem;
   }
 
@@ -201,7 +204,7 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
     font-weight: 500;
     letter-spacing: 0.05em; /* Reduced spacing to avoid jagged reading */
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(245, 237, 230, 0.72); /* kem sáng — đọc rõ trên nền dark fire */
     text-decoration: none;
     padding-block: var(--space-2);
     white-space: nowrap;
@@ -216,9 +219,9 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
     transform: scaleX(0);
     transition: transform var(--duration-normal) var(--ease-out);
   }
-  .nav-link:hover { color: #FFFFFF; }
+  .nav-link:hover { color: #f2420b; }
   .nav-link:hover::after { transform: scaleX(1); }
-  .nav-link.is-active { color: #FFFFFF; }
+  .nav-link.is-active { color: #f2420b; }
   .nav-link.is-active::after { transform: scaleX(1); }
 
   /* ---- Phải ---- */
@@ -251,12 +254,64 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
   .nav-cta:hover {
     background-color: var(--accent-2);
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px -8px rgba(255, 94, 58, 0.6);
+    box-shadow: 0 8px 20px -6px rgba(242, 66, 11, 0.35);
   }
   @media (max-width: 899px) {
     .nav-cta { display: none; }
   }
 
+  /* === GLOBAL OMNI SYNC OVERRIDES === */
+  .site-header {
+    padding-top: 1.5rem !important; /* Float down from top edge */
+  }
+  .header-inner {
+    background: transparent !important; /* Tuyệt đối trong suốt 100% */
+    backdrop-filter: none !important; 
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important; /* Viền siêu mờ ảo, gần như tàng hình */
+    min-height: 2.8rem !important; 
+    height: 2.8rem !important;
+    padding-right: 0.4rem !important;
+    box-shadow: none !important; /* Xóa hoàn toàn bóng đen bên dưới */
+  }
+  .site-header.is-scrolled .header-inner {
+    background: rgba(15, 3, 0, 0.6) !important; /* Chỉ hơi tối và mờ lại khi cuộn trang */
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5) !important;
+  }
+  /* Shrink Logo to fit smaller pill */
+  .logo-img {
+    height: 1.4rem !important; 
+    width: auto !important;
+  }
+  /* Navbar links: Pure white, smaller font */
+  .nav-link { 
+    color: #ffffff !important; 
+    font-weight: 500 !important; 
+    font-size: 10px !important; 
+    letter-spacing: 0.08em !important; 
+  }
+  .nav-link:hover,
+  .nav-link.is-active { 
+    color: #ffffff !important; /* Giữ nguyên chữ màu trắng, giữ nguyên gạch cam gốc của theme */
+  }
+  /* Omni style CTA Button */
+  .nav-cta { 
+    background: #E64A00 !important; /* Solid Deep Orange Pill */
+    color: #ffffff !important;
+    border-radius: 100px !important;
+    padding: 0 1.5rem !important; /* Thinner padding */
+    height: 2rem !important; /* Reduced height */
+    font-size: 10px !important; /* Tweak font size to fit */
+    font-weight: 600 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  .nav-cta:hover { 
+    background: #FF6600 !important; 
+    box-shadow: 0 8px 20px -6px rgba(230, 74, 0, 0.6) !important;
+  }
 </style>
 
 <script>

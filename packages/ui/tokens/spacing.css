@@ -23,6 +23,8 @@
   /* Section spacing — generous breathing room */
   --section-py: clamp(3rem, 2rem + 5vw, 6rem);
   --section-px: clamp(1.25rem, 1rem + 2vw, 2rem);
+  /* Khoảng đệm dọc CHUẨN giữa các section (= HỆT homepage; homepage tự set trùng giá trị này trong index.astro). Định nghĩa global để mọi trang nội dung dùng được, KHÔNG còn collapse về 0. */
+  --sec-pad: clamp(4rem, 8.5vw, 7.5rem);
 
   /* Content max widths */
   --max-w-prose:  42rem;    /* ~672px — optimal reading */

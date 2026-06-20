@@ -242,7 +242,7 @@ a:hover {
 .heavy-section {
   background-color: var(--ink-heavy) !important;
   color: var(--on-ink) !important;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -255,18 +255,18 @@ a:hover {
 
 .heavy-section p,
 .heavy-section .text-secondary {
-  color: rgba(245, 241, 234, 0.7) !important;
+  color: rgba(255, 255, 255, 0.82) !important;
 }
 
 .heavy-section .btn--secondary {
   background-color: transparent !important;
   color: var(--on-ink) !important;
-  border-color: rgba(245, 241, 234, 0.4) !important;
-  box-shadow: 3px 3px 0px rgba(245, 241, 234, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 3px 3px 0px rgba(255, 255, 255, 0.35) !important;
 }
 
 .heavy-section .btn--secondary:hover {
-  background-color: rgba(245, 241, 234, 0.08) !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
   border-color: var(--on-ink) !important;
   box-shadow: 4px 4px 0px var(--on-ink) !important;
 }
