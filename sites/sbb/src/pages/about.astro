@@ -4602,6 +4602,10 @@ const team = [
       rgba(242, 66, 11, 0.42) 44%,
       rgba(242, 66, 11, 0.18) 64%,
       rgba(18, 5, 2, 0) 85%) !important;
+    /* Fade 2 ĐẦU beam (đặc ở giữa = giữ spotlight) -> đáy beam tan TRƯỚC điểm bị overflow:hidden cắt
+       => HẾT đường kẻ ở seam hero↔partner. */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 8%, #000 18%, #000 80%, transparent 90%) !important;
+            mask-image: linear-gradient(to bottom, transparent 8%, #000 18%, #000 80%, transparent 90%) !important;
   }
 
   /* 5) PARTNER (section 2) — MIRROR glow ĐỈNH (ĐỐI XỨNG HỆT đáy hero) -> 2 nửa liền, xoá mạch.
