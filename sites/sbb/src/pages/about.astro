@@ -4426,14 +4426,23 @@ const team = [
        vầng cam -> giáp ranh lệch sáng = ĐƯỜNG KẺ. FIX DỨT ĐIỂM: nền hero = TRANSPARENT HOÀN TOÀN -> lộ
        body Y HỆT partner -> cùng 1 nền liên tục -> HẾT line. Quầng cam riêng (ambient + beam) chồng LÊN body.
        overflow-y:visible cho beam tràn xuống; overflow-x:clip chặn tràn ngang. */
+    /* ⭐⭐ SPOTLIGHT = radial-gradient TRONG NỀN (KHÔNG dùng .hero-glow-beam blurred -> KHÔNG có
+       compositing layer riêng -> KHÔNG thể sinh hairline ở DPR lẻ). Nền base TRANSPARENT (lộ body
+       liên tục như partner). Spotlight fade HẾT trước đáy hero -> đáy hero = body thuần -> HẾT seam. */
     .about-hero {
       background:
-        radial-gradient(ellipse 82% 92% at 28% 50%, rgba(242, 66, 11, 0.06) 0%, transparent 72%),
+        radial-gradient(ellipse 50% 44% at 30% 40%,
+          rgba(255, 112, 60, 0.46) 0%,
+          rgba(248, 82, 26, 0.30) 22%,
+          rgba(242, 66, 11, 0.16) 46%,
+          rgba(242, 66, 11, 0.05) 62%,
+          transparent 76%),
+        radial-gradient(ellipse 82% 92% at 28% 50%, rgba(242, 66, 11, 0.05) 0%, transparent 72%),
         transparent !important;
-      /* ⚠️ overflow PHẢI = visible (KHÔNG dùng overflow-x:clip — Chrome clip CẢ dọc -> cắt beam ở đáy = VẠCH).
-         Beam tràn tự do; tràn ngang đã do body{overflow-x:hidden} chặn nên không sinh cuộn ngang. */
       overflow: visible !important;
     }
+    /* TẮT beam blurred của about (nguồn gây hairline ở DPR lẻ) — spotlight giờ nằm trong nền */
+    .about-hero .hero-glow-beam { display: none !important; }
     /* Section nền sáng -> trong suốt/tối để ăn nền body */
     .partner-marquee-section,
     .about-team, .about-cases {
