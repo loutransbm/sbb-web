@@ -929,13 +929,15 @@ const team = [
 
     /* Mô tả nằm DƯỚI-PHẢI (margin-left:auto đẩy khối sang phải) — BÉ + viết thường như Omni */
     /* Lead canh TRÁI thẳng mép "W" của WORK SMART. .lead-width-driver = thước đo ẩn KHỚP font tiêu đề (.cs-header Inter 500 + .about-tail size/letter-spacing) → ép khối rộng = bề ngang "WORK SMART". */
+    /* Kéo văn bản phụ LÊN gần "WORK SMART" (user): giảm khoảng cách dưới tiêu đề (vốn 80px) còn nhẹ, vẫn có thở */
+    .about-hero-head { margin-bottom: clamp(0.5rem, 1.2vw, 1rem) !important; }
     .about-hero-lead-wrap { margin-left: auto; width: max-content; max-width: 100%; }
     .lead-width-driver {
       display: block; height: 0; overflow: hidden; visibility: hidden; pointer-events: none; user-select: none;
       font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; white-space: nowrap;
     }
     .about-hero-lead {
-      margin-top: clamp(2rem, 4vw, 3.5rem); max-width: 42ch; text-align: left;
+      margin-top: clamp(0.35rem, 0.8vw, 0.7rem); max-width: 42ch; text-align: left;
       font-size: clamp(0.8rem, 0.95vw, 0.92rem); font-weight: 300; line-height: 1.6;
       color: var(--ink-soft); text-transform: none;
     }
@@ -4664,26 +4666,8 @@ const team = [
     z-index: -1 !important;
   }
   .faq-section::before { display: none !important; }
-  /* ĐÁNH SÁNG đồng bộ cho FAQ + Testimonials (user 2026-06-20): spotlight sau heading, khớp độ sáng
-     hero/team/case-studies. Đặt ở BACKGROUND section, fade về transparent ở mép -> seam vẫn liền. */
-  .faq-section {
-    background:
-      radial-gradient(ellipse 42% 440px at 14% 230px,
-        rgba(255, 112, 60, 0.42) 0%,
-        rgba(248, 82, 26, 0.28) 30%,
-        rgba(242, 66, 11, 0.13) 55%,
-        transparent 80%),
-      transparent !important;
-  }
-  .tm-section {
-    background:
-      radial-gradient(ellipse 50% 38% at 80% 26%,
-        rgba(255, 112, 60, 0.42) 0%,
-        rgba(248, 82, 26, 0.28) 30%,
-        rgba(242, 66, 11, 0.13) 55%,
-        transparent 80%),
-      transparent !important;
-  }
+  /* GỠ glow FAQ + Testimonials (user 2026-06-20): glow vẽ sáng ở mép TRÊN section -> lệch sáng so với
+     section trên (trong suốt) = ĐƯỜNG KẺ. Bỏ glow -> 2 section transparent thuần -> hết seam. */
 
   /* 9) CTA + FORM (đáy) — đều cam/đỏ (KHÔNG còn xanh) */
   .cta-final { overflow: visible !important; }
