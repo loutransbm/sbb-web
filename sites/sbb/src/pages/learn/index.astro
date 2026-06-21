@@ -1,159 +1,368 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
 
-// 100% static content — no content collections, no extra components.
-const topics = [
-  {
-    tag: 'Ngôn ngữ',
-    title: 'Tiếng Anh ứng dụng',
-    body: 'Không học ngữ pháp suông. Tập trung vào tiếng Anh dùng thật trong phỏng vấn, email công việc và giao tiếp hằng ngày nơi công sở quốc tế.',
-  },
-  {
-    tag: 'Nghề nghiệp',
-    title: 'Kỹ năng nghề',
-    body: 'Tác phong làm việc chuẩn quốc tế, kỹ năng chuyên ngành và cách thể hiện năng lực để được tin tưởng và trọng dụng từ ngày đầu.',
-  },
-  {
-    tag: 'Hồ sơ',
-    title: 'Hồ sơ & Visa',
-    body: 'Hiểu đúng bản chất từng loại visa, chuẩn bị CV chuẩn ATS, thư động lực và bộ hồ sơ sẵn sàng cho mọi vòng xét duyệt.',
-  },
-  {
-    tag: 'Văn hoá',
-    title: 'Văn hoá làm việc',
-    body: 'Cách thích nghi với môi trường đa văn hoá, giao tiếp với sếp và đồng nghiệp nước ngoài, tránh những cú sốc văn hoá đầu tiên.',
-  },
-  {
-    tag: 'Tài chính',
-    title: 'Tài chính du học',
-    body: 'Dự trù chi phí thật, quản lý dòng tiền khi sống ở nước ngoài và lập kế hoạch tài chính tỉnh táo trước khi lên đường.',
-  },
-  {
-    tag: 'Tương lai',
-    title: 'Định cư & Phát triển',
-    body: 'Tầm nhìn dài hạn: từ một chuyến đi ngắn hạn đến con đường phát triển sự nghiệp và định cư bền vững ở môi trường quốc tế.',
-  },
+// Catalog khóa học SBB. GRP là THẬT (live), còn lại 'soon' (Sắp ra mắt).
+const courses = [
+  { id:'grp', status:'live', cat:'global-readiness', catLabel:'Chuẩn bị toàn cầu',
+    title:'GRP — Global Readiness Program',
+    desc:'Chuẩn bị năng lực toàn cầu trước khi ra nước ngoài học và làm: tư duy toàn cầu, liên văn hoá, ngoại ngữ chức năng, học–làm quốc tế và sống tự chủ.',
+    meta:['15 bài trụ','5 vùng năng lực','Chứng nhận SBB'],
+    img:'/grp-3d-globe-nobg.png', href:'/learn/grp' },
+  { id:'english', status:'soon', cat:'language', catLabel:'Ngoại ngữ',
+    title:'Tiếng Anh chức năng', desc:'Tiếng Anh dùng thật trong phỏng vấn, email công việc và đời sống công sở quốc tế.',
+    meta:['Sắp ra mắt'], img:'/global-3d-nobg.png', href:'#' },
+  { id:'career', status:'soon', cat:'career', catLabel:'Kỹ năng nghề',
+    title:'Kỹ năng nghề quốc tế', desc:'Tác phong chuẩn quốc tế, kỹ năng chuyên ngành và cách thể hiện năng lực để được trọng dụng.',
+    meta:['Sắp ra mắt'], img:'/career-3d-nobg.png', href:'#' },
+  { id:'visa', status:'soon', cat:'visa', catLabel:'Hồ sơ & Visa',
+    title:'Hồ sơ & Visa', desc:'Hiểu đúng từng loại visa, CV chuẩn ATS, thư động lực và bộ hồ sơ sẵn sàng mọi vòng xét duyệt.',
+    meta:['Sắp ra mắt'], img:'/plane-3d-nobg.png', href:'#' },
 ];
-
-const paths = [
-  {
-    num: '01',
-    title: 'Khám phá & Định hướng',
-    body: 'Bắt đầu từ Reality Check: hiểu thật về cuộc sống, công việc và chi phí ở nước ngoài. Tự đánh giá xem mình thực sự phù hợp với con đường nào.',
-  },
-  {
-    num: '02',
-    title: 'Xây nền năng lực',
-    body: 'Rèn tiếng Anh ứng dụng và kỹ năng nghề tới mức làm được việc thật. Đây là phần dài nhất, nhưng cũng là phần quyết định bạn đi được xa tới đâu.',
-  },
-  {
-    num: '03',
-    title: 'Chuẩn bị hồ sơ',
-    body: 'Hoàn thiện CV, thư động lực và bộ hồ sơ visa. Luyện phỏng vấn với doanh nghiệp để tự tin bước vào vòng xét duyệt thật.',
-  },
-  {
-    num: '04',
-    title: 'Sẵn sàng cất cánh',
-    body: 'Checklist trước khi đi, chuẩn bị tâm thế và tài chính, kết nối cộng đồng người đi trước để không bao giờ phải bước đi một mình.',
-  },
-];
-
-const parentChecks = [
-  'Thông tin chính xác về an toàn khi con sống và làm việc ở nước ngoài.',
-  'Bức tranh tài chính minh bạch: chi phí thật, không vẽ vời, không giấu giếm.',
-  'Góc nhìn tỉnh táo để cùng con đưa ra quyết định, thay vì lo lắng mơ hồ.',
-  'Cách đồng hành đúng mức — đủ gần để hỗ trợ, đủ rộng để con trưởng thành.',
+const courseCats = [
+  { id:'all', label:'Tất cả' },
+  { id:'global-readiness', label:'Chuẩn bị toàn cầu' },
+  { id:'language', label:'Ngoại ngữ' },
+  { id:'career', label:'Kỹ năng nghề' },
+  { id:'visa', label:'Hồ sơ & Visa' },
 ];
 ---
 
 <PageLayout
   title="Learn"
-  description="SBB Learn là kho kiến thức và lộ trình chuẩn bị bài bản để bạn tự tin đi học và làm việc ở môi trường quốc tế."
+  description="Học viện SBB — kho khóa học chuẩn bị năng lực quốc tế. Bắt đầu với GRP, các khóa khác sẽ mở dần."
   site="sbb"
   currentPath="/learn"
 >
-  <!-- ===== HERO ===== -->
-  <section class="o-hero">
+  <!-- ===== HERO ngắn gọn (cascade đồng bộ site) ===== -->
+  <section class="learn-hero">
+    <div class="learn-glow-beam" aria-hidden="true"></div>
     <div class="container">
-      <span class="o-eyebrow">Learn</span>
-      <h1 class="o-mega">HỌC ĐỂ<br /><span class="o-accent">ĐI XA</span></h1>
-      <p class="o-lead">SBB Learn là kho kiến thức mở và những lộ trình chuẩn bị bài bản — giúp bạn tự xây dựng năng lực, hiểu đúng thực tế và sẵn sàng đi học, đi làm ở môi trường quốc tế trước khi nộp bất kỳ hồ sơ nào.</p>
-    </div>
-  </section>
-
-  <!-- ===== TOPICS ===== -->
-  <section class="o-section">
-    <div class="container">
-      <div class="o-head">
-        <span class="o-head-eyebrow">Chủ đề kiến thức</span>
-        <h2 class="o-head-title">WHAT YOU <span class="o-stroke">LEARN</span></h2>
-        <p class="o-head-desc">Sáu nhóm kiến thức cốt lõi. Chọn nơi bạn đang yếu nhất để bắt đầu — không cần học theo thứ tự, chỉ cần bắt đầu.</p>
-      </div>
-      <div class="o-grid o-grid--3">
-        {topics.map((t) => (
-          <a href="/learn" class="o-card">
-            <span class="o-card__tag">{t.tag}</span>
-            <h3 class="o-card__title">{t.title}</h3>
-            <p class="o-card__body">{t.body}</p>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PATHS ===== -->
-  <section class="o-section o-section--tint o-section--glow">
-    <div class="container">
-      <div class="o-head">
-        <span class="o-head-eyebrow">Lộ trình</span>
-        <h2 class="o-head-title">YOUR <span class="o-stroke">PATH</span></h2>
-        <p class="o-head-desc">Thay vì đọc những bài viết rời rạc, đi theo bốn chặng được sắp xếp từ định hướng đến hành động — để mỗi bước đều có lý do.</p>
-      </div>
-      <div class="o-rows">
-        {paths.map((p) => (
-          <article class="o-row">
-            <span class="o-row__num">{p.num}</span>
-            <div>
-              <h3 class="o-row__title">{p.title}</h3>
-              <p class="o-row__body">{p.body}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PARENT CORNER ===== -->
-  <section class="o-section">
-    <div class="container">
-      <div class="o-split">
-        <div>
-          <span class="o-head-eyebrow">Góc phụ huynh</span>
-          <h2 class="o-statement">Cho con đi xa, <span class="o-accent">cha mẹ cũng cần đồng hành</span>.</h2>
+      <div class="cs-header">
+        <div class="cs-line cs-line-1">
+          <span class="cs-text-white">OUR COURSES</span>
         </div>
-        <div>
-          <ul class="o-checks">
-            {parentChecks.map((c) => (
-              <li>{c}</li>
-            ))}
-          </ul>
-          <div class="o-actions o-mt-lg">
-            <a href="/learn/parent-corner" class="o-btn o-btn--ghost">Vào góc phụ huynh</a>
+      </div>
+      <p class="learn-sub">Học viện SBB — kho khóa học chuẩn bị năng lực quốc tế. Bắt đầu với GRP, các khóa khác sẽ mở dần.</p>
+    </div>
+  </section>
+
+  <!-- ===== CATALOG (tràn 2 mép như news) ===== -->
+  <section class="o-section courses-section">
+    <div class="container">
+      <!-- Toolbar: filter pills + ô search + toggle grid/list -->
+      <div class="course-toolbar">
+        <div class="course-filters" role="group" aria-label="Lọc theo danh mục">
+          {courseCats.map((c, i) => (
+            <button type="button" class:list={["course-filter", i === 0 && "is-active"]} data-filter={c.id}>{c.label}</button>
+          ))}
+        </div>
+        <div class="course-tools">
+          <label class="course-search">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.2-4.2"/></svg>
+            <input type="search" id="courseSearch" placeholder="Tìm khóa học..." autocomplete="off" aria-label="Tìm khóa học" />
+          </label>
+          <div class="course-view" role="group" aria-label="Chế độ hiển thị">
+            <button type="button" class="course-view-btn is-active" data-view="grid" aria-label="Dạng lưới" title="Lưới">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+            </button>
+            <button type="button" class="course-view-btn" data-view="list" aria-label="Dạng danh sách" title="Danh sách">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+            </button>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ===== CTA ===== -->
-  <section class="o-cta">
-    <div class="container">
-      <h2 class="o-cta__title">BẮT ĐẦU HỌC HÔM NAY</h2>
-      <p class="o-cta__sub">Kiến thức là phần bạn có thể chủ động ngay bây giờ. Chọn một lộ trình, hoặc ghé cộng đồng để nghe tiếng nói thật từ những người đã đi trước.</p>
-      <div class="o-actions">
-        <a href="/programs" class="o-btn o-btn--primary">Xem chương trình</a>
-        <a href="/community" class="o-btn o-btn--ghost">Vào cộng đồng</a>
+      <!-- Lưới thẻ khóa học -->
+      <div class="courses-grid">
+        {courses.map((c) => (
+          <a href={c.href} class:list={["course-card", c.status === 'soon' && "is-soon"]} data-cat={c.cat} data-title={c.title.toLowerCase()} data-status={c.status}>
+            <div class="course-card__media"><img src={c.img} alt={c.title} loading="lazy" /></div>
+            <div class="course-card__body">
+              <span class="course-card__tag">{c.catLabel}</span>
+              <h3 class="course-card__title">{c.title}</h3>
+              <p class="course-card__desc">{c.desc}</p>
+              <div class="course-card__meta">{c.meta.map((m) => <span>{m}</span>)}</div>
+            </div>
+            {c.status === 'soon' && <span class="course-card__badge">Sắp ra mắt</span>}
+            {c.status === 'live' && (
+              <span class="course-card__cta" aria-label="Vào học">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8 L16 16"/><path d="M16 9 L16 16 L9 16"/></svg>
+              </span>
+            )}
+          </a>
+        ))}
       </div>
+      <p class="courses-empty" hidden>Không tìm thấy khóa học phù hợp.</p>
     </div>
   </section>
 </PageLayout>
+
+<style>
+  /* ===== HERO CASCADE (copy từ news, đổi tên class -> learn) ===== */
+  .learn-hero {
+    position: relative; overflow: visible;
+    padding-top: clamp(7rem, 8vw, 10rem); /* padding-top vừa phải, KHÔNG full-screen */
+    padding-bottom: clamp(2rem, 4vw, 3.5rem);
+    background: transparent;
+  }
+  .learn-hero .container { position: relative; z-index: 1; }
+  /* Quầng cam nhẹ bên phải */
+  .learn-glow-beam {
+    position: absolute; top: 10px; left: 84%; transform: translateX(-50%);
+    width: 1080px; height: 720px; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse 50% 50% at 50% 42%,
+      rgba(255, 112, 60, 0.50) 0%,
+      rgba(248, 82, 26, 0.38) 22%,
+      rgba(242, 66, 11, 0.24) 44%,
+      rgba(242, 66, 11, 0.10) 64%,
+      transparent 84%);
+    filter: blur(76px);
+  }
+  /* dòng phụ nhỏ dưới tiêu đề */
+  .learn-sub {
+    position: relative; z-index: 1;
+    margin: clamp(1.2rem, 2vw, 1.8rem) 0 0;
+    max-width: 52ch; text-align: left;
+    color: rgba(255, 255, 255, 0.62); font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: clamp(0.9rem, 1vw, 1.05rem); line-height: 1.6;
+  }
+
+  /* heading cascade — copy từ news */
+  .cs-header { margin-bottom: 0; font-weight: 500; line-height: 0.95; letter-spacing: -0.045em; font-family: 'Inter', sans-serif; }
+  .cs-line { display: flex; align-items: center; gap: 1.5rem; }
+  .cs-line-1 { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; white-space: nowrap; position: relative; z-index: 10; }
+  .cs-text-white { color: #ffffff !important; }
+
+  /* ===== CATALOG ===== */
+  .courses-section { padding-top: clamp(1rem, 2vw, 2.2rem); }
+  /* TRÀN 2 MÉP như news */
+  .courses-section .container {
+    max-width: none; width: 100%;
+    padding-inline: clamp(1.5rem, 3.2vw, 3.25rem);
+  }
+
+  /* Toolbar */
+  .course-toolbar {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 1rem 1.5rem; margin-bottom: clamp(3rem, 5vw, 4.5rem);
+  }
+  .course-filters { display: flex; flex-wrap: wrap; gap: clamp(0.5rem, 0.9vw, 0.85rem); }
+  .course-tools { display: flex; align-items: center; gap: clamp(0.6rem, 1vw, 1rem); flex-wrap: wrap; }
+  .course-filter {
+    font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 500;
+    letter-spacing: 0.03em; color: rgba(255, 255, 255, 0.78); cursor: pointer;
+    padding: 0.6rem 1.2rem; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    transition: background .25s ease, border-color .25s ease, color .25s ease;
+  }
+  .course-filter:hover { border-color: rgba(242, 66, 11, 0.5); background: rgba(242, 66, 11, 0.10); color: #fff; }
+  .course-filter.is-active {
+    border-color: transparent; color: #fff;
+    background: linear-gradient(180deg, #ff5c26 0%, #f2420b 100%);
+    box-shadow: 0 12px 30px -10px rgba(242, 66, 11, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  }
+  .course-search {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.55rem 1.1rem; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.55); min-width: min(240px, 100%);
+    transition: border-color .25s ease, color .25s ease;
+  }
+  .course-search:focus-within { border-color: rgba(242, 66, 11, 0.55); color: #fff; }
+  .course-search input {
+    border: 0; background: transparent; outline: none; color: #fff; width: 100%;
+    font-family: 'Inter', sans-serif; font-size: 0.92rem;
+  }
+  .course-search input::placeholder { color: rgba(255, 255, 255, 0.45); }
+  .course-search input::-webkit-search-cancel-button { filter: invert(0.7); }
+  /* Toggle Grid/List */
+  .course-view {
+    display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem;
+    border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .course-view-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 2.4rem; height: 2.4rem; border: 0; border-radius: 999px; cursor: pointer;
+    background: transparent; color: rgba(255, 255, 255, 0.6);
+    transition: background .25s ease, color .25s ease;
+  }
+  .course-view-btn:hover { color: #fff; }
+  .course-view-btn.is-active {
+    color: #fff;
+    background: linear-gradient(180deg, #ff5c26 0%, #f2420b 100%);
+    box-shadow: 0 8px 20px -8px rgba(242, 66, 11, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  }
+
+  /* Lưới */
+  .courses-grid {
+    display: grid; gap: clamp(1.5rem, 2vw, 2.4rem);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* TỐI mặc định, sáng khi hover (bloom cam giống .blog-card của news) */
+  .course-card {
+    position: relative; display: flex; flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px;
+    background: transparent;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    text-decoration: none; overflow: hidden;
+    transition: border-color .4s ease, background .4s ease, box-shadow .4s ease, transform .4s ease;
+  }
+  .course-card:not(.is-soon):hover {
+    background:
+      radial-gradient(180% 150% at 100% 100%,
+        rgba(255, 126, 72, 0.90) 0%,
+        rgba(255, 100, 30, 0.80) 25%,
+        rgba(242, 66, 11, 0.60) 50%,
+        rgba(20, 10, 5, 0.90) 80%,
+        rgba(10, 5, 2, 0.98) 100%);
+    border-color: #f2420b;
+    box-shadow: 0 26px 64px -24px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px);
+  }
+  /* Media (ảnh 3D nobg) — contain + padding nhẹ, nền nâu ấm */
+  .course-card__media {
+    position: relative; aspect-ratio: 16 / 10;
+    background: linear-gradient(160deg, #2a1109, #160a05);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .course-card__media img {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+    padding: clamp(1.2rem, 2.5vw, 2rem);
+  }
+  .course-card__body {
+    display: flex; flex-direction: column;
+    padding: clamp(1.5rem, 2.2vw, 2rem);
+  }
+  .course-card__tag {
+    display: inline-block; align-self: flex-start;
+    font-family: var(--font-headline); font-weight: 600; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b;
+    border: 1px solid rgba(242, 66, 11, 0.4); border-radius: 999px; padding: 0.28rem 0.75rem;
+    margin-bottom: 0.95rem;
+  }
+  .course-card__title {
+    font-family: var(--font-headline); font-weight: 700;
+    font-size: clamp(1.15rem, 1.4vw, 1.35rem); line-height: 1.3;
+    color: #fff; letter-spacing: -0.01em;
+    margin: 0 0 0.7rem;
+  }
+  .course-card__desc {
+    color: rgba(255, 255, 255, 0.6); font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.2rem;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .course-card__meta {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: 0.35rem 0.85rem; margin-top: auto;
+    font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 400;
+    color: rgba(217, 195, 171, 0.7);
+  }
+  .course-card__meta span { position: relative; }
+  .course-card__meta span:not(:last-child)::after {
+    content: ''; position: absolute; right: -0.5rem; top: 50%; transform: translateY(-50%);
+    width: 1px; height: 0.85em; background: rgba(217, 195, 171, 0.35);
+  }
+  /* CTA mũi tên góc dưới-phải (chỉ card live) */
+  .course-card__cta {
+    position: absolute; right: clamp(1.2rem, 2vw, 1.6rem); bottom: clamp(1.2rem, 2vw, 1.6rem);
+    display: flex; align-items: center; justify-content: center;
+    width: 2.9rem; height: 2.9rem; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18); color: rgba(255, 255, 255, 0.85);
+    background: rgba(20, 10, 5, 0.35); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    transition: background .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .course-card:hover .course-card__cta {
+    border-color: rgba(255, 255, 255, 0.34); background: rgba(255, 255, 255, 0.10); color: #fff;
+  }
+  /* Badge "Sắp ra mắt" góc trên-phải + card mờ, không hover/điều hướng */
+  .course-card__badge {
+    position: absolute; top: 1rem; right: 1rem; z-index: 2;
+    font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.05em; color: rgba(217, 195, 171, 0.92);
+    padding: 0.35rem 0.7rem; border-radius: 999px;
+    background: rgba(20, 10, 5, 0.65); border: 1px solid rgba(255, 255, 255, 0.14);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  }
+  .course-card.is-soon { opacity: 0.85; cursor: default; pointer-events: none; }
+
+  .course-card[hidden] { display: none !important; }
+  .courses-empty { text-align: center; color: rgba(255, 255, 255, 0.55); padding: 2.5rem 0 0; font-size: 1rem; }
+
+  /* ===== CHẾ ĐỘ LIST: 1 cột, layout ngang (ảnh trái nhỏ + nội dung phải) ===== */
+  .courses-grid.is-list { grid-template-columns: 1fr; gap: clamp(1rem, 1.6vw, 1.5rem); }
+  .courses-grid.is-list .course-card { flex-direction: row; align-items: stretch; }
+  .courses-grid.is-list .course-card__media {
+    flex: 0 0 clamp(180px, 26%, 320px); aspect-ratio: auto; align-self: stretch;
+  }
+  .courses-grid.is-list .course-card__body { flex: 1 1 auto; justify-content: center; }
+  .courses-grid.is-list .course-card__cta { position: static; align-self: flex-start; margin-top: 1rem; }
+  @media (max-width: 680px) {
+    .courses-grid.is-list .course-card { flex-direction: column; }
+    .courses-grid.is-list .course-card__media { flex-basis: auto; aspect-ratio: 16 / 10; }
+    .courses-grid.is-list .course-card__cta { position: absolute; }
+  }
+
+  @media (max-width: 980px) { .courses-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 680px) {
+    .courses-grid { grid-template-columns: 1fr; }
+    .course-toolbar { flex-direction: column; align-items: stretch; }
+    .course-tools { justify-content: space-between; }
+    .course-search { min-width: 0; flex: 1 1 auto; }
+  }
+
+  /* ===== Mobile hero: thu nhỏ chữ, cho xuống dòng ===== */
+  @media (max-width: 991px) {
+    .cs-line { flex-wrap: wrap; gap: 0.4rem; }
+    .cs-line-1 { font-size: clamp(3rem, 13vw, 5rem); white-space: normal; }
+  }
+</style>
+
+<script>
+  // (a) Lọc theo filter pill (data-cat) + search (#courseSearch theo data-title).
+  (() => {
+    const filters = Array.from(document.querySelectorAll('.course-filter'));
+    const cards = Array.from(document.querySelectorAll('.course-card'));
+    const search = document.getElementById('courseSearch');
+    const empty = document.querySelector('.courses-empty');
+    let activeCat = 'all';
+
+    const apply = () => {
+      const q = ((search && (search as HTMLInputElement).value) || '').trim().toLowerCase();
+      let shown = 0;
+      cards.forEach((c) => {
+        const el = c as HTMLElement;
+        const catOk = activeCat === 'all' || el.dataset.cat === activeCat;
+        const textOk = !q || (el.dataset.title || '').includes(q);
+        const show = catOk && textOk;
+        el.hidden = !show;
+        if (show) shown += 1;
+      });
+      if (empty) (empty as HTMLElement).hidden = shown !== 0;
+    };
+
+    filters.forEach((b) => b.addEventListener('click', () => {
+      filters.forEach((x) => x.classList.remove('is-active'));
+      b.classList.add('is-active');
+      activeCat = (b as HTMLElement).dataset.filter || 'all';
+      apply();
+    }));
+    if (search) search.addEventListener('input', apply);
+  })();
+
+  // (b) Toggle Grid/List: set is-active + toggle .is-list trên .courses-grid.
+  (() => {
+    const btns = Array.from(document.querySelectorAll('.course-view-btn'));
+    const grid = document.querySelector('.courses-grid');
+    if (!grid) return;
+    btns.forEach((b) => b.addEventListener('click', () => {
+      btns.forEach((x) => x.classList.remove('is-active'));
+      b.classList.add('is-active');
+      grid.classList.toggle('is-list', (b as HTMLElement).dataset.view === 'list');
+    }));
+  })();
+</script>
+</content>
+</invoke>
