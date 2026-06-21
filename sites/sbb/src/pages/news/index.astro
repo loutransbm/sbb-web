@@ -1,66 +1,35 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
 
-const categories = [
-  {
-    tag: 'Câu chuyện',
-    title: 'Câu chuyện học viên',
-    body: 'Hành trình thật của những người đã đi — từ ngày còn loay hoay đến lúc đứng vững ở môi trường quốc tế.',
-  },
-  {
-    tag: 'Reality Check',
-    title: 'Reality Check',
-    body: 'Sự thật trần trụi về làm việc ở nước ngoài. Đủ thẳng để bạn chuẩn bị đúng, không vỡ mộng giữa đường.',
-  },
-  {
-    tag: 'Tiếng nói SV',
-    title: 'Tiếng nói sinh viên',
-    body: 'Góc nhìn chưa qua chỉnh sửa từ chính người trẻ đang đi — điều họ tiếc, điều họ học, điều họ muốn nhắn lại.',
-  },
-  {
-    tag: 'Cập nhật',
-    title: 'Cập nhật chương trình',
-    body: 'Thông tin mới nhất về các chương trình Internship J-1, GRP Foundation và lịch tuyển sinh từng kỳ.',
-  },
+// Danh mục lọc cho lưới blog (Omni style). 'all' = Tất cả.
+const blogCats = [
+  { id: 'all', label: 'Tất cả' },
+  { id: 'tin-tuc', label: 'Tin tức' },
+  { id: 'blog-insight', label: 'Blog Insight' },
+  { id: 'hanh-trinh', label: 'Hành trình học viên' },
+  { id: 'reality-check', label: 'Reality Check' },
 ];
 
-const featured = [
-  {
-    tag: 'Câu chuyện',
-    date: '12.06.2026',
-    title: 'Từ phòng trọ Hà Nội đến gian bếp ở Colorado',
-    body: 'Minh kể lại 6 tháng đầu trên đất Mỹ: cú sốc ngôn ngữ, ca làm 10 tiếng, và khoảnh khắc nhận ra mình đã thật sự trưởng thành.',
-  },
-  {
-    tag: 'Reality Check',
-    date: '08.06.2026',
-    title: 'Lương cao ở nước ngoài: phần họ không kể bạn nghe',
-    body: 'Con số trên giấy và số tiền thật sự còn lại sau thuế, nhà ở, đi lại. Một bài tính sòng phẳng để bạn không ảo tưởng.',
-  },
-  {
-    tag: 'Tiếng nói SV',
-    date: '03.06.2026',
-    title: '"Mình ước có ai nói thật với mình sớm hơn"',
-    body: 'Ba bạn sinh viên vừa kết thúc kỳ thực tập chia sẻ thẳng điều họ tiếc nhất — và điều họ sẽ làm khác nếu được quay lại.',
-  },
-  {
-    tag: 'Cập nhật',
-    date: '01.06.2026',
-    title: 'Internship J-1 mùa Thu 2026 chính thức mở đơn',
-    body: 'Toàn bộ thông tin về vị trí, thời gian, điều kiện và lộ trình chuẩn bị cho kỳ tuyển sinh sắp tới của chương trình.',
-  },
-  {
-    tag: 'Câu chuyện',
-    date: '27.05.2026',
-    title: 'Cô gái Quảng Nam và bài học từ lần bị từ chối visa',
-    body: 'Thất bại lần đầu không phải dấu chấm hết. Hành trình làm lại hồ sơ, luyện phỏng vấn và đậu ở lần thứ hai.',
-  },
-  {
-    tag: 'Reality Check',
-    date: '21.05.2026',
-    title: 'Đi để trải nghiệm hay đi để xây sự nghiệp?',
-    body: 'Hai con đường rất khác nhau, đòi hỏi sự chuẩn bị rất khác nhau. Xác định đúng trước khi bạn đặt chân lên máy bay.',
-  },
+// 18 bài = 6 hàng x 3 cột. (Tiêu đề/ảnh tạm dùng pool sẵn có; thay nội dung & link thật sau.)
+const posts = [
+  { cat: 'hanh-trinh',    catLabel: 'Hành trình học viên', title: 'Từ phòng trọ Hà Nội đến gian bếp ở Colorado',         img: '/images/hero_student.png',            href: '/news' },
+  { cat: 'reality-check', catLabel: 'Reality Check',        title: 'Lương cao ở nước ngoài: phần họ không kể bạn nghe',    img: '/images/reality_face.png',            href: '/news' },
+  { cat: 'tin-tuc',       catLabel: 'Tin tức',              title: 'Internship J-1 mùa Thu 2026 chính thức mở đơn',        img: '/images/office_tour.png',             href: '/news' },
+  { cat: 'hanh-trinh',    catLabel: 'Hành trình học viên', title: 'Cô gái Quảng Nam và bài học từ lần bị từ chối visa',   img: '/images/students/khanh-giang.jpg',    href: '/news' },
+  { cat: 'blog-insight',  catLabel: 'Blog Insight',         title: 'Chọn J-1 hay GRP? Bảng so sánh sòng phẳng cho người mới', img: '/images/case-studies/cs3.jpg',     href: '/news' },
+  { cat: 'reality-check', catLabel: 'Reality Check',        title: 'Đi để trải nghiệm hay đi để xây sự nghiệp?',           img: '/images/case-studies/cs5.webp',       href: '/news' },
+  { cat: 'tin-tuc',       catLabel: 'Tin tức',              title: 'GRP Foundation khai giảng khóa mùa Hè: lịch học & học phí', img: '/images/case-studies/cs1.jpg',   href: '/news' },
+  { cat: 'hanh-trinh',    catLabel: 'Hành trình học viên', title: '"Mình ước có ai nói thật với mình sớm hơn"',           img: '/images/students/my-linh-le.jpg',     href: '/news' },
+  { cat: 'blog-insight',  catLabel: 'Blog Insight',         title: '5 sai lầm khiến hồ sơ phỏng vấn visa bị đánh trượt',   img: '/images/mentorship.png',              href: '/news' },
+  { cat: 'reality-check', catLabel: 'Reality Check',        title: "Ca làm 10 tiếng và sự thật về 'giấc mơ Mỹ'",          img: '/images/case-studies/cs6.webp',       href: '/news' },
+  { cat: 'tin-tuc',       catLabel: 'Tin tức',              title: 'SBB mở thêm tuyến visa 407 sang Úc cho ngành Aged Care', img: '/images/case-studies/cs4.webp',     href: '/news' },
+  { cat: 'hanh-trinh',    catLabel: 'Hành trình học viên', title: 'Victoria và hành trình từ sinh viên tỉnh lẻ đến JP Morgan', img: '/images/students/victoria-tran.jpg', href: '/news' },
+  { cat: 'blog-insight',  catLabel: 'Blog Insight',         title: 'Tiền lương thật sự còn lại sau thuế, nhà ở và đi lại', img: '/images/workspace_laptop.png',        href: '/news' },
+  { cat: 'reality-check', catLabel: 'Reality Check',        title: 'Cô đơn nơi xứ người: điều không brochure nào nói',     img: '/images/cinema_silhouette.png',       href: '/news' },
+  { cat: 'tin-tuc',       catLabel: 'Tin tức',              title: 'Lịch hội thảo định hướng du học nghề quý III/2026',    img: '/images/modern_office_workspace.png', href: '/news' },
+  { cat: 'hanh-trinh',    catLabel: 'Hành trình học viên', title: 'Từ thất bại IELTS đến hợp đồng thực tập tại Singapore', img: '/images/case-studies/cs7.webp',     href: '/news' },
+  { cat: 'blog-insight',  catLabel: 'Blog Insight',         title: 'Checklist chuẩn bị 90 ngày trước khi bay',             img: '/images/case-studies/cs8.webp',       href: '/news' },
+  { cat: 'reality-check', catLabel: 'Reality Check',        title: 'Về nước sau 2 năm: được gì, mất gì, học gì',           img: '/images/case-studies/cs9.webp',       href: '/news' },
 ];
 ---
 
@@ -72,85 +41,167 @@ const featured = [
 >
     <!-- ===== HERO ===== -->
   <section class="news-hero">
+    <!-- Quầng sáng cam LỚN-RỰC đánh từ PHẢI vào "& MARKETING TRENDS" (giống Omni blog hero) -->
+    <div class="news-glow-beam" aria-hidden="true"></div>
     <div class="container">
       <div class="cs-header about-hero-head">
         <div class="cs-line cs-line-1">
           <span class="cs-text-white">OUR BLOG</span>
-          <div class="cs-glass-pill" style="margin-left: 2rem;">
+          <div class="cs-glass-pill" style="margin-left: -1rem; transform: translateY(2.6rem);">
             <span class="cs-glass-title">CONTENT HUB</span>
-            <span class="cs-glass-sub" style="max-width: 250px;">A collection of guides, trends, and ideas for marketing and growth.</span>
+            <span class="cs-glass-sub">Câu chuyện thật và reality check cho hành trình bước ra thế giới.</span>
           </div>
         </div>
         <div class="about-line-2" style="justify-content: flex-start; gap: 0;">
           <span class="about-verb cs-text-white" style="margin-left: clamp(2.5rem, 7.5vw, 7.5rem);">INSIGHTS</span>
           <span class="about-tail" style="margin-left: 1.5rem; text-align: left; align-items: flex-start;">
-            <span style="color: rgba(255, 255, 255, 0.55);">&amp; MARKETING</span>
-            <span class="cs-text-white">TRENDS</span>
+            <span class="cs-text-white">&amp; REAL</span>
+            <span class="cs-text-white">STORIES</span>
           </span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== CATEGORIES ===== -->
-  <section class="o-section">
+  <!-- ===== BLOG GRID (Omni style: lọc danh mục + tìm kiếm + card ảnh) ===== -->
+  <section class="o-section blog-section">
     <div class="container">
-      <div class="o-head">
-        <span class="o-head-eyebrow">Chuyên mục</span>
-        <h2 class="o-head-title">WHAT WE <span class="o-stroke">COVER</span></h2>
-        <p class="o-head-desc">Bốn dòng nội dung, một mục tiêu: cho bạn thấy bức tranh thật trước khi bạn quyết định đi.</p>
+      <!-- Toolbar: pill lọc danh mục + ô tìm kiếm -->
+      <div class="blog-toolbar">
+        <div class="blog-filters" role="group" aria-label="Lọc theo danh mục">
+          {blogCats.map((c, i) => (
+            <button type="button" class:list={["blog-filter", i === 0 && "is-active"]} data-filter={c.id}>{c.label}</button>
+          ))}
+        </div>
+        <label class="blog-search">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.2-4.2"/></svg>
+          <input type="search" id="blogSearch" placeholder="Tìm bài viết..." autocomplete="off" aria-label="Tìm bài viết" />
+        </label>
       </div>
-      <div class="o-grid o-grid--4">
-        {categories.map((c) => (
-          <article class="o-card">
-            <span class="o-card__tag">{c.tag}</span>
-            <h3 class="o-card__title">{c.title}</h3>
-            <p class="o-card__body">{c.body}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== FEATURED STORIES ===== -->
-  <section class="o-section o-section--tint o-section--glow">
-    <div class="container">
-      <div class="o-head">
-        <span class="o-head-eyebrow">Mới nhất</span>
-        <h2 class="o-head-title">FEATURED <span class="o-stroke">STORIES</span></h2>
-        <p class="o-head-desc">Những bài đáng đọc nhất tuần này — chọn lọc từ chính trải nghiệm của cộng đồng SBB.</p>
-      </div>
-      <div class="o-grid o-grid--3">
-        {featured.map((a) => (
-          <a href="/news" class="o-card">
-            <span class="o-card__tag">{a.tag}</span>
-            <h3 class="o-card__title">{a.title}</h3>
-            <p class="o-card__body">{a.body}</p>
-            <p class="o-card__body" style="margin-top:1.1rem;font-size:0.82rem;color:var(--ink-muted);letter-spacing:0.04em;text-transform:uppercase;">{a.date}</p>
+      <!-- Lưới card (prototype: 1 hàng 3 card) -->
+      <div class="blog-grid">
+        {posts.map((p) => (
+          <a href={p.href} class="blog-card" data-cat={p.cat} data-title={p.title.toLowerCase()}>
+            <span class="blog-card__tag">{p.catLabel}</span>
+            <h3 class="blog-card__title">{p.title}</h3>
+            <div class="blog-card__media">
+              <img src={p.img} alt={p.title} loading="lazy" onerror="this.style.display='none'" />
+            </div>
+            <span class="blog-card__cta" aria-label="Đọc bài">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8 L16 16"/><path d="M16 9 L16 16 L9 16"/></svg>
+            </span>
           </a>
         ))}
       </div>
+      <p class="blog-empty" hidden>Không tìm thấy bài viết phù hợp với bộ lọc.</p>
     </div>
   </section>
 
-  <!-- ===== STATEMENT ===== -->
-  <section class="o-section">
-    <div class="container">
-      <p class="o-statement o-statement--full">
-        Chúng tôi không kể chuyện cổ tích. Chúng tôi kể <span class="o-accent">sự thật</span> — để bạn đi với đôi mắt mở to.
-      </p>
-    </div>
-  </section>
-
-  <!-- ===== CTA ===== -->
-  <section class="o-cta">
-    <div class="container">
-      <h2 class="o-cta__title">ĐỪNG BỎ LỠ</h2>
-      <p class="o-cta__sub">Đăng ký nhận tin để không lỡ câu chuyện nào: reality check định kỳ, lịch tuyển sinh và những bài viết thật từ người đã đi.</p>
-      <div class="o-actions">
-        <a href="/apply" class="o-btn o-btn--primary">Đăng ký nhận tin</a>
-        <a href="/learn" class="o-btn o-btn--ghost">Khám phá hành trình</a>
+  <!-- ============ FINAL CTA · "READY TO SHINE BEYOND BORDERS" (giống Omni "READY TO GROW & SCALE") ============ -->
+  <section class="cta-final" id="get-started">
+    <div class="container cta-final-inner">
+      <!-- Tiêu đề kiểu Omni "READY TO GROW & SCALE": cascade 2 dòng lớn + glass pill -->
+      <div class="cs-header cta-header">
+        <div class="cs-line cs-line-1">
+          <span class="cs-text-white">READY TO</span>
+          <div class="cs-glass-pill">
+            <span class="cs-glass-title">BẮT ĐẦU</span>
+            <span class="cs-glass-sub">Tư vấn miễn phí 30 phút — cùng SBB vẽ lộ trình rõ ràng cho bạn.</span>
+          </div>
+        </div>
+        <div class="cta-line-2">
+          <span class="cta-verb">SHINE</span>
+          <span class="cta-tail">
+            <span class="cs-text-white">BEYOND</span>
+            <span class="cs-text-white">BORDERS?</span>
+          </span>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ LEAD FORM · (giống Omni contact form: 2 cột, label in hoa, input gạch chân, dropdown, nút pill) ============ -->
+  <section class="lead-form" id="lead-form">
+    <div class="container">
+      <form class="lf-grid" action="#" method="POST" novalidate>
+        <!-- Hàng 1: Họ tên | Số điện thoại -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-name">HỌ TÊN CỦA BẠN<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-name" name="name" type="text" required autocomplete="name" placeholder="Nguyễn Văn A" />
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-phone">SỐ ĐIỆN THOẠI<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+84 9xx xxx xxx" />
+        </div>
+
+        <!-- Hàng 2: Email | Bạn đang là -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-email">EMAIL CỦA BẠN<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-email" name="email" type="email" required autocomplete="email" placeholder="ban@email.com" />
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-role">BẠN ĐANG LÀ?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-role" name="role">
+              <option value="" disabled selected>Chọn vai trò</option>
+              <option>Sinh viên</option>
+              <option>Người đi làm</option>
+              <option>Phụ huynh</option>
+              <option>Khác</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Hàng 3: Chương trình quan tâm | Mục tiêu -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-program">BẠN QUAN TÂM CHƯƠNG TRÌNH NÀO?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-program" name="program">
+              <option value="" disabled selected>Chọn chương trình</option>
+              <option>GRP — Global Readiness</option>
+              <option>Internship J-1</option>
+              <option>Office Tour</option>
+              <option>407 Training</option>
+              <option>Chưa rõ — cần tư vấn</option>
+            </select>
+          </div>
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-goal">MỤC TIÊU CỦA BẠN LÀ GÌ?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-goal" name="goal">
+              <option value="" disabled selected>Chọn mục tiêu</option>
+              <option>Du học</option>
+              <option>Thực tập quốc tế</option>
+              <option>Làm việc ở nước ngoài</option>
+              <option>Định cư lâu dài</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Hàng 4: Mốc thời gian | Nút gửi -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-timeline">BẠN DỰ ĐỊNH ĐI KHI NÀO?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-timeline" name="timeline">
+              <option value="" disabled selected>Chọn mốc thời gian</option>
+              <option>Trong 6 tháng tới</option>
+              <option>6 – 12 tháng</option>
+              <option>Hơn 1 năm</option>
+              <option>Chưa xác định</option>
+            </select>
+          </div>
+        </div>
+        <div class="lf-field lf-field--submit">
+          <button class="lf-submit" type="submit">
+            <span class="lf-submit-label">GỬI THÔNG TIN</span>
+            <span class="lf-submit-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M7 7 17 17"/><path d="M17 7v10H7"/></svg>
+            </span>
+          </button>
+        </div>
+      </form>
     </div>
   </section>
 </PageLayout>
@@ -158,9 +209,30 @@ const featured = [
 <style>
   .news-hero {
     position: relative;
-    padding-top: clamp(6rem, 8vw, 9rem);
+    /* Hero chiếm trọn 1 màn hình: chỉ có chữ to. Cuộn xuống mới tới toolbar + tin tức. */
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: clamp(7rem, 8vw, 9rem); /* chừa nav (nội dung đã canh giữa dọc) */
     padding-bottom: clamp(3rem, 5vw, 5rem);
     background: transparent;
+    overflow: visible;
+  }
+  /* heading nổi TRÊN quầng sáng */
+  .news-hero .container { position: relative; z-index: 1; }
+  /* SPOTLIGHT kiểu OMNI cho "OUR BLOG": quầng cam LỚN-RỰC LỆCH PHẢI (sau "& MARKETING TRENDS"),
+     nửa trái "OUR BLOG / INSIGHTS" để TỐI. Khớp 100% độ rực/màu các trang (about/programs).
+     Màu = ramp footer: peach 255,112,60 -> cam 248,82,26 -> brand #f2420b. */
+  .news-glow-beam {
+    position: absolute; top: 20px; left: 88%; transform-origin: center;
+    transform: translateX(-50%);
+    width: 1180px; height: 900px; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse 50% 50% at 50% 42%,
+      rgba(255, 112, 60, 0.66) 0%,
+      rgba(248, 82, 26, 0.54) 22%,
+      rgba(242, 66, 11, 0.38) 44%,
+      rgba(242, 66, 11, 0.16) 64%,
+      transparent 84%);
+    filter: blur(76px);
   }
 .cs-header { margin-bottom: 0; font-weight: 500; line-height: 0.95; letter-spacing: -0.045em; font-family: 'Inter', sans-serif; }
     .cs-line { display: flex; align-items: center; gap: 1.5rem; }
@@ -172,24 +244,363 @@ const featured = [
     .about-tail span { display: block; white-space: nowrap; }
 
   .cs-text-white { color: #ffffff !important; }
+  /* PILL KÍNH = Y HỆT about/programs (dark): chữ nhật bo 20px, 210px cố định, nền kính tối + viền sáng.
+     (Trước đây bo 100px stadium + ôm chữ -> khác hình dạng các trang kia.) */
   .cs-glass-pill {
-    background: rgba(255, 255, 255, 0.03);
+    display: inline-flex; flex-direction: column; flex-shrink: 0;
+    gap: var(--space-2);
+    background: rgba(255, 255, 255, 0.045);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 100px;
-    padding: clamp(0.6rem, 1vw, 1.2rem) clamp(1rem, 2vw, 1.8rem);
-    display: inline-flex; flex-direction: column; gap: 0.2rem;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: var(--space-4) var(--space-5);
+    width: 240px; min-height: 7.25rem; /* 240 (border-box) = khớp render pill about/programs (210 content-box + padding) */
+    justify-content: center; text-align: left;
+    box-shadow:
+      0 18px 40px -16px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(242, 66, 11, 0.10),
+      inset 0 1px 1px rgba(255, 255, 255, 0.10);
   }
   .cs-glass-title {
-    font-family: var(--font-headline); font-weight: 600; font-size: 0.8rem;
-    letter-spacing: 0.15em; color: #F5EDE6; text-transform: uppercase;
+    font-family: var(--font-headline);
+    font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+    font-weight: 600; color: #ffffff; line-height: 1;
+    letter-spacing: -0.01em; /* reset spacing âm kế thừa + siết nhẹ cho 1 dòng */
+    white-space: nowrap; text-transform: uppercase;
   }
   .cs-glass-sub {
-    font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(0.85rem, 1vw, 0.95rem);
-    line-height: 1.45; color: rgba(255, 255, 255, 0.65); white-space: normal;
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 11px;
+    line-height: 1.45; color: rgba(255, 255, 255, 0.62); white-space: normal;
+    max-width: 25ch; margin: 0;
+    /* RESET letter-spacing: nếu không, sub kế thừa -0.085em (≈ -15px) từ .cs-line-1 cỡ chữ khổng lồ
+       -> spacing âm khủng -> glyph chồng/lật ngược. */
+    letter-spacing: normal;
   }
 
+  /* ===== BLOG GRID (Omni style: toolbar lọc + tìm kiếm + card ảnh) ===== */
+  /* Bỏ tiêu đề "ĐỌC GÌ HÔM NAY" -> siết top để vào là thấy tin tức luôn */
+  .blog-section { padding-top: clamp(1rem, 2vw, 2.2rem); }
+  /* TRÀN 2 MÉP như Omni: phá container hẹp, chỉ chừa lề mỏng ~3rem (không co vào giữa) */
+  .blog-section .container {
+    max-width: none; width: 100%;
+    padding-inline: clamp(1.5rem, 3.2vw, 3.25rem);
+  }
+  .blog-toolbar {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 1rem 1.5rem; margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
+  }
+  .blog-filters { display: flex; flex-wrap: wrap; gap: clamp(0.5rem, 0.9vw, 0.85rem); }
+  .blog-filter {
+    font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 500;
+    letter-spacing: 0.03em; color: rgba(255, 255, 255, 0.78); cursor: pointer;
+    padding: 0.6rem 1.2rem; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    transition: background .25s ease, border-color .25s ease, color .25s ease;
+  }
+  .blog-filter:hover { border-color: rgba(242, 66, 11, 0.5); background: rgba(242, 66, 11, 0.10); color: #fff; }
+  .blog-filter.is-active {
+    border-color: transparent; color: #fff;
+    background: linear-gradient(180deg, #ff5c26 0%, #f2420b 100%);
+    box-shadow: 0 12px 30px -10px rgba(242, 66, 11, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  }
+  .blog-search {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.55rem 1.1rem; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.55); min-width: min(280px, 100%);
+    transition: border-color .25s ease, color .25s ease;
+  }
+  .blog-search:focus-within { border-color: rgba(242, 66, 11, 0.55); color: #fff; }
+  .blog-search input {
+    border: 0; background: transparent; outline: none; color: #fff; width: 100%;
+    font-family: 'Inter', sans-serif; font-size: 0.92rem;
+  }
+  .blog-search input::placeholder { color: rgba(255, 255, 255, 0.45); }
+  .blog-search input::-webkit-search-cancel-button { filter: invert(0.7); }
+
+  .blog-grid {
+    display: grid; gap: clamp(1.5rem, 2vw, 2.4rem);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* TỐI mặc định, CHỈ SÁNG KHI HOVER — dùng ĐÚNG ánh sáng card case-studies trang programs:
+     bloom cam từ góc dưới-phải (radial 180% 150% at 100% 100%), peach -> cam -> tối. */
+  .blog-card {
+    position: relative; display: flex; flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 28px;
+    background: transparent;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    padding: clamp(1.9rem, 2.6vw, 2.9rem);
+    text-decoration: none; overflow: hidden;
+    transition: border-color .4s ease, background .4s ease, box-shadow .4s ease, transform .4s ease;
+  }
+  .blog-card:hover {
+    background:
+      radial-gradient(180% 150% at 100% 100%,
+        rgba(255, 126, 72, 0.90) 0%,
+        rgba(255, 100, 30, 0.80) 25%,
+        rgba(242, 66, 11, 0.60) 50%,
+        rgba(20, 10, 5, 0.90) 80%,
+        rgba(10, 5, 2, 0.98) 100%);
+    border-color: #f2420b;
+    box-shadow: 0 26px 64px -24px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px);
+  }
+  .blog-card__tag {
+    display: inline-block; align-self: flex-start;
+    font-family: var(--font-headline); font-weight: 600; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b;
+    border: 1px solid rgba(242, 66, 11, 0.4); border-radius: 999px; padding: 0.28rem 0.75rem;
+    margin-bottom: 0.95rem;
+  }
+  .blog-card__title {
+    font-family: var(--font-headline); font-weight: 700;
+    font-size: clamp(1.25rem, 1.6vw, 1.7rem); line-height: 1.34;
+    color: #fff; text-transform: uppercase; letter-spacing: -0.01em;
+    margin: 0 0 clamp(1.5rem, 2.2vw, 2rem);
+  }
+  .blog-card__media {
+    position: relative; border-radius: 18px; overflow: hidden;
+    aspect-ratio: 16 / 11; background: linear-gradient(160deg, #2a1109, #160a05);
+    margin-bottom: clamp(1.6rem, 2.2vw, 2.2rem);
+  }
+  .blog-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .blog-card__cta {
+    margin-top: auto; display: flex; align-items: center; justify-content: center;
+    padding: 0.85rem 1.4rem; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18); color: rgba(255, 255, 255, 0.85);
+    transition: background .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .blog-card:hover .blog-card__cta {
+    border-color: rgba(255, 255, 255, 0.34); background: rgba(255, 255, 255, 0.06); color: #fff;
+  }
+  .blog-card[hidden] { display: none !important; }
+  .blog-empty { text-align: center; color: rgba(255, 255, 255, 0.55); padding: 2.5rem 0 0; font-size: 1rem; }
+
+  @media (max-width: 980px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 680px) {
+    .blog-grid { grid-template-columns: 1fr; }
+    .blog-toolbar { flex-direction: column; align-items: stretch; }
+    .blog-search { min-width: 0; }
+  }
+
+  /* ============================================
+     FINAL CTA  (giống Omni "READY TO GROW & SCALE") — bê từ programs
+     ============================================ */
+  .cta-final {
+    position: relative;
+    /* Nửa DƯỚI của CÙNG vầng sáng với .tm-section: neo TÂM ẢO ở -250px (250px trên mép đỉnh = đúng
+       điểm tâm bên kia seam) + bán kính dọc tuyệt đối 780px ⇒ vầng sáng từ testimonials chảy liền xuống,
+       đơn điệu qua seam, ôm xuống chữ READY TO. Highlight quanh READY TO do ::before lo (user 2026-06-14). */
+    margin-top: -1px; /* CHỒNG 1px khử "vạch tóc" do mép 2 block lệch nửa pixel ở DPR lẻ (paper html lọt qua khe) */
+    background:
+      radial-gradient(60% 780px at 41% -250px, rgba(242, 66, 11, 0.12) 0%, rgba(242, 66, 11, 0.07) 32%, rgba(242, 66, 11, 0.04) 60%, rgba(242, 66, 11, 0.02) 78%, transparent 92%),
+      #D9D1CA;
+    padding: var(--sec-pad) 0 clamp(2rem, 4vw, 3.5rem); /* top = gap chuẩn 240px; bottom NHỎ để form sát tiêu đề */
+    overflow: hidden;
+    text-align: left;
+  }
+  .cta-final::before {
+    content: ''; position: absolute; left: 28%; top: 56%;
+    transform: translate(-50%, -50%);
+    width: 95%; height: 120%; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse 50% 44% at 40% 60%, rgba(242, 66, 11, 0.06) 0%, transparent 62%);
+  }
+  .cta-final-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; }
+  /* Dòng 2 CTA: động từ LỚN (cỡ cs-line-1) + đuôi XÁM nhỏ (cỡ cs-line-2) nằm sát phải — giống Omni GROW + & SCALE */
+  .cta-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  /* Tiêu đề CTA phá khung ra 2rem-từ-mép-màn-hình (đồng bộ HOMEPAGE: thẳng hero, hết lệch container) */
+  @media (min-width: 992px) {
+    .cta-final .cs-header {
+      width: calc(100vw - var(--sbw, 0px) - 4rem);
+      max-width: 120rem;
+      margin-left: calc(50% - (50vw - var(--sbw, 0px) / 2) + 2rem);
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+  }
+  /* space-between: SHINE thụt phải (margin-left ≈ 1/3 READY TO → nằm dưới 2/3 phải),
+     đuôi xám canh phải nhưng bù margin-right để MÉP TRÁI thẳng cột 916 = REAL GROWTH/SAY ABOUT US/BORDERS */
+  /* margin-top 1.25rem = ĐÚNG khoảng dòng1↔dòng2 các section trên (cs-header-bottom). align last baseline → đáy SHINE = đáy BORDERS? */
+  .cta-line-2 { display: flex; justify-content: space-between; align-items: last baseline; margin-top: 1.25rem; } /* đồng bộ homepage */
+  .cta-verb {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9;
+    color: #f2420b; white-space: nowrap;
+    margin-left: 2.3em; /* đồng bộ homepage: đẩy SHINE sang phải sát BEYOND BORDERS? */
+  }
+  .cta-tail {
+    display: flex; flex-direction: column; gap: 0.4rem;
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; line-height: 0.9;
+    margin-right: 1.85em; /* đồng bộ homepage */
+  }
+  .cta-tail span { display: block; }
+  /* Kéo pill CTA xuống thấp hơn chút (chỉ section này) */
+  .cta-final .cs-glass-pill { transform: translateY(3.4rem); margin-left: -4rem; width: 210px; } /* đồng bộ home: pill CTA 210px, lệch trái -4rem (hero pill vẫn 240px) */
+  .cta-eyebrow {
+    font-family: var(--font-headline); font-weight: 600;
+    font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 1.4rem;
+  }
+  .cta-final-title {
+    font-family: var(--font-headline); font-weight: 800;
+    font-size: clamp(2.8rem, 8.5vw, 8rem); line-height: 0.96;
+    letter-spacing: -0.02em; margin: 0; text-transform: uppercase;
+  }
+  .cta-final-title span { display: block; }
+  .cta-fill { color: #f2420b; }
+  .cta-stroke { color: transparent; -webkit-text-stroke: 1.5px rgba(242, 66, 11, 0.45); }
+
+  /* ============================================
+     LEAD FORM (giống Omni contact form) — bê từ programs
+     ============================================ */
+  .lead-form {
+    position: relative;
+    background: #D9D1CA;
+    padding: clamp(2rem, 4vw, 4rem) 0 var(--sec-pad); /* top NHỎ (form sát tiêu đề); bottom = gap chuẩn xuống footer */
+    overflow: visible; /* để panel dropdown custom KHÔNG bị cắt */
+  }
+  /* quầng ấm rất nhẹ cho đỡ phẳng — tàn hẳn trước mọi mép nên không chạm seam */
+  .lead-form::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background: radial-gradient(58% 42% at 32% 30%, rgba(242, 66, 11, 0.04) 0%, transparent 60%);
+  }
+  .lead-form .container { position: relative; z-index: 1; }
+  .lf-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    column-gap: clamp(2.5rem, 6vw, 7rem);
+    row-gap: clamp(2.2rem, 4vw, 3.4rem);
+  }
+  .lf-field { display: flex; flex-direction: column; min-width: 0; }
+  .lf-label {
+    font-family: 'Inter', sans-serif; font-weight: 400; /* không in đậm — chữ thường (user) */
+    font-size: clamp(1.05rem, 1.7vw, 1.65rem); line-height: 1.15;
+    letter-spacing: -0.01em; text-transform: uppercase;
+    color: #1a1a1a; margin: 0 0 clamp(1rem, 1.8vw, 1.7rem);
+  }
+  .lf-req { color: var(--accent); margin-left: 0.12em; }
+  .lf-input {
+    width: 100%; box-sizing: border-box;
+    background: transparent; border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+    color: #1a1a1a; font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1rem, 1.25vw, 1.15rem);
+    padding: 0.55rem 0 0.95rem; line-height: 1.4;
+    transition: border-color 0.25s ease;
+  }
+  .lf-input::placeholder { color: #A7A7A7; }
+  .lf-input:focus { outline: none; border-bottom-color: var(--accent); }
+  .lf-select-wrap { position: relative; }
+  .lf-select-wrap::after { /* caret ▾ cho dropdown */
+    content: ''; position: absolute; right: 0.25rem; top: 42%;
+    width: 0.62rem; height: 0.62rem; pointer-events: none;
+    border-right: 1.5px solid rgba(0, 0, 0, 0.45);
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.45);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .lf-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    padding-right: 2rem; cursor: pointer; border-radius: 0;
+  }
+  .lf-select option { color: #16100c; }   /* fallback khi JS chưa nâng cấp */
+  /* ===== Dropdown CUSTOM: ẩn select native + caret cũ khi đã nâng cấp ===== */
+  .lf-select-wrap.is-enhanced > .lf-select { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+  .lf-select-wrap.is-enhanced::after { display: none; }
+  .lf-dd { position: relative; }
+  .lf-dd-trigger {
+    width: 100%; box-sizing: border-box;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: transparent; border: none; border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+    color: #1a1a1a; font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.4;
+    padding: 0.55rem 0 0.95rem; cursor: pointer; text-align: left;
+    transition: border-color 0.25s ease;
+  }
+  .lf-dd-trigger:focus-visible, .lf-dd.is-open .lf-dd-trigger { outline: none; border-bottom-color: var(--accent); }
+  .lf-dd-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lf-dd-value.is-placeholder { color: #A7A7A7; }
+  .lf-dd-caret { display: flex; flex: 0 0 auto; color: rgba(0, 0, 0, 0.45); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease; }
+  .lf-dd-caret svg { width: 1.15rem; height: 1.15rem; }
+  .lf-dd.is-open .lf-dd-caret { transform: rotate(180deg); color: var(--accent); }
+  .lf-dd-panel {
+    list-style: none; margin: 0; padding: 0.4rem;
+    position: absolute; top: calc(100% + 0.6rem); left: 0; right: 0; z-index: 60;
+    background: rgba(255, 255, 255, 0.98);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.10); border-radius: 14px;
+    box-shadow: 0 26px 64px -20px rgba(0, 0, 0, 0.18), 0 4px 14px rgba(0, 0, 0, 0.10);
+    max-height: 16rem; overflow-y: auto; overscroll-behavior: contain;
+    opacity: 0; transform: translateY(-8px) scale(0.985); transform-origin: top center; pointer-events: none;
+    transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .lf-dd.is-open .lf-dd-panel { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .lf-dd-option {
+    padding: 0.8rem 0.95rem; border-radius: 9px; cursor: pointer;
+    color: #1a1a1a; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.25;
+    transition: background 0.16s ease, color 0.16s ease;
+  }
+  .lf-dd-option:hover, .lf-dd-option.is-active { background: rgba(242, 66, 11, 0.10); color: #f2420b; }
+  .lf-dd-option.is-selected { color: var(--accent); font-weight: 500; }
+  .lf-dd-panel::-webkit-scrollbar { width: 8px; }
+  .lf-dd-panel::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.18); border-radius: 8px; }
+  .lf-field--submit { justify-content: flex-end; }
+  .lf-submit {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    width: 100%; cursor: pointer; color: #fff; background: var(--accent);
+    border: 1px solid var(--accent); border-radius: 100px;
+    padding: clamp(1.1rem, 1.6vw, 1.5rem) clamp(1.8rem, 2.4vw, 2.4rem);
+    font-family: 'Inter', sans-serif; font-weight: 600;
+    font-size: clamp(0.95rem, 1.1vw, 1.1rem); letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .lf-submit:hover {
+    background: var(--accent-2); border-color: var(--accent-2); transform: translateY(-2px);
+    box-shadow: 0 16px 44px -16px rgba(242, 66, 11, 0.5);
+  }
+  .lf-submit-arrow { display: flex; }
+  /* Đẩy form về BÊN PHẢI + thu hẹp (giống Omni): chừa khoảng trống trái, form chiếm ~78% phải */
+  @media (min-width: 1024px) {
+    .lf-grid { width: 78%; margin-left: auto; }
+  }
+  @media (max-width: 720px) {
+    .lf-grid { grid-template-columns: 1fr; row-gap: 2rem; }
+    .lf-field--submit { margin-top: 0.5rem; }
+  }
+
+  /* ============================================
+     DARK OVERRIDE cho CTA + FORM (bê từ about.astro) — News là dark theme
+     ============================================ */
+  .cta-final { overflow: visible !important; }
+  /* quầng sáng cam của tiêu đề CTA (spotlight) */
+  .cta-final::before {
+    display: block !important;
+    width: 100vw !important; height: 130% !important;
+    left: 50% !important; top: 50% !important;
+    background: radial-gradient(circle 470px at 25% 45%,
+      rgba(255, 112, 60, 0.80) 0%,
+      rgba(248, 82, 26, 0.70) 30%,
+      rgba(242, 66, 11, 0.50) 55%,
+      rgba(20, 10, 5, 0.85) 85%,
+      rgba(10, 5, 2, 0.95) 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+  }
+  /* Form + CTA: nền TRANSPARENT (lộ nền tối body) thay nền kem light của base -> chữ trắng đọc được */
+  .cta-final, .lead-form { background: transparent !important; background-image: none !important; }
+  /* Form: KHÔNG đánh sáng — bỏ hẳn quầng cam (form phẳng) */
+  .lead-form::before { display: none !important; }
+  /* CTA động từ phụ trắng (SHINE giữ cam, các cs-text-white trắng) */
+  .cta-verb { color: #ffffff !important; }
+  /* FORM CHỮ TRẮNG */
+  .lf-label, .lf-input, .lf-dd-trigger, .lf-dd-option { color: #ffffff !important; }
+  .lf-input::placeholder, .lf-dd-value.is-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-input, .lf-dd-trigger { border-bottom-color: rgba(255, 255, 255, 0.2) !important; }
+  .lf-select-wrap::after { border-right-color: rgba(255, 255, 255, 0.5) !important; border-bottom-color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-dd-caret { color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-dd-panel { background: rgba(20, 10, 5, 0.85) !important; border-color: rgba(255, 255, 255, 0.1) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important; }
+  .lf-dd-option:hover { background: rgba(255, 255, 255, 0.1) !important; }
+  .lf-dd-option.is-selected { background: rgba(242, 66, 11, 0.2) !important; color: #ffffff !important; }
 
 @media (max-width: 991px) {
       .about-hero-wrap { width: calc(100% - 3rem); }  /* mobile: lề 1.5rem mỗi bên cho khớp nav */
@@ -206,3 +617,149 @@ const featured = [
       .about-hero-lead { margin-left: 0; max-width: 100%; }
     }
 </style>
+
+<script>
+  // Lọc lưới blog theo danh mục (pill) + tìm kiếm theo tiêu đề.
+  (() => {
+    const filters = Array.from(document.querySelectorAll('.blog-filter'));
+    const cards = Array.from(document.querySelectorAll('.blog-card'));
+    const search = document.getElementById('blogSearch');
+    const empty = document.querySelector('.blog-empty');
+    let activeCat = 'all';
+
+    const apply = () => {
+      const q = ((search && search.value) || '').trim().toLowerCase();
+      let shown = 0;
+      cards.forEach((c) => {
+        const catOk = activeCat === 'all' || c.dataset.cat === activeCat;
+        const textOk = !q || (c.dataset.title || '').includes(q);
+        const show = catOk && textOk;
+        c.hidden = !show;
+        if (show) shown += 1;
+      });
+      if (empty) empty.hidden = shown !== 0;
+    };
+
+    filters.forEach((b) => b.addEventListener('click', () => {
+      filters.forEach((x) => x.classList.remove('is-active'));
+      b.classList.add('is-active');
+      activeCat = b.dataset.filter || 'all';
+      apply();
+    }));
+    if (search) search.addEventListener('input', apply);
+  })();
+
+  /* Dropdown CUSTOM cho form (clean & smooth) — progressive enhancement:
+     GIỮ <select> thật (ẩn) để submit + fallback; vẽ UI riêng có animation mượt thay popup native thô. */
+  (function () {
+    function enhance(select) {
+      const wrap = select.closest('.lf-select-wrap');
+      if (!wrap || wrap.classList.contains('is-enhanced')) return;
+
+      const opts = Array.prototype.slice.call(select.options);
+      const placeholder = opts.filter(function (o) { return o.disabled; })[0] || null;
+      const choices = opts.filter(function (o) { return !o.disabled; });
+
+      const dd = document.createElement('div');
+      dd.className = 'lf-dd';
+
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'lf-dd-trigger';
+      trigger.setAttribute('aria-haspopup', 'listbox');
+      trigger.setAttribute('aria-expanded', 'false');
+
+      const valueEl = document.createElement('span');
+      valueEl.className = 'lf-dd-value';
+
+      const caret = document.createElement('span');
+      caret.className = 'lf-dd-caret';
+      caret.setAttribute('aria-hidden', 'true');
+      caret.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+
+      trigger.appendChild(valueEl);
+      trigger.appendChild(caret);
+
+      const panel = document.createElement('ul');
+      panel.className = 'lf-dd-panel';
+      panel.setAttribute('role', 'listbox');
+
+      let activeIdx = -1;
+
+      function syncDisplay() {
+        const sel = select.options[select.selectedIndex];
+        const isPlaceholder = !!(sel && sel.disabled);
+        valueEl.textContent = sel ? sel.text : (placeholder ? placeholder.text : '');
+        valueEl.classList.toggle('is-placeholder', isPlaceholder);
+        const curVal = sel ? sel.value : '';
+        Array.prototype.forEach.call(panel.children, function (li) {
+          li.classList.toggle('is-selected', !isPlaceholder && li.getAttribute('data-value') === curVal);
+        });
+      }
+      function choose(opt) {
+        select.value = opt.value;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        syncDisplay();
+      }
+      choices.forEach(function (opt) {
+        const li = document.createElement('li');
+        li.className = 'lf-dd-option';
+        li.setAttribute('role', 'option');
+        li.setAttribute('data-value', opt.value);
+        li.textContent = opt.text;
+        li.addEventListener('click', function () { choose(opt); closeDd(); trigger.focus(); });
+        panel.appendChild(li);
+      });
+      function setActive(i) {
+        activeIdx = i;
+        Array.prototype.forEach.call(panel.children, function (li, idx) { li.classList.toggle('is-active', idx === i); });
+        if (i >= 0 && panel.children[i]) panel.children[i].scrollIntoView({ block: 'nearest' });
+      }
+      function openDd() {
+        dd.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        let selIdx = -1;
+        const cur = select.options[select.selectedIndex];
+        if (cur && !cur.disabled) selIdx = choices.map(function (o) { return o.value; }).indexOf(cur.value);
+        setActive(selIdx >= 0 ? selIdx : 0);
+      }
+      function closeDd() { dd.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); setActive(-1); }
+      function isOpen() { return dd.classList.contains('is-open'); }
+
+      trigger.addEventListener('click', function (e) { e.stopPropagation(); isOpen() ? closeDd() : openDd(); });
+      trigger.addEventListener('keydown', function (e) {
+        switch (e.key) {
+          case 'ArrowDown': e.preventDefault(); isOpen() ? setActive(Math.min(choices.length - 1, activeIdx + 1)) : openDd(); break;
+          case 'ArrowUp': e.preventDefault(); isOpen() ? setActive(Math.max(0, activeIdx - 1)) : openDd(); break;
+          case 'Enter': case ' ': e.preventDefault(); if (!isOpen()) openDd(); else if (activeIdx >= 0) { choose(choices[activeIdx]); closeDd(); } break;
+          case 'Escape': if (isOpen()) { e.preventDefault(); closeDd(); } break;
+          case 'Tab': if (isOpen()) closeDd(); break;
+        }
+      });
+      document.addEventListener('click', function (e) { if (isOpen() && !dd.contains(e.target)) closeDd(); });
+
+      dd.appendChild(trigger);
+      dd.appendChild(panel);
+      wrap.appendChild(dd);
+      /* Astro scope CSS theo attr data-astro-cid-* (gắn lúc build). Element tạo bằng JS KHÔNG có attr này
+         → style scoped không "ăn". Copy cid từ .lf-select-wrap sang mọi element vừa tạo để khớp selector scoped. */
+      var cidAttr = null;
+      for (var i = 0; i < wrap.attributes.length; i++) { if (wrap.attributes[i].name.indexOf('data-astro-cid-') === 0) { cidAttr = wrap.attributes[i].name; break; } }
+      if (cidAttr) { dd.setAttribute(cidAttr, ''); var all = dd.querySelectorAll('*'); for (var j = 0; j < all.length; j++) all[j].setAttribute(cidAttr, ''); }
+      wrap.classList.add('is-enhanced');
+      syncDisplay();
+    }
+    function init() { Array.prototype.forEach.call(document.querySelectorAll('.lf-select'), enhance); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+
+  /* --sbw = bề rộng scrollbar dọc -> break-out tiêu đề CTA sát 2 mép CHUẨN như homepage (tránh lệch do 100vw tính cả scrollbar) */
+  (function () {
+    var setSbw = function () {
+      document.documentElement.style.setProperty('--sbw', (window.innerWidth - document.documentElement.clientWidth) + 'px');
+    };
+    setSbw();
+    window.addEventListener('resize', setSbw, { passive: true });
+  })();
+</script>

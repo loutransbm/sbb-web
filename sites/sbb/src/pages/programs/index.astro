@@ -586,18 +586,20 @@ const caseStudies = [
   /* ===== GLOW BEAMS (copy từ about.astro: cases-glow-beam đánh trái, team-glow-beam đánh phải) ===== */
   /* Section đầu trang (hero đã bỏ) → nới top vừa đủ thoáng dưới nav (tiêu đề đẩy lên) */
   .pr-programs { position: relative; overflow-x: clip; overflow-y: visible; z-index: 1; padding-top: clamp(7rem, 5rem + 4vw, 9rem); }
-  /* Subtle warm wash on white (was a bright orange beam on dark). */
+  /* SPOTLIGHT kiểu OMNI cho "OUR PROGRAMS": quầng cam LỚN-RỰC đặt LỆCH PHẢI (sau "ONE START FOUR
+     PATHS"), nửa trái "OUR PROGRAMS" để TỐI. Khớp 100% độ rực section case-studies trang about.
+     Màu = ramp footer: peach 255,112,60 -> cam 248,82,26 -> brand #f2420b. */
   .cases-glow-beam {
-    position: absolute; top: -120px; left: 102%; transform-origin: top center;
-    transform: translateX(-50%) rotate(24deg);
-    width: 700px; height: 920px; pointer-events: none; z-index: 0;
+    position: absolute; top: -10px; left: 90%; transform-origin: center;
+    transform: translateX(-50%);
+    width: 1180px; height: 900px; pointer-events: none; z-index: 0;
     background: radial-gradient(ellipse 50% 50% at 50% 42%,
-      rgba(242, 66, 11, 0.14) 0%,
-      rgba(255, 108, 42, 0.11) 22%,
-      rgba(234, 91, 27, 0.07) 44%,
-      rgba(242, 66, 11, 0.03) 66%,
-      transparent 88%);
-    filter: blur(44px);
+      rgba(255, 112, 60, 0.66) 0%,
+      rgba(248, 82, 26, 0.54) 22%,
+      rgba(242, 66, 11, 0.38) 44%,
+      rgba(242, 66, 11, 0.16) 64%,
+      transparent 84%);
+    filter: blur(76px);
   }
   .pr-how { position: relative; overflow-x: clip; overflow-y: visible; z-index: 1; }
   /* Subtle warm wash on white (was a bright orange beam on dark). */
@@ -1125,19 +1127,19 @@ const caseStudies = [
       0 0 40px rgba(242, 66, 11, 0.06),
       inset 0 1px 1px rgba(255, 255, 255, 0.6);
   }
+  /* SPOTLIGHT kiểu OMNI cho "OUR CASE STUDIES": quầng cam LỚN-RỰC LỆCH TRÁI (sau "OUR CASE STUDIES"),
+     nửa phải "& REAL RESULTS" để TỐI. Xen kẽ với glow PHẢI của section PROGRAMS. Khớp 100% about. */
   .about-cases-glow-beam {
-    position: absolute; top: -30px; left: 16%; transform-origin: top center;
-    transform: translateX(-50%) rotate(-18deg);
-    width: 880px; height: 760px; pointer-events: none; z-index: 0;
+    position: absolute; top: -40px; left: 20%; transform-origin: center;
+    transform: translateX(-50%);
+    width: 1180px; height: 900px; pointer-events: none; z-index: 0;
     background: radial-gradient(ellipse 50% 50% at 50% 42%,
-      rgba(242, 66, 11, 0.16) 0%,
-      rgba(242, 66, 11, 0.13) 17%,
-      rgba(242, 66, 11, 0.10) 37%,
-      rgba(242, 66, 11, 0.06) 55%,
-      rgba(242, 66, 11, 0.03) 71%,
-      rgba(242, 66, 11, 0.015) 85%,
-      transparent 98%);
-    filter: blur(28px);
+      rgba(255, 112, 60, 0.66) 0%,
+      rgba(248, 82, 26, 0.54) 22%,
+      rgba(242, 66, 11, 0.38) 44%,
+      rgba(242, 66, 11, 0.16) 64%,
+      transparent 84%);
+    filter: blur(76px);
   }
   .cases-track { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: space-between; }
   .cases-track .case-card { flex: 0 0 clamp(280px, 31%, 460px); min-height: clamp(440px, 40vw, 580px); }
@@ -1189,25 +1191,35 @@ const caseStudies = [
   .cta-final-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; }
   /* Dòng 2 CTA: động từ LỚN (cỡ cs-line-1) + đuôi XÁM nhỏ (cỡ cs-line-2) nằm sát phải — giống Omni GROW + & SCALE */
   .cta-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  /* Tiêu đề CTA phá khung ra 2rem-từ-mép-màn-hình (đồng bộ HOMEPAGE: thẳng hero, hết lệch container) */
+  @media (min-width: 992px) {
+    .cta-final .cs-header {
+      width: calc(100vw - var(--sbw, 0px) - 4rem);
+      max-width: 120rem;
+      margin-left: calc(50% - (50vw - var(--sbw, 0px) / 2) + 2rem);
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+  }
   /* space-between: SHINE thụt phải (margin-left ≈ 1/3 READY TO → nằm dưới 2/3 phải),
      đuôi xám canh phải nhưng bù margin-right để MÉP TRÁI thẳng cột 916 = REAL GROWTH/SAY ABOUT US/BORDERS */
   /* margin-top 1.25rem = ĐÚNG khoảng dòng1↔dòng2 các section trên (cs-header-bottom). align last baseline → đáy SHINE = đáy BORDERS? */
-  .cta-line-2 { display: flex; justify-content: flex-start; align-items: center; margin-top: 0.5rem; gap: 0; }
+  .cta-line-2 { display: flex; justify-content: space-between; align-items: last baseline; margin-top: 1.25rem; } /* đồng bộ homepage */
   .cta-verb {
     font-family: 'Inter', sans-serif; font-weight: 500;
     font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9;
     color: #f2420b; white-space: nowrap;
-    margin-left: 0.8em; /* Match margin-left of .about-verb in about-cases-head */
+    margin-left: 2.3em; /* đồng bộ homepage: đẩy SHINE sang phải sát BEYOND BORDERS? */
   }
   .cta-tail {
     display: flex; flex-direction: column; gap: 0.4rem;
     font-family: 'Inter', sans-serif; font-weight: 500;
     font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; line-height: 0.9;
-    margin-right: 0; margin-left: 0.45em; align-items: flex-start; text-align: left; /* Match about-tail in about-cases-head */
+    margin-right: 1.85em; /* đồng bộ homepage */
   }
   .cta-tail span { display: block; }
   /* Kéo pill CTA xuống thấp hơn chút (chỉ section này) */
-  .cta-final .cs-glass-pill { transform: translateY(3.4rem); }
+  .cta-final .cs-glass-pill { transform: translateY(3.4rem); margin-left: -4rem; } /* đồng bộ home: pill CTA lệch trái -4rem */
   .cta-eyebrow {
     font-family: var(--font-headline); font-weight: 600;
     font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase;
@@ -1499,7 +1511,7 @@ const caseStudies = [
     display: block !important; 
     width: 100vw !important; height: 130% !important;
     left: 50% !important; top: 50% !important;
-    background: radial-gradient(circle 600px at 25% 45%, 
+    background: radial-gradient(circle 470px at 25% 45%,
       rgba(255, 112, 60, 0.80) 0%,
       rgba(248, 82, 26, 0.70) 30%,
       rgba(242, 66, 11, 0.50) 55%,
@@ -1508,13 +1520,20 @@ const caseStudies = [
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
     mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
   }
-  .lead-form::before { display: block !important; background: radial-gradient(58% 42% at 32% 30%, rgba(242, 66, 11, 0.16) 0%, transparent 60%) !important; }
+  .lead-form::before { display: none !important; } /* bỏ ánh sáng góc trái form -> đồng nhất home/about (form phẳng) (user 2026-06-21) */
 
   /* 10) CHỮ = TRẮNG sáng trên nền nâu trầm (như OMNI) */
   .campaign-heading, .agency-heading, .giant-bg-text, .partner-headline,
   .services-heading, .faq-mega, .cta-verb, .cs-text-white, .mvh-fade, .faq-a strong { color: #ffffff !important; }
   
-  /* FORM CHỮ TRẮNG */
+  /* FORM CHỮ TRẮNG + dropdown dark (đồng bộ ĐỦ BỘ như homepage) */
   .lf-label, .lf-input, .lf-dd-trigger, .lf-dd-option { color: #ffffff !important; }
+  .lf-input::placeholder, .lf-dd-value.is-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-input, .lf-dd-trigger { border-bottom-color: rgba(255, 255, 255, 0.2) !important; }
+  .lf-select-wrap::after { border-right-color: rgba(255, 255, 255, 0.5) !important; border-bottom-color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-dd-caret { color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-dd-panel { background: rgba(20, 10, 5, 0.85) !important; border-color: rgba(255, 255, 255, 0.1) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important; }
+  .lf-dd-option:hover { background: rgba(255, 255, 255, 0.1) !important; }
+  .lf-dd-option.is-selected { background: rgba(242, 66, 11, 0.2) !important; color: #ffffff !important; }
 
 </style>
