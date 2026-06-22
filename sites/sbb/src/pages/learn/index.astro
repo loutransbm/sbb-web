@@ -196,6 +196,7 @@ const programs = [
               <div class="cc__cover" style={`background:${c.cover}`}>
                 <svg class="cc__icon" viewBox="0 0 64 64" fill="none" stroke="#1c1c1c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={c.icon}></svg>
                 <span class="cc__done" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="cc__lock" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
               </div>
               <div class="cc__info">
                 <h3 class="cc__title">{c.title}</h3>
@@ -432,6 +433,18 @@ const programs = [
     opacity: 0; transform: scale(0.5); transition: opacity .25s ease, transform .25s ease;
   }
   .cc.is-done .cc__done { opacity: 1; transform: scale(1); }
+  /* Khóa card Lớp 1 chưa tới */
+  .cc__lock {
+    position: absolute; inset: 0; z-index: 3;
+    display: none; align-items: center; justify-content: center;
+    background: rgba(20, 8, 4, 0.45); color: #fff;
+    -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px);
+  }
+  .cc.is-locked { cursor: not-allowed; }
+  .cc.is-locked:hover { transform: none; border-color: rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02); box-shadow: none; }
+  .cc.is-locked:hover .cc__icon { transform: none; }
+  .cc.is-locked .cc__lock { display: flex; }
+  .cc.is-locked .cc__title, .cc.is-locked .cc__meta, .cc.is-locked .cc__foot { opacity: 0.5; }
   /* Card nước (Lớp 2): cờ SVG bo góc giữa cover */
   .cc__flag {
     width: 52%; height: auto; aspect-ratio: 4 / 3; display: block;
@@ -638,14 +651,20 @@ const programs = [
     const fillEl = document.getElementById('acProgFill');
     const resetBtn = document.getElementById('acProgReset') as HTMLButtonElement | null;
 
+    // Chặn mở card đang khóa
+    cards.forEach((c) => c.addEventListener('click', (e) => { if (c.classList.contains('is-locked')) e.preventDefault(); }));
+
     const render = () => {
       const done = read();
+      // reach = số bài đã đạt liên tiếp từ đầu; card sau bài đang học bị khóa
+      let reach = 0;
+      while (reach < cards.length && done.has(cards[reach].dataset.lessonId || '')) reach += 1;
       let n = 0;
-      cards.forEach((c) => {
-        const id = c.dataset.lessonId || '';
-        const isDone = done.has(id);
+      cards.forEach((c, i) => {
+        const isDone = done.has(c.dataset.lessonId || '');
         c.classList.toggle('is-done', isDone);
-        if (isDone && id.startsWith('l1-')) n += 1;
+        c.classList.toggle('is-locked', i > reach);
+        if (isDone) n += 1;
       });
       if (countEl) countEl.textContent = String(n);
       if (fillEl) fillEl.style.width = total ? `${Math.round((n / total) * 100)}%` : '0%';
@@ -655,7 +674,7 @@ const programs = [
 
     resetBtn?.addEventListener('click', () => {
       const done = read();
-      cards.forEach((c) => { const id = c.dataset.lessonId || ''; if (id.startsWith('l1-')) done.delete(id); });
+      cards.forEach((c) => done.delete(c.dataset.lessonId || ''));
       write(done);
       render();
     });

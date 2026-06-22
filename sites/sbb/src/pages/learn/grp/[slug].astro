@@ -3,6 +3,7 @@
 // Style DARK FIRE; .grp-prose dùng :global() vì <Content/> render HTML không có data-astro-cid.
 import PageLayout from '@ui/layouts/PageLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { quizFor } from '../../../data/grpQuizzes';
 
 export async function getStaticPaths() {
   const lessons = (await getCollection('grp')).sort((a, b) => a.data.order - b.data.order);
@@ -24,6 +25,12 @@ const { Content } = await render(lesson);
 const slugOf = (m: string) => m.replace('.', '-');
 const pad2 = (n: number) => String(n).padStart(2, '0');
 
+// Quiz + gate tuần tự
+const curSlug = slugOf(lesson.data.module);
+const quiz = quizFor(curSlug);
+const curId = `l1-${curSlug}`;
+const prevId = prev ? `l1-${slugOf(prev.data.module)}` : '';
+
 // Gom danh sách bài theo zone cho sidebar.
 type Lesson = typeof all[number];
 const zoneMap = new Map<number, { zone: number; zoneTitle: string; lessons: Lesson[] }>();
@@ -42,7 +49,7 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
   currentPath="/learn"
 >
   <script is:inline>document.body.classList.add('grp-light');</script>
-  <section class="o-section grp-lesson-page">
+  <section class="o-section grp-lesson-page" data-lesson-id={curId} data-prev-id={prevId}>
     <div class="container">
       <div class="grp-layout">
         <!-- ===== SIDEBAR (mục lục) ===== -->
@@ -68,6 +75,7 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
                           <span class="grp-toc__num">{pad2(l.data.order)}</span>
                           <span class="grp-toc__t">{l.data.title}</span>
                           <svg class="grp-toc__check" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                          <svg class="grp-toc__lock" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
                         </a>
                       </li>
                     ))}
@@ -96,18 +104,51 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
             {lesson.data.subtitle && <p class="grp-lesson-subtitle">{lesson.data.subtitle}</p>}
           </header>
 
+          <!-- KHÓA: chưa hoàn thành bài trước -->
+          <div class="grp-locked" id="grpLocked" hidden>
+            <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            <h2 class="grp-locked__title">Bài này đang khóa</h2>
+            <p class="grp-locked__sub">Hoàn thành bài trước và làm đạt bài kiểm tra của bài đó để mở bài này.</p>
+            <div class="grp-locked__actions">
+              {prev && <a href={`/learn/grp/${slugOf(prev.data.module)}`} class="grp-locked__btn grp-locked__btn--prev">← Về bài trước</a>}
+              <a href="/learn" class="grp-locked__btn">Tất cả khóa học</a>
+            </div>
+          </div>
+
           <article class="grp-prose">
             <Content />
           </article>
 
-          <!-- ĐÁNH DẤU ĐÃ HỌC (localStorage) -->
-          <div class="grp-done">
-            <button type="button" class="grp-done__btn" id="grpDoneBtn" data-lesson-id={`l1-${slugOf(lesson.data.module)}`} aria-pressed="false">
-              <svg class="grp-done__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle class="grp-done__ring" cx="12" cy="12" r="9"/><path class="grp-done__tick" d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
-              <span class="grp-done__label">Đánh dấu đã học</span>
-            </button>
-            <p class="grp-done__hint">Lưu trên trình duyệt này để bạn theo dõi tiến độ.</p>
-          </div>
+          <!-- QUIZ (đạt ≥80% để mở bài sau) -->
+          {quiz.length > 0 && (
+            <section class="grp-quiz" id="grpQuiz">
+              <div class="grp-quiz__head">
+                <h2 class="grp-quiz__title">Bài kiểm tra</h2>
+                <p class="grp-quiz__sub">Chọn đáp án cho cả 5 câu rồi nộp. Đúng tối thiểu 4/5 để mở bài tiếp theo — làm lại được nếu chưa đạt.</p>
+              </div>
+              <form id="grpQuizForm" novalidate>
+                {quiz.map((item, qi) => (
+                  <fieldset class="grp-q" data-answer={item.answer}>
+                    <legend class="grp-q__q"><span class="grp-q__n">{qi + 1}</span><span>{item.q}</span></legend>
+                    <div class="grp-q__opts">
+                      {item.options.map((opt, oi) => (
+                        <label class="grp-q__opt">
+                          <input type="radio" name={`q${qi}`} value={oi} />
+                          <span class="grp-q__box" aria-hidden="true"></span>
+                          <span class="grp-q__text">{opt}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
+                ))}
+                <div class="grp-quiz__foot">
+                  <button type="submit" class="grp-quiz__submit" id="grpQuizSubmit">Nộp bài</button>
+                  <button type="button" class="grp-quiz__retry" id="grpQuizRetry" hidden>Làm lại</button>
+                </div>
+                <p class="grp-quiz__result" id="grpQuizResult" role="status" aria-live="polite" hidden></p>
+              </form>
+            </section>
+          )}
 
           <!-- PREV / NEXT -->
           <nav class="grp-pager" aria-label="Điều hướng bài">
@@ -118,9 +159,13 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
               </a>
             ) : <span></span>}
             {next ? (
-              <a href={`/learn/grp/${slugOf(next.data.module)}`} class="grp-pager__btn grp-pager__btn--next">
+              <a href={`/learn/grp/${slugOf(next.data.module)}`} id="grpNext" class="grp-pager__btn grp-pager__btn--next">
                 <span class="grp-pager__dir">Bài sau ›</span>
                 <span class="grp-pager__name">{next.data.title}</span>
+                <span class="grp-pager__lock" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                  Làm quiz để mở
+                </span>
               </a>
             ) : <span></span>}
           </nav>
@@ -264,33 +309,96 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
     background: rgba(36, 23, 16, 0.07); padding: 0.12em 0.4em; border-radius: 6px; color: #b23207;
   }
 
-  /* ===== Mục lục: dấu ✓ bài đã học ===== */
-  .grp-toc__check {
-    flex: 0 0 auto; margin-left: auto; color: #f2420b;
+  /* ===== Mục lục: ✓ đã học / khóa ===== */
+  .grp-toc__check, .grp-toc__lock {
+    flex: 0 0 auto; margin-left: auto;
     opacity: 0; transform: scale(0.6); transition: opacity .2s ease, transform .2s ease;
   }
+  .grp-toc__check { color: #f2420b; }
+  .grp-toc__lock { color: rgba(36, 23, 16, 0.4); }
   .grp-toc__link.is-done .grp-toc__check { opacity: 1; transform: scale(1); }
   .grp-toc__link.is-done:not(.is-current) .grp-toc__t { color: rgba(36, 23, 16, 0.46); }
+  .grp-toc__link.is-locked { opacity: 0.55; cursor: not-allowed; }
+  .grp-toc__link.is-locked:hover { background: transparent; }
+  .grp-toc__link.is-locked .grp-toc__lock { opacity: 1; transform: scale(1); }
+  .grp-toc__link.is-locked .grp-toc__t { color: rgba(36, 23, 16, 0.5); }
 
-  /* ===== Nút đánh dấu đã học ===== */
-  .grp-done { margin-top: clamp(2.4rem, 4vw, 3.2rem); display: flex; flex-direction: column; align-items: flex-start; gap: 0.55rem; }
-  .grp-done__btn {
-    display: inline-flex; align-items: center; gap: 0.6rem; cursor: pointer;
-    font-family: var(--font-headline); font-weight: 700; font-size: 0.92rem;
-    color: #c2380a; background: transparent; border: 1.5px solid rgba(242, 66, 11, 0.45);
-    border-radius: 999px; padding: 0.7rem 1.4rem;
-    transition: background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+  /* ===== Khóa bài (chưa qua bài trước) ===== */
+  .grp-locked {
+    text-align: center; max-width: 30rem; margin: clamp(1.5rem, 4vw, 3rem) auto;
+    padding: clamp(2rem, 4vw, 3rem) 1.5rem; border-radius: 20px; color: #b06a3a;
+    border: 1px dashed rgba(36, 23, 16, 0.2); background: rgba(36, 23, 16, 0.025);
   }
-  .grp-done__btn:hover { background: rgba(242, 66, 11, 0.07); border-color: rgba(242, 66, 11, 0.7); }
-  .grp-done__icon { flex: 0 0 auto; }
-  .grp-done__tick { stroke-dasharray: 14; stroke-dashoffset: 14; transition: stroke-dashoffset .35s ease .05s; }
-  .grp-done__btn.is-done {
-    background: #f2420b; border-color: #f2420b; color: #fff;
-    box-shadow: 0 12px 26px -12px rgba(242, 66, 11, 0.7);
+  .grp-locked__title { font-family: var(--font-headline); font-weight: 700; color: #1f140d; font-size: 1.4rem; margin: 0.7rem 0 0.5rem; }
+  .grp-locked__sub { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.98rem; line-height: 1.6; color: rgba(36, 23, 16, 0.7); margin: 0 0 1.4rem; }
+  .grp-locked__actions { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; }
+  .grp-locked__btn {
+    font-family: var(--font-headline); font-weight: 700; font-size: 0.85rem; text-decoration: none;
+    padding: 0.65rem 1.2rem; border-radius: 999px; border: 1px solid rgba(36, 23, 16, 0.18);
+    color: rgba(36, 23, 16, 0.8); transition: border-color .25s ease, color .25s ease, background .25s ease;
   }
-  .grp-done__btn.is-done:hover { background: #ff5c26; border-color: #ff5c26; }
-  .grp-done__btn.is-done .grp-done__tick { stroke-dashoffset: 0; }
-  .grp-done__hint { margin: 0; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.8rem; color: rgba(60, 44, 34, 0.5); }
+  .grp-locked__btn:hover { border-color: rgba(242, 66, 11, 0.5); color: #f2420b; }
+  .grp-locked__btn--prev { background: #f2420b; color: #fff; border-color: #f2420b; }
+  .grp-locked__btn--prev:hover { background: #ff5c26; border-color: #ff5c26; color: #fff; }
+
+  /* ===== QUIZ ===== */
+  .grp-quiz { margin-top: clamp(2.4rem, 4vw, 3.4rem); padding-top: clamp(1.8rem, 3vw, 2.4rem); border-top: 1px solid rgba(36, 23, 16, 0.12); }
+  .grp-quiz__title { font-family: var(--font-headline); font-weight: 700; color: #20140d; font-size: clamp(1.4rem, 2.3vw, 1.8rem); margin: 0 0 0.5rem; }
+  .grp-quiz__sub { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.95rem; line-height: 1.6; color: rgba(36, 23, 16, 0.62); margin: 0 0 1.6rem; }
+  .grp-q { border: 0; margin: 0 0 1.4rem; padding: 0; min-width: 0; }
+  .grp-q__q { display: flex; gap: 0.6rem; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.02rem; line-height: 1.5; color: #20140d; margin-bottom: 0.7rem; padding: 0; }
+  .grp-q__n {
+    flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+    width: 1.5rem; height: 1.5rem; border-radius: 999px; background: rgba(242, 66, 11, 0.12);
+    color: #c2380a; font-family: var(--font-headline); font-weight: 700; font-size: 0.8rem;
+  }
+  .grp-q__opts { display: flex; flex-direction: column; gap: 0.5rem; padding-left: 2.1rem; }
+  .grp-q__opt {
+    position: relative; display: flex; align-items: flex-start; gap: 0.65rem; cursor: pointer;
+    padding: 0.7rem 0.9rem; border-radius: 12px; border: 1px solid rgba(36, 23, 16, 0.14);
+    background: rgba(255, 255, 255, 0.5); transition: border-color .2s ease, background .2s ease;
+  }
+  .grp-q__opt:hover { border-color: rgba(242, 66, 11, 0.4); background: rgba(242, 66, 11, 0.04); }
+  .grp-q__opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .grp-q__box {
+    flex: 0 0 auto; width: 18px; height: 18px; border-radius: 999px; margin-top: 1px;
+    border: 2px solid rgba(36, 23, 16, 0.3); position: relative; transition: border-color .2s ease;
+  }
+  .grp-q__opt input:checked + .grp-q__box { border-color: #f2420b; }
+  .grp-q__opt input:checked + .grp-q__box::after { content: ''; position: absolute; inset: 3px; border-radius: 999px; background: #f2420b; }
+  .grp-q__opt input:focus-visible + .grp-q__box { box-shadow: 0 0 0 3px rgba(242, 66, 11, 0.25); }
+  .grp-q__text { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.96rem; line-height: 1.5; color: rgba(36, 23, 16, 0.85); }
+  /* Sau khi nộp: tô đúng (xanh) / sai đã chọn (đỏ) */
+  .grp-q.is-correct .grp-q__n { background: rgba(26, 143, 74, 0.16); color: #1a8f4a; }
+  .grp-q.is-wrong .grp-q__n { background: rgba(204, 43, 43, 0.16); color: #cc2b2b; }
+  .grp-q__opt.is-answer { border-color: #1a8f4a; background: rgba(26, 143, 74, 0.08); }
+  .grp-q__opt.is-answer .grp-q__box { border-color: #1a8f4a; }
+  .grp-q__opt.is-wrong-pick { border-color: #cc2b2b; background: rgba(204, 43, 43, 0.07); }
+  .grp-q__opt.is-wrong-pick .grp-q__box { border-color: #cc2b2b; }
+  .grp-quiz.is-graded .grp-q__opt { pointer-events: none; }
+
+  .grp-quiz__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; margin-top: 1.6rem; }
+  .grp-quiz__submit, .grp-quiz__retry {
+    font-family: var(--font-headline); font-weight: 700; font-size: 0.92rem; cursor: pointer;
+    border-radius: 999px; padding: 0.75rem 1.6rem; transition: background .25s ease, box-shadow .25s ease, transform .2s ease;
+  }
+  .grp-quiz__submit { background: #f2420b; color: #fff; border: 0; box-shadow: 0 12px 26px -12px rgba(242, 66, 11, 0.7); }
+  .grp-quiz__submit:hover { background: #ff5c26; transform: translateY(-1px); }
+  .grp-quiz__submit:disabled { background: #1a8f4a; box-shadow: none; cursor: default; transform: none; }
+  .grp-quiz__retry { background: transparent; color: #c2380a; border: 1.5px solid rgba(242, 66, 11, 0.45); }
+  .grp-quiz__retry:hover { background: rgba(242, 66, 11, 0.07); }
+  .grp-quiz__result { width: 100%; margin: 0.5rem 0 0; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.96rem; }
+  .grp-quiz__result.is-pass { color: #1a8f4a; }
+  .grp-quiz__result.is-fail { color: #cc2b2b; }
+
+  /* ===== Nút "Bài sau" khóa ===== */
+  .grp-pager__lock {
+    display: none; align-items: center; gap: 0.35rem; margin-top: 0.4rem;
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.74rem; color: rgba(36, 23, 16, 0.45);
+  }
+  .grp-pager__btn--next.is-locked { opacity: 0.6; cursor: not-allowed; }
+  .grp-pager__btn--next.is-locked:hover { border-color: rgba(36, 23, 16, 0.12); background: rgba(255, 255, 255, 0.55); box-shadow: none; }
+  .grp-pager__btn--next.is-locked .grp-pager__lock { display: inline-flex; justify-content: flex-end; }
 
   /* ===== PREV / NEXT ===== */
   .grp-pager {
@@ -327,35 +435,102 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
 </style>
 
 <script>
-  // Đánh dấu "đã học" cho bài Lớp 1, lưu localStorage. Đồng bộ sidebar + nút.
+  // Gate tuần tự GRP Lớp 1: khóa bài chưa tới, quiz đạt ≥80% mới mở bài sau. localStorage.
   (() => {
     const KEY = 'sbb:grp:done';
-    const read = () => { try { return new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch { return new Set(); } };
-    const write = (set) => { try { localStorage.setItem(KEY, JSON.stringify([...set])); } catch {} };
+    const PASS = 0.8;
+    const read = () => { try { return new Set<string>(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch { return new Set<string>(); } };
+    const write = (s: Set<string>) => { try { localStorage.setItem(KEY, JSON.stringify([...s])); } catch {} };
 
-    const done = read();
-    const btn = document.getElementById('grpDoneBtn');
-    const label = btn?.querySelector('.grp-done__label');
+    const root = document.querySelector<HTMLElement>('.grp-lesson-page');
+    if (!root) return;
+    const curId = root.dataset.lessonId || '';
+    const prevId = root.dataset.prevId || '';
 
-    document.querySelectorAll('.grp-toc__link[data-lesson-id]').forEach((a) => {
-      if (done.has(a.dataset.lessonId)) a.classList.add('is-done');
-    });
+    const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.grp-toc__link[data-lesson-id]'));
+    const orderedIds = tocLinks.map((a) => a.dataset.lessonId || '');
+    const reachOf = (done: Set<string>) => { let r = 0; while (r < orderedIds.length && done.has(orderedIds[r])) r++; return r; };
 
-    const sync = () => {
-      if (!btn) return;
-      const isDone = done.has(btn.dataset.lessonId);
-      btn.classList.toggle('is-done', isDone);
-      btn.setAttribute('aria-pressed', String(isDone));
-      if (label) label.textContent = isDone ? 'Đã học' : 'Đánh dấu đã học';
+    const paintSidebar = () => {
+      const done = read();
+      const reach = reachOf(done);
+      tocLinks.forEach((a, i) => {
+        const isDone = done.has(a.dataset.lessonId || '');
+        const locked = i > reach && !a.classList.contains('is-current');
+        a.classList.toggle('is-done', isDone);
+        a.classList.toggle('is-locked', locked);
+        if (locked) a.setAttribute('aria-disabled', 'true'); else a.removeAttribute('aria-disabled');
+      });
     };
-    sync();
+    tocLinks.forEach((a) => a.addEventListener('click', (e) => { if (a.classList.contains('is-locked')) e.preventDefault(); }));
 
-    btn?.addEventListener('click', () => {
-      const id = btn.dataset.lessonId;
-      if (done.has(id)) done.delete(id); else done.add(id);
-      write(done);
-      document.querySelectorAll(`.grp-toc__link[data-lesson-id="${id}"]`).forEach((a) => a.classList.toggle('is-done', done.has(id)));
-      sync();
+    // Khóa cả trang nếu bài trước chưa qua
+    const unlocked = !prevId || read().has(prevId);
+    if (!unlocked) {
+      document.querySelector('.grp-prose')?.setAttribute('hidden', '');
+      document.getElementById('grpQuiz')?.setAttribute('hidden', '');
+      document.querySelector('.grp-pager')?.setAttribute('hidden', '');
+      const ln = document.getElementById('grpLocked'); if (ln) ln.hidden = false;
+    }
+
+    // Gate nút "Bài sau"
+    const nextBtn = document.getElementById('grpNext');
+    const syncNext = () => { if (nextBtn) nextBtn.classList.toggle('is-locked', !read().has(curId)); };
+    nextBtn?.addEventListener('click', (e) => { if (!read().has(curId)) e.preventDefault(); });
+
+    // ===== Quiz =====
+    const quizEl = document.getElementById('grpQuiz');
+    const form = document.getElementById('grpQuizForm') as HTMLFormElement | null;
+    const submitBtn = document.getElementById('grpQuizSubmit') as HTMLButtonElement | null;
+    const retryBtn = document.getElementById('grpQuizRetry') as HTMLButtonElement | null;
+    const resultEl = document.getElementById('grpQuizResult');
+
+    if (read().has(curId) && submitBtn) {
+      submitBtn.disabled = true; submitBtn.textContent = 'Đã đạt ✓';
+      if (resultEl) { resultEl.hidden = false; resultEl.className = 'grp-quiz__result is-pass'; resultEl.textContent = 'Bạn đã đạt bài kiểm tra này. Bài tiếp theo đã mở — có thể làm lại để ôn.'; }
+    }
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const qs = Array.from(form.querySelectorAll<HTMLElement>('.grp-q'));
+      let correct = 0;
+      qs.forEach((fs) => {
+        const ans = Number(fs.dataset.answer);
+        fs.classList.remove('is-correct', 'is-wrong');
+        const opts = Array.from(fs.querySelectorAll<HTMLElement>('.grp-q__opt'));
+        opts.forEach((o) => o.classList.remove('is-answer', 'is-wrong-pick'));
+        if (opts[ans]) opts[ans].classList.add('is-answer');
+        const sel = fs.querySelector<HTMLInputElement>('input:checked');
+        const v = sel ? Number(sel.value) : -1;
+        if (v === ans) { correct++; fs.classList.add('is-correct'); }
+        else { fs.classList.add('is-wrong'); if (sel) sel.closest('.grp-q__opt')?.classList.add('is-wrong-pick'); }
+      });
+      const total = qs.length;
+      quizEl?.classList.add('is-graded');
+      if (resultEl) resultEl.hidden = false;
+      if (correct / total >= PASS) {
+        const d = read(); d.add(curId); write(d);
+        if (resultEl) { resultEl.className = 'grp-quiz__result is-pass'; resultEl.textContent = `Đạt — đúng ${correct}/${total}. Bài tiếp theo đã mở.`; }
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Đã đạt ✓'; }
+        if (retryBtn) retryBtn.hidden = true;
+        syncNext(); paintSidebar();
+      } else {
+        if (resultEl) { resultEl.className = 'grp-quiz__result is-fail'; resultEl.textContent = `Đúng ${correct}/${total}. Cần ít nhất 4/5. Xem đáp án đúng (xanh) rồi làm lại nhé.`; }
+        if (retryBtn) retryBtn.hidden = false;
+      }
     });
+
+    retryBtn?.addEventListener('click', () => {
+      form?.reset();
+      form?.querySelectorAll('.grp-q').forEach((fs) => fs.classList.remove('is-correct', 'is-wrong'));
+      form?.querySelectorAll('.grp-q__opt').forEach((o) => o.classList.remove('is-answer', 'is-wrong-pick'));
+      quizEl?.classList.remove('is-graded');
+      if (resultEl) { resultEl.hidden = true; resultEl.textContent = ''; }
+      retryBtn.hidden = true;
+      if (submitBtn && !read().has(curId)) { submitBtn.disabled = false; submitBtn.textContent = 'Nộp bài'; }
+    });
+
+    paintSidebar();
+    syncNext();
   })();
 </script>
