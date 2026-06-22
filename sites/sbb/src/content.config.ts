@@ -27,4 +27,18 @@ const grp2 = defineCollection({
   }),
 });
 
-export const collections = { grp, grp2 };
+// Lớp 3 — 6 "cẩm nang sâu theo nước" (tách từ GRP_*_Handbook_DaoSau). Xem scripts/split-grp-handbook.mjs
+const grp3 = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/grp3' }),
+  schema: z.object({
+    code: z.string(),        // "my"
+    name: z.string(),        // "Mỹ"
+    enName: z.string().optional().default(''),
+    flag: z.string(),        // "🇺🇸"
+    order: z.number(),       // 1..6
+    title: z.string(),       // tiêu đề handbook (đã bỏ emoji)
+    subtitle: z.string().optional().default(''),
+  }),
+});
+
+export const collections = { grp, grp2, grp3 };

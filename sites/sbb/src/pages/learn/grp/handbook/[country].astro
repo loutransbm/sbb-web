@@ -1,11 +1,11 @@
 ---
-// LỚP 2 — Trang "đào sâu theo nước" (GRP). Light mode như trang bài học.
-// Sidebar = 6 nước (current highlight) + nội dung markdown + prev/next.
+// LỚP 3 — "Cẩm nang sâu theo nước" (GRP). Light mode như trang bài học/Lớp 2.
+// Handbook dài (bảng + footnote). Sidebar = 6 nước, breadcrumb có link về Lớp 2.
 import PageLayout from '@ui/layouts/PageLayout.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const countries = (await getCollection('grp2')).sort((a, b) => a.data.order - b.data.order);
+  const countries = (await getCollection('grp3')).sort((a, b) => a.data.order - b.data.order);
   return countries.map((country, idx) => ({
     params: { country: country.data.code },
     props: {
@@ -23,8 +23,8 @@ const fullName = (c: typeof country) => `${c.data.name}${c.data.enName ? ` (${c.
 ---
 
 <PageLayout
-  title={`Đào sâu: ${fullName(country)}`}
-  description={country.data.subtitle || `GRP Lớp 2 — Đào sâu theo nước ${country.data.name}`}
+  title={`Cẩm nang: ${fullName(country)}`}
+  description={country.data.subtitle || `GRP Lớp 3 — Cẩm nang sâu về ${country.data.name}`}
   site="sbb"
   currentPath="/learn"
 >
@@ -39,13 +39,13 @@ const fullName = (c: typeof country) => `${c.data.name}${c.data.enName ? ` (${c.
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg>
               Tất cả khóa học
             </a>
-            <p class="grp-toc__zonetitle">Lớp 2 · Đào sâu theo nước</p>
+            <p class="grp-toc__zonetitle">Lớp 3 · Cẩm nang sâu</p>
             <nav class="grp-toc" aria-label="Các nước">
               <ul>
                 {all.map((c) => (
                   <li>
                     <a
-                      href={`/learn/grp/nuoc/${c.data.code}`}
+                      href={`/learn/grp/handbook/${c.data.code}`}
                       class:list={["grp-toc__link", c.data.code === country.data.code && "is-current"]}
                       aria-current={c.data.code === country.data.code ? 'page' : undefined}
                     >
@@ -66,42 +66,39 @@ const fullName = (c: typeof country) => `${c.data.name}${c.data.enName ? ` (${c.
             <span aria-hidden="true">›</span>
             <span class="grp-breadcrumb__prog">GRP</span>
             <span aria-hidden="true">›</span>
-            Lớp 2 — Đào sâu theo nước
+            <a href={`/learn/grp/nuoc/${country.data.code}`}>{country.data.name}</a>
+            <span aria-hidden="true">›</span>
+            Lớp 3 — Cẩm nang sâu
           </p>
 
           <header class="grp-lesson-head">
+            <p class="grp-kicker">Cẩm nang sâu</p>
             <h1 class="grp-lesson-title">
               <img class="grp-lesson-title__flag" src={`/flags/${country.data.code}.svg`} alt="" decoding="async" />
-              {fullName(country)}
+              {country.data.title}
             </h1>
             {country.data.subtitle && <p class="grp-lesson-subtitle">{country.data.subtitle}</p>}
+            <a href={`/learn/grp/nuoc/${country.data.code}`} class="grp-backlevel">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg>
+              Về bản đào sâu {fullName(country)}
+            </a>
           </header>
 
-          <article class="grp-prose">
+          <article class="grp-prose grp-prose--handbook">
             <Content />
           </article>
 
-          <!-- Mời đọc cẩm nang sâu (Lớp 3) -->
-          <a href={`/learn/grp/handbook/${country.data.code}`} class="grp-handbook-cta">
-            <div class="grp-handbook-cta__text">
-              <span class="grp-handbook-cta__kicker">Lớp 3 · Cẩm nang sâu</span>
-              <span class="grp-handbook-cta__title">Đọc cẩm nang đầy đủ về {fullName(country)}</span>
-              <span class="grp-handbook-cta__sub">Chi phí, nhà ở, việc làm, visa, an toàn — số liệu và kinh nghiệm thực tế.</span>
-            </div>
-            <svg class="grp-handbook-cta__arrow" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-          </a>
-
           <!-- PREV / NEXT -->
-          <nav class="grp-pager" aria-label="Điều hướng nước">
+          <nav class="grp-pager" aria-label="Điều hướng cẩm nang">
             {prev ? (
-              <a href={`/learn/grp/nuoc/${prev.data.code}`} class="grp-pager__btn grp-pager__btn--prev">
-                <span class="grp-pager__dir">‹ Nước trước</span>
+              <a href={`/learn/grp/handbook/${prev.data.code}`} class="grp-pager__btn grp-pager__btn--prev">
+                <span class="grp-pager__dir">‹ Cẩm nang trước</span>
                 <span class="grp-pager__name"><img class="grp-pager__flag" src={`/flags/${prev.data.code}.svg`} alt="" width="22" height="16" decoding="async" />{fullName(prev)}</span>
               </a>
             ) : <span></span>}
             {next ? (
-              <a href={`/learn/grp/nuoc/${next.data.code}`} class="grp-pager__btn grp-pager__btn--next">
-                <span class="grp-pager__dir">Nước sau ›</span>
+              <a href={`/learn/grp/handbook/${next.data.code}`} class="grp-pager__btn grp-pager__btn--next">
+                <span class="grp-pager__dir">Cẩm nang sau ›</span>
                 <span class="grp-pager__name"><img class="grp-pager__flag" src={`/flags/${next.data.code}.svg`} alt="" width="22" height="16" decoding="async" />{fullName(next)}</span>
               </a>
             ) : <span></span>}
@@ -162,10 +159,14 @@ const fullName = (c: typeof country) => `${c.data.name}${c.data.enName ? ` (${c.
   .grp-breadcrumb__prog { color: rgba(36, 23, 16, 0.55); font-weight: 500; }
 
   .grp-lesson-head { margin-bottom: clamp(1.8rem, 3vw, 2.6rem); }
+  .grp-kicker {
+    margin: 0 0 0.5rem; font-family: var(--font-headline); font-weight: 700;
+    font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: #c2380a;
+  }
   .grp-lesson-title {
     font-family: var(--font-headline); font-weight: 700;
-    font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: 1.12;
-    color: #1f140d; letter-spacing: -0.015em; margin: 0; max-width: 22ch;
+    font-size: clamp(1.7rem, 3.2vw, 2.7rem); line-height: 1.12;
+    color: #1f140d; letter-spacing: -0.015em; margin: 0; max-width: 24ch;
     display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap;
   }
   .grp-lesson-title__flag { width: 1.18em; height: auto; aspect-ratio: 4 / 3; border-radius: 5px; box-shadow: 0 4px 12px -3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.06); }
@@ -173,9 +174,17 @@ const fullName = (c: typeof country) => `${c.data.name}${c.data.enName ? ` (${c.
     margin: 0.7rem 0 0; font-family: 'Inter', sans-serif; font-weight: 400; font-style: italic;
     font-size: clamp(0.98rem, 1.3vw, 1.18rem); color: rgba(60, 44, 34, 0.6); line-height: 1.5;
   }
+  .grp-backlevel {
+    display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 1.1rem;
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.86rem;
+    color: #c2380a; text-decoration: none;
+    border: 1px solid rgba(242, 66, 11, 0.3); border-radius: 999px; padding: 0.4rem 0.9rem;
+    transition: background .25s ease, border-color .25s ease, color .25s ease;
+  }
+  .grp-backlevel:hover { background: rgba(242, 66, 11, 0.08); border-color: rgba(242, 66, 11, 0.5); color: #f2420b; }
 
   /* ===== PROSE (dùng :global vì <Content/> không có data-astro-cid) ===== */
-  .grp-prose { max-width: 70ch; }
+  .grp-prose { max-width: 74ch; }
   .grp-prose :global(h2) {
     font-family: var(--font-headline); font-weight: 700;
     font-size: clamp(1.4rem, 2.3vw, 1.85rem); line-height: 1.25;
@@ -184,6 +193,10 @@ const fullName = (c: typeof country) => `${c.data.name}${c.data.enName ? ` (${c.
   .grp-prose :global(h3) {
     font-family: var(--font-headline); font-weight: 700;
     font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.3; color: #c2380a; margin: 2rem 0 0.8rem;
+  }
+  .grp-prose :global(h4) {
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.02rem;
+    color: #20140d; margin: 1.6rem 0 0.6rem; text-transform: none;
   }
   .grp-prose :global(p) {
     font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1.05rem; line-height: 1.8;
@@ -211,33 +224,41 @@ const fullName = (c: typeof country) => `${c.data.name}${c.data.enName ? ` (${c.
     background: rgba(36, 23, 16, 0.07); padding: 0.12em 0.4em; border-radius: 6px; color: #b23207;
   }
 
-  /* ===== CTA cẩm nang sâu (Lớp 3) ===== */
-  .grp-handbook-cta {
-    display: flex; align-items: center; gap: 1.2rem;
-    margin-top: clamp(2.4rem, 4vw, 3.2rem); padding: 1.4rem 1.6rem; border-radius: 18px;
-    text-decoration: none; background: linear-gradient(120deg, rgba(242, 66, 11, 0.1), rgba(242, 66, 11, 0.04));
-    border: 1px solid rgba(242, 66, 11, 0.28);
-    transition: border-color .3s ease, background .3s ease, transform .3s ease, box-shadow .3s ease;
+  /* ===== BẢNG (handbook có nhiều bảng markdown) ===== */
+  .grp-prose :global(table) {
+    display: block; width: 100%; max-width: 100%; overflow-x: auto;
+    border-collapse: collapse; margin: 0 0 1.6rem;
+    font-family: 'Inter', sans-serif; font-size: 0.94rem; line-height: 1.55;
+    border: 1px solid rgba(36, 23, 16, 0.12); border-radius: 12px;
   }
-  .grp-handbook-cta:hover {
-    border-color: rgba(242, 66, 11, 0.55); transform: translateY(-2px);
-    box-shadow: 0 16px 34px -18px rgba(242, 66, 11, 0.5);
+  .grp-prose :global(thead) { background: rgba(242, 66, 11, 0.08); }
+  .grp-prose :global(th) {
+    text-align: left; font-weight: 600; color: #20140d; padding: 0.7rem 0.95rem;
+    border-bottom: 1px solid rgba(36, 23, 16, 0.16); white-space: nowrap;
   }
-  .grp-handbook-cta__text { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
-  .grp-handbook-cta__kicker {
-    font-family: var(--font-headline); font-weight: 700; font-size: 0.7rem;
-    letter-spacing: 0.08em; text-transform: uppercase; color: #c2380a;
+  .grp-prose :global(td) {
+    padding: 0.65rem 0.95rem; color: rgba(36, 23, 16, 0.82);
+    border-bottom: 1px solid rgba(36, 23, 16, 0.08); vertical-align: top;
   }
-  .grp-handbook-cta__title {
-    font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.05rem, 1.5vw, 1.25rem);
-    color: #1f140d; line-height: 1.25; text-transform: none;
+  .grp-prose :global(tbody tr:nth-child(even)) { background: rgba(36, 23, 16, 0.025); }
+  .grp-prose :global(tbody tr:last-child td) { border-bottom: 0; }
+
+  /* ===== FOOTNOTE (handbook dùng [^n]) ===== */
+  .grp-prose :global(sup a) {
+    color: #c2380a; text-decoration: none; font-weight: 600; padding: 0 0.1em;
   }
-  .grp-handbook-cta__sub {
-    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.9rem; line-height: 1.5;
-    color: rgba(36, 23, 16, 0.6);
+  .grp-prose :global(.footnotes) {
+    margin-top: clamp(2.6rem, 4vw, 3.4rem); padding-top: 1.4rem;
+    border-top: 1px solid rgba(36, 23, 16, 0.14);
+    font-size: 0.86rem; color: rgba(36, 23, 16, 0.62);
   }
-  .grp-handbook-cta__arrow { flex: 0 0 auto; color: #f2420b; transition: transform .3s ease; }
-  .grp-handbook-cta:hover .grp-handbook-cta__arrow { transform: translateX(5px); }
+  .grp-prose :global(.footnotes h2) {
+    font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(60, 44, 34, 0.55); margin: 0 0 0.8rem;
+  }
+  .grp-prose :global(.footnotes ol) { font-size: 0.86rem; line-height: 1.6; }
+  .grp-prose :global(.footnotes li) { margin-bottom: 0.4rem; }
+  .grp-prose :global(.footnotes p) { font-size: 0.86rem; line-height: 1.6; margin: 0; display: inline; }
 
   /* ===== PREV / NEXT ===== */
   .grp-pager {
@@ -264,5 +285,6 @@ const fullName = (c: typeof country) => `${c.data.name}${c.data.enName ? ` (${c.
   @media (max-width: 560px) {
     .grp-pager { grid-template-columns: 1fr; }
     .grp-pager__btn--next { text-align: left; }
+    .grp-pager__btn--next .grp-pager__name { justify-content: flex-start; }
   }
 </style>
