@@ -1,0 +1,264 @@
+---
+// Trang TEASER cho khóa "Sắp ra mắt" (dark-fire, khớp trang Học viện).
+// Nguồn: src/data/upcomingCourses.ts. Mỗi khóa 1 trang /learn/sap-ra-mat/{slug}.
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import { upcomingCourses } from '../../../data/upcomingCourses';
+
+export function getStaticPaths() {
+  return upcomingCourses.map((course) => ({ params: { slug: course.slug }, props: { course } }));
+}
+
+const { course } = Astro.props;
+---
+
+<PageLayout
+  title={`${course.title} — Sắp ra mắt`}
+  description={course.tagline}
+  site="sbb"
+  currentPath="/learn"
+>
+  <!-- ===== HERO ===== -->
+  <section class="up-hero">
+    <div class="up-glow" aria-hidden="true"></div>
+    <div class="up-wrap">
+      <a href="/learn" class="up-back">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg>
+        Học viện
+      </a>
+
+      <div class="up-head">
+        <span class="up-chip" style={`--c:${course.cover}`} aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="#1c1c1c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" set:html={course.icon}></svg>
+        </span>
+        <span class="up-badge">Sắp ra mắt</span>
+      </div>
+
+      <h1 class="up-title">{course.title}</h1>
+      <p class="up-tagline">{course.tagline}</p>
+      <p class="up-intro">{course.intro}</p>
+      <p class="up-audience"><span>Hợp với</span> {course.audience}</p>
+
+      <div class="up-actions">
+        <a href="/apply" class="up-btn up-btn--primary">Đăng ký nhận thông báo</a>
+        <a href="/learn" class="up-btn up-btn--ghost">Bắt đầu với khóa GRP</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BẠN SẼ HỌC GÌ ===== -->
+  <section class="up-section">
+    <div class="up-wrap">
+      <h2 class="up-h2">Bạn sẽ học gì</h2>
+      <div class="up-learn">
+        {course.learn.map((item) => (
+          <div class="up-learn__item">
+            <svg class="up-check" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <p>{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NỘI DUNG DỰ KIẾN ===== -->
+  <section class="up-section">
+    <div class="up-wrap">
+      <h2 class="up-h2">Nội dung dự kiến</h2>
+      <p class="up-note-line">Khung chương trình đang hoàn thiện, có thể thay đổi khi khóa mở.</p>
+      <ol class="up-outline">
+        {course.outline.map((mod, i) => (
+          <li class="up-outline__mod">
+            <span class="up-outline__num">{String(i + 1).padStart(2, '0')}</span>
+            <div class="up-outline__body">
+              <h3 class="up-outline__title">{mod.title}</h3>
+              <ul class="up-outline__items">
+                {mod.items.map((it) => <li>{it}</li>)}
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      {course.note && (
+        <p class="up-disclaimer">{course.note}</p>
+      )}
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="up-cta">
+    <div class="up-wrap">
+      <div class="up-cta__box">
+        <h2 class="up-cta__title">Quan tâm khóa này?</h2>
+        <p class="up-cta__sub">Để lại thông tin, SBB sẽ báo bạn ngay khi {course.title} mở đăng ký.</p>
+        <a href="/apply" class="up-btn up-btn--onfire">Đăng ký nhận thông báo</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  /* ===== WRAP chung ===== */
+  .up-wrap {
+    width: 100%; max-width: 72rem; margin-inline: auto;
+    padding-inline: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  /* ===== HERO ===== */
+  .up-hero {
+    position: relative; overflow: visible;
+    padding-top: clamp(7rem, 9vw, 10rem); padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .up-glow {
+    position: absolute; top: -40px; left: 78%; transform: translateX(-50%);
+    width: 900px; height: 640px; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse 50% 50% at 50% 42%,
+      rgba(255, 112, 60, 0.42) 0%, rgba(248, 82, 26, 0.30) 24%, rgba(242, 66, 11, 0.18) 46%,
+      rgba(242, 66, 11, 0.08) 66%, transparent 84%);
+    filter: blur(76px);
+  }
+  .up-wrap { position: relative; z-index: 1; }
+
+  .up-back {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-headline); font-weight: 700; font-size: 0.78rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 126, 72, 0.9);
+    text-decoration: none; margin-bottom: 1.8rem; transition: color .25s ease;
+  }
+  .up-back:hover { color: #ff7e48; }
+
+  .up-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.4rem; }
+  .up-chip {
+    flex: 0 0 auto; width: 58px; height: 58px; border-radius: 15px; background: var(--c, #d6c3e0);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.55);
+  }
+  .up-chip svg { width: 60%; height: 60%; }
+  .up-badge {
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.72rem;
+    letter-spacing: 0.06em; text-transform: uppercase; color: #ffcaac;
+    border: 1px solid rgba(255, 126, 72, 0.45); border-radius: 999px;
+    padding: 0.32rem 0.85rem; background: rgba(242, 66, 11, 0.12);
+  }
+
+  .up-title {
+    font-family: var(--font-headline); font-weight: 700; color: #fff;
+    font-size: clamp(2.3rem, 5.2vw, 4.2rem); line-height: 1.06; letter-spacing: -0.02em;
+    margin: 0 0 1rem; max-width: 18ch;
+  }
+  .up-tagline {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-style: italic;
+    font-size: clamp(1.05rem, 1.5vw, 1.35rem); line-height: 1.5;
+    color: rgba(255, 255, 255, 0.78); margin: 0 0 1.4rem; max-width: 46ch;
+  }
+  .up-intro {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(1rem, 1.2vw, 1.12rem);
+    line-height: 1.75; color: rgba(255, 255, 255, 0.66); margin: 0 0 1.3rem; max-width: 56ch;
+  }
+  .up-audience {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.96rem; line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6); margin: 0 0 2.2rem; max-width: 56ch;
+  }
+  .up-audience span {
+    display: inline-block; margin-right: 0.5rem; font-weight: 600; color: rgba(255, 126, 72, 0.95);
+    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  .up-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  .up-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-headline); font-weight: 700; font-size: 0.92rem;
+    letter-spacing: 0.01em; text-decoration: none; border-radius: 999px;
+    padding: 0.85rem 1.7rem; transition: transform .25s ease, background .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .up-btn--primary {
+    background: #f2420b; color: #fff; box-shadow: 0 14px 30px -12px rgba(242, 66, 11, 0.7);
+  }
+  .up-btn--primary:hover { background: #ff5c26; transform: translateY(-2px); box-shadow: 0 18px 38px -14px rgba(255, 92, 38, 0.75); }
+  .up-btn--ghost {
+    background: rgba(255, 255, 255, 0.04); color: #fff; border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .up-btn--ghost:hover { border-color: rgba(242, 66, 11, 0.55); background: rgba(242, 66, 11, 0.08); transform: translateY(-2px); }
+
+  /* ===== SECTIONS ===== */
+  .up-section { padding-block: clamp(2rem, 3.5vw, 3.4rem); }
+  .up-h2 {
+    font-family: var(--font-headline); font-weight: 700; color: #fff;
+    font-size: clamp(1.4rem, 2.3vw, 1.9rem); letter-spacing: -0.01em; margin: 0 0 1.4rem;
+  }
+  .up-note-line {
+    margin: -0.8rem 0 1.6rem; font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 0.9rem; color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Bạn sẽ học gì */
+  .up-learn { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .up-learn__item {
+    display: flex; align-items: flex-start; gap: 0.85rem;
+    padding: 1.15rem 1.3rem; border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.09); background: rgba(255, 255, 255, 0.025);
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .up-learn__item:hover { border-color: rgba(242, 66, 11, 0.35); background: rgba(242, 66, 11, 0.04); }
+  .up-check { flex: 0 0 auto; color: #ff7e48; margin-top: 1px; }
+  .up-learn__item p {
+    margin: 0; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.98rem;
+    line-height: 1.6; color: rgba(255, 255, 255, 0.82);
+  }
+
+  /* Nội dung dự kiến */
+  .up-outline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+  .up-outline__mod {
+    display: flex; gap: 1.1rem; align-items: flex-start;
+    padding: 1.2rem 1.4rem; border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02);
+  }
+  .up-outline__num {
+    flex: 0 0 auto; font-family: var(--font-headline); font-weight: 700; font-size: 1.05rem;
+    color: rgba(255, 126, 72, 0.85); line-height: 1.5; min-width: 1.8rem;
+  }
+  .up-outline__body { min-width: 0; }
+  .up-outline__title {
+    font-family: var(--font-headline); font-weight: 700; color: #fff;
+    font-size: 1.06rem; margin: 0 0 0.5rem; text-transform: none;
+  }
+  .up-outline__items { margin: 0; padding-left: 1.1rem; }
+  .up-outline__items li {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.92rem; line-height: 1.7;
+    color: rgba(255, 255, 255, 0.62);
+  }
+  .up-outline__items li::marker { color: rgba(242, 66, 11, 0.7); }
+
+  .up-disclaimer {
+    margin: 1.6rem 0 0; padding: 1rem 1.2rem; border-radius: 12px;
+    border-left: 3px solid rgba(242, 66, 11, 0.6); background: rgba(242, 66, 11, 0.06);
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.88rem; line-height: 1.6;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  /* ===== CTA ===== */
+  .up-cta { padding-block: clamp(2rem, 4vw, 4rem) clamp(4rem, 7vw, 7rem); }
+  .up-cta__box {
+    position: relative; overflow: hidden; text-align: center;
+    padding: clamp(2.4rem, 4vw, 3.4rem) clamp(1.5rem, 3vw, 3rem); border-radius: 26px;
+    background: linear-gradient(135deg, #f2420b, #c2380a);
+    box-shadow: 0 24px 60px -22px rgba(242, 66, 11, 0.6);
+  }
+  .up-cta__title {
+    font-family: var(--font-headline); font-weight: 700; color: #fff;
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem); margin: 0 0 0.8rem;
+  }
+  .up-cta__sub {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.02rem; line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9); margin: 0 auto 1.8rem; max-width: 44ch;
+  }
+  .up-btn--onfire {
+    background: #fff; color: #c2380a; box-shadow: 0 12px 26px -10px rgba(0, 0, 0, 0.4);
+  }
+  .up-btn--onfire:hover { transform: translateY(-2px); background: #fff5f1; box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.45); }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 640px) {
+    .up-learn { grid-template-columns: 1fr; }
+  }
+</style>

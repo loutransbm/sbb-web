@@ -4,7 +4,9 @@
 // MỖI BÀI GRP = 1 card "khóa". Bấm card -> trang bài học (light mode).
 import PageLayout from '@ui/layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
+import { upcomingCourses } from '../../data/upcomingCourses';
 
+const upcomingById = Object.fromEntries(upcomingCourses.map((c) => [c.id, c]));
 const lessons = (await getCollection('grp')).sort((a, b) => a.data.order - b.data.order);
 const countriesRaw = (await getCollection('grp2')).sort((a, b) => a.data.order - b.data.order);
 const slugOf = (m: string) => m.replace('.', '-');
@@ -117,15 +119,16 @@ const programs = [
           </summary>
           <div class="ac-opts" role="group" aria-label="Lọc theo chương trình">
             {programs.map((p, i) => (
-              <button
-                type="button"
-                class:list={["ac-opt", i === 0 && "is-active", !p.live && "is-locked"]}
-                data-product={p.id}
-                disabled={!p.live}
-              >
-                {p.label}
-                {!p.live && <span class="ac-opt__soon">Sắp ra mắt</span>}
-              </button>
+              p.live ? (
+                <button type="button" class:list={["ac-opt", i === 0 && "is-active"]} data-product={p.id}>
+                  {p.label}
+                </button>
+              ) : (
+                <a class="ac-opt ac-opt--soon" href={`/learn/sap-ra-mat/${upcomingById[p.id].slug}`}>
+                  {p.label}
+                  <span class="ac-opt__soon">Sắp ra mắt</span>
+                </a>
+              )
             ))}
           </div>
         </details>
@@ -212,6 +215,34 @@ const programs = [
           ))}
         </div>
         <p class="ac-empty" hidden>Không tìm thấy khóa học phù hợp.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KHÓA SẮP RA MẮT ===== -->
+  <section class="up-row">
+    <div class="up-row__wrap">
+      <div class="up-row__head">
+        <h2 class="up-row__title">Khóa sắp ra mắt</h2>
+        <p class="up-row__sub">Các khóa đang được xây dựng. Bấm để xem trước nội dung và đăng ký nhận thông báo khi mở.</p>
+      </div>
+      <div class="up-row__grid">
+        {upcomingCourses.map((c) => (
+          <a href={`/learn/sap-ra-mat/${c.slug}`} class="upc">
+            <div class="upc__cover" style={`background:${c.cover}`}>
+              <svg class="upc__icon" viewBox="0 0 64 64" fill="none" stroke="#1c1c1c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={c.icon}></svg>
+              <span class="upc__badge">Sắp ra mắt</span>
+            </div>
+            <div class="upc__info">
+              <h3 class="upc__title">{c.title}</h3>
+              <p class="upc__tag">{c.tagline}</p>
+              <span class="upc__more">
+                Tìm hiểu
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              </span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -307,6 +338,13 @@ const programs = [
     color: rgba(217, 195, 171, 0.7); border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 999px; padding: 0.12rem 0.45rem; white-space: nowrap;
   }
+  /* Rail item 'soon' = link bấm được tới trang teaser */
+  a.ac-opt--soon {
+    display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.6); text-decoration: none;
+  }
+  a.ac-opt--soon:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+  a.ac-opt--soon:hover .ac-opt__soon { border-color: rgba(242, 66, 11, 0.5); color: #ffcaac; }
 
   /* ===== TOOLBAR ===== */
   .ac-toolbar {
@@ -422,6 +460,70 @@ const programs = [
     .ac-grid.is-list .cc { flex-direction: column; }
     .ac-grid.is-list .cc__cover { flex-basis: auto; aspect-ratio: 4 / 3; }
   }
+
+  /* ===== KHÓA SẮP RA MẮT (card strip dưới catalog) ===== */
+  .up-row { padding-block: clamp(1rem, 2vw, 2rem) clamp(4rem, 7vw, 7rem); }
+  .up-row__wrap {
+    width: 100%; max-width: 120rem; margin-inline: auto;
+    padding-inline: clamp(1.5rem, 3vw, 3rem);
+  }
+  .up-row__head {
+    margin-bottom: clamp(1.4rem, 2.5vw, 2.2rem); padding-top: clamp(2rem, 4vw, 3.5rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .up-row__title {
+    font-family: var(--font-headline); font-weight: 700; color: #fff;
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem); letter-spacing: -0.01em; margin: 0 0 0.5rem;
+  }
+  .up-row__sub {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.96rem; line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55); margin: 0; max-width: 60ch;
+  }
+  .up-row__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.2rem, 1.8vw, 1.9rem); }
+
+  .upc {
+    display: flex; flex-direction: column; text-decoration: none; min-width: 0;
+    padding: 0.5rem; border-radius: 22px; border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease, background .35s ease, box-shadow .35s ease;
+  }
+  .upc:hover {
+    transform: translateY(-5px); border-color: rgba(242, 66, 11, 0.45);
+    background: rgba(242, 66, 11, 0.05);
+    box-shadow: 0 26px 60px -28px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(242, 66, 11, 0.1);
+  }
+  .upc__cover {
+    position: relative; aspect-ratio: 16 / 10; border-radius: 16px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .upc__icon { width: 30%; height: 30%; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .upc:hover .upc__icon { transform: scale(1.08) rotate(-2deg); }
+  .upc__badge {
+    position: absolute; top: 0.7rem; right: 0.7rem;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.6rem;
+    letter-spacing: 0.05em; text-transform: uppercase; color: #1c1c1c;
+    background: rgba(255, 255, 255, 0.82); border-radius: 999px; padding: 0.2rem 0.55rem;
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  }
+  .upc__info { display: flex; flex-direction: column; flex: 1 1 auto; padding: 1.15rem 0.9rem 0.95rem; }
+  .upc__title {
+    font-family: var(--font-headline); font-weight: 600; text-transform: none;
+    font-size: clamp(1.2rem, 1.5vw, 1.45rem); line-height: 1.22; color: #fff; margin: 0 0 0.5rem;
+  }
+  .upc__tag {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.9rem; line-height: 1.55;
+    color: rgba(255, 255, 255, 0.6); margin: 0 0 1.1rem;
+  }
+  .upc__more {
+    margin-top: auto; display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: var(--font-headline); font-weight: 700; font-size: 0.8rem;
+    letter-spacing: 0.03em; text-transform: uppercase; color: #ff7e48;
+  }
+  .upc__more svg { transition: transform .3s ease; }
+  .upc:hover .upc__more svg { transform: translateX(4px); }
+
+  @media (max-width: 1080px) { .up-row__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .up-row__grid { grid-template-columns: 1fr; } }
 </style>
 
 <script>
