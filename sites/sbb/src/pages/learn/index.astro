@@ -110,6 +110,14 @@ const programs = [
     <div class="academy-wrap">
       <!-- ===== RAIL FILTER (trái) ===== -->
       <aside class="ac-rail" aria-label="Bộ lọc" data-lenis-prevent>
+        <div class="ac-progress" data-total={cards.length}>
+          <div class="ac-progress__top">
+            <span class="ac-progress__label">Tiến độ GRP</span>
+            <span class="ac-progress__count"><b id="acDoneCount">0</b>/{cards.length} bài</span>
+          </div>
+          <div class="ac-progress__bar"><span class="ac-progress__fill" id="acProgFill"></span></div>
+          <button type="button" class="ac-progress__reset" id="acProgReset" hidden>Đặt lại tiến độ</button>
+        </div>
         <p class="ac-rail__head">Bộ lọc</p>
 
         <details class="ac-group" open>
@@ -184,9 +192,10 @@ const programs = [
         <!-- Lưới card -->
         <div class="ac-grid">
           {cards.map((c) => (
-            <a href={c.href} class="cc" data-product="grp" data-level="1" data-zone={String(c.zone)} data-title={`${c.title} ${c.subtitle} ${c.zoneTitle}`.toLowerCase()}>
+            <a href={c.href} class="cc" data-product="grp" data-level="1" data-zone={String(c.zone)} data-lesson-id={`l1-${c.slug}`} data-title={`${c.title} ${c.subtitle} ${c.zoneTitle}`.toLowerCase()}>
               <div class="cc__cover" style={`background:${c.cover}`}>
                 <svg class="cc__icon" viewBox="0 0 64 64" fill="none" stroke="#1c1c1c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={c.icon}></svg>
+                <span class="cc__done" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
               </div>
               <div class="cc__info">
                 <h3 class="cc__title">{c.title}</h3>
@@ -310,6 +319,21 @@ const programs = [
     font-size: 1.02rem; color: #fff; letter-spacing: 0.01em;
     padding-bottom: 0.85rem; border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
+
+  /* ===== Tiến độ GRP (localStorage) ===== */
+  .ac-progress { margin-bottom: 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+  .ac-progress__top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.55rem; }
+  .ac-progress__label { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.82rem; color: rgba(255, 255, 255, 0.72); letter-spacing: 0.02em; }
+  .ac-progress__count { font-family: var(--font-headline); font-weight: 700; font-size: 0.82rem; color: rgba(255, 255, 255, 0.5); white-space: nowrap; }
+  .ac-progress__count b { color: #ff7e48; }
+  .ac-progress__bar { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.1); overflow: hidden; }
+  .ac-progress__fill { display: block; height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #f2420b, #ff7e48); transition: width .55s cubic-bezier(.16,1,.3,1); }
+  .ac-progress__reset {
+    margin-top: 0.65rem; cursor: pointer; border: 0; background: transparent; padding: 0;
+    font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255, 255, 255, 0.4);
+    text-decoration: underline; text-underline-offset: 2px; transition: color .2s ease;
+  }
+  .ac-progress__reset:hover { color: rgba(255, 255, 255, 0.72); }
   .ac-group { border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
   .ac-group > summary {
     display: flex; align-items: center; justify-content: space-between;
@@ -399,6 +423,15 @@ const programs = [
   }
   .cc__icon { width: 38%; height: 38%; transition: transform .4s cubic-bezier(.16,1,.3,1); }
   .cc:hover .cc__icon { transform: scale(1.07) rotate(-2deg); }
+  /* Badge ✓ "đã học" trên cover (hiện qua JS khi .cc.is-done) */
+  .cc__done {
+    position: absolute; top: 0.7rem; left: 0.7rem; z-index: 2;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 999px; color: #fff; background: #f2420b;
+    box-shadow: 0 5px 14px -4px rgba(242, 66, 11, 0.8);
+    opacity: 0; transform: scale(0.5); transition: opacity .25s ease, transform .25s ease;
+  }
+  .cc.is-done .cc__done { opacity: 1; transform: scale(1); }
   /* Card nước (Lớp 2): cờ SVG bo góc giữa cover */
   .cc__flag {
     width: 52%; height: auto; aspect-ratio: 4 / 3; display: block;
@@ -590,5 +623,44 @@ const programs = [
       b.classList.add('is-active');
       grid.classList.toggle('is-list', b.dataset.view === 'list');
     }));
+  })();
+
+  // Tiến độ "đã học" GRP: đọc localStorage, đánh dấu card + cập nhật thanh tiến độ.
+  (() => {
+    const KEY = 'sbb:grp:done';
+    const read = () => { try { return new Set<string>(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch { return new Set<string>(); } };
+    const write = (set: Set<string>) => { try { localStorage.setItem(KEY, JSON.stringify([...set])); } catch {} };
+
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.cc[data-lesson-id]'));
+    const wrap = document.querySelector<HTMLElement>('.ac-progress');
+    const total = Number(wrap?.dataset.total) || cards.filter((c) => (c.dataset.lessonId || '').startsWith('l1-')).length;
+    const countEl = document.getElementById('acDoneCount');
+    const fillEl = document.getElementById('acProgFill');
+    const resetBtn = document.getElementById('acProgReset') as HTMLButtonElement | null;
+
+    const render = () => {
+      const done = read();
+      let n = 0;
+      cards.forEach((c) => {
+        const id = c.dataset.lessonId || '';
+        const isDone = done.has(id);
+        c.classList.toggle('is-done', isDone);
+        if (isDone && id.startsWith('l1-')) n += 1;
+      });
+      if (countEl) countEl.textContent = String(n);
+      if (fillEl) fillEl.style.width = total ? `${Math.round((n / total) * 100)}%` : '0%';
+      if (resetBtn) resetBtn.hidden = n === 0;
+    };
+    render();
+
+    resetBtn?.addEventListener('click', () => {
+      const done = read();
+      cards.forEach((c) => { const id = c.dataset.lessonId || ''; if (id.startsWith('l1-')) done.delete(id); });
+      write(done);
+      render();
+    });
+
+    window.addEventListener('pageshow', render);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) render(); });
   })();
 </script>

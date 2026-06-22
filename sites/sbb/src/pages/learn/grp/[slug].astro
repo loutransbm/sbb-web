@@ -63,9 +63,11 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
                           href={`/learn/grp/${slugOf(l.data.module)}`}
                           class:list={["grp-toc__link", l.data.module === lesson.data.module && "is-current"]}
                           aria-current={l.data.module === lesson.data.module ? 'page' : undefined}
+                          data-lesson-id={`l1-${slugOf(l.data.module)}`}
                         >
                           <span class="grp-toc__num">{pad2(l.data.order)}</span>
                           <span class="grp-toc__t">{l.data.title}</span>
+                          <svg class="grp-toc__check" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
                         </a>
                       </li>
                     ))}
@@ -97,6 +99,15 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
           <article class="grp-prose">
             <Content />
           </article>
+
+          <!-- ĐÁNH DẤU ĐÃ HỌC (localStorage) -->
+          <div class="grp-done">
+            <button type="button" class="grp-done__btn" id="grpDoneBtn" data-lesson-id={`l1-${slugOf(lesson.data.module)}`} aria-pressed="false">
+              <svg class="grp-done__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle class="grp-done__ring" cx="12" cy="12" r="9"/><path class="grp-done__tick" d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+              <span class="grp-done__label">Đánh dấu đã học</span>
+            </button>
+            <p class="grp-done__hint">Lưu trên trình duyệt này để bạn theo dõi tiến độ.</p>
+          </div>
 
           <!-- PREV / NEXT -->
           <nav class="grp-pager" aria-label="Điều hướng bài">
@@ -253,6 +264,34 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
     background: rgba(36, 23, 16, 0.07); padding: 0.12em 0.4em; border-radius: 6px; color: #b23207;
   }
 
+  /* ===== Mục lục: dấu ✓ bài đã học ===== */
+  .grp-toc__check {
+    flex: 0 0 auto; margin-left: auto; color: #f2420b;
+    opacity: 0; transform: scale(0.6); transition: opacity .2s ease, transform .2s ease;
+  }
+  .grp-toc__link.is-done .grp-toc__check { opacity: 1; transform: scale(1); }
+  .grp-toc__link.is-done:not(.is-current) .grp-toc__t { color: rgba(36, 23, 16, 0.46); }
+
+  /* ===== Nút đánh dấu đã học ===== */
+  .grp-done { margin-top: clamp(2.4rem, 4vw, 3.2rem); display: flex; flex-direction: column; align-items: flex-start; gap: 0.55rem; }
+  .grp-done__btn {
+    display: inline-flex; align-items: center; gap: 0.6rem; cursor: pointer;
+    font-family: var(--font-headline); font-weight: 700; font-size: 0.92rem;
+    color: #c2380a; background: transparent; border: 1.5px solid rgba(242, 66, 11, 0.45);
+    border-radius: 999px; padding: 0.7rem 1.4rem;
+    transition: background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+  }
+  .grp-done__btn:hover { background: rgba(242, 66, 11, 0.07); border-color: rgba(242, 66, 11, 0.7); }
+  .grp-done__icon { flex: 0 0 auto; }
+  .grp-done__tick { stroke-dasharray: 14; stroke-dashoffset: 14; transition: stroke-dashoffset .35s ease .05s; }
+  .grp-done__btn.is-done {
+    background: #f2420b; border-color: #f2420b; color: #fff;
+    box-shadow: 0 12px 26px -12px rgba(242, 66, 11, 0.7);
+  }
+  .grp-done__btn.is-done:hover { background: #ff5c26; border-color: #ff5c26; }
+  .grp-done__btn.is-done .grp-done__tick { stroke-dashoffset: 0; }
+  .grp-done__hint { margin: 0; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.8rem; color: rgba(60, 44, 34, 0.5); }
+
   /* ===== PREV / NEXT ===== */
   .grp-pager {
     display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
@@ -286,3 +325,37 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
     .grp-pager__btn--next { text-align: left; }
   }
 </style>
+
+<script>
+  // Đánh dấu "đã học" cho bài Lớp 1, lưu localStorage. Đồng bộ sidebar + nút.
+  (() => {
+    const KEY = 'sbb:grp:done';
+    const read = () => { try { return new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch { return new Set(); } };
+    const write = (set) => { try { localStorage.setItem(KEY, JSON.stringify([...set])); } catch {} };
+
+    const done = read();
+    const btn = document.getElementById('grpDoneBtn');
+    const label = btn?.querySelector('.grp-done__label');
+
+    document.querySelectorAll('.grp-toc__link[data-lesson-id]').forEach((a) => {
+      if (done.has(a.dataset.lessonId)) a.classList.add('is-done');
+    });
+
+    const sync = () => {
+      if (!btn) return;
+      const isDone = done.has(btn.dataset.lessonId);
+      btn.classList.toggle('is-done', isDone);
+      btn.setAttribute('aria-pressed', String(isDone));
+      if (label) label.textContent = isDone ? 'Đã học' : 'Đánh dấu đã học';
+    };
+    sync();
+
+    btn?.addEventListener('click', () => {
+      const id = btn.dataset.lessonId;
+      if (done.has(id)) done.delete(id); else done.add(id);
+      write(done);
+      document.querySelectorAll(`.grp-toc__link[data-lesson-id="${id}"]`).forEach((a) => a.classList.toggle('is-done', done.has(id)));
+      sync();
+    });
+  })();
+</script>
