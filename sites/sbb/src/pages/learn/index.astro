@@ -1,368 +1,492 @@
 ---
+// Catalog "Học viện SBB" — layout kiểu Claude Academy: rail filter trái (Chương trình /
+// Vùng năng lực) + search + toggle grid/list + lưới card (cover pastel + icon nét vẽ tay).
+// MỖI BÀI GRP = 1 card "khóa". Bấm card -> trang bài học (light mode).
 import PageLayout from '@ui/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
 
-// Catalog khóa học SBB. GRP là THẬT (live), còn lại 'soon' (Sắp ra mắt).
-const courses = [
-  { id:'grp', status:'live', cat:'global-readiness', catLabel:'Chuẩn bị toàn cầu',
-    title:'GRP — Global Readiness Program',
-    desc:'Chuẩn bị năng lực toàn cầu trước khi ra nước ngoài học và làm: tư duy toàn cầu, liên văn hoá, ngoại ngữ chức năng, học–làm quốc tế và sống tự chủ.',
-    meta:['15 bài trụ','5 vùng năng lực','Chứng nhận SBB'],
-    img:'/grp-3d-globe-nobg.png', href:'/learn/grp' },
-  { id:'english', status:'soon', cat:'language', catLabel:'Ngoại ngữ',
-    title:'Tiếng Anh chức năng', desc:'Tiếng Anh dùng thật trong phỏng vấn, email công việc và đời sống công sở quốc tế.',
-    meta:['Sắp ra mắt'], img:'/global-3d-nobg.png', href:'#' },
-  { id:'career', status:'soon', cat:'career', catLabel:'Kỹ năng nghề',
-    title:'Kỹ năng nghề quốc tế', desc:'Tác phong chuẩn quốc tế, kỹ năng chuyên ngành và cách thể hiện năng lực để được trọng dụng.',
-    meta:['Sắp ra mắt'], img:'/career-3d-nobg.png', href:'#' },
-  { id:'visa', status:'soon', cat:'visa', catLabel:'Hồ sơ & Visa',
-    title:'Hồ sơ & Visa', desc:'Hiểu đúng từng loại visa, CV chuẩn ATS, thư động lực và bộ hồ sơ sẵn sàng mọi vòng xét duyệt.',
-    meta:['Sắp ra mắt'], img:'/plane-3d-nobg.png', href:'#' },
+const lessons = (await getCollection('grp')).sort((a, b) => a.data.order - b.data.order);
+const countriesRaw = (await getCollection('grp2')).sort((a, b) => a.data.order - b.data.order);
+const slugOf = (m: string) => m.replace('.', '-');
+
+// Palette cover pastel (cycle theo thứ tự bài) — đa sắc như Claude.
+const COVERS = [
+  '#c8c7e6', '#5e9b80', '#ecc7ac', '#8f7fd6', '#d97a5a', '#bcdccb',
+  '#e6d49b', '#a9c8e0', '#e3afc0', '#cf9a73', '#9fc7b4', '#d6c3e0',
 ];
-const courseCats = [
-  { id:'all', label:'Tất cả' },
-  { id:'global-readiness', label:'Chuẩn bị toàn cầu' },
-  { id:'language', label:'Ngoại ngữ' },
-  { id:'career', label:'Kỹ năng nghề' },
-  { id:'visa', label:'Hồ sơ & Visa' },
+// 15 icon nét vẽ tay (viewBox 0 0 64 64, chỉ phần path bên trong <svg>).
+const ICONS = [
+  '<circle cx="32" cy="32" r="20"/><path d="M12 32h40"/><path d="M32 12v40"/><path d="M32 12c8 6 8 34 0 40"/><path d="M32 12c-8 6-8 34 0 40"/>',
+  '<circle cx="32" cy="32" r="20"/><path d="M41 23 33 33 23 41 31 31z"/>',
+  '<path d="M32 18c-5-4-13-4-18-2v30c5-2 13-2 18 2"/><path d="M32 18c5-4 13-4 18-2v30c-5-2-13-2-18 2"/><path d="M32 18v32"/>',
+  '<path d="M16 18h28a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H28l-9 7v-7h-3a4 4 0 0 1-4-4V22a4 4 0 0 1 4-4z"/><path d="M23 26h18"/><path d="M23 33h12"/>',
+  '<path d="M32 12a14 14 0 0 0-8 25c2 2 3 4 3 6h10c0-2 1-4 3-6a14 14 0 0 0-8-25z"/><path d="M27 49h10"/><path d="M29 53h6"/>',
+  '<path d="M32 53s14-13 14-25a14 14 0 0 0-28 0c0 12 14 25 14 25z"/><circle cx="32" cy="28" r="5"/>',
+  '<path d="M32 17 8 27l24 10 24-10z"/><path d="M18 32v10c0 3 6 6 14 6s14-3 14-6V32"/><path d="M56 27v13"/>',
+  '<rect x="12" y="22" width="40" height="28" rx="3"/><path d="M24 22v-4a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v4"/><path d="M12 35h40"/>',
+  '<path d="M14 30 32 14l18 16"/><path d="M18 28v20h28V28"/><path d="M28 48V37h8v11"/>',
+  '<path d="M32 12 16 18v12c0 11 7 18 16 22 9-4 16-11 16-22V18z"/><path d="M25 31l5 5 9-10"/>',
+  '<path d="M32 48S14 38 14 26a9 9 0 0 1 18-3 9 9 0 0 1 18 3c0 12-18 22-18 22z"/>',
+  '<circle cx="32" cy="32" r="18"/><circle cx="32" cy="32" r="10"/><circle cx="32" cy="32" r="2.6"/>',
+  '<path d="M14 48h8v-9h9v-9h9v-9h10"/><path d="M44 21h6v6"/><path d="M30 31 50 21"/>',
+  '<rect x="16" y="12" width="32" height="40" rx="3"/><path d="M24 24h16"/><path d="M24 32h16"/><path d="M24 40h10"/>',
+  '<path d="M14 45 25 19l11 26"/><path d="M18 37h13"/><path d="M46 45V29"/><path d="M46 33a6 6 0 1 0 0 12"/>',
+];
+
+const wordsOf = (s: string) => (s.match(/[^\s]+/g) || []).length;
+
+// ===== LỚP 1 — 15 bài trụ =====
+const cards = lessons.map((l, i) => {
+  const body = l.body || '';
+  const lectures = (body.match(/^##\s+\d/gm) || []).length || (body.match(/^##\s+/gm) || []).length;
+  const hasQuiz = /^##\s+Tự kiểm tra/m.test(body);
+  const mins = Math.max(3, Math.round(wordsOf(body) / 170));
+  const meta = [`${lectures} bài giảng`, `${mins} phút`];
+  if (hasQuiz) meta.push('Tự kiểm tra');
+  return {
+    ...l.data,
+    level: 1,
+    slug: slugOf(l.data.module),
+    href: `/learn/grp/${slugOf(l.data.module)}`,
+    cover: COVERS[i % COVERS.length],
+    icon: ICONS[i % ICONS.length],
+    meta,
+  };
+});
+
+// ===== LỚP 2 — 6 bài đào sâu theo nước =====
+const COUNTRY_COVERS: Record<string, string> = {
+  my: '#b8c6e8', uc: '#e7d49a', anh: '#d9b2bf', canada: '#e9b1a6', newzealand: '#a8c9da', singapore: '#e3a89f',
+};
+const countryCards = countriesRaw.map((c) => {
+  const body = c.body || '';
+  const parts = (body.match(/^##\s+/gm) || []).length;
+  const mins = Math.max(5, Math.round(wordsOf(body) / 170));
+  return {
+    ...c.data,
+    level: 2,
+    href: `/learn/grp/nuoc/${c.data.code}`,
+    cover: COUNTRY_COVERS[c.data.code] || '#cdb8e0',
+    title: `${c.data.name}${c.data.enName ? ` (${c.data.enName})` : ''}`,
+    meta: [`${parts} phần`, `${mins} phút`, 'Phủ 5 vùng'],
+  };
+});
+
+// Vùng năng lực (Category)
+const zoneMap = new Map<number, string>();
+for (const l of lessons) if (!zoneMap.has(l.data.zone)) zoneMap.set(l.data.zone, l.data.zoneTitle);
+const zones = Array.from(zoneMap, ([id, title]) => ({ id, title }));
+
+// Chương trình (Product)
+const programs = [
+  { id: 'grp', label: 'GRP — Global Readiness', live: true },
+  { id: 'english', label: 'Tiếng Anh chức năng', live: false },
+  { id: 'career', label: 'Kỹ năng nghề quốc tế', live: false },
+  { id: 'visa', label: 'Hồ sơ & Visa', live: false },
 ];
 ---
 
 <PageLayout
-  title="Learn"
-  description="Học viện SBB — kho khóa học chuẩn bị năng lực quốc tế. Bắt đầu với GRP, các khóa khác sẽ mở dần."
+  title="Học viện"
+  description="Học viện SBB — kho khóa học chuẩn bị năng lực quốc tế. Bắt đầu với GRP: 15 bài trụ qua 5 vùng năng lực."
   site="sbb"
   currentPath="/learn"
 >
-  <!-- ===== HERO ngắn gọn (cascade đồng bộ site) ===== -->
+  <!-- ===== HERO cascade (đồng bộ site) ===== -->
   <section class="learn-hero">
     <div class="learn-glow-beam" aria-hidden="true"></div>
-    <div class="container">
-      <div class="cs-header">
-        <div class="cs-line cs-line-1">
-          <span class="cs-text-white">OUR COURSES</span>
-        </div>
+    <div class="learn-hero__wrap">
+      <h1 class="sr-only">Học viện SBB — khóa học</h1>
+      <div class="cs-header" aria-hidden="true">
+        <div class="cs-line cs-line-1"><span class="cs-text-white">OUR COURSES</span></div>
       </div>
       <p class="learn-sub">Học viện SBB — kho khóa học chuẩn bị năng lực quốc tế. Bắt đầu với GRP, các khóa khác sẽ mở dần.</p>
     </div>
   </section>
 
-  <!-- ===== CATALOG (tràn 2 mép như news) ===== -->
-  <section class="o-section courses-section">
-    <div class="container">
-      <!-- Toolbar: filter pills + ô search + toggle grid/list -->
-      <div class="course-toolbar">
-        <div class="course-filters" role="group" aria-label="Lọc theo danh mục">
-          {courseCats.map((c, i) => (
-            <button type="button" class:list={["course-filter", i === 0 && "is-active"]} data-filter={c.id}>{c.label}</button>
-          ))}
-        </div>
-        <div class="course-tools">
-          <label class="course-search">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.2-4.2"/></svg>
-            <input type="search" id="courseSearch" placeholder="Tìm khóa học..." autocomplete="off" aria-label="Tìm khóa học" />
+  <section class="academy">
+    <div class="academy-wrap">
+      <!-- ===== RAIL FILTER (trái) ===== -->
+      <aside class="ac-rail" aria-label="Bộ lọc" data-lenis-prevent>
+        <p class="ac-rail__head">Bộ lọc</p>
+
+        <details class="ac-group" open>
+          <summary>
+            <span>Chương trình</span>
+            <svg class="ac-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="ac-opts" role="group" aria-label="Lọc theo chương trình">
+            {programs.map((p, i) => (
+              <button
+                type="button"
+                class:list={["ac-opt", i === 0 && "is-active", !p.live && "is-locked"]}
+                data-product={p.id}
+                disabled={!p.live}
+              >
+                {p.label}
+                {!p.live && <span class="ac-opt__soon">Sắp ra mắt</span>}
+              </button>
+            ))}
+          </div>
+        </details>
+
+        <details class="ac-group" open>
+          <summary>
+            <span>Cấp độ</span>
+            <svg class="ac-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="ac-opts" role="group" aria-label="Lọc theo cấp độ">
+            <button type="button" class="ac-opt is-active" data-level="all">Tất cả cấp độ</button>
+            <button type="button" class="ac-opt" data-level="1"><span class="ac-opt__z">Lớp 1</span> Bài trụ nền tảng</button>
+            <button type="button" class="ac-opt" data-level="2"><span class="ac-opt__z">Lớp 2</span> Đào sâu theo nước</button>
+          </div>
+        </details>
+
+        <details class="ac-group" open>
+          <summary>
+            <span>Vùng năng lực</span>
+            <svg class="ac-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="ac-opts" role="group" aria-label="Lọc theo vùng năng lực">
+            <button type="button" class="ac-opt is-active" data-zone="all">Tất cả vùng</button>
+            {zones.map((z) => (
+              <button type="button" class="ac-opt" data-zone={String(z.id)}>
+                <span class="ac-opt__z">Vùng {z.id}</span> {z.title}
+              </button>
+            ))}
+          </div>
+        </details>
+      </aside>
+
+      <!-- ===== NỘI DUNG (phải) ===== -->
+      <div class="ac-content">
+        <!-- Toolbar: search + toggle grid/list -->
+        <div class="ac-toolbar">
+          <label class="ac-search">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.2-4.2"/></svg>
+            <input type="search" id="acSearch" placeholder="Tìm khóa học..." autocomplete="off" aria-label="Tìm khóa học" />
           </label>
-          <div class="course-view" role="group" aria-label="Chế độ hiển thị">
-            <button type="button" class="course-view-btn is-active" data-view="grid" aria-label="Dạng lưới" title="Lưới">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+          <div class="ac-view" role="group" aria-label="Chế độ hiển thị">
+            <button type="button" class="ac-view__btn is-active" data-view="grid" title="Lưới">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.6"/><rect x="13" y="3" width="8" height="8" rx="1.6"/><rect x="3" y="13" width="8" height="8" rx="1.6"/><rect x="13" y="13" width="8" height="8" rx="1.6"/></svg>
+              <span>Lưới</span>
             </button>
-            <button type="button" class="course-view-btn" data-view="list" aria-label="Dạng danh sách" title="Danh sách">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+            <button type="button" class="ac-view__btn" data-view="list" title="Danh sách">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><circle cx="3.5" cy="6" r="1.2" fill="currentColor" stroke="none"/><circle cx="3.5" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="3.5" cy="18" r="1.2" fill="currentColor" stroke="none"/></svg>
+              <span>Danh sách</span>
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- Lưới thẻ khóa học -->
-      <div class="courses-grid">
-        {courses.map((c) => (
-          <a href={c.href} class:list={["course-card", c.status === 'soon' && "is-soon"]} data-cat={c.cat} data-title={c.title.toLowerCase()} data-status={c.status}>
-            <div class="course-card__media"><img src={c.img} alt={c.title} loading="lazy" /></div>
-            <div class="course-card__body">
-              <span class="course-card__tag">{c.catLabel}</span>
-              <h3 class="course-card__title">{c.title}</h3>
-              <p class="course-card__desc">{c.desc}</p>
-              <div class="course-card__meta">{c.meta.map((m) => <span>{m}</span>)}</div>
-            </div>
-            {c.status === 'soon' && <span class="course-card__badge">Sắp ra mắt</span>}
-            {c.status === 'live' && (
-              <span class="course-card__cta" aria-label="Vào học">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8 L16 16"/><path d="M16 9 L16 16 L9 16"/></svg>
-              </span>
-            )}
-          </a>
-        ))}
+        <!-- Lưới card -->
+        <div class="ac-grid">
+          {cards.map((c) => (
+            <a href={c.href} class="cc" data-product="grp" data-level="1" data-zone={String(c.zone)} data-title={`${c.title} ${c.subtitle} ${c.zoneTitle}`.toLowerCase()}>
+              <div class="cc__cover" style={`background:${c.cover}`}>
+                <svg class="cc__icon" viewBox="0 0 64 64" fill="none" stroke="#1c1c1c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={c.icon}></svg>
+              </div>
+              <div class="cc__info">
+                <h3 class="cc__title">{c.title}</h3>
+                <div class="cc__meta">{c.meta.map((m) => <span>{m}</span>)}</div>
+                <div class="cc__foot">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a14 14 0 0 0 0 18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M3 12h18"/></svg>
+                  <span>{c.zoneTitle}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+          {countryCards.map((c) => (
+            <a href={c.href} class="cc cc--country" data-product="grp" data-level="2" data-zone="" data-title={`${c.title} ${c.subtitle} đào sâu theo nước ${c.name} ${c.enName}`.toLowerCase()}>
+              <div class="cc__cover" style={`background:${c.cover}`}>
+                <img class="cc__flag" src={`/flags/${c.code}.svg`} alt={`Cờ ${c.name}`} width="120" height="90" loading="lazy" decoding="async" />
+              </div>
+              <div class="cc__info">
+                <h3 class="cc__title">{c.title}</h3>
+                <div class="cc__meta">{c.meta.map((m) => <span>{m}</span>)}</div>
+                <div class="cc__foot">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v18"/><path d="M5 4h11l-2 4 2 4H5"/></svg>
+                  <span>Lớp 2 · Đào sâu theo nước</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+        <p class="ac-empty" hidden>Không tìm thấy khóa học phù hợp.</p>
       </div>
-      <p class="courses-empty" hidden>Không tìm thấy khóa học phù hợp.</p>
     </div>
   </section>
 </PageLayout>
 
 <style>
-  /* ===== HERO CASCADE (copy từ news, đổi tên class -> learn) ===== */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* ===== HERO cascade (khối cao, canh giữa dọc cho thoáng như các page cũ) ===== */
   .learn-hero {
     position: relative; overflow: visible;
-    padding-top: clamp(7rem, 8vw, 10rem); /* padding-top vừa phải, KHÔNG full-screen */
-    padding-bottom: clamp(2rem, 4vw, 3.5rem);
+    min-height: clamp(460px, 70vh, 840px);
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: clamp(8rem, 9vw, 11.5rem); padding-bottom: clamp(4rem, 7vw, 7rem);
     background: transparent;
   }
-  .learn-hero .container { position: relative; z-index: 1; }
-  /* Quầng cam nhẹ bên phải */
+  .learn-hero__wrap {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 120rem; margin-inline: auto;
+    padding-inline: clamp(1.5rem, 3vw, 3rem);
+  }
   .learn-glow-beam {
     position: absolute; top: 10px; left: 84%; transform: translateX(-50%);
     width: 1080px; height: 720px; pointer-events: none; z-index: 0;
     background: radial-gradient(ellipse 50% 50% at 50% 42%,
-      rgba(255, 112, 60, 0.50) 0%,
-      rgba(248, 82, 26, 0.38) 22%,
-      rgba(242, 66, 11, 0.24) 44%,
-      rgba(242, 66, 11, 0.10) 64%,
-      transparent 84%);
+      rgba(255, 112, 60, 0.50) 0%, rgba(248, 82, 26, 0.38) 22%, rgba(242, 66, 11, 0.24) 44%,
+      rgba(242, 66, 11, 0.10) 64%, transparent 84%);
     filter: blur(76px);
   }
-  /* dòng phụ nhỏ dưới tiêu đề */
   .learn-sub {
-    position: relative; z-index: 1;
-    margin: clamp(1.2rem, 2vw, 1.8rem) 0 0;
-    max-width: 52ch; text-align: left;
+    margin: clamp(1.2rem, 2vw, 1.8rem) 0 0; max-width: 52ch; text-align: left;
     color: rgba(255, 255, 255, 0.62); font-family: 'Inter', sans-serif; font-weight: 300;
     font-size: clamp(0.9rem, 1vw, 1.05rem); line-height: 1.6;
   }
-
-  /* heading cascade — copy từ news */
   .cs-header { margin-bottom: 0; font-weight: 500; line-height: 0.95; letter-spacing: -0.045em; font-family: 'Inter', sans-serif; }
   .cs-line { display: flex; align-items: center; gap: 1.5rem; }
   .cs-line-1 { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; white-space: nowrap; position: relative; z-index: 10; }
   .cs-text-white { color: #ffffff !important; }
 
-  /* ===== CATALOG ===== */
-  .courses-section { padding-top: clamp(1rem, 2vw, 2.2rem); }
-  /* TRÀN 2 MÉP như news */
-  .courses-section .container {
-    max-width: none; width: 100%;
-    padding-inline: clamp(1.5rem, 3.2vw, 3.25rem);
+  .academy { padding-top: clamp(1rem, 2vw, 2.5rem); padding-bottom: clamp(4rem, 7vw, 7rem); }
+  .academy-wrap {
+    width: 100%; max-width: 120rem; margin-inline: auto;
+    padding-inline: clamp(1.5rem, 3vw, 3rem);
+    display: grid; grid-template-columns: 232px minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem); align-items: start;
   }
 
-  /* Toolbar */
-  .course-toolbar {
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-    gap: 1rem 1.5rem; margin-bottom: clamp(3rem, 5vw, 4.5rem);
+  /* ===== RAIL ===== */
+  .ac-rail {
+    position: sticky; top: clamp(5.5rem, 8vw, 7rem);
+    /* Cao quá màn hình thì TỰ CUỘN bên trong (để với tới hết các vùng), vẫn dính */
+    max-height: calc(100vh - clamp(5.5rem, 8vw, 7rem) - 1.5rem);
+    overflow-y: auto; overscroll-behavior: contain;
+    padding-right: 0.4rem; margin-right: -0.4rem;
+    scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
   }
-  .course-filters { display: flex; flex-wrap: wrap; gap: clamp(0.5rem, 0.9vw, 0.85rem); }
-  .course-tools { display: flex; align-items: center; gap: clamp(0.6rem, 1vw, 1rem); flex-wrap: wrap; }
-  .course-filter {
-    font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 500;
-    letter-spacing: 0.03em; color: rgba(255, 255, 255, 0.78); cursor: pointer;
-    padding: 0.6rem 1.2rem; border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.05);
-    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-    transition: background .25s ease, border-color .25s ease, color .25s ease;
+  .ac-rail::-webkit-scrollbar { width: 8px; }
+  .ac-rail::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.18); border-radius: 999px; }
+  .ac-rail::-webkit-scrollbar-track { background: transparent; }
+  .ac-rail__head {
+    margin: 0 0 0.4rem; font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: 1.02rem; color: #fff; letter-spacing: 0.01em;
+    padding-bottom: 0.85rem; border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
-  .course-filter:hover { border-color: rgba(242, 66, 11, 0.5); background: rgba(242, 66, 11, 0.10); color: #fff; }
-  .course-filter.is-active {
-    border-color: transparent; color: #fff;
-    background: linear-gradient(180deg, #ff5c26 0%, #f2420b 100%);
-    box-shadow: 0 12px 30px -10px rgba(242, 66, 11, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  .ac-group { border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+  .ac-group > summary {
+    display: flex; align-items: center; justify-content: space-between;
+    list-style: none; cursor: pointer; padding: 1rem 0;
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.86);
   }
-  .course-search {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    padding: 0.55rem 1.1rem; border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.04);
-    color: rgba(255, 255, 255, 0.55); min-width: min(240px, 100%);
-    transition: border-color .25s ease, color .25s ease;
+  .ac-group > summary::-webkit-details-marker { display: none; }
+  .ac-group > summary:hover { color: #fff; }
+  .ac-chev { color: rgba(255, 255, 255, 0.5); transition: transform .28s ease; }
+  .ac-group[open] .ac-chev { transform: rotate(180deg); }
+  .ac-opts { display: flex; flex-direction: column; gap: 0.1rem; padding: 0 0 1rem; }
+  .ac-opt {
+    text-align: left; cursor: pointer; border: 0; background: transparent;
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.88rem; line-height: 1.45;
+    color: rgba(255, 255, 255, 0.62); padding: 0.5rem 0.7rem; border-radius: 9px;
+    border-left: 2px solid transparent; transition: background .22s ease, color .22s ease, border-color .22s ease;
   }
-  .course-search:focus-within { border-color: rgba(242, 66, 11, 0.55); color: #fff; }
-  .course-search input {
+  .ac-opt:hover:not(:disabled) { background: rgba(255, 255, 255, 0.05); color: #fff; }
+  .ac-opt.is-active { background: rgba(242, 66, 11, 0.12); border-left-color: #f2420b; color: #fff; font-weight: 400; }
+  .ac-opt__z { color: rgba(255, 126, 72, 0.85); font-weight: 500; }
+  .ac-opt.is-active .ac-opt__z { color: #ff7e48; }
+  .ac-opt.is-locked { opacity: 0.5; cursor: not-allowed; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .ac-opt__soon {
+    font-size: 0.62rem; letter-spacing: 0.04em; text-transform: uppercase;
+    color: rgba(217, 195, 171, 0.7); border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px; padding: 0.12rem 0.45rem; white-space: nowrap;
+  }
+
+  /* ===== TOOLBAR ===== */
+  .ac-toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; margin-bottom: clamp(1.6rem, 2.5vw, 2.4rem); flex-wrap: wrap;
+  }
+  .ac-search {
+    display: inline-flex; align-items: center; gap: 0.7rem; flex: 1 1 320px; max-width: 460px;
+    padding: 0.8rem 1.2rem; border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.5); transition: border-color .25s ease, color .25s ease;
+  }
+  .ac-search:focus-within { border-color: rgba(242, 66, 11, 0.5); color: #fff; }
+  .ac-search input {
     border: 0; background: transparent; outline: none; color: #fff; width: 100%;
-    font-family: 'Inter', sans-serif; font-size: 0.92rem;
+    font-family: 'Inter', sans-serif; font-size: 1rem;
   }
-  .course-search input::placeholder { color: rgba(255, 255, 255, 0.45); }
-  .course-search input::-webkit-search-cancel-button { filter: invert(0.7); }
-  /* Toggle Grid/List */
-  .course-view {
-    display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem;
-    border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(255, 255, 255, 0.04);
+  .ac-search input::placeholder { color: rgba(255, 255, 255, 0.42); }
+  .ac-search input::-webkit-search-cancel-button { filter: invert(0.7); }
+  .ac-view {
+    display: inline-flex; align-items: center; gap: 0.2rem; padding: 0.25rem;
+    border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.04);
   }
-  .course-view-btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 2.4rem; height: 2.4rem; border: 0; border-radius: 999px; cursor: pointer;
-    background: transparent; color: rgba(255, 255, 255, 0.6);
-    transition: background .25s ease, color .25s ease;
+  .ac-view__btn {
+    display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer;
+    border: 0; border-radius: 11px; padding: 0.5rem 0.9rem; background: transparent;
+    color: rgba(255, 255, 255, 0.6); font-family: 'Inter', sans-serif; font-size: 0.86rem; font-weight: 400;
+    transition: background .22s ease, color .22s ease;
   }
-  .course-view-btn:hover { color: #fff; }
-  .course-view-btn.is-active {
-    color: #fff;
-    background: linear-gradient(180deg, #ff5c26 0%, #f2420b 100%);
-    box-shadow: 0 8px 20px -8px rgba(242, 66, 11, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25);
-  }
+  .ac-view__btn:hover { color: #fff; }
+  .ac-view__btn.is-active { color: #fff; background: rgba(255, 255, 255, 0.1); }
 
-  /* Lưới */
-  .courses-grid {
-    display: grid; gap: clamp(1.5rem, 2vw, 2.4rem);
-    grid-template-columns: repeat(3, 1fr);
+  /* ===== GRID + CARD ===== */
+  .ac-content { min-width: 0; }
+  .ac-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.2rem, 1.8vw, 1.9rem); }
+
+  .cc {
+    min-width: 0;
+    display: flex; flex-direction: column; text-decoration: none;
+    padding: 0.5rem; border-radius: 22px; border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease, background .35s ease, box-shadow .35s ease;
   }
-  /* TỐI mặc định, sáng khi hover (bloom cam giống .blog-card của news) */
-  .course-card {
-    position: relative; display: flex; flex-direction: column;
-    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px;
-    background: transparent;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    text-decoration: none; overflow: hidden;
-    transition: border-color .4s ease, background .4s ease, box-shadow .4s ease, transform .4s ease;
+  .cc:hover {
+    transform: translateY(-5px); border-color: rgba(242, 66, 11, 0.45);
+    background: rgba(242, 66, 11, 0.05);
+    box-shadow: 0 26px 60px -28px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(242, 66, 11, 0.1);
   }
-  .course-card:not(.is-soon):hover {
-    background:
-      radial-gradient(180% 150% at 100% 100%,
-        rgba(255, 126, 72, 0.90) 0%,
-        rgba(255, 100, 30, 0.80) 25%,
-        rgba(242, 66, 11, 0.60) 50%,
-        rgba(20, 10, 5, 0.90) 80%,
-        rgba(10, 5, 2, 0.98) 100%);
-    border-color: #f2420b;
-    box-shadow: 0 26px 64px -24px rgba(0, 0, 0, 0.5);
-    transform: translateY(-4px);
-  }
-  /* Media (ảnh 3D nobg) — contain + padding nhẹ, nền nâu ấm */
-  .course-card__media {
-    position: relative; aspect-ratio: 16 / 10;
-    background: linear-gradient(160deg, #2a1109, #160a05);
+  .cc__cover {
+    position: relative; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
   }
-  .course-card__media img {
-    width: 100%; height: 100%; object-fit: contain; display: block;
-    padding: clamp(1.2rem, 2.5vw, 2rem);
+  .cc__icon { width: 38%; height: 38%; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .cc:hover .cc__icon { transform: scale(1.07) rotate(-2deg); }
+  /* Card nước (Lớp 2): cờ SVG bo góc giữa cover */
+  .cc__flag {
+    width: 52%; height: auto; aspect-ratio: 4 / 3; display: block;
+    border-radius: 11px; box-shadow: 0 12px 26px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.06);
+    transition: transform .4s cubic-bezier(.16,1,.3,1);
   }
-  .course-card__body {
-    display: flex; flex-direction: column;
-    padding: clamp(1.5rem, 2.2vw, 2rem);
+  .cc:hover .cc__flag { transform: scale(1.06); }
+  .cc__info { display: flex; flex-direction: column; padding: 1.15rem 0.9rem 0.8rem; }
+  .cc__title {
+    font-family: var(--font-headline); font-weight: 600; text-transform: none;
+    font-size: clamp(1.3rem, 1.6vw, 1.6rem); line-height: 1.22; letter-spacing: 0;
+    color: #fff; margin: 0 0 0.85rem;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
-  .course-card__tag {
-    display: inline-block; align-self: flex-start;
-    font-family: var(--font-headline); font-weight: 600; font-size: 0.68rem;
-    letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b;
-    border: 1px solid rgba(242, 66, 11, 0.4); border-radius: 999px; padding: 0.28rem 0.75rem;
-    margin-bottom: 0.95rem;
+  .cc__meta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.95rem;
+    font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
   }
-  .course-card__title {
-    font-family: var(--font-headline); font-weight: 700;
-    font-size: clamp(1.15rem, 1.4vw, 1.35rem); line-height: 1.3;
-    color: #fff; letter-spacing: -0.01em;
-    margin: 0 0 0.7rem;
-  }
-  .course-card__desc {
-    color: rgba(255, 255, 255, 0.6); font-family: 'Inter', sans-serif; font-weight: 300;
-    font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.2rem;
-    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
-  }
-  .course-card__meta {
-    display: flex; flex-wrap: wrap; align-items: center;
-    gap: 0.35rem 0.85rem; margin-top: auto;
-    font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 400;
-    color: rgba(217, 195, 171, 0.7);
-  }
-  .course-card__meta span { position: relative; }
-  .course-card__meta span:not(:last-child)::after {
+  .cc__meta span { position: relative; }
+  .cc__meta span:not(:last-child)::after {
     content: ''; position: absolute; right: -0.5rem; top: 50%; transform: translateY(-50%);
-    width: 1px; height: 0.85em; background: rgba(217, 195, 171, 0.35);
+    width: 1px; height: 0.9em; background: rgba(255, 255, 255, 0.22);
   }
-  /* CTA mũi tên góc dưới-phải (chỉ card live) */
-  .course-card__cta {
-    position: absolute; right: clamp(1.2rem, 2vw, 1.6rem); bottom: clamp(1.2rem, 2vw, 1.6rem);
-    display: flex; align-items: center; justify-content: center;
-    width: 2.9rem; height: 2.9rem; border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.18); color: rgba(255, 255, 255, 0.85);
-    background: rgba(20, 10, 5, 0.35); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
-    transition: background .3s ease, border-color .3s ease, color .3s ease;
+  .cc__foot {
+    display: flex; align-items: flex-start; gap: 0.5rem; margin-top: 1.4rem; min-width: 0;
+    padding-top: 0.95rem; border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 300;
+    color: rgba(217, 195, 171, 0.78);
   }
-  .course-card:hover .course-card__cta {
-    border-color: rgba(255, 255, 255, 0.34); background: rgba(255, 255, 255, 0.10); color: #fff;
-  }
-  /* Badge "Sắp ra mắt" góc trên-phải + card mờ, không hover/điều hướng */
-  .course-card__badge {
-    position: absolute; top: 1rem; right: 1rem; z-index: 2;
-    font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500;
-    letter-spacing: 0.05em; color: rgba(217, 195, 171, 0.92);
-    padding: 0.35rem 0.7rem; border-radius: 999px;
-    background: rgba(20, 10, 5, 0.65); border: 1px solid rgba(255, 255, 255, 0.14);
-    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  }
-  .course-card.is-soon { opacity: 0.85; cursor: default; pointer-events: none; }
+  .cc__foot svg { color: rgba(255, 126, 72, 0.8); flex: 0 0 auto; margin-top: 1px; }
+  .cc__foot span { min-width: 0; line-height: 1.4; }
 
-  .course-card[hidden] { display: none !important; }
-  .courses-empty { text-align: center; color: rgba(255, 255, 255, 0.55); padding: 2.5rem 0 0; font-size: 1rem; }
+  .cc[hidden] { display: none !important; }
+  .ac-empty { color: rgba(255, 255, 255, 0.55); padding: 2.5rem 0 0; font-size: 1rem; }
 
-  /* ===== CHẾ ĐỘ LIST: 1 cột, layout ngang (ảnh trái nhỏ + nội dung phải) ===== */
-  .courses-grid.is-list { grid-template-columns: 1fr; gap: clamp(1rem, 1.6vw, 1.5rem); }
-  .courses-grid.is-list .course-card { flex-direction: row; align-items: stretch; }
-  .courses-grid.is-list .course-card__media {
-    flex: 0 0 clamp(180px, 26%, 320px); aspect-ratio: auto; align-self: stretch;
-  }
-  .courses-grid.is-list .course-card__body { flex: 1 1 auto; justify-content: center; }
-  .courses-grid.is-list .course-card__cta { position: static; align-self: flex-start; margin-top: 1rem; }
-  @media (max-width: 680px) {
-    .courses-grid.is-list .course-card { flex-direction: column; }
-    .courses-grid.is-list .course-card__media { flex-basis: auto; aspect-ratio: 16 / 10; }
-    .courses-grid.is-list .course-card__cta { position: absolute; }
-  }
+  /* ===== LIST MODE ===== */
+  .ac-grid.is-list { grid-template-columns: 1fr; gap: 0.9rem; }
+  .ac-grid.is-list .cc { flex-direction: row; align-items: stretch; padding: 0.6rem; }
+  .ac-grid.is-list .cc__cover { flex: 0 0 clamp(150px, 22%, 240px); aspect-ratio: 5 / 4; }
+  .ac-grid.is-list .cc__info { flex: 1 1 auto; justify-content: center; padding: 0.6rem 1.2rem; }
+  .ac-grid.is-list .cc__title { -webkit-line-clamp: 1; }
+  .ac-grid.is-list .cc__foot { margin-top: 1rem; }
 
-  @media (max-width: 980px) { .courses-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 680px) {
-    .courses-grid { grid-template-columns: 1fr; }
-    .course-toolbar { flex-direction: column; align-items: stretch; }
-    .course-tools { justify-content: space-between; }
-    .course-search { min-width: 0; flex: 1 1 auto; }
-  }
-
-  /* ===== Mobile hero: thu nhỏ chữ, cho xuống dòng ===== */
+  /* ===== Responsive ===== */
   @media (max-width: 991px) {
     .cs-line { flex-wrap: wrap; gap: 0.4rem; }
     .cs-line-1 { font-size: clamp(3rem, 13vw, 5rem); white-space: normal; }
   }
+  @media (max-width: 1080px) { .ac-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 860px) {
+    .academy-wrap { grid-template-columns: 1fr; gap: 1.5rem; }
+    .ac-rail { position: static; max-height: none; overflow: visible; padding-right: 0; margin-right: 0; }
+    .ac-rail__head { display: none; }
+    .ac-group { border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 0 0.9rem; margin-bottom: 0.6rem; }
+  }
+  @media (max-width: 560px) {
+    .ac-grid, .ac-grid.is-list { grid-template-columns: 1fr; }
+    .ac-grid.is-list .cc { flex-direction: column; }
+    .ac-grid.is-list .cc__cover { flex-basis: auto; aspect-ratio: 4 / 3; }
+  }
 </style>
 
 <script>
-  // (a) Lọc theo filter pill (data-cat) + search (#courseSearch theo data-title).
+  // Lọc: product (rail) + zone (rail) + search; toggle grid/list.
   (() => {
-    const filters = Array.from(document.querySelectorAll('.course-filter'));
-    const cards = Array.from(document.querySelectorAll('.course-card'));
-    const search = document.getElementById('courseSearch');
-    const empty = document.querySelector('.courses-empty');
-    let activeCat = 'all';
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.cc'));
+    const search = document.getElementById('acSearch') as HTMLInputElement | null;
+    const empty = document.querySelector('.ac-empty') as HTMLElement | null;
+    const prodBtns = Array.from(document.querySelectorAll<HTMLElement>('.ac-opt[data-product]'));
+    const levelBtns = Array.from(document.querySelectorAll<HTMLElement>('.ac-opt[data-level]'));
+    const zoneBtns = Array.from(document.querySelectorAll<HTMLElement>('.ac-opt[data-zone]'));
+    let activeProduct = 'grp';
+    let activeLevel = 'all';
+    let activeZone = 'all';
 
     const apply = () => {
-      const q = ((search && (search as HTMLInputElement).value) || '').trim().toLowerCase();
+      const q = (search?.value || '').trim().toLowerCase();
       let shown = 0;
       cards.forEach((c) => {
-        const el = c as HTMLElement;
-        const catOk = activeCat === 'all' || el.dataset.cat === activeCat;
-        const textOk = !q || (el.dataset.title || '').includes(q);
-        const show = catOk && textOk;
-        el.hidden = !show;
+        const prodOk = activeProduct === 'all' || c.dataset.product === activeProduct;
+        const levelOk = activeLevel === 'all' || c.dataset.level === activeLevel;
+        const zoneOk = activeZone === 'all' || c.dataset.zone === activeZone;
+        const textOk = !q || (c.dataset.title || '').includes(q);
+        const show = prodOk && levelOk && zoneOk && textOk;
+        c.hidden = !show;
         if (show) shown += 1;
       });
-      if (empty) (empty as HTMLElement).hidden = shown !== 0;
+      if (empty) empty.hidden = shown !== 0;
     };
 
-    filters.forEach((b) => b.addEventListener('click', () => {
-      filters.forEach((x) => x.classList.remove('is-active'));
+    prodBtns.forEach((b) => b.addEventListener('click', () => {
+      if (b.hasAttribute('disabled')) return;
+      prodBtns.forEach((x) => x.classList.remove('is-active'));
       b.classList.add('is-active');
-      activeCat = (b as HTMLElement).dataset.filter || 'all';
+      activeProduct = b.dataset.product || 'all';
+      apply();
+    }));
+    levelBtns.forEach((b) => b.addEventListener('click', () => {
+      levelBtns.forEach((x) => x.classList.remove('is-active'));
+      b.classList.add('is-active');
+      activeLevel = b.dataset.level || 'all';
+      // Chọn 1 cấp độ -> reset vùng (vùng chỉ áp cho Lớp 1)
+      if (activeLevel !== '1') {
+        activeZone = 'all';
+        zoneBtns.forEach((x) => x.classList.toggle('is-active', x.dataset.zone === 'all'));
+      }
+      apply();
+    }));
+    zoneBtns.forEach((b) => b.addEventListener('click', () => {
+      zoneBtns.forEach((x) => x.classList.remove('is-active'));
+      b.classList.add('is-active');
+      activeZone = b.dataset.zone || 'all';
       apply();
     }));
     if (search) search.addEventListener('input', apply);
   })();
 
-  // (b) Toggle Grid/List: set is-active + toggle .is-list trên .courses-grid.
   (() => {
-    const btns = Array.from(document.querySelectorAll('.course-view-btn'));
-    const grid = document.querySelector('.courses-grid');
+    const btns = Array.from(document.querySelectorAll<HTMLElement>('.ac-view__btn'));
+    const grid = document.querySelector('.ac-grid');
     if (!grid) return;
     btns.forEach((b) => b.addEventListener('click', () => {
       btns.forEach((x) => x.classList.remove('is-active'));
       b.classList.add('is-active');
-      grid.classList.toggle('is-list', (b as HTMLElement).dataset.view === 'list');
+      grid.classList.toggle('is-list', b.dataset.view === 'list');
     }));
   })();
 </script>
-</content>
-</invoke>

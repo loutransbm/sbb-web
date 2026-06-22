@@ -1,0 +1,230 @@
+---
+// LỚP 2 — Trang "đào sâu theo nước" (GRP). Light mode như trang bài học.
+// Sidebar = 6 nước (current highlight) + nội dung markdown + prev/next.
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const countries = (await getCollection('grp2')).sort((a, b) => a.data.order - b.data.order);
+  return countries.map((country, idx) => ({
+    params: { country: country.data.code },
+    props: {
+      country,
+      prev: idx > 0 ? countries[idx - 1] : null,
+      next: idx < countries.length - 1 ? countries[idx + 1] : null,
+      all: countries,
+    },
+  }));
+}
+
+const { country, prev, next, all } = Astro.props;
+const { Content } = await render(country);
+const fullName = (c: typeof country) => `${c.data.name}${c.data.enName ? ` (${c.data.enName})` : ''}`;
+---
+
+<PageLayout
+  title={`Đào sâu: ${fullName(country)}`}
+  description={country.data.subtitle || `GRP Lớp 2 — Đào sâu theo nước ${country.data.name}`}
+  site="sbb"
+  currentPath="/learn"
+>
+  <script is:inline>document.body.classList.add('grp-light');</script>
+  <section class="o-section grp-lesson-page">
+    <div class="container">
+      <div class="grp-layout">
+        <!-- ===== SIDEBAR (danh sách nước) ===== -->
+        <aside class="grp-sidebar">
+          <div class="grp-sidebar__inner">
+            <a href="/learn" class="grp-sidebar__home">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg>
+              Tất cả khóa học
+            </a>
+            <p class="grp-toc__zonetitle">Lớp 2 · Đào sâu theo nước</p>
+            <nav class="grp-toc" aria-label="Các nước">
+              <ul>
+                {all.map((c) => (
+                  <li>
+                    <a
+                      href={`/learn/grp/nuoc/${c.data.code}`}
+                      class:list={["grp-toc__link", c.data.code === country.data.code && "is-current"]}
+                      aria-current={c.data.code === country.data.code ? 'page' : undefined}
+                    >
+                      <img class="grp-toc__flag" src={`/flags/${c.data.code}.svg`} alt="" width="22" height="16" loading="lazy" decoding="async" />
+                      <span class="grp-toc__t">{fullName(c)}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- ===== MAIN ===== -->
+        <div class="grp-main">
+          <p class="grp-breadcrumb">
+            <a href="/learn">Học viện</a>
+            <span aria-hidden="true">›</span>
+            <span class="grp-breadcrumb__prog">GRP</span>
+            <span aria-hidden="true">›</span>
+            Lớp 2 — Đào sâu theo nước
+          </p>
+
+          <header class="grp-lesson-head">
+            <h1 class="grp-lesson-title">
+              <img class="grp-lesson-title__flag" src={`/flags/${country.data.code}.svg`} alt="" decoding="async" />
+              {fullName(country)}
+            </h1>
+            {country.data.subtitle && <p class="grp-lesson-subtitle">{country.data.subtitle}</p>}
+          </header>
+
+          <article class="grp-prose">
+            <Content />
+          </article>
+
+          <!-- PREV / NEXT -->
+          <nav class="grp-pager" aria-label="Điều hướng nước">
+            {prev ? (
+              <a href={`/learn/grp/nuoc/${prev.data.code}`} class="grp-pager__btn grp-pager__btn--prev">
+                <span class="grp-pager__dir">‹ Nước trước</span>
+                <span class="grp-pager__name"><img class="grp-pager__flag" src={`/flags/${prev.data.code}.svg`} alt="" width="22" height="16" decoding="async" />{fullName(prev)}</span>
+              </a>
+            ) : <span></span>}
+            {next ? (
+              <a href={`/learn/grp/nuoc/${next.data.code}`} class="grp-pager__btn grp-pager__btn--next">
+                <span class="grp-pager__dir">Nước sau ›</span>
+                <span class="grp-pager__name"><img class="grp-pager__flag" src={`/flags/${next.data.code}.svg`} alt="" width="22" height="16" decoding="async" />{fullName(next)}</span>
+              </a>
+            ) : <span></span>}
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  /* ===== LIGHT MODE (paper ấm, chữ tối) — đồng bộ trang bài học ===== */
+  :global(body.grp-light) { background: #f7f3ec !important; }
+  :global(body.grp-light .site-header .header-inner) {
+    background: rgba(20, 8, 4, 0.92) !important;
+    -webkit-backdrop-filter: blur(14px) !important; backdrop-filter: blur(14px) !important;
+    border-color: rgba(255, 255, 255, 0.10) !important;
+    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.35) !important;
+  }
+
+  .grp-lesson-page { padding-top: clamp(6rem, 9vw, 9rem); }
+  .grp-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+
+  /* ===== SIDEBAR ===== */
+  .grp-sidebar__inner { position: sticky; top: clamp(5rem, 8vw, 7rem); max-height: calc(100vh - 6rem); overflow-y: auto; padding-right: 0.5rem; }
+  .grp-sidebar__home {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-headline); font-weight: 700; font-size: 0.78rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: #c2380a;
+    text-decoration: none; margin-bottom: 1.4rem; transition: color .25s ease;
+  }
+  .grp-sidebar__home:hover { color: #f2420b; }
+  .grp-toc__zonetitle {
+    margin: 0 0 0.6rem; font-family: 'Inter', sans-serif; font-weight: 600;
+    font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(60, 44, 34, 0.55);
+  }
+  .grp-toc ul { list-style: none; margin: 0; padding: 0; }
+  .grp-toc__link {
+    display: flex; align-items: center; gap: 0.65rem;
+    padding: 0.5rem 0.6rem; border-radius: 9px; text-decoration: none;
+    border-left: 2px solid transparent; transition: background .25s ease, border-color .25s ease;
+  }
+  .grp-toc__flag { flex: 0 0 auto; width: 22px; height: 16.5px; border-radius: 3px; object-fit: cover; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05); }
+  .grp-toc__t { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.9rem; line-height: 1.4; color: rgba(36, 23, 16, 0.66); }
+  .grp-toc__link:hover { background: rgba(36, 23, 16, 0.05); }
+  .grp-toc__link:hover .grp-toc__t { color: rgba(36, 23, 16, 0.92); }
+  .grp-toc__link.is-current { background: rgba(242, 66, 11, 0.1); border-left-color: #f2420b; }
+  .grp-toc__link.is-current .grp-toc__t { color: #241710; font-weight: 600; }
+
+  /* ===== MAIN ===== */
+  .grp-main { min-width: 0; }
+  .grp-breadcrumb {
+    margin: 0 0 1.2rem; font-family: 'Inter', sans-serif; font-size: 0.82rem;
+    color: rgba(60, 44, 34, 0.7); display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+  }
+  .grp-breadcrumb a { color: #c2380a; text-decoration: none; }
+  .grp-breadcrumb a:hover { color: #f2420b; }
+  .grp-breadcrumb__prog { color: rgba(36, 23, 16, 0.55); font-weight: 500; }
+
+  .grp-lesson-head { margin-bottom: clamp(1.8rem, 3vw, 2.6rem); }
+  .grp-lesson-title {
+    font-family: var(--font-headline); font-weight: 700;
+    font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: 1.12;
+    color: #1f140d; letter-spacing: -0.015em; margin: 0; max-width: 22ch;
+    display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap;
+  }
+  .grp-lesson-title__flag { width: 1.18em; height: auto; aspect-ratio: 4 / 3; border-radius: 5px; box-shadow: 0 4px 12px -3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.06); }
+  .grp-lesson-subtitle {
+    margin: 0.7rem 0 0; font-family: 'Inter', sans-serif; font-weight: 400; font-style: italic;
+    font-size: clamp(0.98rem, 1.3vw, 1.18rem); color: rgba(60, 44, 34, 0.6); line-height: 1.5;
+  }
+
+  /* ===== PROSE (dùng :global vì <Content/> không có data-astro-cid) ===== */
+  .grp-prose { max-width: 70ch; }
+  .grp-prose :global(h2) {
+    font-family: var(--font-headline); font-weight: 700;
+    font-size: clamp(1.4rem, 2.3vw, 1.85rem); line-height: 1.25;
+    color: #20140d; letter-spacing: -0.01em; margin: clamp(2.4rem, 4vw, 3.2rem) 0 1rem;
+  }
+  .grp-prose :global(h3) {
+    font-family: var(--font-headline); font-weight: 700;
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.3; color: #c2380a; margin: 2rem 0 0.8rem;
+  }
+  .grp-prose :global(p) {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1.05rem; line-height: 1.8;
+    color: rgba(36, 23, 16, 0.82); margin: 0 0 1.3rem;
+  }
+  .grp-prose :global(strong) { color: #1f140d; font-weight: 600; }
+  .grp-prose :global(em) { font-style: italic; color: rgba(36, 23, 16, 0.7); }
+  .grp-prose :global(a) { color: #d2380a; text-decoration: underline; text-underline-offset: 3px; }
+  .grp-prose :global(a:hover) { color: #f2420b; }
+  .grp-prose :global(ul), .grp-prose :global(ol) {
+    margin: 0 0 1.4rem; padding-left: 1.5rem; color: rgba(36, 23, 16, 0.82);
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1.05rem; line-height: 1.8;
+  }
+  .grp-prose :global(li) { margin-bottom: 0.55rem; }
+  .grp-prose :global(li)::marker { color: #f2420b; }
+  .grp-prose :global(blockquote) {
+    margin: 1.8rem 0; padding: 1.2rem 1.4rem; background: rgba(242, 66, 11, 0.07);
+    border-left: 3px solid #f2420b; border-radius: 12px;
+  }
+  .grp-prose :global(blockquote p) { margin: 0 0 0.5rem; font-size: 0.98rem; line-height: 1.65; color: rgba(36, 23, 16, 0.82); }
+  .grp-prose :global(blockquote p:last-child) { margin-bottom: 0; }
+  .grp-prose :global(hr) { border: 0; height: 1px; background: rgba(36, 23, 16, 0.12); margin: clamp(2.4rem, 4vw, 3.2rem) 0; }
+  .grp-prose :global(code) {
+    font-family: ui-monospace, 'SF Mono', monospace; font-size: 0.9em;
+    background: rgba(36, 23, 16, 0.07); padding: 0.12em 0.4em; border-radius: 6px; color: #b23207;
+  }
+
+  /* ===== PREV / NEXT ===== */
+  .grp-pager {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: clamp(1.5rem, 3vw, 2.2rem);
+    border-top: 1px solid rgba(36, 23, 16, 0.12);
+  }
+  .grp-pager__btn {
+    display: flex; flex-direction: column; gap: 0.35rem; padding: 1rem 1.3rem; border-radius: 16px; text-decoration: none;
+    border: 1px solid rgba(36, 23, 16, 0.12); background: rgba(255, 255, 255, 0.55);
+    transition: border-color .3s ease, background .3s ease, box-shadow .3s ease;
+  }
+  .grp-pager__btn:hover { border-color: rgba(242, 66, 11, 0.5); background: rgba(242, 66, 11, 0.06); box-shadow: 0 12px 28px -16px rgba(0,0,0,.3); }
+  .grp-pager__btn--next { text-align: right; }
+  .grp-pager__dir { font-family: var(--font-headline); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.05em; text-transform: uppercase; color: #c2380a; }
+  .grp-pager__name { display: flex; align-items: center; gap: 0.5rem; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.95rem; color: rgba(36, 23, 16, 0.85); line-height: 1.35; }
+  .grp-pager__btn--next .grp-pager__name { justify-content: flex-end; }
+  .grp-pager__flag { flex: 0 0 auto; width: 22px; height: 16.5px; border-radius: 3px; object-fit: cover; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05); }
+
+  @media (max-width: 900px) {
+    .grp-layout { grid-template-columns: 1fr; }
+    .grp-sidebar { display: none; }
+  }
+  @media (max-width: 560px) {
+    .grp-pager { grid-template-columns: 1fr; }
+    .grp-pager__btn--next { text-align: left; }
+  }
+</style>

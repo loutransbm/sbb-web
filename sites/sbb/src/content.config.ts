@@ -14,4 +14,17 @@ const grp = defineCollection({
   }),
 });
 
-export const collections = { grp };
+// Lớp 2 — 6 bài "đào sâu theo nước" (tách từ GRP_BaiTheoNuoc). Xem scripts/split-grp-nuoc.mjs
+const grp2 = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/grp2' }),
+  schema: z.object({
+    code: z.string(),        // "my"
+    name: z.string(),        // "Mỹ"
+    enName: z.string().optional().default(''),
+    flag: z.string(),        // "🇺🇸"
+    order: z.number(),       // 1..6
+    subtitle: z.string().optional().default(''),
+  }),
+});
+
+export const collections = { grp, grp2 };
