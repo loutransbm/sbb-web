@@ -1,0 +1,109 @@
+---
+// Thanh đăng nhập magic-link + khởi tạo đồng bộ tiến độ.
+// Tự ẩn nếu chưa cấu hình Supabase (web vẫn chạy bằng localStorage).
+interface Props { theme?: 'dark' | 'light'; }
+const { theme = 'dark' } = Astro.props;
+---
+<div class:list={["authbar", `authbar--${theme}`]} id="authBar" hidden>
+  <form class="authbar__form" id="authForm">
+    <span class="authbar__hint">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7"/><path d="M4 7l8 6 8-6"/><rect x="4" y="5" width="16" height="14" rx="2"/></svg>
+      Đăng nhập để lưu tiến độ trên mọi thiết bị
+    </span>
+    <div class="authbar__row">
+      <input type="email" id="authEmail" placeholder="Email của bạn" required autocomplete="email" />
+      <button type="submit" id="authSubmit">Gửi link</button>
+    </div>
+    <p class="authbar__msg" id="authMsg" role="status" aria-live="polite" hidden></p>
+  </form>
+  <div class="authbar__signed" id="authSigned" hidden>
+    <span class="authbar__who">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <span><b id="authWho"></b> · tiến độ đang đồng bộ</span>
+    </span>
+    <button type="button" id="authSignout">Đăng xuất</button>
+  </div>
+</div>
+
+<style>
+  .authbar { border-radius: 12px; padding: 0.85rem 0.95rem; font-family: 'Inter', sans-serif; }
+  .authbar__hint { display: flex; align-items: center; gap: 0.45rem; font-size: 0.78rem; line-height: 1.4; margin-bottom: 0.6rem; }
+  .authbar__hint svg { flex: 0 0 auto; }
+  .authbar__row { display: flex; gap: 0.4rem; }
+  .authbar__row input {
+    flex: 1 1 auto; min-width: 0; font-family: 'Inter', sans-serif; font-size: 0.85rem;
+    padding: 0.5rem 0.7rem; border-radius: 9px; outline: none;
+  }
+  .authbar__row button {
+    flex: 0 0 auto; cursor: pointer; font-family: var(--font-headline); font-weight: 700;
+    font-size: 0.8rem; padding: 0.5rem 0.85rem; border-radius: 9px; border: 0;
+    background: #f2420b; color: #fff; transition: background .2s ease;
+  }
+  .authbar__row button:hover { background: #ff5c26; }
+  .authbar__msg { margin: 0.55rem 0 0; font-size: 0.76rem; line-height: 1.45; }
+  .authbar__signed { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .authbar__who { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; min-width: 0; }
+  .authbar__who svg { flex: 0 0 auto; color: #2fae6a; }
+  .authbar__who span { overflow: hidden; text-overflow: ellipsis; }
+  .authbar__signed button {
+    flex: 0 0 auto; cursor: pointer; background: transparent; border: 0; padding: 0;
+    font-family: 'Inter', sans-serif; font-size: 0.76rem; text-decoration: underline; text-underline-offset: 2px;
+  }
+
+  /* ===== DARK (rail catalog) ===== */
+  .authbar--dark { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); }
+  .authbar--dark .authbar__hint { color: rgba(255, 255, 255, 0.62); }
+  .authbar--dark .authbar__row input { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.14); color: #fff; }
+  .authbar--dark .authbar__row input::placeholder { color: rgba(255, 255, 255, 0.4); }
+  .authbar--dark .authbar__row input:focus { border-color: rgba(242, 66, 11, 0.6); }
+  .authbar--dark .authbar__msg { color: rgba(255, 255, 255, 0.6); }
+  .authbar--dark .authbar__who { color: rgba(255, 255, 255, 0.78); }
+  .authbar--dark .authbar__signed button { color: rgba(255, 255, 255, 0.45); }
+  .authbar--dark .authbar__signed button:hover { color: rgba(255, 255, 255, 0.8); }
+
+  /* ===== LIGHT (trang bài học) ===== */
+  .authbar--light { background: rgba(36, 23, 16, 0.03); border: 1px solid rgba(36, 23, 16, 0.12); }
+  .authbar--light .authbar__hint { color: rgba(36, 23, 16, 0.62); }
+  .authbar--light .authbar__row input { background: #fff; border: 1px solid rgba(36, 23, 16, 0.18); color: #1f140d; }
+  .authbar--light .authbar__row input::placeholder { color: rgba(36, 23, 16, 0.4); }
+  .authbar--light .authbar__row input:focus { border-color: rgba(242, 66, 11, 0.6); }
+  .authbar--light .authbar__msg { color: rgba(36, 23, 16, 0.62); }
+  .authbar--light .authbar__who { color: rgba(36, 23, 16, 0.78); }
+  .authbar--light .authbar__signed button { color: rgba(36, 23, 16, 0.5); }
+  .authbar--light .authbar__signed button:hover { color: #c2380a; }
+</style>
+
+<script>
+  import { initProgressSync, onAuthChange, signInWithEmail, signOut } from '../lib/grpProgress';
+  import { isSupabaseConfigured } from '../lib/supabase';
+
+  (() => {
+    const bar = document.getElementById('authBar');
+    if (!bar) return;
+    if (!isSupabaseConfigured()) { bar.hidden = true; return; }  // chưa cấu hình -> ẩn hẳn
+    bar.hidden = false;
+
+    const form = document.getElementById('authForm') as HTMLFormElement | null;
+    const signed = document.getElementById('authSigned');
+    const who = document.getElementById('authWho');
+    const msg = document.getElementById('authMsg');
+    const emailInput = document.getElementById('authEmail') as HTMLInputElement | null;
+
+    onAuthChange((u) => {
+      if (u) { if (form) form.hidden = true; if (signed) signed.hidden = false; if (who) who.textContent = u.email || 'bạn'; }
+      else { if (form) form.hidden = false; if (signed) signed.hidden = true; }
+    });
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (emailInput?.value || '').trim();
+      if (!email) return;
+      if (msg) { msg.hidden = false; msg.textContent = 'Đang gửi link...'; }
+      const { error } = await signInWithEmail(email);
+      if (msg) msg.textContent = error ? ('Lỗi: ' + error) : 'Đã gửi link đăng nhập tới email của bạn. Mở email và bấm vào link để vào.';
+    });
+    document.getElementById('authSignout')?.addEventListener('click', () => signOut());
+
+    initProgressSync(() => location.reload());
+  })();
+</script>

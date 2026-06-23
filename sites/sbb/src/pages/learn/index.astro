@@ -5,6 +5,7 @@
 import PageLayout from '@ui/layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 import { upcomingCourses } from '../../data/upcomingCourses';
+import AuthBar from '../../components/AuthBar.astro';
 
 const upcomingById = Object.fromEntries(upcomingCourses.map((c) => [c.id, c]));
 const lessons = (await getCollection('grp')).sort((a, b) => a.data.order - b.data.order);
@@ -118,6 +119,7 @@ const programs = [
           <div class="ac-progress__bar"><span class="ac-progress__fill" id="acProgFill"></span></div>
           <button type="button" class="ac-progress__reset" id="acProgReset" hidden>Đặt lại tiến độ</button>
         </div>
+        <AuthBar theme="dark" />
         <p class="ac-rail__head">Bộ lọc</p>
 
         <details class="ac-group" open>
@@ -573,6 +575,8 @@ const programs = [
 </style>
 
 <script>
+  import { clearDone } from '../../lib/grpProgress';
+
   // Lọc: product (rail) + zone (rail) + search; toggle grid/list.
   (() => {
     const cards = Array.from(document.querySelectorAll<HTMLElement>('.cc'));
@@ -673,9 +677,7 @@ const programs = [
     render();
 
     resetBtn?.addEventListener('click', () => {
-      const done = read();
-      cards.forEach((c) => done.delete(c.dataset.lessonId || ''));
-      write(done);
+      clearDone(cards.map((c) => c.dataset.lessonId || '').filter(Boolean));
       render();
     });
 

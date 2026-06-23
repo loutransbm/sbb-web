@@ -4,6 +4,7 @@
 import PageLayout from '@ui/layouts/PageLayout.astro';
 import { getCollection, render } from 'astro:content';
 import { quizFor } from '../../../data/grpQuizzes';
+import AuthBar from '../../../components/AuthBar.astro';
 
 export async function getStaticPaths() {
   const lessons = (await getCollection('grp')).sort((a, b) => a.data.order - b.data.order);
@@ -95,6 +96,8 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
             <span aria-hidden="true">›</span>
             Vùng {lesson.data.zone} — {lesson.data.zoneTitle}
           </p>
+
+          <div class="grp-authbar"><AuthBar theme="light" /></div>
 
           <header class="grp-lesson-head">
             <h1 class="grp-lesson-title">
@@ -247,6 +250,7 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
   .grp-breadcrumb a { color: #c2380a; text-decoration: none; }
   .grp-breadcrumb a:hover { color: #f2420b; }
   .grp-breadcrumb__prog { color: rgba(36, 23, 16, 0.55); font-weight: 500; }
+  .grp-authbar { margin: 0 0 1.7rem; max-width: 38rem; }
 
   .grp-lesson-head { margin-bottom: clamp(1.8rem, 3vw, 2.6rem); }
   .grp-lesson-title {
@@ -435,6 +439,8 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
 </style>
 
 <script>
+  import { markDone } from '../../../lib/grpProgress';
+
   // Gate tuần tự GRP Lớp 1: khóa bài chưa tới, quiz đạt ≥80% mới mở bài sau. localStorage.
   (() => {
     const KEY = 'sbb:grp:done';
@@ -509,7 +515,7 @@ const zones = Array.from(zoneMap.values()).sort((a, b) => a.zone - b.zone);
       quizEl?.classList.add('is-graded');
       if (resultEl) resultEl.hidden = false;
       if (correct / total >= PASS) {
-        const d = read(); d.add(curId); write(d);
+        markDone(curId);
         if (resultEl) { resultEl.className = 'grp-quiz__result is-pass'; resultEl.textContent = `Đạt — đúng ${correct}/${total}. Bài tiếp theo đã mở.`; }
         if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Đã đạt ✓'; }
         if (retryBtn) retryBtn.hidden = true;
