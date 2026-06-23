@@ -41,7 +41,8 @@ const { theme = 'dark' } = Astro.props;
   }
   .authbar__row button:hover { background: #ff5c26; }
   .authbar__msg { margin: 0.55rem 0 0; font-size: 0.76rem; line-height: 1.45; }
-  .authbar__signed { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .authbar__signed { align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .authbar__signed:not([hidden]) { display: flex; }
   .authbar__who { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; min-width: 0; }
   .authbar__who svg { flex: 0 0 auto; color: #2fae6a; }
   .authbar__who span { overflow: hidden; text-overflow: ellipsis; }
