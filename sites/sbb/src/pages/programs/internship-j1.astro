@@ -27,16 +27,16 @@ const stats = [
 
 // ===== Industries =====
 const industries = [
-  'Hospitality & Tourism — Du lịch, Khách sạn',
-  'Business & Commerce — Kinh doanh, Thương mại',
-  'Finance & Accounting — Tài chính, Kế toán',
-  'Information Technology — Công nghệ thông tin',
-  'Engineering — Kỹ thuật',
-  'Architecture & Design — Kiến trúc, Thiết kế',
-  'Media & Communications — Truyền thông',
-  'Sciences — Khoa học ứng dụng',
-  'Agriculture — Nông nghiệp công nghệ cao',
-  'Arts & Culture — Nghệ thuật, Văn hóa',
+  'Hospitality & Tourism · Du lịch, Khách sạn',
+  'Business & Commerce · Kinh doanh, Thương mại',
+  'Finance & Accounting · Tài chính, Kế toán',
+  'Information Technology · Công nghệ thông tin',
+  'Engineering · Kỹ thuật',
+  'Architecture & Design · Kiến trúc, Thiết kế',
+  'Media & Communications · Truyền thông',
+  'Sciences · Khoa học ứng dụng',
+  'Agriculture · Nông nghiệp công nghệ cao',
+  'Arts & Culture · Nghệ thuật, Văn hóa',
 ];
 
 // ===== Process steps =====
@@ -72,7 +72,7 @@ const steps = [
 const truths = [
   {
     title: 'Đào tạo, không phải lao động giá rẻ',
-    body: 'Visa J-1 được thiết kế để học hỏi và phát triển chuyên môn thật qua một Training Plan chi tiết. Bạn được trả lương bình đẳng, và doanh nghiệp Mỹ có nghĩa vụ đào tạo bạn — không phải bóc lột sức lao động.',
+    body: 'Visa J-1 được thiết kế để học hỏi và phát triển chuyên môn thật qua một Training Plan chi tiết. Bạn được trả lương bình đẳng, và doanh nghiệp Mỹ có nghĩa vụ đào tạo bạn, không bóc lột sức lao động.',
   },
   {
     title: 'Quy tắc cư trú 2 năm',
@@ -90,7 +90,7 @@ const sponsors = ['CIEE', 'CETUSA', 'Alliance Abroad (AAG)', 'IEEX'];
 
 <PageLayout
   title="Thực tập & Tu nghiệp Quốc tế J-1"
-  description="Chương trình thực tập và tu nghiệp quốc tế tại Mỹ theo visa J-1 Exchange Visitor — đi làm thật ở doanh nghiệp Mỹ."
+  description="Chương trình thực tập và tu nghiệp quốc tế tại Mỹ theo visa J-1 Exchange Visitor. Đi làm thật ở doanh nghiệp Mỹ."
   site="sbb"
   currentPath="/programs/internship-j1"
 >
@@ -100,7 +100,7 @@ const sponsors = ['CIEE', 'CETUSA', 'Alliance Abroad (AAG)', 'IEEX'];
       <span class="o-eyebrow">Chương trình · Internship J-1</span>
       <h1 class="o-mega">ĐI LÀM THẬT<br />Ở DOANH NGHIỆP <span class="o-accent">MỸ</span></h1>
       <p class="o-lead">
-        Mỗi năm hơn 300.000 người từ khắp thế giới đến Mỹ theo visa J-1 Exchange Visitor. Đây không phải visa du học thông thường — đây là con đường nghề nghiệp nghiêm túc để bạn trải nghiệm môi trường làm việc thực tế, nâng tầm năng lực và mang giá trị quốc tế trở về.
+        Mỗi năm hơn 300.000 người từ khắp thế giới đến Mỹ theo visa J-1 Exchange Visitor. Khác với du học thông thường, đây là con đường nghề nghiệp nghiêm túc để bạn trải nghiệm môi trường làm việc thực tế, nâng tầm năng lực và mang giá trị quốc tế trở về.
       </p>
       <div class="o-actions o-mt-lg">
         <a href="/apply" class="o-btn o-btn--primary">Đăng ký tư vấn</a>
@@ -116,7 +116,7 @@ const sponsors = ['CIEE', 'CETUSA', 'Alliance Abroad (AAG)', 'IEEX'];
         <div>
           <span class="o-head-eyebrow">Tổng quan</span>
           <p class="o-statement">
-            Một chương trình nghề <span class="o-accent">đúng nghĩa</span> — không phải điểm dừng du lịch.
+            Một chương trình nghề <span class="o-accent">đúng nghĩa</span>, không phải điểm dừng du lịch.
           </p>
         </div>
         <div>
@@ -157,7 +157,7 @@ const sponsors = ['CIEE', 'CETUSA', 'Alliance Abroad (AAG)', 'IEEX'];
             <span class="o-card__num">{t.num}</span>
             <h3 class="o-card__title">{t.title}</h3>
             <p class="o-card__body">{t.body}</p>
-            <p class="o-card__body" style="margin-top:1rem;color:#1a1a1a;font-weight:600;">{t.detail}</p>
+            <p class="o-card__body" style="margin-top:1rem;color:#ff7e48;font-weight:600;">{t.detail}</p>
           </article>
         ))}
       </div>
@@ -176,7 +176,7 @@ const sponsors = ['CIEE', 'CETUSA', 'Alliance Abroad (AAG)', 'IEEX'];
       <div class="o-grid o-grid--2">
         {industries.map((name) => (
           <article class="o-card">
-            <p class="o-card__body" style="color:#1a1a1a;font-weight:600;">{name}</p>
+            <p class="o-card__body" style="color:#fff;font-weight:600;">{name}</p>
           </article>
         ))}
       </div>
@@ -205,7 +205,7 @@ const sponsors = ['CIEE', 'CETUSA', 'Alliance Abroad (AAG)', 'IEEX'];
       </div>
 
       <p class="o-note o-mt-lg" style="max-width:62ch;">
-        <strong style="color:#1a1a1a;">Về chi phí:</strong> SBB không đưa ra biểu giá chung chung. Chi phí thực tế phụ thuộc vào ngành nghề, thời lượng và bang bạn làm việc — và sẽ được minh bạch chi tiết ngay từ buổi trao đổi đầu tiên.
+        <strong style="color:#fff;">Về chi phí:</strong> SBB không đưa ra biểu giá chung chung. Chi phí thực tế phụ thuộc vào ngành nghề, thời lượng và bang bạn làm việc, và sẽ được minh bạch chi tiết ngay từ buổi trao đổi đầu tiên.
       </p>
     </div>
   </section>
@@ -216,7 +216,7 @@ const sponsors = ['CIEE', 'CETUSA', 'Alliance Abroad (AAG)', 'IEEX'];
       <div class="o-head">
         <span class="o-head-eyebrow">Reality Check</span>
         <h2 class="o-head-title">THE TRUTH <span class="o-stroke">FIRST</span></h2>
-        <p class="o-head-desc">Ba sự thật chúng tôi muốn bạn biết trước khi quyết định — để bạn đi với đôi mắt mở.</p>
+        <p class="o-head-desc">Ba sự thật chúng tôi muốn bạn biết trước khi quyết định, để bạn đi với đôi mắt mở.</p>
       </div>
 
       <div class="o-grid o-grid--3">
