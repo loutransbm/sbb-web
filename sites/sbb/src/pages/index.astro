@@ -1915,6 +1915,45 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   }
 
   /* ============================================
+     HERO — Mobile (≤991px): xếp dọc gọn, chống tràn, chừa header
+     ============================================ */
+  @media (max-width: 991px) {
+    .omni-hero { min-height: auto; }
+    .omni-hero__inner {
+      padding-top: 6.5rem !important;   /* chừa chỗ cho thanh nav nổi */
+      padding-bottom: 2rem;
+      gap: var(--space-6);
+    }
+    .hero-col { width: 100%; }
+    .hero-col--left { align-items: flex-start; }
+    .hero-col--right { align-items: flex-start; text-align: left; }
+    .campaign-box { padding-left: 0 !important; }
+    .stat-card { max-width: 100%; width: 100%; }
+    .central-artwork-frame {
+      transform: none !important;       /* bỏ nghiêng 3D -> ảnh đứng thẳng trên mobile */
+      max-width: 300px;
+      aspect-ratio: 4 / 5;
+    }
+    .artwork-image { transform: scale(1.3) translateY(6%); }
+    .agency-box { align-items: flex-start; width: 100%; }
+    .agency-heading { font-size: clamp(2.6rem, 11vw, 3.6rem); margin-bottom: 1.5rem; }
+    .action-pill-row { flex-wrap: wrap; max-width: 100%; gap: 1rem; }
+    .action-pill-text { white-space: normal !important; }
+    .hero-bottom-row {
+      margin-top: 0.5rem;
+      padding-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+    .giant-bg-text { transform: none; }
+    .social-links { margin-bottom: 0; }
+    /* Tiêu đề "KIẾN TẠO THẾ HỆ…" để nowrap -> ép xuống dòng trên mobile */
+    .headline-dimmed { white-space: normal !important; }
+    .partner-headline { font-size: clamp(1.05rem, 4.6vw, 1.4rem); }
+  }
+
+  /* ============================================
      Visual Agency Header & Footer (For Grid)
      ============================================ */
   .agency-header {

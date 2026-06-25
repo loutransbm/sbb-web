@@ -289,3 +289,82 @@ a:hover {
   letter-spacing: var(--tracking-wider);
   color: var(--text-secondary);
 }
+
+/* ============================================
+   MOBILE BASELINE — áp toàn site (is:global)
+   Hệ tiêu đề cascade (.cs-line-1/2/3) bị khoá min 8.5rem (136px) + nowrap
+   nên tràn ngang ở mọi màn < ~1130px. Ở đây ép về cỡ hợp lý theo từng tầng.
+   Dùng !important để thắng CSS scoped per-page của Astro.
+   ============================================ */
+
+/* —— Tablet hẹp (601–980px): ghì tiêu đề cascade lại, cho xuống dòng —— */
+@media (min-width: 601px) and (max-width: 980px) {
+  .cs-line-1 {
+    font-size: clamp(3.4rem, 8.5vw, 6rem) !important;
+    letter-spacing: -0.05em !important;
+    white-space: normal !important;
+  }
+  .cs-line-2, .cs-line-3 {
+    font-size: clamp(2.3rem, 6vw, 4rem) !important;
+    letter-spacing: -0.04em !important;
+  }
+  .cs-line { flex-wrap: wrap !important; }
+  /* Section CTA "READY TO SHINE …" (lặp ở nhiều trang) */
+  .cta-verb { font-size: clamp(3.4rem, 9vw, 6rem) !important; margin-left: 0 !important; white-space: normal !important; }
+  .cta-tail { font-size: clamp(2.2rem, 5.5vw, 3.6rem) !important; margin-right: 0 !important; }
+  .cta-line-2 { flex-wrap: wrap !important; }
+}
+
+/* —— Điện thoại (≤600px): tiêu đề cỡ phone, mọi media không tràn —— */
+@media (max-width: 600px) {
+  .cs-line-1 {
+    font-size: clamp(2.15rem, 11.5vw, 3.35rem) !important;
+    letter-spacing: -0.035em !important;
+    white-space: normal !important;
+    line-height: 1.02 !important;
+  }
+  .cs-line-2, .cs-line-3 {
+    font-size: clamp(1.6rem, 8vw, 2.5rem) !important;
+    letter-spacing: -0.03em !important;
+  }
+  .cs-line { flex-wrap: wrap !important; gap: 0.5rem !important; }
+  .cs-header { margin-bottom: 2.25rem !important; }
+
+  /* Section CTA "READY TO SHINE …" — xếp dọc, cỡ phone */
+  .cta-verb {
+    font-size: clamp(2.3rem, 13vw, 3.6rem) !important;
+    letter-spacing: -0.04em !important;
+    margin-left: 0 !important;
+    white-space: normal !important;
+    line-height: 1.0 !important;
+  }
+  .cta-tail {
+    font-size: clamp(1.4rem, 7vw, 2.2rem) !important;
+    margin-right: 0 !important;
+  }
+  .cta-line-2 {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.4rem !important;
+  }
+  .cta-final-title { font-size: clamp(2.2rem, 9vw, 3.4rem) !important; }
+
+  /* Ảnh/video nội dung không vượt khung (KHÔNG đụng tới SVG trang trí đặt absolute) */
+  img:not([class*="artwork"]):not([class*="glow"]),
+  video, iframe, table {
+    max-width: 100%;
+  }
+  table, pre { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Tiêu đề partner "KIẾN TẠO THẾ HỆ…" (about, global-internship, home) để nowrap -> ép xuống dòng */
+  .headline-dimmed { white-space: normal !important; }
+  .partner-headline { font-size: clamp(1.05rem, 4.6vw, 1.45rem) !important; }
+
+  /* Pill kính cạnh tiêu đề cascade: bỏ mọi offset/transform hack -> nằm gọn, không lố mép */
+  .cs-glass-pill {
+    transform: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100% !important;
+  }
+}
