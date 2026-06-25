@@ -360,12 +360,22 @@ a:hover {
   .headline-dimmed { white-space: normal !important; }
   .partner-headline { font-size: clamp(1.05rem, 4.6vw, 1.45rem) !important; }
 
-  /* Pill kính cạnh tiêu đề cascade: bỏ mọi offset/transform hack -> nằm gọn, không lố mép */
+  /* Pill kính cạnh tiêu đề cascade: về DÒNG RIÊNG trong luồng (bỏ absolute/offset hack) */
   .cs-glass-pill {
+    position: static !important;     /* nhiều trang đặt absolute -> kéo về luồng bình thường */
+    inset: auto !important;
+    display: flex !important;
     transform: none !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    margin: 1rem 0 0 0 !important;
     max-width: 100% !important;
+  }
+  /* Wrapper chứa "tiêu đề + pill" -> xếp dọc để pill nằm dưới tiêu đề */
+  .prog-verb-wrap,
+  .verb-box,
+  .about-line-2 > span:first-child {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
   }
 
   /* Tiêu đề section bespoke ngoài hệ .cs-line (homepage): PROGRAMS 96px, FAQ 136px… -> cỡ phone */
