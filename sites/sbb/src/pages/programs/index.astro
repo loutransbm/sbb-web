@@ -59,18 +59,18 @@ const caseStudies = [
     <div class="container">
       <div class="services-grid">
         <div class="services-row services-row--top">
-        <div class="service-card pr-prog-card s-pos-1" data-cat="practical">
+        <a class="service-card pr-prog-card s-pos-1" data-cat="practical" href="/programs/global-internship">
           <div class="s-card-number">01</div>
           <div class="s-card-icon-wrapper">
             <img src="/global-3d-nobg.png" alt="Global Internship 3D" class="s-icon-image" />
           </div>
           <div class="s-card-content">
             <h3 class="s-card-title">GLOBAL INTERNSHIP</h3>
-            <p class="s-card-desc">Thực tập có trả lương tại doanh nghiệp Mỹ qua chương trình J‑1 — bước đệm thực chất để khởi động sự nghiệp toàn cầu.</p>
+            <p class="s-card-desc">Thực tập quốc tế có trả lương. J‑1 Hoa Kỳ là mũi nhọn, và SBB đang mở rộng sang nhiều quốc gia khác.</p>
           </div>
-        </div>
+        </a>
 
-        <div class="service-card pr-prog-card s-pos-2" data-cat="learning">
+        <a class="service-card pr-prog-card s-pos-2" data-cat="learning" href="/programs/office-tour">
           <div class="s-card-number">02</div>
           <div class="s-card-icon-wrapper">
             <img src="/plane-3d-nobg.png" alt="Office Tour 3D Plane" class="s-icon-image" />
@@ -79,31 +79,31 @@ const caseStudies = [
             <h3 class="s-card-title">OFFICE TOUR</h3>
             <p class="s-card-desc">Đồng sáng lập cùng Career Mates: bước vào văn phòng các tập đoàn toàn cầu (JP Morgan…), trải nghiệm thực tế kết hợp khám phá.</p>
           </div>
-        </div>
+        </a>
         </div>
 
         <div class="services-row services-row--bottom">
-        <div class="service-card pr-prog-card s-pos-3" data-cat="learning">
+        <a class="service-card pr-prog-card s-pos-3" data-cat="learning" href="/learn">
           <div class="s-card-number">03</div>
           <div class="s-card-icon-wrapper">
             <img src="/grp-3d-globe-nobg.png" alt="GRP Foundation 3D" class="s-icon-image" />
           </div>
           <div class="s-card-content">
             <h3 class="s-card-title">GLOBAL READINESS</h3>
-            <p class="s-card-desc">Global Readiness Programme (GRP) — chuẩn hóa năng lực hội nhập theo tiêu chí UNESCO (SDG4 &amp; SDG8), kiểm định bởi ABE.</p>
+            <p class="s-card-desc">Global Readiness Programme (GRP) — nền chuẩn bị bắt buộc, học ngay tại trang Learn của SBB.</p>
           </div>
-        </div>
+        </a>
 
-        <div class="service-card pr-prog-card s-pos-4" data-cat="practical">
+        <a class="service-card pr-prog-card s-pos-4" data-cat="practical" href="/programs/career-training">
           <div class="s-card-number">04</div>
           <div class="s-card-icon-wrapper">
             <img src="/career-3d-nobg-v2.png" alt="Career Training 3D" class="s-icon-image" />
           </div>
           <div class="s-card-content">
-            <h3 class="s-card-title">CAREER TRAINING GLOBAL</h3>
-            <p class="s-card-desc">Đào tạo nghề quốc tế có trả lương: J‑1 (Mỹ) và visa 407 (Úc) — Hospitality, Aged Care, Childcare.</p>
+            <h3 class="s-card-title">CAREER TRAINING</h3>
+            <p class="s-card-desc">Đào tạo nghề quốc tế có trả lương cho người đã có nền tảng: J‑1 Trainee (Mỹ) và visa 407 (Úc), và sẽ mở rộng thêm.</p>
           </div>
-        </div>
+        </a>
         </div>
       </div>
     </div>
@@ -674,6 +674,9 @@ const caseStudies = [
 
   /* ===== PROGRAM CARDS — service-card 3D (copy verbatim từ home index.astro) ===== */
   .service-card[hidden] { display: none !important; }
+  /* Card giờ là <a> điều hướng — bỏ gạch chân/đổi màu mặc định của thẻ a */
+  a.service-card { text-decoration: none; color: inherit; cursor: pointer; }
+  a.service-card:hover { text-decoration: none; }
 
   .services-grid {
     display: flex;

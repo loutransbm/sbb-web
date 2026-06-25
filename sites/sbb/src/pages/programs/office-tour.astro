@@ -1,6 +1,14 @@
 ---
-// Trang Office Tour. Hệ bespoke dark-fire (đồng bộ hub/trang chủ).
+// Office Tour — chia theo Tier/khu vực (Bình dân: Singapore, Châu Á · Premium: Anh, Mỹ).
+// TRANG ĐANG XÂY DỰNG: hiện chỉ để mô tả, các hạng mục chưa click vào được.
+// Hệ dark-fire đồng bộ hub/trang chủ. KHÔNG card trắng.
 import PageLayout from '@ui/layouts/PageLayout.astro';
+
+// Phân hạng theo Tier — tạm thời chỉ mô tả, chưa mở từng điểm đến
+const tiers = [
+  { tag: 'Phổ thông · Đang xây dựng', title: 'Bình dân', region: 'Singapore · Châu Á', body: 'Các điểm đến chi phí hợp lý, dễ tiếp cận. Phù hợp để thử một bước ngắn vào môi trường doanh nghiệp quốc tế ở gần.' },
+  { tag: 'Cao cấp · Đang xây dựng', title: 'Premium', region: 'Anh · Mỹ', body: 'Vào tận văn phòng những tập đoàn đầu ngành như JP Morgan. Trải nghiệm chiều sâu, đắt giá, cho người muốn nhìn thẳng vào đỉnh của nghề.' },
+];
 
 const overview = [
   { num: '01', title: 'Vào tận văn phòng, không đứng ngoài nhìn', body: 'Bạn không tham quan kiểu khách du lịch. Bạn bước vào văn phòng những tập đoàn toàn cầu, ngồi cùng người làm thật, làm việc thật và quan sát cách một tổ chức lớn vận hành mỗi ngày.' },
@@ -31,7 +39,7 @@ const agenda = [
 
 <PageLayout
   title="Office Tour"
-  description="5 đến 10 ngày vào doanh nghiệp toàn cầu làm việc thật, có hướng dẫn thật. Đồng sáng lập cùng Career Mates."
+  description="5 đến 10 ngày vào doanh nghiệp toàn cầu làm việc thật, có hướng dẫn thật. Chia theo Tier từ bình dân tới premium. Trang đang xây dựng."
   site="sbb"
   currentPath="/programs/office-tour"
 >
@@ -39,14 +47,33 @@ const agenda = [
   <section class="pr-hero">
     <div class="pr-hero__beam" aria-hidden="true"></div>
     <div class="pr-hero__wrap">
-      <span class="pr-eyebrow">Chương trình · Office Tour</span>
       <div class="cs-header">
         <div class="cs-line cs-line-1"><span class="cs-text-white">OFFICE TOUR</span></div>
       </div>
       <p class="pr-lead">5 đến 10 ngày bước vào doanh nghiệp toàn cầu, làm việc thật và có người hướng dẫn thật. Một bước thử ngắn, ít rủi ro, trước khi bạn cam kết một con đường dài hơi ra thế giới.</p>
-      <div class="pr-actions">
-        <a href="/apply" class="pr-btn pr-btn--primary">Đăng ký tham gia</a>
-        <a href="#agenda" class="pr-btn pr-btn--ghost">Xem lịch trình</a>
+      <span class="pr-build">Trang đang được xây dựng. Thông tin từng điểm đến sẽ sớm cập nhật.</span>
+    </div>
+  </section>
+
+  <!-- ===== TIERS (chia hạng — chưa click vào được) ===== -->
+  <section class="pr-sec pr-sec--beam">
+    <div class="pr-beam pr-beam--right" aria-hidden="true"></div>
+    <div class="pr-wrap">
+      <div class="pr-head">
+        <span class="pr-eyebrow">Phân hạng</span>
+        <h2 class="pr-h2">Chọn theo <span class="pr-accent">Tier</span></h2>
+        <p class="pr-desc">Office Tour chia theo khu vực và mức trải nghiệm, từ bình dân tới premium, để bạn chọn đúng với mục tiêu và ngân sách. Các điểm đến đang được hoàn thiện.</p>
+      </div>
+      <div class="pr-grid pr-grid--2">
+        {tiers.map((t) => (
+          <div class="pr-card pr-card--soon" aria-disabled="true">
+            <span class="pr-card__tag pr-card__tag--soon">{t.tag}</span>
+            <h3 class="pr-card__title">{t.title}</h3>
+            <p class="pr-card__region">{t.region}</p>
+            <p class="pr-card__body">{t.body}</p>
+            <span class="pr-card__more pr-card__more--soon">Đang xây dựng</span>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -129,9 +156,9 @@ const agenda = [
     <div class="pr-wrap">
       <div class="pr-cta">
         <h2 class="pr-cta__title">THỬ MỘT BƯỚC RA THẾ GIỚI?</h2>
-        <p class="pr-cta__sub">Đăng ký tham gia Office Tour để bước vào doanh nghiệp toàn cầu, hoặc xem các chương trình khác của SBB để chọn con đường phù hợp nhất với bạn.</p>
+        <p class="pr-cta__sub">Để lại thông tin để SBB báo bạn ngay khi Office Tour mở từng điểm đến, hoặc xem các chương trình khác để chọn con đường phù hợp nhất.</p>
         <div class="pr-actions pr-actions--center">
-          <a href="/apply" class="pr-btn pr-btn--onfire">Đăng ký tham gia</a>
+          <a href="/apply" class="pr-btn pr-btn--onfire">Đăng ký quan tâm</a>
           <a href="/programs" class="pr-btn pr-btn--light">Xem chương trình khác</a>
         </div>
       </div>
@@ -152,7 +179,8 @@ const agenda = [
   .cs-line-1 { font-size: clamp(3rem, 10.4vw, 10.5rem); letter-spacing: -0.075em; line-height: 0.95; white-space: nowrap; position: relative; z-index: 10; }
   .cs-text-white { color: #ffffff; }
 
-  .pr-lead { margin: clamp(1.6rem, 3vw, 2.6rem) 0 0; max-width: 60ch; font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.7; color: rgba(255,255,255,0.66); }
+  .pr-lead { margin: clamp(1.6rem, 3vw, 2.6rem) 0 0; max-width: 46ch; font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(0.8rem, 0.95vw, 0.92rem); line-height: 1.6; color: rgba(255,255,255,0.66); }
+  .pr-build { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.4rem; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.82rem; letter-spacing: 0.02em; color: #ffb59c; background: rgba(242,66,11,0.12); border: 1px solid rgba(242,66,11,0.30); border-radius: 999px; padding: 0.5rem 1.1rem; }
   .pr-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: clamp(1.6rem, 3vw, 2.4rem); }
   .pr-actions--center { justify-content: center; }
   .pr-btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-headline); font-weight: 700; font-size: 0.9rem; text-decoration: none; border-radius: 999px; padding: 0.85rem 1.7rem; transition: transform .25s ease, background .25s ease, box-shadow .25s ease, border-color .25s ease, color .25s ease; }
@@ -182,14 +210,37 @@ const agenda = [
   .pr-h2 { font-family: var(--font-headline); font-weight: 700; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.08; color: #fff; letter-spacing: -0.02em; margin: 0; text-transform: none; }
   .pr-desc { font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(0.96rem, 1.1vw, 1.08rem); line-height: 1.65; color: rgba(255,255,255,0.6); margin: 0.9rem 0 0; max-width: 60ch; }
 
+  /* ===== CARD = KÍNH TỐI PHỦ LỬA (đồng bộ .service-card / .case-card hub — KHÔNG nền trắng) ===== */
   .pr-grid { display: grid; gap: clamp(1.2rem, 2vw, 1.8rem); }
   .pr-grid--2 { grid-template-columns: repeat(2, 1fr); }
   .pr-grid--3 { grid-template-columns: repeat(3, 1fr); }
-  .pr-card { position: relative; display: flex; flex-direction: column; background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 1.6rem; padding: clamp(1.6rem, 2.2vw, 2.3rem); box-shadow: 0 14px 40px -16px rgba(0,0,0,0.5); transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease, background .4s ease; }
-  .pr-card:hover { transform: translateY(-8px); background: #fff7f3; border-color: rgba(242,66,11,0.25); box-shadow: 0 26px 56px -22px rgba(0,0,0,0.55); }
-  .pr-card__tag { align-self: flex-start; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: #c2380a; background: rgba(242,66,11,0.1); border-radius: 999px; padding: 0.28rem 0.7rem; }
-  .pr-card__title { font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.2rem, 1.6vw, 1.5rem); color: #1a1a1a; margin: 0.8rem 0 0.7rem; letter-spacing: -0.01em; text-transform: none; }
-  .pr-card__body { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.96rem; line-height: 1.6; color: #5a5a5a; margin: 0; }
+  .pr-card {
+    position: relative; display: flex; flex-direction: column; text-decoration: none;
+    background: rgba(255,255,255,0.025);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.10); border-radius: 1.6rem;
+    padding: clamp(1.6rem, 2.2vw, 2.3rem);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.40);
+    transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease, background .4s ease;
+  }
+  .pr-card:hover {
+    transform: translateY(-8px);
+    background:
+      radial-gradient(150% 150% at 100% 100%,
+        rgba(255,126,72,0.40) 0%, rgba(255,100,30,0.26) 26%, rgba(242,66,11,0.14) 50%, rgba(20,10,5,0.30) 80%, rgba(10,5,2,0.40) 100%),
+      rgba(255,255,255,0.03);
+    border-color: rgba(242,66,11,0.40);
+    box-shadow: 0 26px 64px -24px rgba(0,0,0,0.55);
+  }
+  .pr-card--soon { opacity: 0.7; cursor: default; }
+  .pr-card--soon:hover { transform: none; background: rgba(255,255,255,0.025); border-color: rgba(255,255,255,0.10); box-shadow: 0 8px 24px rgba(0,0,0,0.40); }
+  .pr-card__tag { align-self: flex-start; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: #ffb59c; background: rgba(242,66,11,0.18); border: 1px solid rgba(242,66,11,0.30); border-radius: 999px; padding: 0.28rem 0.7rem; }
+  .pr-card__tag--soon { color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.16); }
+  .pr-card__title { font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.2rem, 1.6vw, 1.5rem); color: #F5EDE6; margin: 0.8rem 0 0.7rem; letter-spacing: -0.01em; text-transform: none; }
+  .pr-card__region { font-family: var(--font-headline); font-weight: 600; font-size: 0.86rem; letter-spacing: 0.04em; text-transform: uppercase; color: #ff7a52; margin: 0 0 0.7rem; }
+  .pr-card__body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.96rem; line-height: 1.6; color: rgba(255,255,255,0.78); margin: 0; }
+  .pr-card__more { margin-top: auto; padding-top: 1.4rem; font-family: var(--font-headline); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; color: #ff7a52; }
+  .pr-card__more--soon { color: rgba(255,255,255,0.45); }
 
   .pr-rows { display: flex; flex-direction: column; gap: 0.7rem; }
   .pr-row { display: flex; gap: 1.4rem; align-items: flex-start; padding: 1.3rem 1.5rem; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); transition: border-color .3s ease, background .3s ease; }

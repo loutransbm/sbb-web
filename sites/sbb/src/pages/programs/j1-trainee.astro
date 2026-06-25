@@ -1,47 +1,47 @@
 ---
-// Visa 407 (Úc) — TRANG CHI TIẾT (1 hạng mục của Career Training). Đường Úc.
+// J-1 Trainee — TRANG CHI TIẾT (1 hạng mục của Career Training). Nhánh Trainee tại Mỹ.
 // Bấm từ trang tổng quan /programs/career-training nhảy sang đây.
 // Hệ dark-fire đồng bộ hub/trang chủ. KHÔNG card trắng.
 import PageLayout from '@ui/layouts/PageLayout.astro';
 
 const stats = [
-  { num: '407', label: 'Loại visa (Training)' },
-  { num: 'ÚC', label: 'Điểm đến' },
-  { num: '03', label: 'Mảng ngành trọng tâm' },
+  { num: '18', label: 'Tháng tu nghiệp tối đa' },
+  { num: 'J-1', label: 'Visa Exchange Visitor' },
+  { num: '1+ năm', label: 'Kinh nghiệm liên quan' },
+  { num: '10+', label: 'Nhóm ngành tiếp nhận' },
 ];
 
-const fields = [
-  { tag: 'Aged Care', title: 'Chăm sóc người cao tuổi', body: 'Một trong những mảng nhu cầu lớn và ổn định nhất tại Úc. Hợp với người muốn theo nghề chăm sóc bài bản, có tâm và có nghề.' },
-  { tag: 'Child Care', title: 'Chăm sóc & giáo dục trẻ', body: 'Môi trường làm việc đề cao chuẩn mực và sự tận tâm. Phù hợp nếu bạn yêu thích công việc với trẻ nhỏ và muốn học cách làm chuyên nghiệp.' },
-  { tag: 'Hospitality', title: 'Du lịch & Khách sạn', body: 'Mảng dịch vụ rộng, dễ tiếp cận với người có nền tảng ngoại ngữ và tác phong tốt, cũng là thế mạnh quen thuộc của hệ sinh thái SBB.' },
-];
-
-const eligibility = [
-  'Nhắm đúng một trong các mảng Aged Care, Child Care hoặc Hospitality.',
-  'Có nền tảng ngoại ngữ đủ dùng cho công việc và phỏng vấn.',
-  'Tác phong nghiêm túc, sẵn sàng làm thật và học thật ở môi trường quốc tế.',
-  'Hồ sơ rõ ràng và trung thực, yếu tố quyết định khi đối tác xét duyệt.',
+const industries = [
+  'Hospitality & Tourism · Du lịch, Khách sạn',
+  'Business & Commerce · Kinh doanh, Thương mại',
+  'Finance & Accounting · Tài chính, Kế toán',
+  'Information Technology · Công nghệ thông tin',
+  'Engineering · Kỹ thuật',
+  'Media & Communications · Truyền thông',
 ];
 
 const steps = [
-  { num: '01', title: 'Đánh giá ban đầu', body: 'Nói chuyện thẳng thắn với SBB để xem hồ sơ của bạn có thật sự hợp với đường Úc qua visa 407 hay không. Không hợp, SBB nói thẳng.' },
-  { num: '02', title: 'Chuẩn bị nền tảng', body: 'Xây dựng tư duy toàn cầu, tác phong chuyên nghiệp và ngoại ngữ trước khi bước vào quá trình xét duyệt và kết nối vị trí.' },
-  { num: '03', title: 'Kết nối qua đối tác', body: 'Hồ sơ được làm việc cùng đối tác Australian Internships để tìm vị trí tiếp nhận phù hợp với ngành bạn nhắm tới.' },
-  { num: '04', title: 'Xét duyệt & khởi hành', body: 'Hoàn tất hồ sơ bảo trợ, xin visa 407 và chuẩn bị sang Úc bắt đầu hành trình làm việc thực tế.' },
+  { num: '01', title: 'Tìm hiểu & đánh giá ban đầu', body: 'Nói chuyện thẳng thắn với SBB để xem bằng cấp và kinh nghiệm của bạn có hợp với diện J-1 Trainee hay không.' },
+  { num: '02', title: 'Chuẩn bị nền tảng với GRP', body: 'Củng cố tư duy toàn cầu, tác phong chuyên nghiệp và ngoại ngữ trước khi bước vào phỏng vấn vị trí tu nghiệp.' },
+  { num: '03', title: 'Kết nối host company tại Mỹ', body: 'Tìm kiếm doanh nghiệp tiếp nhận và phỏng vấn trực tiếp cho vị trí tu nghiệp đúng chuyên môn của bạn.' },
+  { num: '04', title: 'Sponsor xét duyệt DS-2019', body: 'Tổ chức bảo trợ được Bộ Ngoại giao Mỹ cấp phép duyệt hồ sơ và cấp DS-2019 cho hành trình tu nghiệp.' },
+  { num: '05', title: 'Phỏng vấn visa & khởi hành', body: 'Nhận visa J-1, hoàn tất chuẩn bị và bay sang Mỹ bắt đầu tu nghiệp thật theo Training Plan.' },
 ];
 
 const truths = [
-  { title: 'Đào tạo, không phải lao động giá rẻ', body: 'Visa 407 là diện training: bạn sang Úc để học nghề và nâng năng lực thực tế, không phải để làm thuê giá rẻ. Điều này định hình cả cách SBB chuẩn bị hồ sơ cho bạn.' },
-  { title: 'Hợp với người nhắm đúng ngành', body: 'Đường Úc dành cho người nhắm đúng các mảng Aged Care, Child Care hoặc Hospitality. Hãy hỏi để biết bạn có thật sự hợp hay không.' },
-  { title: 'Chính sách có thể thay đổi', body: 'Quy định visa và nhập cảnh của Úc có thể biến động theo thời điểm. SBB đồng hành và xử lý linh hoạt, nhưng không cam kết thay cho quyết định của cơ quan chức năng.' },
+  { title: 'Đào tạo, không phải lao động giá rẻ', body: 'Diện Trainee được thiết kế để nâng chuyên môn qua một Training Plan chi tiết. Bạn được trả lương bình đẳng, và doanh nghiệp Mỹ có nghĩa vụ đào tạo bạn.' },
+  { title: 'Cần bằng cấp và kinh nghiệm', body: 'Khác với nhánh Intern dành cho sinh viên, Trainee đòi hỏi bạn đã có bằng cộng kinh nghiệm, hoặc nhiều năm kinh nghiệm thực tế trong ngành.' },
+  { title: 'Chính sách có thể thay đổi', body: 'Quy định nhập cảnh và quản lý visa của Mỹ có thể biến động. SBB cam kết đồng hành và xử lý linh hoạt, nhưng không cam kết trước quyết định pháp lý của cơ quan ngoại giao.' },
 ];
+
+const sponsors = ['CIEE', 'CETUSA', 'Alliance Abroad (AAG)', 'IEEX'];
 ---
 
 <PageLayout
-  title="Visa 407 — Đường Úc"
-  description="Visa 407, một hạng mục của Career Training: đường Úc cho Aged Care, Child Care và Hospitality. Đào tạo nghề thực tế cùng đối tác Australian Internships."
+  title="J-1 Trainee — Tu nghiệp tại Mỹ"
+  description="J-1 Trainee, một hạng mục của Career Training: diện tu nghiệp của visa J-1 dành cho người đã có bằng cấp và kinh nghiệm. Tu nghiệp tối đa 18 tháng tại Mỹ."
   site="sbb"
-  currentPath="/programs/407"
+  currentPath="/programs/j1-trainee"
 >
   <!-- ===== HERO (kiểu Omni: tiêu đề lớn + hàng stat card quầng lửa) ===== -->
   <section class="pr-hero">
@@ -50,8 +50,8 @@ const truths = [
       <div class="hero-top">
         <a class="pr-eyebrow pr-eyebrow--back" href="/programs/career-training">← Career Training</a>
         <div class="cs-header">
-          <div class="cs-line cs-line-1"><span class="cs-text-white">AUSTRALIA</span></div>
-          <div class="cs-line cs-line-1 cs-line-2"><span class="cs-int-wrap"><span class="cs-text-white">407</span></span></div>
+          <div class="cs-line cs-line-1"><span class="cs-text-white">TRAINEE</span></div>
+          <div class="cs-line cs-line-1 cs-line-2"><span class="cs-int-wrap"><span class="cs-text-white">J-1 USA</span></span></div>
         </div>
       </div>
       <div class="hero-stats">
@@ -71,13 +71,13 @@ const truths = [
       <div class="pr-split">
         <div>
           <span class="pr-eyebrow">Tổng quan</span>
-          <p class="pr-statement">Một con đường nghề <span class="pr-accent">nghiêm túc</span> tới Úc.</p>
+          <p class="pr-statement">Tu nghiệp <span class="pr-accent">chuyên sâu</span> cho người đã có nghề.</p>
         </div>
         <ul class="pr-checks">
-          <li>Visa 407 là diện training: sang Úc để học nghề và làm thật, không phải du học thuần tuý.</li>
-          <li>Tập trung vào các mảng nhu cầu cao và ổn định tại Úc.</li>
-          <li>Triển khai cùng đối tác đào tạo quốc tế Australian Internships.</li>
-          <li>Cùng tinh thần với hệ SBB: chuẩn bị để bạn được tin và trọng dụng, không chỉ được đi.</li>
+          <li>Có bằng đại học/cao đẳng cộng ít nhất 1 năm kinh nghiệm liên quan, hoặc 5 năm kinh nghiệm trong lĩnh vực liên quan.</li>
+          <li>Thời gian tu nghiệp tối đa 18 tháng. Riêng ngành Hospitality tối đa 12 tháng, trừ vị trí quản lý.</li>
+          <li>Được trả lương bình đẳng như nhân sự bản địa cùng vị trí.</li>
+          <li>Bảo trợ bởi Designated Sponsor do Bộ Ngoại giao Mỹ chỉ định.</li>
         </ul>
       </div>
       <div class="pr-stats">
@@ -88,51 +88,28 @@ const truths = [
     </div>
   </section>
 
-  <!-- ===== FIELDS ===== -->
-  <section class="pr-sec pr-sec--beam" id="fields">
+  <!-- ===== INDUSTRIES ===== -->
+  <section class="pr-sec pr-sec--beam">
     <div class="pr-beam pr-beam--right" aria-hidden="true"></div>
     <div class="pr-wrap">
       <div class="pr-head">
-        <span class="pr-eyebrow">Mảng ngành</span>
-        <h2 class="pr-h2">Bạn sẽ <span class="pr-accent">làm gì</span></h2>
-        <p class="pr-desc">Visa 407 mở đường vào những mảng nghề mà nước Úc đang thật sự cần người. Đây là ba hướng SBB tập trung.</p>
+        <span class="pr-eyebrow">Ngành nghề</span>
+        <h2 class="pr-h2">Bạn sẽ tu nghiệp <span class="pr-accent">ngành nào</span></h2>
+        <p class="pr-desc">Các nhóm ngành chính đang tiếp nhận ứng viên J-1 Trainee. Suất thực tế tùy thuộc ngành nghề và thời điểm tuyển dụng của host company.</p>
       </div>
-      <div class="pr-grid pr-grid--3">
-        {fields.map((f) => (
-          <article class="pr-card">
-            <span class="pr-card__tag">{f.tag}</span>
-            <h3 class="pr-card__title">{f.title}</h3>
-            <p class="pr-card__body">{f.body}</p>
-          </article>
-        ))}
+      <div class="pr-tags">
+        {industries.map((name) => <span class="pr-tag">{name}</span>)}
       </div>
     </div>
   </section>
 
-  <!-- ===== ELIGIBILITY ===== -->
-  <section class="pr-sec">
-    <div class="pr-wrap">
-      <div class="pr-split">
-        <div>
-          <span class="pr-eyebrow">Điều kiện</span>
-          <h2 class="pr-h2">Bạn có <span class="pr-accent">hợp</span> không</h2>
-          <p class="pr-desc">Đường Úc không hợp với tất cả mọi người. Dưới đây là những điều nên có trước khi bạn nghĩ tới visa 407.</p>
-        </div>
-        <ul class="pr-checks">
-          {eligibility.map((e) => <li>{e}</li>)}
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== STEPS ===== -->
-  <section class="pr-sec pr-sec--beam">
-    <div class="pr-beam pr-beam--left" aria-hidden="true"></div>
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="pr-sec" id="how">
     <div class="pr-wrap">
       <div class="pr-head">
         <span class="pr-eyebrow">Lộ trình</span>
         <h2 class="pr-h2">Cách <span class="pr-accent">vận hành</span></h2>
-        <p class="pr-desc">Bốn bước từ buổi nói chuyện đầu tiên đến lúc bạn đặt chân sang Úc, minh bạch ngay từ đầu.</p>
+        <p class="pr-desc">Năm bước rõ ràng từ buổi nói chuyện đầu tiên đến ngày bạn đặt chân tới Mỹ tu nghiệp.</p>
       </div>
       <div class="pr-rows">
         {steps.map((s) => (
@@ -142,16 +119,18 @@ const truths = [
           </article>
         ))}
       </div>
+      <p class="pr-note"><strong>Về chi phí:</strong> SBB không đưa ra biểu giá chung chung. Chi phí thực tế phụ thuộc vào ngành nghề, thời lượng và bang bạn làm việc, và sẽ được minh bạch chi tiết ngay từ buổi trao đổi đầu tiên.</p>
     </div>
   </section>
 
-  <!-- ===== REALITY + PARTNER ===== -->
-  <section class="pr-sec">
+  <!-- ===== REALITY CHECK ===== -->
+  <section class="pr-sec pr-sec--beam">
+    <div class="pr-beam pr-beam--left" aria-hidden="true"></div>
     <div class="pr-wrap">
       <div class="pr-head">
         <span class="pr-eyebrow">Reality Check</span>
         <h2 class="pr-h2">Sự thật <span class="pr-accent">trước</span></h2>
-        <p class="pr-desc">SBB chọn nói thật trước. Đây là những điều bạn nên biết trước khi đi đường Úc.</p>
+        <p class="pr-desc">Ba sự thật chúng tôi muốn bạn biết trước khi quyết định, để bạn đi với đôi mắt mở.</p>
       </div>
       <div class="pr-grid pr-grid--3">
         {truths.map((t) => (
@@ -162,8 +141,22 @@ const truths = [
           </article>
         ))}
       </div>
-      <div class="pr-pills" style="margin-top:1.8rem;">
-        <span class="pr-pill">Đối tác triển khai · Australian Internships</span>
+    </div>
+  </section>
+
+  <!-- ===== SPONSORS ===== -->
+  <section class="pr-sec">
+    <div class="pr-wrap">
+      <div class="pr-split">
+        <div>
+          <span class="pr-eyebrow">Sponsors</span>
+          <p class="pr-statement">Được bảo trợ bởi tổ chức <span class="pr-accent">chính danh</span>.</p>
+        </div>
+        <div>
+          <p class="pr-desc" style="margin-bottom:1.4rem;">SBB hợp tác chặt chẽ cùng các Designated Sponsor được Bộ Ngoại giao Mỹ cấp phép bảo trợ chương trình:</p>
+          <div class="pr-pills">{sponsors.map((name) => <span class="pr-pill">{name}</span>)}</div>
+          <p class="pr-desc" style="margin-top:1.2rem;font-style:italic;">và các tổ chức bảo trợ uy tín khác.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -172,8 +165,8 @@ const truths = [
   <section class="pr-cta-sec">
     <div class="pr-wrap">
       <div class="pr-cta">
-        <h2 class="pr-cta__title">ĐƯỜNG ÚC CÓ HỢP VỚI BẠN?</h2>
-        <p class="pr-cta__sub">Đặt lịch nói chuyện để SBB đánh giá thẳng thắn xem visa 407 có phải con đường phù hợp với bạn, hoặc xem các hạng mục khác.</p>
+        <h2 class="pr-cta__title">BẮT ĐẦU HÀNH TRÌNH TU NGHIỆP</h2>
+        <p class="pr-cta__sub">Đặt lịch nói chuyện trực tiếp để SBB đánh giá hồ sơ và kinh nghiệm của bạn, tư vấn con đường phù hợp nhất.</p>
         <div class="pr-actions pr-actions--center">
           <a href="/apply" class="pr-btn pr-btn--onfire">Đăng ký tư vấn</a>
           <a href="/programs/career-training" class="pr-btn pr-btn--light">Xem hạng mục khác</a>
@@ -202,7 +195,7 @@ const truths = [
   .cs-int-wrap { position: relative; display: inline-flex; }
 
   /* ===== Hàng STAT CARD kiểu Omni (quầng lửa cam góc dưới-trái, số TRẮNG) ===== */
-  .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.9rem, 1.4vw, 1.4rem); }
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.9rem, 1.4vw, 1.4rem); }
   .hero-stat {
     position: relative; overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 22px;
@@ -264,6 +257,7 @@ const truths = [
 
   /* ===== CARD = KÍNH TỐI PHỦ LỬA (KHÔNG nền trắng) ===== */
   .pr-grid { display: grid; gap: clamp(1.2rem, 2vw, 1.8rem); }
+  .pr-grid--2 { grid-template-columns: repeat(2, 1fr); }
   .pr-grid--3 { grid-template-columns: repeat(3, 1fr); }
   .pr-card {
     position: relative; display: flex; flex-direction: column;
@@ -287,6 +281,11 @@ const truths = [
   .pr-card__title { font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.2rem, 1.6vw, 1.5rem); color: #F5EDE6; margin: 0.8rem 0 0.7rem; letter-spacing: -0.01em; text-transform: none; }
   .pr-card__body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.96rem; line-height: 1.6; color: rgba(255,255,255,0.78); margin: 0; }
 
+  /* ===== TAGS ===== */
+  .pr-tags { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+  .pr-tag { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.92rem; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 0.6rem 1.1rem; transition: border-color .25s ease, background .25s ease; }
+  .pr-tag:hover { border-color: rgba(242,66,11,0.45); background: rgba(242,66,11,0.07); }
+
   /* ===== ROWS ===== */
   .pr-rows { display: flex; flex-direction: column; gap: 0.7rem; }
   .pr-row { display: flex; gap: 1.4rem; align-items: flex-start; padding: 1.3rem 1.5rem; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); transition: border-color .3s ease, background .3s ease; }
@@ -294,6 +293,8 @@ const truths = [
   .pr-row__num { flex: 0 0 auto; font-family: var(--font-headline); font-weight: 700; font-size: 1.3rem; color: #f2420b; line-height: 1.4; min-width: 2.2rem; }
   .pr-row__title { font-family: var(--font-headline); font-weight: 700; font-size: 1.1rem; color: #fff; margin: 0 0 0.4rem; text-transform: none; }
   .pr-row__body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.96rem; line-height: 1.6; color: rgba(255,255,255,0.62); margin: 0; }
+  .pr-note { margin: clamp(1.6rem, 3vw, 2.2rem) 0 0; max-width: 64ch; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,0.6); }
+  .pr-note strong { color: #fff; font-weight: 600; }
 
   /* ===== PILLS ===== */
   .pr-pills { display: flex; flex-wrap: wrap; gap: 0.7rem; }
@@ -309,9 +310,11 @@ const truths = [
     .cs-line { flex-wrap: wrap; gap: 0.5rem; }
     .cs-line-1 { font-size: clamp(3rem, 13vw, 5rem); white-space: normal; }
     .pr-split { grid-template-columns: 1fr; }
+    .pr-stats { grid-template-columns: repeat(2, 1fr); }
     .pr-grid--3 { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 600px) {
-    .pr-grid--3 { grid-template-columns: 1fr; }
+    .pr-grid--2, .pr-grid--3 { grid-template-columns: 1fr; }
+    .pr-stats { grid-template-columns: 1fr 1fr; }
   }
 </style>

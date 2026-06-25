@@ -5,10 +5,13 @@ export const GET: APIRoute = async () => {
     '',
     '/about',
     '/programs',
+    '/programs/global-internship',
     '/programs/internship-j1',
-    '/programs/office-tour',
-    '/programs/grp',
+    '/programs/career-training',
+    '/programs/j1-trainee',
     '/programs/407',
+    '/programs/office-tour',
+    '/learn',
     '/community',
     '/apply'
   ];
