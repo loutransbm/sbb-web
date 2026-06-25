@@ -367,4 +367,12 @@ a:hover {
     margin-right: 0 !important;
     max-width: 100% !important;
   }
+
+  /* Tiêu đề section bespoke ngoài hệ .cs-line (homepage): PROGRAMS 96px, FAQ 136px… -> cỡ phone */
+  .services-heading,
+  .faq-mega {
+    font-size: clamp(2.6rem, 12.5vw, 4rem) !important;
+    line-height: 1.02 !important;
+  }
+  .cs-card-title { font-size: clamp(1.9rem, 8.5vw, 2.9rem) !important; }
 }
