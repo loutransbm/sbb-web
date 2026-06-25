@@ -9,3 +9,4 @@ export default defineConfig({
 });
 
 // deploy: sbb.edu.vn production
+// production deploy v2
