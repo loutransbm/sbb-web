@@ -7,3 +7,5 @@ export default defineConfig({
     assets: '_assets'
   }
 });
+
+// deploy: sbb.edu.vn production
