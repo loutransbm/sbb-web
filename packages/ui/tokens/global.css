@@ -21,6 +21,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   background-color: var(--bg-primary);
+  overflow-x: clip;            /* CHẶN kéo ngang lòi nền đen (html vốn để visible) */
+  max-width: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
