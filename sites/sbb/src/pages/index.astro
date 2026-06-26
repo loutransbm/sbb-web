@@ -1913,7 +1913,14 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       display: block !important;
       padding-top: 0 !important;
       padding-bottom: 1.5rem !important;
+      /* Nền lửa ĐỒNG ĐỀU: bỏ beam/noise/seam (tính theo % chiều cao desktop -> sinh mép kẻ + 2 tông) */
+      background:
+        radial-gradient(140% 80% at 50% 46%, rgba(255, 92, 38, 0.26) 0%, rgba(242, 66, 11, 0.09) 42%, transparent 74%),
+        var(--paper) !important;
     }
+    .omni-hero::after { display: none !important; }   /* tắt noise (mép kẻ 2 tông) */
+    .hero-glow-beam { display: none !important; }      /* tắt beam lệch giữa màn */
+    .hero-seam-bridge { display: none !important; }    /* tắt dải paper sáng #D9D1CA */
     .omni-hero__inner {
       padding-top: 6rem !important;   /* chừa chỗ cho thanh nav nổi */
       padding-bottom: 1rem;
@@ -1922,19 +1929,21 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     .hero-col { width: 100%; }
     /* === BỐ CỤC OMNI: cụm GLOBAL + card 5000 LÊN TRÊN · ảnh GIỮA · PRACTICAL TRAINING XUỐNG DƯỚI === */
-    .hero-col--right  { order: 1; align-items: flex-end; text-align: right; }
+    .hero-col--right  { order: 1; align-items: stretch; text-align: left; }
     .hero-col--center { order: 2; }
     .hero-col--left   { order: 3; align-items: flex-start; text-align: left; }
     .hero-bottom-row  { order: 4; }
     /* Bỏ HẲN card 86% trên mobile */
     .stat-card--left { display: none !important; }
     .campaign-box { padding-left: 0 !important; }
-    /* Card 5000: NHỎ lại, sát phải, ĐỔ BÓNG XUỐNG, nằm trên GLOBAL INTERNSHIPS (giống "5 MM" Omni) */
+    /* Card 5000: NHỎ, sát phải, kéo XUỐNG đè ~1/3 chữ GLOBAL, bóng đổ xuống (giống "5 MM" Omni) */
     .stat-card--right {
-      max-width: 232px;
+      max-width: 196px;
       width: auto;
       align-self: flex-end;
-      margin-bottom: 0.6rem;
+      position: relative;
+      z-index: 6;
+      margin-bottom: -2.7rem;   /* kéo xuống đè ~1/3 chữ GLOBAL */
       box-shadow: 0 28px 48px -14px rgba(0, 0, 0, 0.62),
                   0 12px 24px -10px rgba(0, 0, 0, 0.45),
                   inset 0 1px 1px rgba(255, 255, 255, 0.6);
@@ -1953,11 +1962,11 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
               saturate(1.3) contrast(1.24) brightness(1.12) !important;
     }
     .artwork-glow { opacity: 1 !important; width: 92% !important; }
-    /* GLOBAL INTERNSHIPS + văn bản phụ: căn SÁT MÉP PHẢI */
-    .agency-box { align-items: flex-end !important; width: 100%; text-align: right; }
-    .agency-heading { font-size: clamp(2.9rem, 13.5vw, 4.4rem); text-align: right; margin-bottom: 1.4rem; }
-    .action-pill-row { flex-wrap: wrap; max-width: 100%; gap: 1rem; justify-content: flex-end; }
-    .action-pill-text { white-space: normal !important; text-align: right; }
+    /* GLOBAL INTERNSHIPS + văn bản phụ: căn SÁT MÉP TRÁI (chữ GLOBAL ở mép trái) */
+    .agency-box { align-items: flex-start !important; width: 100%; text-align: left; }
+    .agency-heading { font-size: clamp(2.9rem, 13.5vw, 4.4rem); text-align: left; margin-bottom: 1.4rem; }
+    .action-pill-row { flex-wrap: wrap; max-width: 100%; gap: 1rem; justify-content: flex-start; }
+    .action-pill-text { white-space: normal !important; text-align: left; }
     .hero-bottom-row {
       margin-top: 0.5rem;
       padding-bottom: 1.5rem;
