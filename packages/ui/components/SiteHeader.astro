@@ -485,6 +485,11 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
   @media (max-width: 899px) {
     /* Bỏ viền capsule -> thanh nav TRONG SUỐT hẳn, item nổi thẳng trên hero như Omni */
     .header-inner {
+      /* Grid 1fr auto 1fr bị dồn header-right vào cột giữa khi nav-desktop ẩn
+         -> chuyển sang flex space-between: logo TRÁI ↔ pill+hamburger PHẢI */
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
       border-color: transparent !important;
       background: transparent !important;
       box-shadow: none !important;
