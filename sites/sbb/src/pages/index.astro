@@ -217,15 +217,15 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
                 <div class="cinema-stats-row">
                   <div class="cinema-stat">
                     <div class="c-stat-num">86%</div>
-                    <div class="c-stat-text">Học viên đạt tăng trưởng thu nhập >50% trong 12 tháng, HOẶC thăng tiến quản lý.</div>
+                    <div class="c-stat-text"><span class="stat-long">Học viên đạt tăng trưởng thu nhập >50% trong 12 tháng, HOẶC thăng tiến quản lý.</span><span class="stat-short">Tăng thu nhập</span></div>
                   </div>
                   <div class="cinema-stat">
                     <div class="c-stat-num">81%</div>
-                    <div class="c-stat-text">Học viên tiếp tục gắn bó với mạng lưới toàn cầu của SBB sau 18 tháng.</div>
+                    <div class="c-stat-text"><span class="stat-long">Học viên tiếp tục gắn bó với mạng lưới toàn cầu của SBB sau 18 tháng.</span><span class="stat-short">Gắn bó lâu dài</span></div>
                   </div>
                   <div class="cinema-stat">
                     <div class="c-stat-num">5k+</div>
-                    <div class="c-stat-text">Cơ hội thực tập & làm<br/>việc thực chất tại các<br/><span style="white-space: nowrap;">tập đoàn đối tác quốc tế.</span></div>
+                    <div class="c-stat-text"><span class="stat-long">Cơ hội thực tập &amp; làm<br/>việc thực chất tại các<br/><span style="white-space: nowrap;">tập đoàn đối tác quốc tế.</span></span><span class="stat-short">Cơ hội toàn cầu</span></div>
                   </div>
                 </div>
               </div>
@@ -2681,6 +2681,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     font-weight: 300;
     text-wrap: pretty; /* Prevents typographic orphans/widows */
   }
+  /* Desktop: bản dài; nhãn ngắn chỉ bật ở mobile */
+  .c-stat-text .stat-short { display: none; }
 
   .screen-right {
     flex: 0 0 45%;
@@ -2785,14 +2787,14 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* GIỮ bố cục NGANG như desktop (chữ TRÁI · chân dung PHẢI), chỉ thu nhỏ cho vừa điện thoại */
     .screen-content { flex-direction: row !important; }
     .screen-left {
-      flex: 1 1 54% !important;
+      flex: 1 1 48% !important;
       z-index: 1;
-      padding: 1.1rem 1.15rem 1.1rem 1.2rem !important;
+      padding: 1.1rem 1rem 1.1rem 1.2rem !important;
       justify-content: center;
     }
     .screen-right {
       position: relative !important;
-      flex: 0 0 46% !important;          /* ảnh rộng hơn cho cân đối, không còn là dải mỏng góc phải */
+      flex: 0 0 52% !important;          /* ảnh RỘNG sang trái thêm cho cân đối */
       opacity: 1 !important;
       inset: auto !important;
       height: auto !important;          /* cho align-self:stretch ăn -> screen-right CAO = chiều cao hàng */
@@ -2800,13 +2802,13 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       z-index: 0;
     }
     /* Ảnh founder lấp đầy cột phải bằng inset:0 (KHÔNG dựa height:100% vì card cao tự-động -> %height không giải được).
-       Mask CHỈ làm mềm mép trái 1 chút để hoà vào chữ — KHÔNG fade đáy/góc nữa (ảnh khỏi 'thụt vào góc'). */
+       Mask CHỈ làm mềm mép trái rất nhẹ để hoà vào chữ — ảnh trải rộng sang trái, không thụt góc. */
     .cinema-portrait {
       inset: 0 !important;
       width: auto !important;
       height: auto !important;
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 16%) !important;
-      mask-image: linear-gradient(to right, transparent 0%, #000 16%) !important;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%) !important;
+      mask-image: linear-gradient(to right, transparent 0%, #000 8%) !important;
       -webkit-mask-composite: source-over !important;
       mask-composite: add !important;
     }
@@ -2816,8 +2818,17 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       margin-bottom: 0.5rem !important;
       line-height: 1.14 !important;
     }
-    /* Bỏ đoạn mô tả phụ trên mobile -> card NGANG DẸT hơn (desktop vẫn còn) */
-    .cinema-sub { display: none !important; }
+    /* KHÔI PHỤC mô tả phụ dưới tiêu đề (cỡ nhỏ cho mobile) */
+    .cinema-sub {
+      display: block !important;
+      font-size: 0.62rem !important;
+      line-height: 1.4 !important;
+      margin-bottom: 0 !important;
+      max-width: 100% !important;
+    }
+    /* Đổi mô tả 3 số sang nhãn NGẮN gọn 1 dòng (ẩn bản dài) */
+    .c-stat-text .stat-long { display: none !important; }
+    .c-stat-text .stat-short { display: inline !important; white-space: nowrap !important; }
     /* 3 chỉ số NẰM NGANG cạnh nhau (không xếp dọc) */
     .cinema-stats-row {
       flex-direction: row !important;
