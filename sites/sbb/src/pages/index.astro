@@ -3725,13 +3725,33 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   }
 
   @media (max-width: 600px) {
-    /* Mobile: card chiếm full chiều ngang */
+    /* Mobile: PROGRAMS = SLIDER vuốt ngang 4 card (không xếp dọc nữa) */
+    .services-grid {
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      row-gap: 0 !important;
+      gap: 1rem !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      overflow-x: auto !important;
+      scroll-snap-type: x mandatory !important;
+      -webkit-overflow-scrolling: touch !important;
+      padding-bottom: 0.5rem !important;
+      scrollbar-width: none !important;            /* ẩn thanh cuộn (Firefox) */
+    }
+    .services-grid::-webkit-scrollbar { display: none !important; }  /* ẩn thanh cuộn (WebKit) */
+    /* 2 hàng tan ra -> 4 card thành item trực tiếp của track ngang */
+    .services-row { display: contents !important; }
     .service-card {
-      flex-basis: 100%;
-      width: 100%;
-      max-width: 100%;
-      aspect-ratio: auto;
-      min-height: 450px;
+      flex: 0 0 86% !important;          /* mỗi card ~86% màn -> hé card kế = biết còn vuốt */
+      width: 86% !important;
+      max-width: 86% !important;
+      min-height: 430px !important;
+      aspect-ratio: auto !important;
+      scroll-snap-align: center !important;
+      /* Hiện sẵn (không phụ thuộc observer vì card 3·4 nằm ngoài viewport ngang) */
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 
