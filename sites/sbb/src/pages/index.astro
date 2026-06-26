@@ -3709,6 +3709,20 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* mobile: thu gọn khoảng cách (đã xếp dọc từ breakpoint 1200) */
     .cs-header-bottom { gap: 1.5rem; margin-top: 1.5rem; }
 
+    /* PILL "REAL RESULTS" lên TRÊN tiêu đề (không nằm giữa chữ) như Omni */
+    #case-studies .cs-line-1 { flex-direction: column !important; align-items: flex-start !important; }
+    #case-studies .cs-glass-pill { order: -1 !important; margin: 0 0 1.1rem 0 !important; }
+    /* Tiêu đề TO phủ màn hình như Omni (3 dòng cùng cỡ lớn) */
+    #case-studies .cs-line-1,
+    #case-studies .cs-line-2,
+    #case-studies .cs-line-3 {
+      font-size: clamp(2.4rem, 12vw, 3.6rem) !important;
+      line-height: 1.0 !important;
+      letter-spacing: -0.03em !important;
+    }
+    /* không cho dòng tiêu đề tràn mép -> tự xuống dòng thay vì bị cắt */
+    #case-studies .cs-line { max-width: 100% !important; }
+
     /* XÓA ĐƯỜNG CHIA Programs ↔ Case Studies: tắt quầng trang trí (dùng #services để THẮNG override dark ở dưới) */
     #services::before,
     #services::after { display: none !important; }
