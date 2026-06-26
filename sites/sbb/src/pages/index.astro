@@ -2766,9 +2766,21 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   }
 
   @media (max-width: 992px) {
+    /* Card RESULTS căng NGANG hết cỡ: mép chạm 2 mép màn hình (full-bleed), bỏ bo góc */
+    .cinema-stage {
+      width: 100% !important;
+      max-width: none !important;
+      margin-inline: 0 !important;
+    }
+    .display-bezel {
+      border-radius: 0 !important;
+      border-left: 0 !important;
+      border-right: 0 !important;
+    }
     .cinema-screen {
       aspect-ratio: auto;
       min-height: 600px;
+      border-radius: 0 !important;
     }
     .screen-content {
       flex-direction: column;
