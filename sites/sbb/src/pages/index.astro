@@ -4780,10 +4780,12 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   /* Hero MOBILE: nền lửa cam ĐỒNG ĐỀU — GHI ĐÈ linear dark "SEAM FIX" ở trên (vốn cho desktop)
      -> hết dải tối 0-58% + đường kẻ 2 tông. Đặt cuối <style> để thắng theo thứ tự nguồn. */
   @media (max-width: 991px) {
+    /* Base = ĐÚNG màu body (#120502) -> hero & mọi section dưới CÙNG MÀU, không lệch mạch nối.
+       Glow cam tan dần về chính #120502 = gradient mượt, KHÔNG còn đường kẻ. */
     .omni-hero {
       background:
-        radial-gradient(155% 96% at 50% 40%, rgba(255, 108, 52, 0.34) 0%, rgba(242, 66, 11, 0.15) 38%, rgba(242, 66, 11, 0.04) 60%, transparent 80%),
-        #150602 !important;
+        radial-gradient(150% 80% at 50% 38%, rgba(255, 108, 52, 0.32) 0%, rgba(242, 66, 11, 0.14) 36%, rgba(242, 66, 11, 0.04) 58%, transparent 78%),
+        #120502 !important;
     }
     .omni-hero::after { display: none !important; }
   }
