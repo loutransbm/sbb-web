@@ -1624,16 +1624,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     z-index: 2;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .central-artwork-frame:hover {
-    transform: perspective(1000px) rotateY(-10deg) rotateX(5deg); /* bỏ hover phóng to — giữ y như mặc định */
-    box-shadow: none;
-  }
-  /* Khi hover ảnh cô gái: nâng cả khu hero LÊN TRÊN thanh điều hướng (fixed, z-index 100)
-     -> cô gái phóng to ĐÈ LÊN nav thay vì bị nav che. :has() = hover phần tử con tác động phần tử cha.
-     Nền hero phía trên trong suốt nên thanh nav vẫn lộ qua, chỉ bị cô gái che ở giữa. */
-  .omni-hero:has(.central-artwork-frame:hover) {
-    z-index: 2; /* bỏ nâng hero đè nav khi hover */
-  }
+  /* (ĐÃ BỎ hover ảnh cô gái — không phóng to / nghiêng / nâng z-index khi rê chuột hoặc chạm) */
   .artwork-image {
     width: 100%;
     height: 100%;
@@ -1653,9 +1644,6 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* Stronger, earlier cinematic fade to completely hide the cut PNG edge */
     -webkit-mask-image: linear-gradient(to bottom, black 30%, rgba(0,0,0,0.5) 60%, transparent 85%);
     mask-image: linear-gradient(to bottom, black 30%, rgba(0,0,0,0.5) 60%, transparent 85%);
-  }
-  .central-artwork-frame:hover .artwork-image {
-    transform: scale(1.6) translateY(8%); /* bỏ hover — giữ y như mặc định */
   }
   .glossy-lens-overlay {
     position: absolute;
@@ -1918,11 +1906,19 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
      HERO — Mobile (≤991px): xếp dọc gọn, chống tràn, chừa header
      ============================================ */
   @media (max-width: 991px) {
-    .omni-hero { min-height: auto; }
+    /* Bỏ height:100vh + căn-giữa-dọc (làm content cao hơn màn bị đẩy lên khuất header) */
+    .omni-hero {
+      height: auto !important;
+      min-height: 0 !important;
+      display: block !important;
+      padding-top: 0 !important;
+      padding-bottom: 1.5rem !important;
+    }
     .omni-hero__inner {
-      padding-top: 6.5rem !important;   /* chừa chỗ cho thanh nav nổi */
-      padding-bottom: 2rem;
+      padding-top: 6rem !important;   /* chừa chỗ cho thanh nav nổi */
+      padding-bottom: 1rem;
       gap: var(--space-6);
+      transform: none !important;
     }
     .hero-col { width: 100%; }
     .hero-col--left { align-items: flex-start; }
