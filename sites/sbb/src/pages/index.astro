@@ -2785,30 +2785,36 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* GIỮ bố cục NGANG như desktop (chữ TRÁI · chân dung PHẢI), chỉ thu nhỏ cho vừa điện thoại */
     .screen-content { flex-direction: row !important; }
     .screen-left {
-      flex: 1 1 58% !important;
+      flex: 1 1 54% !important;
       z-index: 1;
-      padding: 1.05rem 1.1rem 1.05rem 1.2rem !important;
+      padding: 1.1rem 1.15rem 1.1rem 1.2rem !important;
       justify-content: center;
     }
     .screen-right {
       position: relative !important;
-      flex: 0 0 42% !important;
+      flex: 0 0 46% !important;          /* ảnh rộng hơn cho cân đối, không còn là dải mỏng góc phải */
       opacity: 1 !important;
       inset: auto !important;
       height: auto !important;          /* cho align-self:stretch ăn -> screen-right CAO = chiều cao hàng */
       align-self: stretch !important;   /* nếu không, chỉ chứa ảnh absolute -> height 0 -> ẢNH BIẾN MẤT */
       z-index: 0;
     }
-    /* Ảnh founder lấp đầy cột phải bằng inset:0 (KHÔNG dựa height:100% vì card cao tự-động -> %height không giải được) */
+    /* Ảnh founder lấp đầy cột phải bằng inset:0 (KHÔNG dựa height:100% vì card cao tự-động -> %height không giải được).
+       Mask CHỈ làm mềm mép trái 1 chút để hoà vào chữ — KHÔNG fade đáy/góc nữa (ảnh khỏi 'thụt vào góc'). */
     .cinema-portrait {
       inset: 0 !important;
       width: auto !important;
       height: auto !important;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 16%) !important;
+      mask-image: linear-gradient(to right, transparent 0%, #000 16%) !important;
+      -webkit-mask-composite: source-over !important;
+      mask-composite: add !important;
     }
+    .portrait-img { background-position: center top !important; }
     .cinema-heading {
-      font-size: clamp(1.05rem, 5vw, 1.55rem) !important;
-      margin-bottom: 0.55rem !important;
-      line-height: 1.12 !important;
+      font-size: clamp(0.9rem, 4vw, 1.2rem) !important;
+      margin-bottom: 0.5rem !important;
+      line-height: 1.14 !important;
     }
     /* Bỏ đoạn mô tả phụ trên mobile -> card NGANG DẸT hơn (desktop vẫn còn) */
     .cinema-sub { display: none !important; }
@@ -2829,10 +2835,10 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     .cinema-stat:last-child { padding-right: 0 !important; }
     .c-stat-num {
-      font-size: clamp(1.4rem, 6.5vw, 2.1rem) !important;
-      margin-bottom: 0.25rem !important;
+      font-size: clamp(1.1rem, 5vw, 1.6rem) !important;
+      margin-bottom: 0.2rem !important;
     }
-    .c-stat-text { font-size: 0.56rem !important; line-height: 1.38 !important; }
+    .c-stat-text { font-size: 0.5rem !important; line-height: 1.35 !important; }
     .portrait-caption { right: 5% !important; bottom: 5% !important; }
     .portrait-name { font-size: 0.82rem !important; }
     .portrait-role { font-size: 0.56rem !important; }
