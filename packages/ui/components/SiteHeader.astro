@@ -484,13 +484,14 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
   /* ===== KHỚP THANH NAV OMNI TRÊN MOBILE (≤899px) ===== */
   @media (max-width: 899px) {
     /* Bỏ viền capsule -> thanh nav TRONG SUỐT hẳn, item nổi thẳng trên hero như Omni */
-    .header-inner {
+    .site-header .header-inner {
       /* Grid 1fr auto 1fr bị dồn header-right vào cột giữa khi nav-desktop ẩn
-         -> chuyển sang flex space-between: logo TRÁI ↔ pill+hamburger PHẢI */
+         -> chuyển sang flex space-between: logo TRÁI ↔ pill+hamburger PHẢI.
+         Dùng .site-header .header-inner (specificity cao hơn) để ÉP THẮNG viền omni. */
       display: flex !important;
       justify-content: space-between !important;
       align-items: center !important;
-      border: 0 !important;            /* bỏ HẲN viền capsule (shorthand thắng border của omni) */
+      border: 0 !important;            /* bỏ HẲN viền capsule "kẻ trên top" */
       background: transparent !important;
       box-shadow: none !important;
       width: calc(100% - 2.5rem) !important;  /* sát mép hơn (giống Omni) */
