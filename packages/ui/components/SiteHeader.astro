@@ -331,12 +331,12 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
     position: fixed;
     inset: 0;
     z-index: 200;
-    /* Nền tối + quầng lửa cam hắt từ GÓC DƯỚI-TRÁI (giống menu Omni) */
+    /* Nền tối + quầng lửa cam hắt từ GÓC DƯỚI-TRÁI — sáng/rực hơn (giống menu Omni) */
     background:
-      radial-gradient(125% 85% at -8% 108%, rgba(255, 92, 38, 0.62) 0%, rgba(242, 66, 11, 0.30) 26%, rgba(242, 66, 11, 0.08) 48%, transparent 66%),
-      rgba(9, 3, 1, 0.97);
-    -webkit-backdrop-filter: blur(20px) saturate(120%);
-    backdrop-filter: blur(20px) saturate(120%);
+      radial-gradient(140% 100% at -5% 112%, rgba(255, 125, 65, 0.92) 0%, rgba(250, 78, 20, 0.58) 24%, rgba(242, 66, 11, 0.26) 46%, rgba(242, 66, 11, 0.06) 60%, transparent 74%),
+      rgba(14, 5, 2, 0.94);
+    -webkit-backdrop-filter: blur(20px) saturate(125%);
+    backdrop-filter: blur(20px) saturate(125%);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -490,7 +490,7 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
       display: flex !important;
       justify-content: space-between !important;
       align-items: center !important;
-      border-color: transparent !important;
+      border: 0 !important;            /* bỏ HẲN viền capsule (shorthand thắng border của omni) */
       background: transparent !important;
       box-shadow: none !important;
       width: calc(100% - 2.5rem) !important;  /* sát mép hơn (giống Omni) */
