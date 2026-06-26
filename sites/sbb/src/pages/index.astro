@@ -1973,15 +1973,21 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     .action-pill-btn { flex: none; }
     .action-pill-text { white-space: normal !important; text-align: left; flex: 1; font-size: 12px; line-height: 1.45; }
     .action-pill-text br { display: none; }
+    /* Bỏ chữ SBB to ở dưới (theo yêu cầu) */
+    .giant-bg-text { display: none !important; }
+    /* social-links NÂNG lên THẲNG HÀNG với CASE STUDIES (giống Omni): CASE STUDIES trái · social phải */
     .hero-bottom-row {
-      margin-top: 0.5rem;
-      padding-bottom: 1.5rem;
-      flex-wrap: wrap;
-      gap: 1rem;
+      margin-top: -3.6rem !important;   /* kéo social LÊN ngang dòng CASE STUDIES của cụm PRACTICAL TRAINING */
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      flex-wrap: nowrap;
+      gap: 0;
       align-items: center;
+      justify-content: flex-end !important;  /* social dồn sát PHẢI (CASE STUDIES nằm bên trái cùng hàng) */
+      position: relative;
+      z-index: 12;
     }
-    .giant-bg-text { transform: none; }
-    .social-links { margin-bottom: 0; }
+    .social-links { margin-bottom: 0 !important; gap: var(--space-5); }
     /* Tiêu đề "KIẾN TẠO THẾ HỆ…" để nowrap -> ép xuống dòng trên mobile */
     .headline-dimmed { white-space: normal !important; }
     .partner-headline { font-size: clamp(1.05rem, 4.6vw, 1.4rem); }
@@ -4790,15 +4796,15 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* Đèn rọi MỀM vào đúng CÔ GÁI: radial tròn, toả đều, tan hẳn về nền tối.
        Bỏ linear-chéo + mask cứng của bản desktop (chúng tạo mép/2 mảng). */
     .artwork-glow {
-      width: 165vw !important;
-      height: 165vw !important;
-      top: 42% !important;              /* nâng tâm đèn lên -> sáng hắt LÊN khu GLOBAL */
-      background: radial-gradient(circle at 50% 34%,
-        rgba(255, 150, 88, 0.62) 0%,
-        rgba(247, 90, 26, 0.34) 28%,
-        rgba(242, 66, 11, 0.14) 50%,
-        rgba(242, 66, 11, 0.04) 66%,
-        transparent 80%) !important;
+      width: 172vw !important;
+      height: 172vw !important;
+      top: 37% !important;              /* nâng tâm đèn LÊN cao hơn -> sáng hắt tới SÁT card 5000 rồi tan */
+      background: radial-gradient(circle at 50% 30%,
+        rgba(255, 150, 88, 0.66) 0%,
+        rgba(247, 90, 26, 0.36) 26%,
+        rgba(242, 66, 11, 0.16) 46%,
+        rgba(242, 66, 11, 0.05) 64%,
+        transparent 78%) !important;
       -webkit-mask-image: none !important;
       mask-image: none !important;
       filter: blur(54px) !important;
