@@ -4792,6 +4792,12 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     .omni-hero {
       background: #120502 !important;
     }
+    /* BODY PHẲNG #120502 trên mobile: quầng cam đỉnh-trang (radial 55% chiều cao = 14k px)
+       vốn tràn xuống tận mạch nối hero↔partner. Hero ĐẶC che quầng, partner TRONG SUỐT lộ quầng
+       -> lệch tông = ĐƯỜNG KẺ + dải ấm dưới line. Tắt quầng body trên mobile -> 2 section đồng màu, hết kẻ. */
+    :global(body) {
+      background: #120502 !important;
+    }
     .omni-hero::after { display: none !important; }
     /* Đèn rọi MỀM vào đúng CÔ GÁI: radial tròn, toả đều, tan hẳn về nền tối.
        Bỏ linear-chéo + mask cứng của bản desktop (chúng tạo mép/2 mảng). */
