@@ -66,7 +66,7 @@ const team = [
       <div class="cs-header about-hero-head">
         <!-- Dòng 1: ABOUT SBB (trắng lớn) + glass pill chườm cuối chữ (như Omni "WORK FLOW") -->
         <div class="cs-line cs-line-1">
-          <span class="cs-text-white">ABOUT SBB</span>
+          <span class="cs-text-white">ABOUT<br/>SBB</span>
           <div class="cs-glass-pill">
             <span class="cs-glass-title">CÁCH SBB LÀM</span>
             <span class="cs-glass-sub">Nói thật trước, chuẩn bị năng lực thật, đồng hành tới cùng.</span>
@@ -1335,8 +1335,11 @@ const team = [
       .lead-width-driver { display: none; }
       .about-hero-lead { margin-left: 0; max-width: 100%; }
 
-      /* ===== HERO ĐỒNG BỘ tiêu đề các section homepage: cs-line-1 72px / verb 72px / tail 49px + pill ĐÈ ĐỈNH ===== */
+      /* ===== HERO kiểu OMNI: ABOUT / SBB / INSTITUTE mỗi chữ 1 dòng (cascade lớn), card GIỮA-PHẢI, đẩy LÊN cao ===== */
+      .about-hero { padding-block: clamp(5.5rem, 8vw, 7.5rem) clamp(2rem, 4vw, 4rem) !important; min-height: auto !important; }
+      .about-hero-head { position: relative !important; }
       .about-hero-head .cs-line-1 {
+        position: static !important;
         flex-direction: column !important; align-items: flex-start !important;
         font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;
         line-height: 0.9 !important; letter-spacing: -0.097em !important; white-space: nowrap !important;
@@ -1351,21 +1354,24 @@ const team = [
       }
       .about-hero-head .about-line-2 {
         flex-direction: column !important; align-items: flex-start !important;
-        gap: 0.1rem !important; margin-top: 0.35rem !important;
+        gap: 0.05rem !important; margin-top: 0.05rem !important;
       }
-      /* pill ĐÈ ĐỈNH "ABOUT SBB" + đổ bóng xuống (như Case Studies homepage) */
+      /* Card GIỮA-PHẢI (như Omni "WORK FLOW"): tuyệt đối, neo phải, căn GIỮA dọc cụm tiêu đề */
       .about-hero-head .cs-glass-pill {
-        order: -1 !important; align-self: flex-start !important;
-        transform: none !important; margin: 0 0 -1.3rem 1.6rem !important;
-        width: 34vw !important; min-width: 138px !important; max-width: 168px !important;
-        min-height: 0 !important; padding: 0.7rem 0.95rem !important; gap: 0.3rem !important;
+        position: absolute !important;
+        right: 0 !important; left: auto !important;
+        top: 50% !important; bottom: auto !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important; align-self: auto !important;
+        width: 52vw !important; min-width: 195px !important; max-width: 245px !important;
+        min-height: 0 !important; padding: 0.9rem 1.1rem !important; gap: 0.4rem !important;
       }
       .about-hero-head .cs-glass-title {
-        font-size: 0.92rem !important; font-weight: 700 !important; color: #ffffff !important;
-        white-space: normal !important; line-height: 1.05 !important; letter-spacing: 0.015em !important;
+        font-size: 1.02rem !important; font-weight: 700 !important; color: #ffffff !important;
+        white-space: normal !important; line-height: 1.1 !important; letter-spacing: 0.01em !important;
       }
       .about-hero-head .cs-glass-sub {
-        font-size: 0.7rem !important; line-height: 1.35 !important; letter-spacing: normal !important;
+        font-size: 0.74rem !important; line-height: 1.4 !important; letter-spacing: normal !important;
         color: rgba(255, 255, 255, 0.5) !important; max-width: 100% !important;
       }
     }
@@ -4913,5 +4919,19 @@ const team = [
   .partner-marquee-section { margin-top: -1px !important; background: transparent !important; }
   .partner-marquee-section::before { display: none !important; }
 
+  /* ===== MOBILE: ánh sáng hero NHỎ + tập trung GIỮA + xung quanh TỐI (giống Omni) ===== */
+  @media (max-width: 991px) {
+    :global(body) {
+      background:
+        radial-gradient(ellipse 380px 340px at 45% 235px,
+          rgba(255, 112, 60, 0.72) 0%,
+          rgba(248, 82, 26, 0.42) 20%,
+          rgba(242, 66, 11, 0.20) 40%,
+          rgba(242, 66, 11, 0.05) 58%,
+          transparent 70%),
+        radial-gradient(120% 60% at 50% 116%, rgba(242, 66, 11, 0.10) 0%, rgba(18, 5, 2, 0) 55%),
+        #120502 !important;
+    }
+  }
 </style>
 </PageLayout>
