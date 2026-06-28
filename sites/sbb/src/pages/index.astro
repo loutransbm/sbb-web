@@ -3863,17 +3863,16 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       margin-right: 0 !important;
       white-space: nowrap !important;
     }
-    /* Dòng "TO SHINE" + card: cta-line-2 fit-content để card neo PHẢI = mép SHINE (đè lên SHINE) */
+    /* Dòng "TO SHINE" + card: cta-line-2 full-width để card NEO MÉP PHẢI (xa khỏi cột READY) */
     #get-started .cta-line-2 {
       flex-direction: column !important;
       align-items: flex-start !important;
-      width: -moz-fit-content !important;
-      width: fit-content !important;
+      width: 100% !important;
       gap: 0 !important;
       margin-top: 0.35rem !important;
     }
     #get-started .cta-line-3 { margin-top: 0.35rem !important; }
-    /* Pill LET'S TALK: bỏ transform desktop; NEO PHẢI (align-self flex-end) -> đè lên chữ SHINE, mép dưới đè đỉnh chữ */
+    /* Pill LET'S TALK: bỏ transform desktop; NEO MÉP PHẢI -> nằm ở đầu phải SHINE, KHÔNG đè cột READY */
     #get-started .cs-glass-pill {
       transform: none !important;
       align-self: flex-end !important;
