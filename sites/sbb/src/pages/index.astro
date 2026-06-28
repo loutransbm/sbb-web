@@ -3719,7 +3719,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* PILL "REAL RESULTS" lên TRÊN tiêu đề + HẠ SÁT đỉnh chữ THIS IS WHAT (áp cho cả Moments) */
     #case-studies .cs-line-1,
     #moments .cs-line-1,
-    #testimonials .cs-line-1 {
+    #testimonials .cs-line-1,
+    #get-started .cs-line-1 {
       flex-direction: column !important;
       align-items: flex-start !important;
       font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;  /* THIS IS WHAT: RẤT TO, tràn 2 mép */
@@ -3729,7 +3730,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     /* Pill lên TRÊN + ĐÈ đỉnh chữ + dịch phải (áp cho cả Moments REAL MOMENTS) */
     #case-studies .cs-glass-pill,
-    #moments .cs-glass-pill {
+    #moments .cs-glass-pill,
+    #get-started .cs-glass-pill {
       order: -1 !important;
       margin: 0 0 -1.3rem 1.6rem !important;   /* đè nhẹ + DỊCH PHẢI vào trong 1 chút */
       width: 34vw !important;                   /* DÀI tới qua chữ I của IS */
@@ -3742,7 +3744,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* Chữ trong pill CÂN ĐỐI như Omni: title TO + đậm + trắng (1 dòng), sub xám đọc được */
     #case-studies .cs-glass-title,
     #moments .cs-glass-title,
-    #testimonials .cs-glass-title {
+    #testimonials .cs-glass-title,
+    #get-started .cs-glass-title {
       font-size: 0.92rem !important;
       font-weight: 700 !important;
       letter-spacing: 0.015em !important;
@@ -3752,7 +3755,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     #case-studies .cs-glass-sub,
     #moments .cs-glass-sub,
-    #testimonials .cs-glass-sub {
+    #testimonials .cs-glass-sub,
+    #get-started .cs-glass-sub {
       font-size: 0.7rem !important;
       line-height: 1.35 !important;
       letter-spacing: normal !important;
@@ -3788,7 +3792,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* không cho dòng tiêu đề tràn mép -> tự xuống dòng thay vì bị cắt */
     #case-studies .cs-line,
     #moments .cs-line,
-    #testimonials .cs-line { max-width: 100% !important; }
+    #testimonials .cs-line,
+    #get-started .cs-line { max-width: 100% !important; }
 
     /* ===== TESTIMONIALS mobile: tiêu đề HOÀNH TRÁNG lấp đầy bề ngang + pill căn giữa TO ===== */
     /* Header gần full-bleed (KHÔNG đụng card tm-stage) */
@@ -3841,6 +3846,32 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     /* Bỏ mũi tên 2 bên trên mobile -> vuốt + tab điều khiển (giống Case Studies) */
     #testimonials .tm-nav { display: none !important; }
+
+    /* ===== CTA "READY TO SHINE BEYOND BORDERS?" — tiêu đề ĐỒNG BỘ các section trên ===== */
+    /* Header gần full-bleed như các section trên */
+    #get-started .cta-header { margin-left: -1.1rem !important; margin-right: -1.1rem !important; }
+    /* SHINE = động từ LỚN = cs-line-1 size (72px, -0.097em); BEYOND/BORDERS? = đuôi = cs-line-2 size (49px, -0.045em) */
+    #get-started .cta-verb {
+      font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;
+      letter-spacing: -0.097em !important;
+      line-height: 0.9 !important;
+      margin-left: 0 !important;
+    }
+    #get-started .cta-tail {
+      font-size: clamp(2.4rem, 11.4vw, 3.2rem) !important;
+      letter-spacing: -0.045em !important;
+      line-height: 0.96 !important;
+      margin-right: 0 !important;
+    }
+    /* Dòng 2 xếp DỌC trái (SHINE trên, BEYOND/BORDERS? dưới) — cascade như các section trên */
+    #get-started .cta-line-2 {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0.1rem !important;
+      margin-top: 0.35rem !important;
+    }
+    /* Pill BẮT ĐẦU: bỏ transform desktop (translateY 3.4rem) -> treatment Case Studies (đè đỉnh + đổ bóng) */
+    #get-started .cs-glass-pill { transform: none !important; }
 
     /* XÓA ĐƯỜNG CHIA Programs ↔ Case Studies: tắt quầng trang trí (dùng #services để THẮNG override dark ở dưới) */
     #services::before,
