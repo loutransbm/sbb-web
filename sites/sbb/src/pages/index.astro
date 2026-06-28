@@ -3710,6 +3710,10 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     .cs-header-bottom { gap: 2.2rem !important; margin-top: 0.35rem !important; }
     /* Moments: LIFE BEYOND ↔ BORDERS sát lại Y HỆT (mvh-bottom thay cho cs-header-bottom) */
     #moments .mvh-bottom { margin-top: 0.35rem !important; align-items: flex-start !important; }
+    /* CÁCH XA section trên = ĐÚNG nhịp Programs→Case Studies (≈142px tới pill).
+       Pill tuyệt đối nổi lên ~97px ĂN vào padding-top -> cần 12rem để khoảng tới pill khớp,
+       nếu không pill gần chạm cụm số Case Studies (đo được chỉ 14px = sát nhau). */
+    #moments { padding-top: 12rem !important; }
 
     /* PILL "REAL RESULTS" lên TRÊN tiêu đề + HẠ SÁT đỉnh chữ THIS IS WHAT (áp cho cả Moments) */
     #case-studies .cs-line-1,
