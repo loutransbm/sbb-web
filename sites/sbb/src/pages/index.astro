@@ -497,10 +497,10 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       <div class="cs-header mvh">
         <!-- Dòng 1: LIFE BEYOND + card (card tự kéo sát cuối chữ & đổ bóng xuống dòng dưới — dùng đúng .cs-glass-pill như section trên) -->
         <div class="cs-line cs-line-1">
-          <span class="cs-text-white">LIFE BEYOND</span>
+          <span class="cs-text-white">LIFE<br/>BEYOND</span>
           <div class="cs-glass-pill">
             <span class="cs-glass-title">REAL MOMENTS</span>
-            <span class="cs-glass-sub">Khoảnh khắc thật từ học viên SBB — không kịch bản, không dàn dựng</span>
+            <span class="cs-glass-sub">Không kịch bản, không dàn dựng</span>
           </div>
         </div>
         <!-- Dòng 2: BORDERS (thẳng hàng REAL GROWTH) -->
@@ -3750,6 +3750,14 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       letter-spacing: normal !important;
       color: rgba(255, 255, 255, 0.5) !important;
       max-width: 100% !important;
+    }
+    /* Moments: pill REAL MOMENTS DÀI hơn -> title KHÔNG xuống dòng */
+    #moments .cs-glass-title { white-space: nowrap !important; }
+    #moments .cs-glass-pill {
+      width: -moz-fit-content !important;
+      width: fit-content !important;
+      min-width: 150px !important;
+      max-width: 225px !important;
     }
     /* Dòng 2 (REAL GROWTH/LOOKS LIKE · BORDERS): TO nhưng nhỏ hơn dòng 1 */
     #case-studies .cs-line-2,
