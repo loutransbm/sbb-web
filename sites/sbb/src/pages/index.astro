@@ -3721,19 +3721,22 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* Pill NHỎ lại + ĐÈ lên đỉnh chữ THIS IS (margin âm, z-index trên) */
     #case-studies .cs-glass-pill {
       order: -1 !important;
-      margin: 0 0 -1.3rem 0 !important;   /* đè nhẹ hơn -> pill cao lên một xíu */
-      padding: 0.5rem 0.85rem !important;
+      margin: 0 0 -1.3rem 1.6rem !important;   /* đè nhẹ + DỊCH PHẢI vào trong 1 chút */
+      padding: 0.45rem 0.75rem !important;      /* gọn lại */
       gap: 2px !important;
+      width: -moz-fit-content !important;
+      width: fit-content !important;            /* size theo nội dung */
+      max-width: 150px !important;              /* CHẶN bề ngang -> pill NGẮN lại */
       position: relative; z-index: 5;
     }
-    #case-studies .cs-glass-title { font-size: 0.88rem !important; }
-    #case-studies .cs-glass-sub { font-size: 9.5px !important; max-width: 22ch !important; }
+    #case-studies .cs-glass-title { font-size: 0.74rem !important; letter-spacing: normal !important; white-space: normal !important; }
+    #case-studies .cs-glass-sub { font-size: 9px !important; max-width: 15ch !important; }  /* NGẮN lại -> pill hẹp */
     /* REAL GROWTH · LOOKS LIKE: TO hơn nhiều (vẫn nhỏ hơn THIS IS WHAT chút) */
     #case-studies .cs-line-2,
     #case-studies .cs-line-3 {
-      font-size: clamp(2.1rem, 10.3vw, 2.9rem) !important;   /* nhỏ hơn HẲN THIS IS WHAT */
-      line-height: 0.98 !important;
-      letter-spacing: -0.04em !important;
+      font-size: clamp(2.8rem, 13.4vw, 3.75rem) !important;  /* GẦN bằng THIS IS WHAT nhưng vẫn nhỏ hơn */
+      line-height: 0.95 !important;
+      letter-spacing: -0.05em !important;
     }
     /* không cho dòng tiêu đề tràn mép -> tự xuống dòng thay vì bị cắt */
     #case-studies .cs-line { max-width: 100% !important; }
