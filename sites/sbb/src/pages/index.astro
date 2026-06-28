@@ -3802,7 +3802,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     #testimonials .cs-glass-pill {
       order: -1 !important;
       align-self: center !important;
-      margin: 0 auto -1.55rem !important;
+      margin: 0 auto -1.1rem !important;
       width: -moz-fit-content !important;
       width: fit-content !important;
       min-width: 182px !important;
@@ -3816,6 +3816,18 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     #testimonials .cs-glass-title { font-size: 1.1rem !important; }
     #testimonials .cs-glass-sub { font-size: 0.8rem !important; }
+    /* Văn bản phụ (tm-desc): full bề ngang + căn ĐỀU 2 mép (justify), hết wrap hẹp ở giữa */
+    #testimonials .tm-right { width: 100% !important; max-width: 100% !important; }
+    #testimonials .tm-desc { max-width: none !important; text-align: justify !important; }
+    /* Ảnh đối tác: khôi phục khung DỌC 4/5. Desktop để flex:0 0 33% -> ở layout cột mobile nó set
+       CHIỀU CAO = 33% card (khung DẸT ngang 366x267) -> chân dung bị cắt cụt mặt (Career).
+       flex:0 0 auto cho aspect-ratio điều khiển -> chân dung đứng, đủ mặt. */
+    #testimonials .tm-media { flex: 0 0 auto !important; width: 100% !important; aspect-ratio: 4 / 5 !important; }
+    #testimonials .tm-media img { object-position: center 20% !important; }
+    /* 3 stat chip: hạ cỡ num để 3 cụm KHÔNG tràn/cắt chữ (IKI tràn 71px, Career 132px ở 30px) + dàn đều cân đối */
+    #testimonials .tm-stats { gap: 0.5rem !important; }
+    #testimonials .tm-stat-num { font-size: 1.12rem !important; }
+    #testimonials .tm-stat-label { font-size: 0.7rem !important; margin-top: 0.4rem !important; }
 
     /* XÓA ĐƯỜNG CHIA Programs ↔ Case Studies: tắt quầng trang trí (dùng #services để THẮNG override dark ở dưới) */
     #services::before,
