@@ -729,18 +729,17 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       <!-- Tiêu đề kiểu Omni "READY TO GROW & SCALE": cascade 2 dòng lớn + glass pill -->
       <div class="cs-header cta-header">
         <div class="cs-line cs-line-1">
-          <span class="cs-text-white">READY TO</span>
+          <span class="cs-text-white">READY</span>
+        </div>
+        <div class="cta-line-2">
+          <span class="cta-verb">TO SHINE</span>
           <div class="cs-glass-pill">
-            <span class="cs-glass-title">BẮT ĐẦU</span>
+            <span class="cs-glass-title">LET'S TALK</span>
             <span class="cs-glass-sub">Tư vấn miễn phí 30 phút — cùng SBB vẽ lộ trình rõ ràng cho bạn.</span>
           </div>
         </div>
-        <div class="cta-line-2">
-          <span class="cta-verb">SHINE</span>
-          <span class="cta-tail">
-            <span class="cs-text-white">BEYOND</span>
-            <span class="cs-text-white">BORDERS?</span>
-          </span>
+        <div class="cta-line-3">
+          <span class="cta-tail"><span class="cs-text-white">BEYOND BORDERS?</span></span>
         </div>
       </div>
     </div>
@@ -3858,20 +3857,28 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       margin-left: 0 !important;
     }
     #get-started .cta-tail {
-      font-size: clamp(2.4rem, 11.4vw, 3.2rem) !important;
+      font-size: clamp(2rem, 10vw, 2.9rem) !important;  /* nhỏ hơn line-2 chuẩn 1 chút để "BEYOND BORDERS?" (15 ký tự) vừa 1 dòng */
       letter-spacing: -0.045em !important;
       line-height: 0.96 !important;
       margin-right: 0 !important;
+      white-space: nowrap !important;
     }
-    /* Dòng 2 xếp DỌC trái (SHINE trên, BEYOND/BORDERS? dưới) — cascade như các section trên */
+    /* Dòng "TO SHINE" + card: cta-line-2 fit-content để card neo PHẢI = mép SHINE (đè lên SHINE) */
     #get-started .cta-line-2 {
       flex-direction: column !important;
       align-items: flex-start !important;
-      gap: 0.1rem !important;
+      width: -moz-fit-content !important;
+      width: fit-content !important;
+      gap: 0 !important;
       margin-top: 0.35rem !important;
     }
-    /* Pill BẮT ĐẦU: bỏ transform desktop (translateY 3.4rem) -> treatment Case Studies (đè đỉnh + đổ bóng) */
-    #get-started .cs-glass-pill { transform: none !important; }
+    #get-started .cta-line-3 { margin-top: 0.35rem !important; }
+    /* Pill LET'S TALK: bỏ transform desktop; NEO PHẢI (align-self flex-end) -> đè lên chữ SHINE, mép dưới đè đỉnh chữ */
+    #get-started .cs-glass-pill {
+      transform: none !important;
+      align-self: flex-end !important;
+      margin: 0 0 -1.3rem 0 !important;
+    }
 
     /* XÓA ĐƯỜNG CHIA Programs ↔ Case Studies: tắt quầng trang trí (dùng #services để THẮNG override dark ở dưới) */
     #services::before,
@@ -4550,22 +4557,20 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   /* space-between: SHINE thụt phải (margin-left ≈ 1/3 READY TO → nằm dưới 2/3 phải),
      đuôi xám canh phải nhưng bù margin-right để MÉP TRÁI thẳng cột 916 = REAL GROWTH/SAY ABOUT US/BORDERS */
   /* margin-top 1.25rem = ĐÚNG khoảng dòng1↔dòng2 các section trên (cs-header-bottom). align last baseline → đáy SHINE = đáy BORDERS? */
-  .cta-line-2 { display: flex; justify-content: space-between; align-items: last baseline; margin-top: 1.25rem; }
+  /* Cascade trái: READY / TO SHINE (+pill đè lên SHINE) / BEYOND BORDERS? */
+  .cta-line-2 { display: flex; align-items: flex-start; gap: 1.5rem; margin-top: 0.5rem; }
   .cta-verb {
     font-family: 'Inter', sans-serif; font-weight: 500;
     font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9;
     color: #f2420b; white-space: nowrap;
-    margin-left: 2.3em; /* đẩy SHINE sang phải để nằm SÁT "BEYOND BORDERS?" (chừa khoảng ~1 dấu cách) */
   }
+  .cta-line-3 { margin-top: 0.5rem; }
   .cta-tail {
-    display: flex; flex-direction: column; gap: 0.4rem;
     font-family: 'Inter', sans-serif; font-weight: 500;
     font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; line-height: 0.9;
-    margin-right: 1.85em; /* bù để mép trái BEYOND/BORDERS? thẳng cột 916 (giống cs-line-2 các section trên) */
   }
   .cta-tail span { display: block; }
-  /* Kéo pill CTA xuống thấp hơn chút (chỉ section này) */
-  .cta-final .cs-glass-pill { transform: translateY(3.4rem); }
+  .cta-final .cs-glass-pill { transform: translateY(2.6rem); }
   .cta-eyebrow {
     font-family: var(--font-headline); font-weight: 600;
     font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase;
