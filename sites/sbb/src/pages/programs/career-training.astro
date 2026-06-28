@@ -33,7 +33,7 @@ const items = [
     <div class="pr-wrap">
       <div class="pr-split">
         <div>
-          <span class="pr-eyebrow">Tổng quan</span>
+          <span class="pr-eyebrow">Overview</span>
           <p class="pr-statement">Đào tạo nghề <span class="pr-accent">chuyên sâu</span> ở môi trường quốc tế.</p>
         </div>
         <ul class="pr-checks">
@@ -51,8 +51,11 @@ const items = [
     <div class="pr-beam pr-beam--right" aria-hidden="true"></div>
     <div class="pr-wrap">
       <div class="pr-head">
-        <span class="pr-eyebrow">Hạng mục</span>
-        <h2 class="pr-h2">Chọn hạng mục trong <span class="pr-accent">Career Training</span></h2>
+        <span class="pr-eyebrow">Tracks</span>
+        <div class="cs-header pr-sec-head">
+          <div class="cs-line cs-line-1"><span class="cs-text-white">CHOOSE</span></div>
+          <div class="cs-line cs-line-1"><span class="cs-text-white">A&nbsp;PATH</span></div>
+        </div>
         <p class="pr-desc">Hai con đường đang mở, hai điểm đến. Bấm vào để xem chi tiết từng hạng mục. Các điểm đến mới đang được hoàn thiện.</p>
       </div>
       <div class="pr-grid pr-grid--3">
@@ -81,7 +84,7 @@ const items = [
   <section class="pr-cta-sec">
     <div class="pr-wrap">
       <div class="pr-cta">
-        <h2 class="pr-cta__title">HẠNG MỤC NÀO HỢP VỚI BẠN?</h2>
+        <h2 class="pr-cta__title">WHICH PATH FITS YOU?</h2>
         <p class="pr-cta__sub">Đặt lịch nói chuyện để SBB đánh giá thẳng thắn xem J-1 Trainee hay visa 407 phù hợp với bạn, hoặc xem các chương trình khác.</p>
         <div class="pr-actions pr-actions--center">
           <a href="/apply" class="pr-btn pr-btn--onfire">Đăng ký tư vấn</a>
@@ -181,7 +184,7 @@ const items = [
 
   @media (max-width: 980px) {
     .cs-line { flex-wrap: wrap; gap: 0.5rem; }
-    .cs-line-1 { font-size: clamp(3rem, 13vw, 5rem); white-space: normal; }
+    .cs-line-1 { font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; letter-spacing: -0.097em !important; line-height: 0.92 !important; white-space: normal; }
     .pr-split { grid-template-columns: 1fr; }
     .pr-grid--3 { grid-template-columns: repeat(2, 1fr); }
   }
