@@ -1326,6 +1326,10 @@ const team = [
       .team-member:nth-child(3) { grid-column: 1 / -1 !important; grid-row: 2 !important; justify-self: center !important; width: 50% !important; }  /* Duong — giữa */
       .team-member:nth-child(4) { grid-column: 2 !important; grid-row: 3 !important; }  /* Quang — phải */
       .team-member:nth-child(5) { grid-column: 1 !important; grid-row: 3 !important; }  /* Rosie — trái */
+      /* Thu nhỏ blob+người VỪA trong cột -> KHÔNG dính nhau; người & blob CÙNG bề rộng + neo đáy -> ăn khớp đáy (đầu chìa lên) như desktop */
+      .team-photo { height: 188px !important; }
+      .team-blob, .team-cutout { width: 150px !important; }
+      .team-member:nth-child(3) { text-align: center !important; }  /* Duong: tên căn giữa khớp blob */
     }
 
     @media (max-width: 991px) {
