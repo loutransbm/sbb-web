@@ -657,8 +657,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
         <div class="cs-header-bottom">
           <div class="tm-switch" role="tablist" aria-label="Chọn đối tác">
             <button class="tm-tab is-active" type="button" data-i="0">ABE</button>
-            <button class="tm-tab" type="button" data-i="1">IKI GROUP</button>
-            <button class="tm-tab" type="button" data-i="2">CAREER MATES</button>
+            <button class="tm-tab" type="button" data-i="1">IKI</button>
+            <button class="tm-tab" type="button" data-i="2">CAREER</button>
           </div>
           <div class="cs-right-block tm-right">
             <div class="cs-line cs-line-2"><span class="cs-text-white">SAY ABOUT US</span></div>
@@ -3793,16 +3793,16 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* ===== TESTIMONIALS mobile: tiêu đề HOÀNH TRÁNG lấp đầy bề ngang + pill căn giữa TO ===== */
     /* Header gần full-bleed (KHÔNG đụng card tm-stage) */
     #testimonials .cs-header { margin-left: -1.1rem !important; margin-right: -1.1rem !important; }
-    /* Chữ NGẮN ("WHAT THEY" 9 ký tự / "SAY ABOUT US") ở 72/49px bị lọt thỏm vì không lấp đầy bề ngang
-       như "THIS IS WHAT" (chữ dài) -> cho TO hơn để cùng độ hoành tráng (lấp gần kín 2 mép). */
-    #testimonials .cs-line-1 { font-size: clamp(4rem, 18.6vw, 5rem) !important; }
-    #testimonials .cs-line-2 { font-size: clamp(3rem, 13.6vw, 3.8rem) !important; }
+    /* Tiêu đề DÙNG ĐÚNG cỡ chữ + letter-spacing của Case Studies (cs-line-1 72px / cs-line-2 49px)
+       qua rule CHUNG -> KHÔNG override cỡ riêng (đồng bộ mọi section: CS = chuẩn). Cỡ 49px giúp
+       "SAY ABOUT US" gọn 1 dòng (không tràn chữ US). */
+    #testimonials .cs-line-2 { white-space: nowrap !important; }
     /* Pill "REAL VOICES" CĂN GIỮA đỉnh "WHAT THEY" (khác CS trái & Moments phải) + TO hơn,
        đè đỉnh chữ + đổ bóng xuống nhờ box-shadow sẵn có của .cs-glass-pill. */
     #testimonials .cs-glass-pill {
       order: -1 !important;
       align-self: center !important;
-      margin: 0 auto -1.1rem !important;
+      margin: 0 auto -0.75rem !important;
       width: -moz-fit-content !important;
       width: fit-content !important;
       min-width: 182px !important;
@@ -3828,6 +3828,19 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     #testimonials .tm-stats { gap: 0.5rem !important; }
     #testimonials .tm-stat-num { font-size: 1.12rem !important; }
     #testimonials .tm-stat-label { font-size: 0.7rem !important; margin-top: 0.4rem !important; }
+    /* TABS ABE/IKI/CAREER = 1 HÀNG như Case Studies (.cs-tabs): không xuống dòng, cuộn ngang nếu cần */
+    #testimonials .tm-switch {
+      flex-wrap: nowrap !important; justify-content: center !important;
+      overflow-x: auto !important; -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: none !important; gap: 0.6rem !important;
+    }
+    #testimonials .tm-switch::-webkit-scrollbar { display: none !important; }
+    #testimonials .tm-tab {
+      flex: 0 0 auto !important; white-space: nowrap !important;
+      padding: 0.7rem 1.4rem !important; font-size: 0.82rem !important;
+    }
+    /* Bỏ mũi tên 2 bên trên mobile -> vuốt + tab điều khiển (giống Case Studies) */
+    #testimonials .tm-nav { display: none !important; }
 
     /* XÓA ĐƯỜNG CHIA Programs ↔ Case Studies: tắt quầng trang trí (dùng #services để THẮNG override dark ở dưới) */
     #services::before,
