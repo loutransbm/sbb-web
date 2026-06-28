@@ -497,7 +497,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       <div class="cs-header mvh">
         <!-- Dòng 1: LIFE BEYOND + card (card tự kéo sát cuối chữ & đổ bóng xuống dòng dưới — dùng đúng .cs-glass-pill như section trên) -->
         <div class="cs-line cs-line-1">
-          <span class="cs-text-white">LIFE<br/>BEYOND</span>
+          <span class="cs-text-white"><span class="mvh-life">LIFE</span><br/><span class="mvh-beyond">BEYOND</span></span>
           <div class="cs-glass-pill">
             <span class="cs-glass-title">REAL MOMENTS</span>
             <span class="cs-glass-sub">Không kịch bản, không dàn dựng</span>
@@ -3758,14 +3758,19 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     /* Moments: pill REAL MOMENTS DÀI hơn -> title KHÔNG xuống dòng */
     #moments .cs-glass-title { white-space: nowrap !important; }
-    /* Tiêu đề 3 DÒNG: LIFE / BEYOND / BORDERS (đều CĂN TRÁI). Pill NEO TRÁI nằm trên chữ "OND"
-       của BEYOND (dòng 2), mép dưới đè ~1/3 trên chữ. */
-    #moments .cs-line-1 { position: relative !important; }
+    /* Tiêu đề 3 DÒNG: LIFE (trái) / BEYOND (CĂN PHẢI) / BORDERS (trái).
+       Tách LIFE & BEYOND thành 2 span block để căn lề độc lập; BEYOND đẩy về mép phải. */
+    #moments .cs-line-1 .cs-text-white { display: block !important; width: 100% !important; }
+    #moments .cs-line-1 .cs-text-white br { display: none !important; }
+    #moments .mvh-life { display: block !important; text-align: left !important; }
+    #moments .mvh-beyond { display: block !important; text-align: right !important; }
+    /* Pill NEO PHẢI theo BEYOND -> nằm trên chữ "OND" của BEYOND (dòng 2), mép dưới đè ~1/3 trên chữ. */
+    #moments .cs-line-1 { position: relative !important; width: 100% !important; }
     #moments .cs-glass-pill {
       position: absolute !important;
       margin: 0 !important;
-      left: 21vw !important;          /* nằm trên OND của BEYOND (dòng 2, căn trái) */
-      right: auto !important;
+      left: auto !important;
+      right: 0 !important;            /* bám mép phải = mép BEYOND -> phủ OND */
       bottom: 10.5vw !important;      /* mép dưới đè ~1/3 trên của chữ BEYOND */
       width: -moz-fit-content !important;
       width: fit-content !important;
