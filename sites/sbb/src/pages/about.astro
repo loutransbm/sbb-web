@@ -1471,6 +1471,17 @@ const team = [
       }
     }
 
+    /* ===== MOBILE (điện thoại ≤640px): carousel case study = 1 THẺ TO mỗi lần lướt ===== */
+    @media (max-width: 640px) {
+      .about-cases .cases-track { gap: 1rem; }
+      .about-cases .case-card {
+        flex: 0 0 100% !important;          /* full-width: 1 thẻ/màn, snap đúng 1 lần lướt */
+        scroll-snap-align: center !important;
+        min-height: clamp(500px, 124vw, 620px) !important;  /* thẻ cao/to hơn */
+        border-radius: 1.4rem !important;
+      }
+    }
+
     /* ===== Copied from home: testimonials + FAQ + lead-form ===== */
     /* --- Shared header helpers NOT already present in about.astro (.cs-header/.cs-line/.cs-line-1/.cs-text-white/.cs-glass-* already exist above → skipped) --- */
     /* Break-out khỏi container hẹp cho .cs-header + .tm-stage (an toàn scrollbar nhờ --sbw). Chỉ desktop. */
