@@ -543,7 +543,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     <div class="container faq-container">
       <h2 class="faq-mega">FAQ</h2>
       <div class="faq-list">
-        <details class="faq-item" open>
+        <details class="faq-item">
           <summary class="faq-q"><span>SBB là gì, và khác gì so với một trung tâm tư vấn du học thông thường?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
             <p>SBB (Shine Beyond Borders) là học viện đào tạo và đưa người trẻ Việt ra thế giới bằng <strong>năng lực nghề thật</strong>, không chỉ bằng một tấm vé du học.</p>
@@ -651,7 +651,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           <span class="cs-text-white">WHAT THEY</span>
           <div class="cs-glass-pill">
             <span class="cs-glass-title">REAL VOICES</span>
-            <span class="cs-glass-sub">Lời thật từ các đối tác đồng hành cùng SBB</span>
+            <span class="cs-glass-sub">Lời thật từ đối tác</span>
           </div>
         </div>
         <div class="cs-header-bottom">
@@ -3718,7 +3718,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
 
     /* PILL "REAL RESULTS" lên TRÊN tiêu đề + HẠ SÁT đỉnh chữ THIS IS WHAT (áp cho cả Moments) */
     #case-studies .cs-line-1,
-    #moments .cs-line-1 {
+    #moments .cs-line-1,
+    #testimonials .cs-line-1 {
       flex-direction: column !important;
       align-items: flex-start !important;
       font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;  /* THIS IS WHAT: RẤT TO, tràn 2 mép */
@@ -3740,7 +3741,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     /* Chữ trong pill CÂN ĐỐI như Omni: title TO + đậm + trắng (1 dòng), sub xám đọc được */
     #case-studies .cs-glass-title,
-    #moments .cs-glass-title {
+    #moments .cs-glass-title,
+    #testimonials .cs-glass-title {
       font-size: 0.92rem !important;
       font-weight: 700 !important;
       letter-spacing: 0.015em !important;
@@ -3749,7 +3751,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       line-height: 1.05 !important;
     }
     #case-studies .cs-glass-sub,
-    #moments .cs-glass-sub {
+    #moments .cs-glass-sub,
+    #testimonials .cs-glass-sub {
       font-size: 0.7rem !important;
       line-height: 1.35 !important;
       letter-spacing: normal !important;
@@ -3776,14 +3779,37 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* Dòng 2 (REAL GROWTH/LOOKS LIKE · BORDERS): TO nhưng nhỏ hơn dòng 1 */
     #case-studies .cs-line-2,
     #case-studies .cs-line-3,
-    #moments .cs-line-2 {
+    #moments .cs-line-2,
+    #testimonials .cs-line-2 {
       font-size: clamp(2.4rem, 11.4vw, 3.2rem) !important;
       line-height: 0.96 !important;
       letter-spacing: -0.045em !important;
     }
     /* không cho dòng tiêu đề tràn mép -> tự xuống dòng thay vì bị cắt */
     #case-studies .cs-line,
-    #moments .cs-line { max-width: 100% !important; }
+    #moments .cs-line,
+    #testimonials .cs-line { max-width: 100% !important; }
+
+    /* ===== TESTIMONIALS mobile: tiêu đề GIỐNG các section trên + pill ĐỔI VỊ TRÍ (căn giữa) ===== */
+    /* Header gần full-bleed: container padding ~1.54rem -> kéo header ra 2 mép như cs-container 0.5rem (KHÔNG đụng card tm-stage) */
+    #testimonials .cs-header { margin-left: -1rem !important; margin-right: -1rem !important; }
+    /* Pill "REAL VOICES" CĂN GIỮA đỉnh "WHAT THEY" (khác CS trái & Moments phải),
+       đè đỉnh chữ + đổ bóng xuống nhờ box-shadow sẵn có của .cs-glass-pill. */
+    #testimonials .cs-glass-pill {
+      order: -1 !important;
+      align-self: center !important;
+      margin: 0 auto -1.4rem !important;
+      width: -moz-fit-content !important;
+      width: fit-content !important;
+      min-width: 150px !important;
+      max-width: 220px !important;
+      min-height: 0 !important;
+      padding: 0.7rem 0.95rem !important;
+      gap: 0.3rem !important;
+      transform: none !important;
+      position: relative !important;
+      z-index: 5 !important;
+    }
 
     /* XÓA ĐƯỜNG CHIA Programs ↔ Case Studies: tắt quầng trang trí (dùng #services để THẮNG override dark ở dưới) */
     #services::before,
