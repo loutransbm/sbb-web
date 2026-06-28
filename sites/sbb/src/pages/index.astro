@@ -3708,9 +3708,12 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     .cs-glass-pill { transform: translateY(0); margin-left: 0; margin-top: 1rem; }
     /* mobile: THIS IS WHAT ↔ REAL GROWTH sát lại (margin-top nhỏ); REAL GROWTH ↔ tabs CÁCH thêm */
     .cs-header-bottom { gap: 2.2rem !important; margin-top: 0.35rem !important; }
+    /* Moments: LIFE BEYOND ↔ BORDERS sát lại Y HỆT (mvh-bottom thay cho cs-header-bottom) */
+    #moments .mvh-bottom { margin-top: 0.35rem !important; align-items: flex-start !important; }
 
-    /* PILL "REAL RESULTS" lên TRÊN tiêu đề + HẠ SÁT đỉnh chữ THIS IS WHAT */
-    #case-studies .cs-line-1 {
+    /* PILL "REAL RESULTS" lên TRÊN tiêu đề + HẠ SÁT đỉnh chữ THIS IS WHAT (áp cho cả Moments) */
+    #case-studies .cs-line-1,
+    #moments .cs-line-1 {
       flex-direction: column !important;
       align-items: flex-start !important;
       font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;  /* THIS IS WHAT: RẤT TO, tràn 2 mép */
@@ -3718,12 +3721,11 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       letter-spacing: -0.097em !important;                   /* siết chữ thêm để chữ to vẫn vừa 1 dòng */
       white-space: nowrap !important;                        /* ép 1 dòng */
     }
-    /* Pill NHỎ lại + ĐÈ lên đỉnh chữ THIS IS (margin âm, z-index trên) */
-    #case-studies .cs-glass-pill {
+    /* Pill lên TRÊN + ĐÈ đỉnh chữ + dịch phải (áp cho cả Moments REAL MOMENTS) */
+    #case-studies .cs-glass-pill,
+    #moments .cs-glass-pill {
       order: -1 !important;
       margin: 0 0 -1.3rem 1.6rem !important;   /* đè nhẹ + DỊCH PHẢI vào trong 1 chút */
-      padding: 0.45rem 0.75rem !important;      /* gọn lại */
-      gap: 2px !important;
       width: 34vw !important;                   /* DÀI tới qua chữ I của IS */
       min-width: 138px !important;
       max-width: 168px !important;
@@ -3732,7 +3734,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       position: relative; z-index: 5;
     }
     /* Chữ trong pill CÂN ĐỐI như Omni: title TO + đậm + trắng (1 dòng), sub xám đọc được */
-    #case-studies .cs-glass-title {
+    #case-studies .cs-glass-title,
+    #moments .cs-glass-title {
       font-size: 0.92rem !important;
       font-weight: 700 !important;
       letter-spacing: 0.015em !important;
@@ -3740,28 +3743,32 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       white-space: normal !important;
       line-height: 1.05 !important;
     }
-    #case-studies .cs-glass-sub {
+    #case-studies .cs-glass-sub,
+    #moments .cs-glass-sub {
       font-size: 0.7rem !important;
       line-height: 1.35 !important;
       letter-spacing: normal !important;
       color: rgba(255, 255, 255, 0.5) !important;
       max-width: 100% !important;
     }
-    /* REAL GROWTH · LOOKS LIKE: TO hơn nhiều (vẫn nhỏ hơn THIS IS WHAT chút) */
+    /* Dòng 2 (REAL GROWTH/LOOKS LIKE · BORDERS): TO nhưng nhỏ hơn dòng 1 */
     #case-studies .cs-line-2,
-    #case-studies .cs-line-3 {
-      font-size: clamp(2.4rem, 11.4vw, 3.2rem) !important;   /* nhỏ hơn THIS IS WHAT (nhỏ thêm 1 chút) */
+    #case-studies .cs-line-3,
+    #moments .cs-line-2 {
+      font-size: clamp(2.4rem, 11.4vw, 3.2rem) !important;
       line-height: 0.96 !important;
       letter-spacing: -0.045em !important;
     }
     /* không cho dòng tiêu đề tràn mép -> tự xuống dòng thay vì bị cắt */
-    #case-studies .cs-line { max-width: 100% !important; }
+    #case-studies .cs-line,
+    #moments .cs-line { max-width: 100% !important; }
 
     /* XÓA ĐƯỜNG CHIA Programs ↔ Case Studies: tắt quầng trang trí (dùng #services để THẮNG override dark ở dưới) */
     #services::before,
     #services::after { display: none !important; }
-    /* Container Case Studies rộng gần kín màn như Omni (4rem -> 0.7rem) -> THIS IS WHAT tràn gần 2 mép */
+    /* Container rộng gần kín màn như Omni (4rem -> 0.5rem) -> tiêu đề tràn gần 2 mép (cả Moments) */
     #case-studies .cs-container { padding: 0 0.5rem !important; }
+    #moments .mv-container { padding: 0 0.5rem !important; }
 
     /* TAB = pill CUỘN NGANG như Omni (không xuống dòng) */
     .cs-tabs {
