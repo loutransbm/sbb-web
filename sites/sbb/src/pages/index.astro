@@ -497,7 +497,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       <div class="cs-header mvh">
         <!-- Dòng 1: LIFE BEYOND + card (card tự kéo sát cuối chữ & đổ bóng xuống dòng dưới — dùng đúng .cs-glass-pill như section trên) -->
         <div class="cs-line cs-line-1">
-          <span class="cs-text-white"><span class="mvh-life">LIFE</span><br/><span class="mvh-beyond">BEYOND</span></span>
+          <span class="cs-text-white">LIFE BEYOND</span>
           <div class="cs-glass-pill">
             <span class="cs-glass-title">REAL MOMENTS</span>
             <span class="cs-glass-sub">Không kịch bản, không dàn dựng</span>
@@ -3711,8 +3711,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     /* Moments: LIFE BEYOND ↔ BORDERS sát lại Y HỆT (mvh-bottom thay cho cs-header-bottom) */
     #moments .mvh-bottom { margin-top: 0.35rem !important; align-items: flex-start !important; }
     /* CÁCH XA section trên = ĐÚNG nhịp Programs→Case Studies (≈142px tới pill).
-       Tiêu đề 3 dòng -> pill nằm thấp hơn (trên dòng 2) -> 8rem là đủ để khoảng tới pill khớp ~142px. */
-    #moments { padding-top: 8rem !important; }
+       Tiêu đề 1 dòng -> pill nằm cao (trên dòng 1) -> cần ~12.5rem để khoảng tới pill khớp ~142px. */
+    #moments { padding-top: 12.5rem !important; }
     /* Cụm tiêu đề LIFE BEYOND BORDERS cách video coverflow ở dưới xa thêm 1 chút */
     #moments .mvh { margin-bottom: 6rem !important; }
 
@@ -3758,20 +3758,15 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     /* Moments: pill REAL MOMENTS DÀI hơn -> title KHÔNG xuống dòng */
     #moments .cs-glass-title { white-space: nowrap !important; }
-    /* Tiêu đề 3 DÒNG: LIFE (trái) / BEYOND (CĂN PHẢI) / BORDERS (trái).
-       Tách LIFE & BEYOND thành 2 span block để căn lề độc lập; BEYOND đẩy về mép phải. */
-    #moments .cs-line-1 .cs-text-white { display: block !important; width: 100% !important; }
-    #moments .cs-line-1 .cs-text-white br { display: none !important; }
-    #moments .mvh-life { display: block !important; text-align: left !important; }
-    #moments .mvh-beyond { display: block !important; text-align: right !important; }
-    /* Pill NEO PHẢI theo BEYOND -> nằm trên chữ "OND" của BEYOND (dòng 2), mép dưới đè ~1/3 trên chữ. */
-    #moments .cs-line-1 { position: relative !important; width: 100% !important; }
+    /* Tiêu đề 1 DÒNG "LIFE BEYOND" + BORDERS (dòng 2). Pill NEO PHẢI trên chữ "OND",
+       NÂNG CAO hơn (mép dưới chỉ chạm/đè nhẹ đỉnh chữ). */
+    #moments .cs-line-1 { position: relative !important; }
     #moments .cs-glass-pill {
       position: absolute !important;
       margin: 0 !important;
       left: auto !important;
-      right: 0 !important;            /* bám mép phải = mép BEYOND -> phủ OND */
-      bottom: 10.5vw !important;      /* mép dưới đè ~1/3 trên của chữ BEYOND */
+      right: 0.75rem !important;      /* phủ OND của BEYOND, lùi trái 1 chút khỏi mép phải */
+      bottom: 12.5vw !important;      /* NÂNG CAO 1 chút so với trước (10.5vw) */
       width: -moz-fit-content !important;
       width: fit-content !important;
       min-width: 150px !important;
