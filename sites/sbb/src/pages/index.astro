@@ -3790,26 +3790,32 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     #moments .cs-line,
     #testimonials .cs-line { max-width: 100% !important; }
 
-    /* ===== TESTIMONIALS mobile: tiêu đề GIỐNG các section trên + pill ĐỔI VỊ TRÍ (căn giữa) ===== */
-    /* Header gần full-bleed: container padding ~1.54rem -> kéo header ra 2 mép như cs-container 0.5rem (KHÔNG đụng card tm-stage) */
-    #testimonials .cs-header { margin-left: -1rem !important; margin-right: -1rem !important; }
-    /* Pill "REAL VOICES" CĂN GIỮA đỉnh "WHAT THEY" (khác CS trái & Moments phải),
+    /* ===== TESTIMONIALS mobile: tiêu đề HOÀNH TRÁNG lấp đầy bề ngang + pill căn giữa TO ===== */
+    /* Header gần full-bleed (KHÔNG đụng card tm-stage) */
+    #testimonials .cs-header { margin-left: -1.1rem !important; margin-right: -1.1rem !important; }
+    /* Chữ NGẮN ("WHAT THEY" 9 ký tự / "SAY ABOUT US") ở 72/49px bị lọt thỏm vì không lấp đầy bề ngang
+       như "THIS IS WHAT" (chữ dài) -> cho TO hơn để cùng độ hoành tráng (lấp gần kín 2 mép). */
+    #testimonials .cs-line-1 { font-size: clamp(4rem, 18.6vw, 5rem) !important; }
+    #testimonials .cs-line-2 { font-size: clamp(3rem, 13.6vw, 3.8rem) !important; }
+    /* Pill "REAL VOICES" CĂN GIỮA đỉnh "WHAT THEY" (khác CS trái & Moments phải) + TO hơn,
        đè đỉnh chữ + đổ bóng xuống nhờ box-shadow sẵn có của .cs-glass-pill. */
     #testimonials .cs-glass-pill {
       order: -1 !important;
       align-self: center !important;
-      margin: 0 auto -1.4rem !important;
+      margin: 0 auto -1.55rem !important;
       width: -moz-fit-content !important;
       width: fit-content !important;
-      min-width: 150px !important;
-      max-width: 220px !important;
+      min-width: 182px !important;
+      max-width: 264px !important;
       min-height: 0 !important;
-      padding: 0.7rem 0.95rem !important;
-      gap: 0.3rem !important;
+      padding: 0.95rem 1.2rem !important;
+      gap: 0.35rem !important;
       transform: none !important;
       position: relative !important;
       z-index: 5 !important;
     }
+    #testimonials .cs-glass-title { font-size: 1.1rem !important; }
+    #testimonials .cs-glass-sub { font-size: 0.8rem !important; }
 
     /* XÓA ĐƯỜNG CHIA Programs ↔ Case Studies: tắt quầng trang trí (dùng #services để THẮNG override dark ở dưới) */
     #services::before,
