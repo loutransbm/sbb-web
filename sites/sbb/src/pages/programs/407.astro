@@ -70,7 +70,7 @@ const truths = [
     <div class="pr-wrap">
       <div class="pr-split">
         <div>
-          <span class="pr-eyebrow">Tổng quan</span>
+          <span class="pr-eyebrow">Overview</span>
           <p class="pr-statement">Một con đường nghề <span class="pr-accent">nghiêm túc</span> tới Úc.</p>
         </div>
         <ul class="pr-checks">
@@ -93,8 +93,11 @@ const truths = [
     <div class="pr-beam pr-beam--right" aria-hidden="true"></div>
     <div class="pr-wrap">
       <div class="pr-head">
-        <span class="pr-eyebrow">Mảng ngành</span>
-        <h2 class="pr-h2">Bạn sẽ <span class="pr-accent">làm gì</span></h2>
+        <span class="pr-eyebrow">Sectors</span>
+        <div class="cs-header pr-sec-head">
+          <div class="cs-line cs-line-1"><span class="cs-text-white">WHAT YOU'LL</span></div>
+          <div class="cs-line cs-line-1"><span class="cs-text-white">DO</span></div>
+        </div>
         <p class="pr-desc">Visa 407 mở đường vào những mảng nghề mà nước Úc đang thật sự cần người. Đây là ba hướng SBB tập trung.</p>
       </div>
       <div class="pr-grid pr-grid--3">
@@ -114,8 +117,11 @@ const truths = [
     <div class="pr-wrap">
       <div class="pr-split">
         <div>
-          <span class="pr-eyebrow">Điều kiện</span>
-          <h2 class="pr-h2">Bạn có <span class="pr-accent">hợp</span> không</h2>
+          <span class="pr-eyebrow">Who fits</span>
+          <div class="cs-header pr-sec-head">
+            <div class="cs-line cs-line-1"><span class="cs-text-white">ARE YOU</span></div>
+            <div class="cs-line cs-line-1"><span class="cs-text-white">A FIT</span></div>
+          </div>
           <p class="pr-desc">Đường Úc không hợp với tất cả mọi người. Dưới đây là những điều nên có trước khi bạn nghĩ tới visa 407.</p>
         </div>
         <ul class="pr-checks">
@@ -130,8 +136,11 @@ const truths = [
     <div class="pr-beam pr-beam--left" aria-hidden="true"></div>
     <div class="pr-wrap">
       <div class="pr-head">
-        <span class="pr-eyebrow">Lộ trình</span>
-        <h2 class="pr-h2">Cách <span class="pr-accent">vận hành</span></h2>
+        <span class="pr-eyebrow">How it works</span>
+        <div class="cs-header pr-sec-head">
+          <div class="cs-line cs-line-1"><span class="cs-text-white">HOW IT</span></div>
+          <div class="cs-line cs-line-1"><span class="cs-text-white">WORKS</span></div>
+        </div>
         <p class="pr-desc">Bốn bước từ buổi nói chuyện đầu tiên đến lúc bạn đặt chân sang Úc, minh bạch ngay từ đầu.</p>
       </div>
       <div class="pr-rows">
@@ -150,7 +159,10 @@ const truths = [
     <div class="pr-wrap">
       <div class="pr-head">
         <span class="pr-eyebrow">Reality Check</span>
-        <h2 class="pr-h2">Sự thật <span class="pr-accent">trước</span></h2>
+        <div class="cs-header pr-sec-head">
+          <div class="cs-line cs-line-1"><span class="cs-text-white">THE</span></div>
+          <div class="cs-line cs-line-1"><span class="cs-text-white">TRUTH</span></div>
+        </div>
         <p class="pr-desc">SBB chọn nói thật trước. Đây là những điều bạn nên biết trước khi đi đường Úc.</p>
       </div>
       <div class="pr-grid pr-grid--3">
@@ -172,7 +184,7 @@ const truths = [
   <section class="pr-cta-sec">
     <div class="pr-wrap">
       <div class="pr-cta">
-        <h2 class="pr-cta__title">ĐƯỜNG ÚC CÓ HỢP VỚI BẠN?</h2>
+        <h2 class="pr-cta__title">IS AUSTRALIA YOUR PATH?</h2>
         <p class="pr-cta__sub">Đặt lịch nói chuyện để SBB đánh giá thẳng thắn xem visa 407 có phải con đường phù hợp với bạn, hoặc xem các hạng mục khác.</p>
         <div class="pr-actions pr-actions--center">
           <a href="/apply" class="pr-btn pr-btn--onfire">Đăng ký tư vấn</a>
@@ -307,7 +319,7 @@ const truths = [
 
   @media (max-width: 980px) {
     .cs-line { flex-wrap: wrap; gap: 0.5rem; }
-    .cs-line-1 { font-size: clamp(3rem, 13vw, 5rem); white-space: normal; }
+    .cs-line-1 { font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; letter-spacing: -0.097em !important; line-height: 0.92 !important; white-space: normal; }
     .pr-split { grid-template-columns: 1fr; }
     .pr-grid--3 { grid-template-columns: repeat(2, 1fr); }
   }
