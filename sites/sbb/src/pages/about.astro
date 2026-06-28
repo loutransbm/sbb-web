@@ -1425,6 +1425,46 @@ const team = [
         font-size: 0.68rem !important; line-height: 1.32 !important; letter-spacing: normal !important;
         color: rgba(255, 255, 255, 0.5) !important; max-width: 100% !important;
       }
+
+      /* ===== OUR CASE STUDIES heading kiểu OMNI (như hero/team): cascade 72px + card GIỮA-PHẢI ===== */
+      .about-cases-head { position: relative !important; }
+      .about-cases-head .cs-line-1 {
+        position: static !important;
+        flex-direction: column !important; align-items: flex-start !important;
+        font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;
+        line-height: 0.9 !important; letter-spacing: -0.097em !important; white-space: nowrap !important;
+      }
+      .about-cases-head .about-verb {
+        font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;
+        letter-spacing: -0.097em !important; line-height: 0.9 !important; white-space: nowrap !important;
+        margin-left: 0 !important;
+      }
+      .about-cases-head .about-tail {
+        font-size: clamp(2.4rem, 11.4vw, 3.2rem) !important;
+        letter-spacing: -0.045em !important; line-height: 0.96 !important; margin-left: 0 !important;
+      }
+      .about-cases-head .about-line-2 {
+        flex-direction: column !important; align-items: flex-start !important;
+        gap: 0.05rem !important; margin-top: 0.05rem !important;
+      }
+      /* Card "CONTENT REEL" GIỮA-PHẢI, căn giữa DỌC cụm tiêu đề */
+      .about-cases-head .cs-glass-pill {
+        position: absolute !important;
+        right: 0 !important; left: auto !important;
+        top: 50% !important; bottom: auto !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important; align-self: auto !important;
+        width: 40vw !important; min-width: 158px !important; max-width: 186px !important;
+        min-height: 0 !important; padding: 0.8rem 0.92rem !important; gap: 0.3rem !important;
+      }
+      .about-cases-head .cs-glass-title {
+        font-size: 0.92rem !important; font-weight: 700 !important; color: #ffffff !important;
+        white-space: nowrap !important; line-height: 1.1 !important; letter-spacing: 0.01em !important;
+      }
+      .about-cases-head .cs-glass-sub {
+        font-size: 0.68rem !important; line-height: 1.32 !important; letter-spacing: normal !important;
+        color: rgba(255, 255, 255, 0.5) !important; max-width: 100% !important;
+      }
     }
 
     /* ===== Copied from home: testimonials + FAQ + lead-form ===== */
