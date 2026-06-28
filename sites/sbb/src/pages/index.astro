@@ -497,7 +497,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       <div class="cs-header mvh">
         <!-- Dòng 1: LIFE BEYOND + card (card tự kéo sát cuối chữ & đổ bóng xuống dòng dưới — dùng đúng .cs-glass-pill như section trên) -->
         <div class="cs-line cs-line-1">
-          <span class="cs-text-white">LIFE<br/>BEYOND</span>
+          <span class="cs-text-white">LIFE BEYOND</span>
           <div class="cs-glass-pill">
             <span class="cs-glass-title">REAL MOMENTS</span>
             <span class="cs-glass-sub">Không kịch bản, không dàn dựng</span>
@@ -3753,13 +3753,14 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     /* Moments: pill REAL MOMENTS DÀI hơn -> title KHÔNG xuống dòng */
     #moments .cs-glass-title { white-space: nowrap !important; }
-    /* Pill ĐỊNH VỊ TUYỆT ĐỐI: dịch phải + thấp xuống NẰM TRÊN chữ "OND" của BEYOND; mép dưới đè ~1/3 trên chữ */
+    /* Pill ĐỊNH VỊ TUYỆT ĐỐI: NEO MÉP PHẢI -> nằm trên chữ "OND" cuối dòng "LIFE BEYOND"; mép dưới đè ~1/3 trên chữ.
+       (Neo right thay vì left: pill rộng cố định 197px, OND ở cuối dòng -> neo phải bám mép text mọi bề ngang máy, không tràn.) */
     #moments .cs-line-1 { position: relative !important; }
     #moments .cs-glass-pill {
       position: absolute !important;
       margin: 0 !important;
-      left: 21vw !important;          /* dịch sang phải -> nằm trên OND */
-      right: auto !important;
+      left: auto !important;
+      right: -0.25rem !important;     /* bám sát mép phải dòng -> phủ TRỌN OND của BEYOND */
       bottom: 10.5vw !important;      /* mép dưới đè ~1/3 trên của chữ BEYOND */
       width: -moz-fit-content !important;
       width: fit-content !important;
