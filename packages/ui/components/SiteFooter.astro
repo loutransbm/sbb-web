@@ -192,9 +192,19 @@ const year = new Date().getFullYear();
   }
 
   @media (max-width: 720px) {
-    .sf-top { grid-template-columns: 1fr; gap: var(--space-6, 1.5rem); text-align: left; }
-    .sf-address { text-align: left; }
-    .sf-socials { justify-content: flex-start; }
+    /* nav trên cùng; hàng dưới: CỤM LOGO (trái) + ĐỊA CHỈ (phải) — ĐÁY 2 cụm THẲNG HÀNG (align-items:end) */
+    .sf-top {
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "nav nav"
+        "social address";
+      gap: var(--space-6, 1.5rem);
+      align-items: end;
+      text-align: left;
+    }
+    .sf-nav { grid-area: nav; }
+    .sf-socials { grid-area: social; justify-content: flex-start; align-self: end; }
+    .sf-address { grid-area: address; text-align: left; align-self: end; }
   }
 
   /* ===== SCROLL REVEAL: lướt xuống HIỆN, lướt lên ẨN (toggle .in-view) ===== */
@@ -225,5 +235,10 @@ const year = new Date().getFullYear();
   @media (prefers-reduced-motion: reduce) {
     .sf-nav, .sf-socials, .sf-address, .sf-brand-text { transition: opacity 0.3s ease; transform: none; }
     .sf-nav.in-view, .sf-socials.in-view, .sf-address.in-view, .sf-brand-wrap.in-view .sf-brand-text { transform: none; }
+  }
+  /* mobile: cụm logo KHÔNG lệch phải khi reveal (đổi translateX 48 -> trồi lên) -> luôn sát mép trái */
+  @media (max-width: 720px) {
+    .sf-socials { transform: translateY(16px); }
+    .sf-socials.in-view { transform: translateY(0); }
   }
 </style>
