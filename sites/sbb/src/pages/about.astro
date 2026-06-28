@@ -49,7 +49,6 @@ const team = [
   { name: 'Duong', role: 'Head of Training', img: '/images/team/duong-portrait.png' },
   { name: 'Quang', role: 'Program Trainer', img: '/images/team/quang-portrait.png' },
   { name: 'Rosie', role: 'Program Trainer', img: '/images/team/rosie-portrait.png' },
-  { name: 'Diep', role: 'Marketing Specialist', img: '/images/team/diep-portrait.png' },
 ];
 ---
 
@@ -1319,7 +1318,15 @@ const team = [
     }
 
     @media (max-width: 1100px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px) { .team-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) {
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      /* Bố cục 2-1-2: Lou | Mai  /  Duong (giữa)  /  Rosie | Quang */
+      .team-member:nth-child(1) { grid-column: 1 !important; grid-row: 1 !important; }  /* Lou */
+      .team-member:nth-child(2) { grid-column: 2 !important; grid-row: 1 !important; }  /* Mai */
+      .team-member:nth-child(3) { grid-column: 1 / -1 !important; grid-row: 2 !important; justify-self: center !important; width: 50% !important; }  /* Duong — giữa */
+      .team-member:nth-child(4) { grid-column: 2 !important; grid-row: 3 !important; }  /* Quang — phải */
+      .team-member:nth-child(5) { grid-column: 1 !important; grid-row: 3 !important; }  /* Rosie — trái */
+    }
 
     @media (max-width: 991px) {
       .about-hero-wrap { width: calc(100% - 3rem); }  /* mobile: lề 1.5rem mỗi bên cho khớp nav */
