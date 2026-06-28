@@ -3753,11 +3753,19 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     }
     /* Moments: pill REAL MOMENTS DÀI hơn -> title KHÔNG xuống dòng */
     #moments .cs-glass-title { white-space: nowrap !important; }
+    /* Pill ĐỊNH VỊ TUYỆT ĐỐI: dịch phải + thấp xuống NẰM TRÊN chữ "OND" của BEYOND; mép dưới đè ~1/3 trên chữ */
+    #moments .cs-line-1 { position: relative !important; }
     #moments .cs-glass-pill {
+      position: absolute !important;
+      margin: 0 !important;
+      left: 21vw !important;          /* dịch sang phải -> nằm trên OND */
+      right: auto !important;
+      bottom: 10.5vw !important;      /* mép dưới đè ~1/3 trên của chữ BEYOND */
       width: -moz-fit-content !important;
       width: fit-content !important;
       min-width: 150px !important;
       max-width: 225px !important;
+      z-index: 6 !important;
     }
     /* Dòng 2 (REAL GROWTH/LOOKS LIKE · BORDERS): TO nhưng nhỏ hơn dòng 1 */
     #case-studies .cs-line-2,
