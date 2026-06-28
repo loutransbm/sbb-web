@@ -3725,12 +3725,28 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       padding: 0.45rem 0.75rem !important;      /* gọn lại */
       gap: 2px !important;
       width: 34vw !important;                   /* DÀI tới qua chữ I của IS */
-      min-width: 125px !important;
-      max-width: 160px !important;
+      min-width: 138px !important;
+      max-width: 168px !important;
+      padding: 0.7rem 0.95rem !important;        /* đệm thoáng kiểu Omni */
+      gap: 0.3rem !important;
       position: relative; z-index: 5;
     }
-    #case-studies .cs-glass-title { font-size: 0.74rem !important; letter-spacing: normal !important; white-space: normal !important; }
-    #case-studies .cs-glass-sub { font-size: 9px !important; max-width: 100% !important; }  /* lấp đầy bề ngang pill */
+    /* Chữ trong pill CÂN ĐỐI như Omni: title TO + đậm + trắng (1 dòng), sub xám đọc được */
+    #case-studies .cs-glass-title {
+      font-size: 0.92rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.015em !important;
+      color: #ffffff !important;
+      white-space: normal !important;
+      line-height: 1.05 !important;
+    }
+    #case-studies .cs-glass-sub {
+      font-size: 0.7rem !important;
+      line-height: 1.35 !important;
+      letter-spacing: normal !important;
+      color: rgba(255, 255, 255, 0.5) !important;
+      max-width: 100% !important;
+    }
     /* REAL GROWTH · LOOKS LIKE: TO hơn nhiều (vẫn nhỏ hơn THIS IS WHAT chút) */
     #case-studies .cs-line-2,
     #case-studies .cs-line-3 {
