@@ -194,16 +194,16 @@ const year = new Date().getFullYear();
   @media (max-width: 720px) {
     /* nav trên cùng; hàng dưới: CỤM LOGO (trái) + ĐỊA CHỈ (phải) — ĐÁY 2 cụm THẲNG HÀNG (align-items:end) */
     .sf-top {
-      grid-template-columns: auto 1fr;
+      grid-template-columns: 1fr auto;
       grid-template-areas:
         "nav nav"
-        "social address";
+        "address social";
       gap: var(--space-6, 1.5rem);
       align-items: end;
       text-align: left;
     }
     .sf-nav { grid-area: nav; }
-    .sf-socials { grid-area: social; justify-content: flex-start; align-self: end; }
+    .sf-socials { grid-area: social; justify-content: flex-end; align-self: end; }
     .sf-address { grid-area: address; text-align: left; align-self: end; }
   }
 
