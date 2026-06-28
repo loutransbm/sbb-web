@@ -116,7 +116,7 @@ const caseStudies = [
     <!-- Tiêu đề break-out cascade HỆT hero/team -->
     <div class="cs-header about-cases-head">
       <div class="cs-line cs-line-1">
-        <span class="cs-text-white">OUR CASE</span>
+        <span class="cs-text-white">OUR<br/>CASE</span>
         <div class="cs-glass-pill">
           <span class="cs-glass-title">CONTENT REEL</span>
           <span class="cs-glass-sub">Lát cắt thật từ hành trình học viên SBB — không tô vẽ.</span>
@@ -159,18 +159,17 @@ const caseStudies = [
       <!-- Tiêu đề kiểu Omni "READY TO GROW & SCALE": cascade 2 dòng lớn + glass pill -->
       <div class="cs-header cta-header">
         <div class="cs-line cs-line-1">
-          <span class="cs-text-white">READY TO</span>
+          <span class="cs-text-white">READY</span>
+        </div>
+        <div class="cta-line-2">
+          <span class="cta-verb">TO SHINE</span>
           <div class="cs-glass-pill">
-            <span class="cs-glass-title">BẮT ĐẦU</span>
+            <span class="cs-glass-title">LET'S TALK</span>
             <span class="cs-glass-sub">Tư vấn miễn phí 30 phút — cùng SBB vẽ lộ trình rõ ràng cho bạn.</span>
           </div>
         </div>
-        <div class="cta-line-2">
-          <span class="cta-verb">SHINE</span>
-          <span class="cta-tail">
-            <span class="cs-text-white">BEYOND</span>
-            <span class="cs-text-white">BORDERS?</span>
-          </span>
+        <div class="cta-line-3">
+          <span class="cta-tail"><span class="cs-text-white">BEYOND BORDERS?</span></span>
         </div>
       </div>
     </div>
@@ -982,7 +981,7 @@ const caseStudies = [
     .pr-programs-head, .pr-how-head, .pr-cta { width: calc(100% - 3rem); }
     .pr-programs .container, .pr-how .container { width: calc(100% - 3rem); }
     .cs-line { flex-wrap: wrap; gap: 0.4rem; }
-    .cs-line-1, .about-verb { font-size: clamp(3rem, 13vw, 5rem); white-space: normal; }
+    .cs-line-1, .about-verb { font-size: clamp(3.5rem, 16.8vw, 4.55rem); letter-spacing: -0.097em; line-height: 0.9; white-space: nowrap; }
     .about-verb { margin-left: 0; }
     .pr-programs-head .about-verb, .pr-how-head .about-verb { margin-left: 0; }
     .about-hero-head .cs-glass-pill,
@@ -990,11 +989,82 @@ const caseStudies = [
     .pr-how-head .cs-glass-pill,
     .about-cases-head .cs-glass-pill { transform: translateY(0); margin-left: 0; margin-top: 1rem; }
     .about-line-2 { flex-direction: column; align-items: flex-start; margin-top: 0.5rem; gap: 0.2rem; }
-    .about-tail { align-items: flex-start; text-align: left; font-size: clamp(1.9rem, 9vw, 3.4rem); margin-top: 0.4rem; }
+    .about-tail { align-items: flex-start; text-align: left; font-size: clamp(2.4rem, 11.4vw, 3.2rem); letter-spacing: -0.045em; line-height: 0.96; margin-top: 0.4rem; }
     .about-tail--left, .about-tail--dim { margin-left: 0; }
     .about-hero-lead-wrap { width: 100%; max-width: 100%; margin-left: 0; }
     .lead-width-driver { display: none; }
     .about-hero-lead { margin-left: 0; max-width: 100%; }
+  }
+
+  /* ===== MOBILE chuẩn hóa như home/about: pill ĐÈ ĐỈNH tiêu đề + CTA cascade ===== */
+  @media (max-width: 768px) {
+    /* cs-line-1 (OUR / OUR CASE) = 72px chuẩn — scoped + !important để THẮNG global.css ≤600 (vốn ép 49px) */
+    .pr-programs-head .cs-line-1, .about-cases-head .cs-line-1 {
+      font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;
+      letter-spacing: -0.097em !important; line-height: 0.9 !important; white-space: nowrap !important;
+    }
+    /* Filter All/Practical/Learning = 1 HÀNG cuộn ngang (như tab home/about, hết xuống 2 dòng) */
+    .pr-filters { flex-wrap: nowrap !important; justify-content: flex-start !important; overflow-x: auto !important; scrollbar-width: none !important; }
+    .pr-filters::-webkit-scrollbar { display: none !important; }
+    .pr-filter { flex: 0 0 auto !important; white-space: nowrap !important; }
+    /* pr-programs-head: pill "BỐN CON ĐƯỜNG" neo phải, đè cạnh PROGRAMS (như about hero) */
+    .pr-programs-head { position: relative !important; }
+    .pr-programs-head .prog-verb-wrap { position: static !important; }
+    .pr-programs-head .cs-glass-pill {
+      position: absolute !important; right: 0 !important; left: auto !important;
+      top: 3.2rem !important; bottom: auto !important; transform: none !important;
+      margin: 0 !important; align-self: auto !important;
+      width: 42vw !important; min-width: 158px !important; max-width: 196px !important;
+      min-height: 0 !important; padding: 0.68rem 0.85rem !important; gap: 0.25rem !important;
+    }
+    /* about-cases-head: pill CONTENT REEL đè cạnh CASE (y về about) */
+    .about-cases-head { position: relative !important; }
+    .about-cases-head .cs-glass-pill {
+      position: absolute !important; right: 0 !important; left: auto !important;
+      top: 34% !important; bottom: auto !important; transform: translateY(-50%) !important;
+      margin: 0 !important; align-self: auto !important;
+      width: 40vw !important; min-width: 158px !important; max-width: 186px !important;
+      min-height: 0 !important; padding: 0.8rem 0.92rem !important; gap: 0.3rem !important;
+    }
+    .pr-programs-head .cs-glass-title, .about-cases-head .cs-glass-title {
+      font-size: 0.92rem !important; font-weight: 700 !important; color: #ffffff !important;
+      white-space: nowrap !important; line-height: 1.1 !important; letter-spacing: 0.01em !important;
+    }
+    .pr-programs-head .cs-glass-sub, .about-cases-head .cs-glass-sub {
+      font-size: 0.68rem !important; line-height: 1.32 !important; letter-spacing: normal !important;
+      color: rgba(255,255,255,0.5) !important; max-width: 100% !important;
+    }
+    /* CTA cascade READY / TO SHINE (+pill) / BEYOND BORDERS? — y về home/about */
+    #get-started .cta-verb {
+      font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; letter-spacing: -0.097em !important;
+      line-height: 0.9 !important; margin-left: 0 !important;
+    }
+    #get-started .cta-tail {
+      font-size: clamp(2rem, 10vw, 2.9rem) !important; letter-spacing: -0.045em !important;
+      line-height: 0.96 !important; margin-right: 0 !important; white-space: nowrap !important;
+    }
+    #get-started .cta-line-2 {
+      flex-direction: column !important; align-items: flex-start !important;
+      width: 100% !important; gap: 0 !important; margin-top: 0.35rem !important; position: relative !important;
+    }
+    #get-started .cta-line-3 { margin-top: 0.35rem !important; }
+    #get-started .cs-glass-pill {
+      transform: none !important; position: absolute !important; right: 0 !important; left: auto !important;
+      bottom: 2.6rem !important; margin: 0 !important;
+    }
+  }
+  /* Phone: carousel case study = 1 thẻ TO mỗi lần lướt (như about) */
+  @media (max-width: 640px) {
+    .about-cases .cases-track {
+      flex-wrap: nowrap !important; gap: 1rem !important;
+      overflow-x: auto !important; scroll-snap-type: x mandatory !important;
+      scrollbar-width: none !important; justify-content: flex-start !important;
+    }
+    .about-cases .cases-track::-webkit-scrollbar { display: none !important; }
+    .about-cases .cases-track .case-card {
+      flex: 0 0 100% !important; scroll-snap-align: center !important;
+      min-height: clamp(500px, 124vw, 620px) !important; border-radius: 1.4rem !important;
+    }
   }
 
   @media (max-width: 560px) {
@@ -1207,22 +1277,20 @@ const caseStudies = [
   /* space-between: SHINE thụt phải (margin-left ≈ 1/3 READY TO → nằm dưới 2/3 phải),
      đuôi xám canh phải nhưng bù margin-right để MÉP TRÁI thẳng cột 916 = REAL GROWTH/SAY ABOUT US/BORDERS */
   /* margin-top 1.25rem = ĐÚNG khoảng dòng1↔dòng2 các section trên (cs-header-bottom). align last baseline → đáy SHINE = đáy BORDERS? */
-  .cta-line-2 { display: flex; justify-content: space-between; align-items: last baseline; margin-top: 1.25rem; } /* đồng bộ homepage */
+  /* Cascade trái: READY / TO SHINE (+pill đè lên SHINE) / BEYOND BORDERS? — đồng bộ home/about */
+  .cta-line-2 { display: flex; align-items: flex-start; gap: 1.5rem; margin-top: 0.5rem; }
   .cta-verb {
     font-family: 'Inter', sans-serif; font-weight: 500;
     font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9;
     color: #f2420b; white-space: nowrap;
-    margin-left: 2.3em; /* đồng bộ homepage: đẩy SHINE sang phải sát BEYOND BORDERS? */
   }
+  .cta-line-3 { margin-top: 0.5rem; }
   .cta-tail {
-    display: flex; flex-direction: column; gap: 0.4rem;
     font-family: 'Inter', sans-serif; font-weight: 500;
     font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; line-height: 0.9;
-    margin-right: 1.85em; /* đồng bộ homepage */
   }
   .cta-tail span { display: block; }
-  /* Kéo pill CTA xuống thấp hơn chút (chỉ section này) */
-  .cta-final .cs-glass-pill { transform: translateY(3.4rem); margin-left: -4rem; } /* đồng bộ home: pill CTA lệch trái -4rem */
+  .cta-final .cs-glass-pill { transform: translateY(2.6rem); }
   .cta-eyebrow {
     font-family: var(--font-headline); font-weight: 600;
     font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase;
