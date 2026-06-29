@@ -818,12 +818,20 @@ const caseStudies = [
   }
 
   @media (max-width: 600px) {
+    /* Card chương trình = CAROUSEL LƯỚT ngang 1 thẻ/lần (giống cases-track), KHÔNG trải dài dọc.
+       display:contents trên 2 services-row -> 4 card thành children trực tiếp của 1 track lướt. */
+    .services-grid {
+      flex-direction: row !important; flex-wrap: nowrap !important;
+      overflow-x: auto !important; scroll-snap-type: x mandatory !important;
+      row-gap: 0 !important; gap: 1rem !important;
+      scrollbar-width: none !important; -webkit-overflow-scrolling: touch !important;
+    }
+    .services-grid::-webkit-scrollbar { display: none !important; }
+    .services-row { display: contents !important; }
     .service-card {
-      flex-basis: 100%;
-      width: 100%;
-      max-width: 100%;
-      aspect-ratio: auto;
-      min-height: 450px;
+      flex: 0 0 87% !important; width: 87% !important; max-width: 87% !important;
+      scroll-snap-align: start !important;
+      aspect-ratio: auto !important; min-height: 440px !important;
     }
   }
 
