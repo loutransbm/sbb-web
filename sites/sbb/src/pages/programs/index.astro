@@ -585,6 +585,12 @@ const caseStudies = [
   /* ===== GLOW BEAMS (copy từ about.astro: cases-glow-beam đánh trái, team-glow-beam đánh phải) ===== */
   /* Section đầu trang (hero đã bỏ) → nới top vừa đủ thoáng dưới nav (tiêu đề đẩy lên) */
   .pr-programs { position: relative; overflow-x: clip; overflow-y: visible; z-index: 1; padding-top: clamp(7rem, 5rem + 4vw, 9rem); }
+  /* Bắc cầu quầng cam QUA seam programs↔cases (lấp dải tối giữa 2 beam) -> glow liền mạch, hết "đường kẻ chia cắt" */
+  .pr-programs::after {
+    content: ''; position: absolute; left: 0; right: 0; pointer-events: none;
+    bottom: -400px; height: 800px; z-index: -1;
+    background: radial-gradient(ellipse 70% 300px at 50% 50%, rgba(242, 66, 11, 0.12) 0%, rgba(242, 66, 11, 0.045) 44%, transparent 70%);
+  }
   /* SPOTLIGHT kiểu OMNI cho "OUR PROGRAMS": quầng cam LỚN-RỰC đặt LỆCH PHẢI (sau "ONE START FOUR
      PATHS"), nửa trái "OUR PROGRAMS" để TỐI. Khớp 100% độ rực section case-studies trang about.
      Màu = ramp footer: peach 255,112,60 -> cam 248,82,26 -> brand #f2420b. */
@@ -1215,7 +1221,7 @@ const caseStudies = [
   
 
   /* ===== CASE STUDIES (kiểu Omni): tiêu đề CASCADE + beam đánh từ TRÁI + lưới thẻ ===== */
-  .about-cases { position: relative; overflow-x: clip; overflow-y: visible; z-index: 1; }
+  .about-cases { position: relative; overflow-x: clip; overflow-y: visible; z-index: 1; margin-top: -1px; /* khử khe nửa-pixel DPR lẻ ở seam programs↔cases */ }
   .about-cases-head { position: relative; z-index: 1; width: calc(100% - 4rem); max-width: 120rem; margin-inline: auto; margin-bottom: clamp(9rem, 12vw, 12rem) !important; }
   .about-cases .container { position: relative; z-index: 1; max-width: 120rem; width: calc(100% - 4rem); margin-inline: auto; padding-left: 0; padding-right: 0; }
   .about-cases-head .about-line-2 { justify-content: flex-start; gap: 0; }
