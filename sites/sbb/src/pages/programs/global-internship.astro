@@ -540,9 +540,9 @@ const destinations = [
   .cs-line-1 { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.95; white-space: nowrap; position: relative; z-index: 10; }
   /* about-hero-head: position relative để neo pill tuyệt đối trên mobile */
   .about-hero-head { position: relative; }
-  /* Hàng 2: INTERNSHIP căn trái (chuẩn cascade về, bỏ flex-end cũ) */
-  .about-line-2 { display: flex; align-items: baseline; margin-top: 0.5rem; }
-  .about-verb { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9; white-space: nowrap; }
+  /* Hàng 2 DESKTOP: giữ nguyên căn phải như cũ (cs-line-2 flex-end) */
+  .about-line-2 { display: flex; justify-content: flex-end; align-items: center; margin-top: 0.5rem; }
+  .about-verb { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.95; white-space: nowrap; position: relative; z-index: 10; }
   .cs-text-white { color: #ffffff; }
 
   /* Glass pill kính tối trong suốt (như section): đặt SÁT chữ L cuối GLOBAL, nhích xuống, ĐỔ BÓNG xuống dưới */
