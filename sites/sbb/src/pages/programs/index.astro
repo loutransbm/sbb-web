@@ -1058,6 +1058,9 @@ const caseStudies = [
     .about-cases-head, .about-cases .container { width: calc(100% - 3rem) !important; }
     .about-cases-head .about-verb { margin-left: 0 !important; }
     .about-cases-head .about-tail--dim { margin-left: 0 !important; }
+    /* Kéo carousel card GẦN tiêu đề hơn (144px -> ~56px) + card TRONG SUỐT (bỏ lớp grain "sần") — chỉ mobile */
+    .about-cases .about-cases-head { margin-bottom: clamp(3.5rem, 8vw, 5rem) !important; }
+    .about-cases .case-card::after { display: none !important; }
     .about-cases-head .cs-glass-pill {
       position: absolute !important; right: 0 !important; left: auto !important;
       top: 4.4rem !important; bottom: auto !important; transform: none !important;  /* NÂNG cao hơn nữa - đè nhẹ đỉnh STUDIES, thân pill ở khoảng trên */
