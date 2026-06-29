@@ -1004,9 +1004,17 @@ const caseStudies = [
       letter-spacing: -0.097em !important; line-height: 0.9 !important; white-space: nowrap !important;
     }
     /* Filter All/Practical/Learning = 1 HÀNG cuộn ngang (như tab home/about, hết xuống 2 dòng) */
-    .pr-filters { flex-wrap: nowrap !important; justify-content: flex-start !important; overflow-x: auto !important; scrollbar-width: none !important; }
-    .pr-filters::-webkit-scrollbar { display: none !important; }
-    .pr-filter { flex: 0 0 auto !important; white-space: nowrap !important; }
+    /* Filter ALL/PRACTICAL/LEARNING: LÊN gần tiêu đề (bỏ min-height 92vh đẩy xuống đáy) + tự xuống dòng gọn, KHÔNG tràn */
+    .pr-programs-head { min-height: auto !important; }
+    .pr-filters {
+      margin-top: 2.2rem !important; margin-bottom: 2.4rem !important; padding-top: 0 !important;
+      flex-wrap: wrap !important; justify-content: flex-start !important; overflow-x: visible !important;
+      gap: 0.55rem !important;
+    }
+    .pr-filter {
+      flex: 0 1 auto !important; white-space: nowrap !important;
+      padding: 0.6rem 1.1rem !important; font-size: 0.73rem !important;
+    }
     /* pr-programs-head: pill "BỐN CON ĐƯỜNG" neo phải, đè cạnh PROGRAMS (như about hero) */
     .pr-programs-head { position: relative !important; }
     .pr-programs-head .prog-verb-wrap { position: static !important; }
