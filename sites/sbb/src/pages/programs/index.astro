@@ -39,7 +39,7 @@ const caseStudies = [
           <span class="about-verb cs-text-white">PROGRAMS</span>
           <!-- pill RA GIỮA khe S(PROGRAMS) ↔ ONE START, canh giữa chiều dọc dòng -->
           <div class="cs-glass-pill">
-            <span class="cs-glass-title">BỐN CON ĐƯỜNG</span>
+            <span class="cs-glass-title">PICK A PATH</span>
             <span class="cs-glass-sub">Chọn cái hợp mục tiêu, hoặc để SBB giúp bạn chọn.</span>
           </div>
         </span>
@@ -1012,11 +1012,13 @@ const caseStudies = [
     .pr-programs-head .prog-verb-wrap { position: static !important; }
     .pr-programs-head .cs-glass-pill {
       position: absolute !important; right: 0 !important; left: auto !important;
-      top: 3.2rem !important; bottom: auto !important; transform: none !important;
+      top: 0.2rem !important; bottom: auto !important; transform: none !important;   /* NÂNG lên ngang đỉnh chữ OUR, đè PROGRAMS rất ít */
       margin: 0 !important; align-self: auto !important;
       width: 42vw !important; min-width: 158px !important; max-width: 196px !important;
-      min-height: 0 !important; padding: 0.68rem 0.85rem !important; gap: 0.25rem !important;
+      min-height: 0 !important; padding: 0.95rem 0.9rem !important; gap: 0.32rem !important;   /* card CAO hơn chút */
     }
+    /* "ONE START / FOUR PATHS" căn SÁT mép trái = thẳng OUR/PROGRAMS (bỏ indent 0.45em) */
+    .pr-programs-head .about-tail--dim { margin-left: 0 !important; }
     /* about-cases-head: pill CONTENT REEL đè cạnh CASE (y về about) */
     .about-cases-head { position: relative !important; }
     .about-cases-head .cs-glass-pill {
