@@ -1057,7 +1057,7 @@ const caseStudies = [
     /* Căn HẾT mép trái = 24px khớp hero (bỏ indent 4rem container + margin-left verb/tail) */
     .about-cases-head, .about-cases .container { width: calc(100% - 3rem) !important; }
     .about-cases-head .about-verb { margin-left: 0 !important; }
-    .about-cases-head .about-tail--dim { margin-left: 0 !important; }
+    .about-cases-head .about-tail--dim { margin-left: 0 !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: 0.28em !important; align-items: baseline !important; }
     /* Kéo carousel card GẦN tiêu đề hơn (144px -> ~56px) + card TRONG SUỐT (bỏ lớp grain "sần") — chỉ mobile */
     .about-cases .about-cases-head { margin-bottom: clamp(3.5rem, 8vw, 5rem) !important; }
     .about-cases .case-card::after { display: none !important; }
