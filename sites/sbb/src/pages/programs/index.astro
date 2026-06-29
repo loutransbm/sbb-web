@@ -1061,6 +1061,18 @@ const caseStudies = [
     /* Kéo carousel card GẦN tiêu đề hơn (144px -> ~56px) + card TRONG SUỐT (bỏ lớp grain "sần") — chỉ mobile */
     .about-cases .about-cases-head { margin-bottom: clamp(3.5rem, 8vw, 5rem) !important; }
     .about-cases .case-card::after { display: none !important; }
+    /* Card case study: KHÔNG phát sáng cam khi chạm/lướt (tap = :hover dính trên mobile) — chỉ giữ THẺ GƯƠNG (transparent + viền + bóng đáy) */
+    .about-cases .cases-track .case-card:hover {
+      background: transparent !important;
+      border-color: rgba(255, 255, 255, 0.10) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+      transform: none !important;
+    }
+    .about-cases .cases-track .case-card:hover .case-arrow {
+      border-color: rgba(255, 255, 255, 0.20) !important;
+      background: transparent !important;
+      color: #ffffff !important;
+    }
     .about-cases-head .cs-glass-pill {
       position: absolute !important; right: 0 !important; left: auto !important;
       top: 4.4rem !important; bottom: auto !important; transform: none !important;  /* NÂNG cao hơn nữa - đè nhẹ đỉnh STUDIES, thân pill ở khoảng trên */
