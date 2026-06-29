@@ -101,21 +101,20 @@ const posts = [
   <!-- ============ FINAL CTA · "READY TO SHINE BEYOND BORDERS" (giống Omni "READY TO GROW & SCALE") ============ -->
   <section class="cta-final" id="get-started">
     <div class="container cta-final-inner">
-      <!-- Tiêu đề kiểu Omni "READY TO GROW & SCALE": cascade 2 dòng lớn + glass pill -->
+      <!-- Tiêu đề kiểu Omni "READY TO GROW & SCALE": cascade 3 dòng lớn + glass pill (y hệt homepage) -->
       <div class="cs-header cta-header">
         <div class="cs-line cs-line-1">
-          <span class="cs-text-white">READY TO</span>
+          <span class="cs-text-white">READY</span>
+        </div>
+        <div class="cta-line-2">
+          <span class="cta-verb">TO SHINE</span>
           <div class="cs-glass-pill">
-            <span class="cs-glass-title">BẮT ĐẦU</span>
+            <span class="cs-glass-title">LET'S TALK</span>
             <span class="cs-glass-sub">Tư vấn miễn phí 30 phút — cùng SBB vẽ lộ trình rõ ràng cho bạn.</span>
           </div>
         </div>
-        <div class="cta-line-2">
-          <span class="cta-verb">SHINE</span>
-          <span class="cta-tail">
-            <span class="cs-text-white">BEYOND</span>
-            <span class="cs-text-white">BORDERS?</span>
-          </span>
+        <div class="cta-line-3">
+          <span class="cta-tail"><span class="cs-text-white">BEYOND BORDERS?</span></span>
         </div>
       </div>
     </div>
@@ -430,17 +429,15 @@ const posts = [
     font-family: 'Inter', sans-serif; font-weight: 500;
     font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9;
     color: #f2420b; white-space: nowrap;
-    margin-left: 2.3em; /* đồng bộ homepage: đẩy SHINE sang phải sát BEYOND BORDERS? */
   }
+  .cta-line-3 { margin-top: 0.5rem; }
   .cta-tail {
-    display: flex; flex-direction: column; gap: 0.4rem;
     font-family: 'Inter', sans-serif; font-weight: 500;
     font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; line-height: 0.9;
-    margin-right: 1.85em; /* đồng bộ homepage */
   }
   .cta-tail span { display: block; }
-  /* Kéo pill CTA xuống thấp hơn chút (chỉ section này) */
-  .cta-final .cs-glass-pill { transform: translateY(3.4rem); margin-left: -4rem; width: 210px; } /* đồng bộ home: pill CTA 210px, lệch trái -4rem (hero pill vẫn 240px) */
+  /* Pill "LET'S TALK": dịch xuống theo dòng TO SHINE (y hệt homepage) */
+  .cta-final .cs-glass-pill { transform: translateY(2.6rem); }
   .cta-eyebrow {
     font-family: var(--font-headline); font-weight: 600;
     font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase;
@@ -653,6 +650,46 @@ const posts = [
       .about-hero-head .cs-glass-sub {
         font-size: 0.68rem !important; line-height: 1.32 !important; letter-spacing: normal !important;
         color: rgba(255, 255, 255, 0.5) !important; max-width: 100% !important;
+      }
+
+      /* ===== CTA "READY / TO SHINE / BEYOND BORDERS?" — y hệt homepage mobile ===== */
+      #get-started .cs-line-1 {
+        font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;
+        letter-spacing: -0.097em !important; line-height: 0.9 !important;
+      }
+      #get-started .cta-verb {
+        font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;
+        letter-spacing: -0.097em !important; line-height: 0.9 !important; margin-left: 0 !important;
+      }
+      #get-started .cta-tail {
+        font-size: clamp(2rem, 10vw, 2.9rem) !important;
+        letter-spacing: -0.045em !important; line-height: 0.96 !important;
+        margin-right: 0 !important; white-space: nowrap !important;
+      }
+      #get-started .cta-line-2 {
+        flex-direction: column !important; align-items: flex-start !important;
+        width: 100% !important; gap: 0 !important; margin-top: 0.35rem !important; position: relative !important;
+      }
+      #get-started .cta-line-3 { margin-top: 0.35rem !important; }
+      /* Pill LET'S TALK: tuyệt đối, neo phải, đè đỉnh TO SHINE */
+      #get-started .cs-glass-pill {
+        transform: none !important; position: absolute !important;
+        right: 0 !important; left: auto !important; bottom: 2.6rem !important; margin: 0 !important;
+        width: 34vw !important; min-width: 138px !important; max-width: 168px !important;
+        padding: 0.7rem 0.95rem !important; gap: 0.3rem !important;
+      }
+      #get-started .cs-glass-title {
+        font-size: 0.92rem !important; font-weight: 700 !important; letter-spacing: 0.015em !important;
+        color: #ffffff !important; white-space: normal !important; line-height: 1.05 !important;
+      }
+      #get-started .cs-glass-sub {
+        font-size: 0.7rem !important; line-height: 1.35 !important; letter-spacing: normal !important;
+        color: rgba(255, 255, 255, 0.5) !important; max-width: 100% !important;
+      }
+      /* Căn cụm sát mép trái 24px = thẳng hàng hero */
+      #get-started .cta-final-inner {
+        width: calc(100% - 3rem) !important; max-width: none !important;
+        margin-inline: auto !important; padding-left: 0 !important; padding-right: 0 !important;
       }
     }
 </style>
