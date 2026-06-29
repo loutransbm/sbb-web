@@ -1105,6 +1105,8 @@ const caseStudies = [
     }
     #get-started .cs-glass-title { font-size: 0.92rem !important; font-weight: 700 !important; letter-spacing: 0.015em !important; color: #ffffff !important; white-space: normal !important; line-height: 1.05 !important; }
     #get-started .cs-glass-sub { font-size: 0.7rem !important; line-height: 1.35 !important; letter-spacing: normal !important; color: rgba(255, 255, 255, 0.5) !important; max-width: 100% !important; }
+    /* Căn cụm CTA SÁT mép trái 24px = THẲNG HÀNG hero/cases (cùng cơ chế calc(100%-3rem), hết lệch 1px do padding container) */
+    #get-started .cta-final-inner { width: calc(100% - 3rem) !important; max-width: none !important; margin-inline: auto !important; padding-left: 0 !important; padding-right: 0 !important; }
   }
   /* Phone: carousel case study = 1 thẻ TO mỗi lần lướt (như about) */
   @media (max-width: 640px) {
