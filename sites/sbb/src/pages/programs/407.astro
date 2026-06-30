@@ -561,6 +561,8 @@ const truths = [
      Dùng "chữ bóng" ẩn (cùng metrics) để canh tuyệt đối ở mọi cỡ chữ/letter-spacing. */
   .ind-title .cs-line { line-height: 0.9; }
   .ind-title .ghost { visibility: hidden; }
+  /* Desktop: cho tiêu đề bậc thang to hơn base một xíu (≥981px; tablet/phone giữ nguyên vì bị rule !important đè) */
+  .ind-title .cs-line-1 { font-size: clamp(9.5rem, 13.3vw, 12rem); }
   /* Màn hẹp: dòng dài nhất ("…DO") của bậc thang nối rộng ~5.7em, sẽ tràn ở điện thoại.
      Thu nhỏ riêng tiêu đề này để vừa khít mà vẫn canh đúng chữ. Tablet/desktop giữ nguyên cỡ. */
   @media (max-width: 600px) {
