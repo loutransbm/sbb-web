@@ -444,25 +444,27 @@ const truths = [
     </div>
   </section>
 
-  <!-- ===== STEPS ===== -->
-  <section class="pr-sec pr-sec--beam">
+  <!-- ===== ROADMAP — timeline (line lửa + node số) giống trang J-1 ===== -->
+  <section class="pr-sec pr-sec--beam rm-sec" id="how">
     <div class="pr-beam pr-beam--left" aria-hidden="true"></div>
     <div class="pr-wrap">
-      <div class="pr-head">
-        <span class="pr-eyebrow">How it works</span>
-        <div class="cs-header pr-sec-head">
-          <div class="cs-line cs-line-1"><span class="cs-text-white">HOW IT</span></div>
-          <div class="cs-line cs-line-1"><span class="cs-text-white">WORKS</span></div>
-        </div>
-        <p class="pr-desc">Bốn bước từ buổi nói chuyện đầu tiên đến lúc bạn đặt chân sang Úc, minh bạch ngay từ đầu.</p>
+      <div class="rm-head">
+        <div class="cs-header"><div class="cs-line cs-line-1"><span class="cs-text-white">ROADMAP</span></div></div>
+        <p class="rm-desc">Bốn bước rõ ràng từ buổi nói chuyện đầu tiên đến ngày bạn đặt chân sang Úc, minh bạch ngay từ đầu.</p>
       </div>
-      <div class="pr-rows">
-        {steps.map((s) => (
-          <article class="pr-row">
-            <span class="pr-row__num">{s.num}</span>
-            <div><h3 class="pr-row__title">{s.title}</h3><p class="pr-row__body">{s.body}</p></div>
-          </article>
-        ))}
+      <div class="rm-card">
+        <div class="rm-timeline">
+          {steps.map((s) => (
+            <div class="rm-step">
+              <div class="rm-marker"><span class="rm-node">{s.num}</span></div>
+              <div class="rm-content">
+                <h3 class="rm-title">{s.title}</h3>
+                <p class="rm-body">{s.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p class="rm-note"><strong>Về chi phí:</strong> SBB không đưa ra biểu giá chung chung. Chi phí thực tế phụ thuộc vào ngành nghề, thời lượng và vị trí tại Úc, và sẽ được minh bạch chi tiết ngay từ buổi trao đổi đầu tiên.</p>
       </div>
     </div>
   </section>
@@ -690,6 +692,32 @@ const truths = [
   .pr-row__num { flex: 0 0 auto; font-family: var(--font-headline); font-weight: 400; font-size: 1.3rem; color: #f2420b; line-height: 1.4; min-width: 2.2rem; }
   .pr-row__title { font-family: var(--font-headline); font-weight: 400; font-size: 1.1rem; color: #fff; margin: 0 0 0.4rem; text-transform: none; }
   .pr-row__body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.96rem; line-height: 1.6; color: rgba(255,255,255,0.62); margin: 0; }
+
+  /* ===== ROADMAP — timeline (line lửa + node số), bê từ trang J-1, chữ theo chuẩn không-đậm của 407 ===== */
+  .rm-head { margin-bottom: clamp(3.5rem, 6vw, 6rem); }
+  .rm-desc { margin: clamp(1rem, 1.6vw, 1.6rem) 0 0; max-width: 42rem; font-family: var(--font-body); font-weight: 300; font-size: clamp(1rem, 1.1vw, 1.15rem); color: rgba(255,255,255,0.6); line-height: 1.55; }
+  .rm-card { position: relative; overflow: hidden; border-radius: clamp(24px, 2.6vw, 40px); border: 1px solid rgba(255,255,255,0.08); background: linear-gradient(180deg, rgba(255,255,255,0.028) 0%, rgba(255,255,255,0.008) 60%, rgba(255,255,255,0.004) 100%); padding: clamp(2.75rem, 5vw, 5rem) clamp(2rem, 4.5vw, 4.5rem); }
+  .rm-timeline { --node: clamp(46px, 4.6vw, 56px); position: relative; display: flex; flex-direction: column; gap: clamp(2rem, 3.5vw, 3.2rem); }
+  .rm-timeline::before { content: ''; position: absolute; left: 50%; top: calc(var(--node) / 2); bottom: calc(var(--node) / 2); width: 2px; transform: translateX(-1px); background: linear-gradient(to bottom, rgba(255,92,38,0.75) 0%, rgba(242,66,11,0.4) 55%, rgba(242,66,11,0.10) 100%); }
+  .rm-step { position: relative; display: grid; grid-template-columns: 1fr var(--node) 1fr; column-gap: clamp(1.5rem, 3vw, 3rem); align-items: center; }
+  .rm-marker { grid-column: 2; display: flex; justify-content: center; position: relative; z-index: 1; }
+  .rm-node { width: var(--node); height: var(--node); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-headline); font-weight: 400; font-size: clamp(0.92rem, 1vw, 1.08rem); color: #fff; background: radial-gradient(circle at 50% 32%, rgba(242,66,11,0.5) 0%, rgba(22,9,4,0.96) 78%); border: 1px solid rgba(255,120,60,0.55); box-shadow: 0 0 0 5px rgba(242,66,11,0.05), 0 0 26px rgba(242,66,11,0.22); transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease; }
+  .rm-step:hover .rm-node { transform: scale(1.07); border-color: rgba(255,140,80,0.85); box-shadow: 0 0 0 6px rgba(242,66,11,0.09), 0 0 36px rgba(242,66,11,0.34); }
+  .rm-title { margin: 0 0 0.45rem; font-family: var(--font-headline); font-weight: 400; font-size: clamp(1.12rem, 1.35vw, 1.4rem); color: #fff; line-height: 1.15; text-transform: none; }
+  .rm-body { margin: 0; font-family: var(--font-body); font-weight: 300; font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+  .rm-step:nth-child(odd) .rm-content { grid-column: 1; text-align: right; }
+  .rm-step:nth-child(odd) .rm-body { margin-left: auto; max-width: 27rem; }
+  .rm-step:nth-child(even) .rm-content { grid-column: 3; text-align: left; }
+  .rm-step:nth-child(even) .rm-body { margin-right: auto; max-width: 27rem; }
+  .rm-note { margin: clamp(2.5rem, 4vw, 3.75rem) auto 0; padding-top: clamp(1.5rem, 2.5vw, 2rem); border-top: 1px solid rgba(255,255,255,0.08); max-width: 52rem; text-align: center; font-family: var(--font-body); font-weight: 300; font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .rm-note strong { color: #ff7a52; font-weight: 400; }
+  @media (max-width: 760px) {
+    .rm-timeline::before { left: calc(var(--node) / 2); }
+    .rm-step { grid-template-columns: var(--node) 1fr; column-gap: clamp(1.1rem, 3vw, 1.6rem); align-items: start; }
+    .rm-marker { grid-column: 1; }
+    .rm-step .rm-content { grid-column: 2 !important; text-align: left !important; }
+    .rm-step .rm-body { margin: 0 !important; max-width: none !important; }
+  }
 
   /* ===== PILLS ===== */
   .pr-pills { display: flex; flex-wrap: wrap; gap: 0.7rem; }
