@@ -167,6 +167,15 @@ const benefits = [
         <figure class="gal-item"><img src="/images/case-studies/cs2.jpg" alt="Học viên SBB tại New York, Mỹ" loading="lazy" /></figure>
         <figure class="gal-item"><img src="/images/case-studies/cs1.jpg" alt="Học viên SBB cùng đồng nghiệp tại Mỹ" loading="lazy" /></figure>
         <figure class="gal-item"><img src="/images/case-studies/cs3.jpg" alt="Học viên SBB làm việc tại khách sạn Mỹ" loading="lazy" /></figure>
+        <figure class="gal-item"><img src="/images/us-life/us-life-01.jpg" alt="Học viên SBB tại biển Las Vegas, Mỹ" loading="lazy" /></figure>
+        <figure class="gal-item"><img src="/images/us-life/us-life-02.jpg" alt="Học viên SBB trong sự kiện tại Mỹ" loading="lazy" /></figure>
+        <figure class="gal-item"><img src="/images/us-life/us-life-03.jpg" alt="Nhóm học viên SBB tại Las Vegas, Mỹ" loading="lazy" /></figure>
+        <figure class="gal-item"><img src="/images/us-life/us-life-04.jpg" alt="Học viên SBB trong đồng phục khách sạn Mỹ" loading="lazy" /></figure>
+        <figure class="gal-item"><img src="/images/us-life/us-life-05.jpg" alt="Học viên SBB sau ca làm tại Mỹ" loading="lazy" /></figure>
+        <figure class="gal-item"><img src="/images/us-life/us-life-06.jpg" alt="Nhóm học viên SBB trên đường phố Mỹ" loading="lazy" /></figure>
+        <figure class="gal-item"><img src="/images/us-life/us-life-07.jpg" alt="Nhóm học viên SBB tại nơi làm việc ở Mỹ" loading="lazy" /></figure>
+        <figure class="gal-item gal-item--wide"><img src="/images/us-life/us-life-08.jpg" alt="Học viên SBB trong bếp khách sạn Mỹ" loading="lazy" /></figure>
+        <figure class="gal-item gal-item--wide"><img src="/images/us-life/us-life-09.jpg" alt="Tập thể học viên SBB tại Mỹ" loading="lazy" /></figure>
       </div>
     </div>
   </section>
@@ -604,8 +613,10 @@ const benefits = [
 
   /* ===== GALLERY J-1 USA — loạt ảnh thật ===== */
   .gal-eyebrow { font-family: var(--font-headline); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: #f2420b; margin: 0 0 clamp(1.6rem, 2.6vw, 2.4rem); }
-  .gal-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.8rem, 1.2vw, 1.25rem); }
+  .gal-row { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-flow: dense; gap: clamp(0.8rem, 1.2vw, 1.25rem); }
   .gal-item { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); aspect-ratio: 4 / 5; margin: 0; }
+  /* ảnh chụp NGANG: chiếm 2 cột + tỉ lệ ngang -> không cắt mất nhóm người */
+  .gal-item--wide { grid-column: span 2; aspect-ratio: 3 / 2; }
   .gal-item img { width: 100%; height: 100%; object-fit: cover; object-position: center 32%; display: block; transition: transform 0.65s cubic-bezier(0.16,1,0.3,1); }
   .gal-item::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgba(8,4,3,0.42) 0%, transparent 42%); }
   .gal-item:hover img { transform: scale(1.05); }
