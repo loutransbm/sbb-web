@@ -1,19 +1,26 @@
 ---
-// Career Training Program — TRANG TỔNG QUAN (umbrella). Chỉ giới thiệu + liệt kê hạng mục.
-// Mỗi hạng mục bấm vào NHẢY SANG TRANG RIÊNG (J-1 Trainee, Visa 407).
-// Hệ dark-fire đồng bộ hub/trang chủ. KHÔNG card trắng.
+// Career Training — TRANG TỔNG QUAN (umbrella). Thiết kế y HỆT Global Internship.
+// Hero + logo đối tác + lưới đường tu nghiệp + case study + FAQ + form.
+// Mỗi đường mở bấm vào NHẢY SANG TRANG RIÊNG (J-1 Trainee, Visa 407).
 import PageLayout from '@ui/layouts/PageLayout.astro';
 
-const items = [
-  { state: 'open', tag: 'Hoa Kỳ · Đang mở', title: 'J-1 Trainee', body: 'Diện tu nghiệp của visa J-1 dành cho người đã có bằng cấp và kinh nghiệm. Tu nghiệp tối đa 18 tháng tại doanh nghiệp Mỹ.', href: '/programs/j1-trainee' },
-  { state: 'open', tag: 'Úc · Đang mở', title: 'Visa 407', body: 'Đường Úc qua visa 407 cho các mảng Aged Care, Child Care và Hospitality. Triển khai cùng đối tác Australian Internships.', href: '/programs/407' },
-  { state: 'soon', tag: 'Đang phát triển', title: 'Điểm đến mới', body: 'SBB tiếp tục mở rộng các chương trình đào tạo nghề quốc tế sang nhiều quốc gia khác. Thông tin sẽ được công bố khi sẵn sàng.' },
+// Các đường Career Training. open:true = card mở (bấm vào trang chi tiết); còn lại = đang cập nhật.
+const destinations = [
+  { title: 'TRAINING USA',       tag: 'J-1 Trainee', img: '/images/case-studies/cs1.jpg',  href: '/programs/j1-trainee', open: true },
+  { title: 'TRAINING AUSTRALIA', tag: 'Visa 407',    img: '/images/case-studies/cs4.webp', href: '/programs/407',        open: true },
+  { title: 'TRAINING EU',        open: false },
+  { title: 'TRAINING SINGAPORE', open: false },
+  { title: 'TRAINING CANADA',    open: false },
+  { title: 'TRAINING JAPAN',     open: false },
+  { title: 'TRAINING KOREA',     open: false },
+  { title: 'TRAINING UK',        open: false },
+  { title: 'TRAINING UAE',       open: false },
 ];
 ---
 
 <PageLayout
   title="Career Training — Đào tạo nghề Quốc tế"
-  description="Career Training của SBB: đào tạo nghề quốc tế có trả lương cho người đã có nền tảng. Hai hạng mục đang mở: J-1 Trainee (Mỹ) và Visa 407 (Úc)."
+  description="Career Training của SBB: tu nghiệp quốc tế có trả lương cho người đã có nền tảng. Hai đường đang mở: J-1 Trainee (Mỹ) và Visa 407 (Úc)."
   site="sbb"
   currentPath="/programs/career-training"
 >
@@ -21,58 +28,168 @@ const items = [
   <section class="pr-hero">
     <div class="pr-hero__beam" aria-hidden="true"></div>
     <div class="pr-hero__wrap">
-      <div class="cs-header">
-        <div class="cs-line cs-line-1"><span class="cs-text-white">CAREER TRAINING</span></div>
-      </div>
-      <p class="pr-lead">Đào tạo nghề quốc tế có trả lương, dành cho người đã có nền tảng và muốn nâng tay nghề ở môi trường toàn cầu. Hiện có hai hạng mục: J-1 Trainee tại Mỹ và visa 407 tại Úc.</p>
-    </div>
-  </section>
-
-  <!-- ===== TỔNG QUAN ===== -->
-  <section class="pr-sec">
-    <div class="pr-wrap">
-      <div class="pr-split">
-        <div>
-          <span class="pr-eyebrow">Overview</span>
-          <p class="pr-statement">Đào tạo nghề <span class="pr-accent">chuyên sâu</span> ở môi trường quốc tế.</p>
+      <div class="cs-header about-hero-head">
+        <div class="cs-line cs-line-1">
+          <span class="cs-text-white">CAREER</span>
+          <div class="cs-glass-pill">
+            <span class="cs-glass-title">TRACKS</span>
+            <span class="cs-glass-sub">J-1 Trainee tại Mỹ và visa 407 tại Úc, đang mở thêm điểm đến.</span>
+          </div>
         </div>
-        <ul class="pr-checks">
-          <li>Diện training: sang để học nghề và làm thật, không phải du học thuần tuý.</li>
-          <li>Dành cho người đã có bằng cấp hoặc kinh nghiệm, muốn lên tay nghề bài bản.</li>
-          <li>Được trả lương trong thời gian tu nghiệp, theo kế hoạch đào tạo rõ ràng.</li>
-          <li>Có sponsor tại Mỹ và đối tác Australian Internships tại Úc đồng hành.</li>
-        </ul>
+        <div class="about-line-2">
+          <span class="about-verb cs-text-white">TRAINING</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== HẠNG MỤC (mỗi cái 1 trang riêng) ===== -->
-  <section class="pr-sec pr-sec--beam" id="items">
-    <div class="pr-beam pr-beam--right" aria-hidden="true"></div>
-    <div class="pr-wrap">
-      <div class="pr-head">
-        <span class="pr-eyebrow">Tracks</span>
-        <div class="cs-header pr-sec-head">
-          <div class="cs-line cs-line-1"><span class="cs-text-white">CHOOSE</span></div>
-          <div class="cs-line cs-line-1"><span class="cs-text-white">A&nbsp;PATH</span></div>
+  <!-- ===== SECTION LOGO ĐỐI TÁC (marquee, copy từ home) ===== -->
+  <section class="partner-marquee-section">
+    <div class="partner-text-block">
+      <h2 class="partner-headline">
+        MINDSET. CONDUCT. CAPABILITY.<br/>
+        NĂNG LỰC THỰC CHẤT CHO SỰ NGHIỆP TOÀN CẦU.<br/>
+        <span class="headline-dimmed">KIẾN TẠO THẾ HỆ NGƯỜI TRẺ VIỆT ĐƯỢC TIN VÀ ĐƯỢC TRỌNG DỤNG.</span>
+      </h2>
+      <p class="partner-subtext">
+        Mạng lưới đối tác doanh nghiệp uy tín, mở ra cơ hội<br/>
+        thực tập và làm việc không giới hạn.
+      </p>
+    </div>
+
+    <div class="marquee-wrapper">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <div class="partner-logo"><img src="/images/partners/marriott.png" alt="Marriott" /></div>
+          <div class="partner-logo"><img src="/images/partners/hilton.png" alt="Hilton" /></div>
+          <div class="partner-logo"><img src="/images/partners/waldorf.png" alt="Waldorf Astoria" /></div>
+          <div class="partner-logo"><img src="/images/partners/omni.png" alt="Omni" /></div>
+          <div class="partner-logo"><img src="/images/partners/westin.png" alt="Westin" /></div>
+          <div class="partner-logo"><img src="/images/partners/hyatt.png" alt="Hyatt" /></div>
+          <div class="partner-logo"><img src="/images/partners/ritz-carlton.png" alt="The Ritz-Carlton" /></div>
+          <div class="partner-logo"><img src="/images/partners/st-regis.png" alt="St. Regis" /></div>
+          <div class="partner-logo"><img src="/images/partners/sonesta.png" alt="Sonesta" /></div>
+          <div class="partner-logo"><img src="/images/partners/marriott-vacation.png" alt="Marriott Vacation Club" /></div>
+          <div class="partner-logo"><img src="/images/partners/iee.png" alt="IEE" /></div>
+          <div class="partner-logo"><img src="/images/partners/alliance.png" alt="Alliance Abroad" /></div>
+          <div class="partner-logo"><img src="/images/partners/ciee.png" alt="CIEE" /></div>
+          <div class="partner-logo"><img src="/images/partners/australian-internships.png" alt="Australian Internships" /></div>
         </div>
-        <p class="pr-desc">Hai con đường đang mở, hai điểm đến. Bấm vào để xem chi tiết từng hạng mục. Các điểm đến mới đang được hoàn thiện.</p>
+        <div class="marquee-content" aria-hidden="true">
+          <div class="partner-logo"><img src="/images/partners/marriott.png" alt="Marriott" /></div>
+          <div class="partner-logo"><img src="/images/partners/hilton.png" alt="Hilton" /></div>
+          <div class="partner-logo"><img src="/images/partners/waldorf.png" alt="Waldorf Astoria" /></div>
+          <div class="partner-logo"><img src="/images/partners/omni.png" alt="Omni" /></div>
+          <div class="partner-logo"><img src="/images/partners/westin.png" alt="Westin" /></div>
+          <div class="partner-logo"><img src="/images/partners/hyatt.png" alt="Hyatt" /></div>
+          <div class="partner-logo"><img src="/images/partners/ritz-carlton.png" alt="The Ritz-Carlton" /></div>
+          <div class="partner-logo"><img src="/images/partners/st-regis.png" alt="St. Regis" /></div>
+          <div class="partner-logo"><img src="/images/partners/sonesta.png" alt="Sonesta" /></div>
+          <div class="partner-logo"><img src="/images/partners/marriott-vacation.png" alt="Marriott Vacation Club" /></div>
+          <div class="partner-logo"><img src="/images/partners/iee.png" alt="IEE" /></div>
+          <div class="partner-logo"><img src="/images/partners/alliance.png" alt="Alliance Abroad" /></div>
+          <div class="partner-logo"><img src="/images/partners/ciee.png" alt="CIEE" /></div>
+          <div class="partner-logo"><img src="/images/partners/australian-internships.png" alt="Australian Internships" /></div>
+        </div>
       </div>
-      <div class="pr-grid pr-grid--3">
-        {items.map((t) => (
-          t.state === 'open' ? (
-            <a href={t.href} class="pr-card pr-card--flagship">
-              <span class="pr-card__tag">{t.tag}</span>
-              <h3 class="pr-card__title">{t.title}</h3>
-              <p class="pr-card__body">{t.body}</p>
-              <span class="pr-card__more">Xem chi tiết</span>
+
+      <div class="marquee-track marquee-track--reverse">
+        <div class="marquee-content">
+          <div class="partner-logo"><img src="/images/partners/miami.png" alt="Miami" /></div>
+          <div class="partner-logo"><img src="/images/partners/walgreens.png" alt="Walgreens" /></div>
+          <div class="partner-logo"><img src="/images/partners/graham.png" alt="Graham Packaging" /></div>
+          <div class="partner-logo"><img src="/images/partners/safeway.png" alt="Safeway" /></div>
+          <div class="partner-logo"><img src="/images/partners/walmart.png" alt="Walmart" /></div>
+          <div class="partner-logo"><img src="/images/partners/wedgewood.png" alt="Wedgewood" /></div>
+          <div class="partner-logo"><img src="/images/partners/nyu.png" alt="NYU" /></div>
+          <div class="partner-logo"><img src="/images/partners/hajoca.png" alt="Hajoca" /></div>
+          <div class="partner-logo"><img src="/images/partners/aaa.png" alt="AAA" /></div>
+          <div class="partner-logo"><img src="/images/partners/musc.png" alt="MUSC" /></div>
+          <div class="partner-logo"><img src="/images/partners/notion.png" alt="Notion" /></div>
+          <div class="partner-logo"><img src="/images/partners/minnesota.png" alt="Minnesota" /></div>
+          <div class="partner-logo"><img src="/images/partners/deaconess.png" alt="Deaconess" /></div>
+          <div class="partner-logo"><img src="/images/partners/metrohealth.png" alt="MetroHealth" /></div>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <div class="partner-logo"><img src="/images/partners/miami.png" alt="Miami" /></div>
+          <div class="partner-logo"><img src="/images/partners/walgreens.png" alt="Walgreens" /></div>
+          <div class="partner-logo"><img src="/images/partners/graham.png" alt="Graham Packaging" /></div>
+          <div class="partner-logo"><img src="/images/partners/safeway.png" alt="Safeway" /></div>
+          <div class="partner-logo"><img src="/images/partners/walmart.png" alt="Walmart" /></div>
+          <div class="partner-logo"><img src="/images/partners/wedgewood.png" alt="Wedgewood" /></div>
+          <div class="partner-logo"><img src="/images/partners/nyu.png" alt="NYU" /></div>
+          <div class="partner-logo"><img src="/images/partners/hajoca.png" alt="Hajoca" /></div>
+          <div class="partner-logo"><img src="/images/partners/aaa.png" alt="AAA" /></div>
+          <div class="partner-logo"><img src="/images/partners/musc.png" alt="MUSC" /></div>
+          <div class="partner-logo"><img src="/images/partners/notion.png" alt="Notion" /></div>
+          <div class="partner-logo"><img src="/images/partners/minnesota.png" alt="Minnesota" /></div>
+          <div class="partner-logo"><img src="/images/partners/deaconess.png" alt="Deaconess" /></div>
+          <div class="partner-logo"><img src="/images/partners/metrohealth.png" alt="MetroHealth" /></div>
+        </div>
+      </div>
+
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <div class="partner-logo"><img src="/images/partners/equinox.png" alt="Equinox" /></div>
+          <div class="partner-logo"><img src="/images/partners/evergreen.png" alt="Evergreen" /></div>
+          <div class="partner-logo"><img src="/images/partners/cadwell.png" alt="Cadwell" /></div>
+          <div class="partner-logo"><img src="/images/partners/sezzle.png" alt="Sezzle" /></div>
+          <div class="partner-logo"><img src="/images/partners/argonne.png" alt="Argonne" /></div>
+          <div class="partner-logo"><img src="/images/partners/metox.png" alt="Metox" /></div>
+          <div class="partner-logo"><img src="/images/partners/tree.png" alt="Tree Tech" /></div>
+          <div class="partner-logo"><img src="/images/partners/armada.png" alt="Armada" /></div>
+          <div class="partner-logo"><img src="/images/partners/sbenergy.png" alt="SB Energy" /></div>
+          <div class="partner-logo"><img src="/images/partners/berkeley.png" alt="Berkeley Lab" /></div>
+          <div class="partner-logo"><img src="/images/partners/sel.png" alt="SEL" /></div>
+          <div class="partner-logo"><img src="/images/partners/reframe.png" alt="Reframe Data Services" /></div>
+          <div class="partner-logo"><img src="/images/partners/oakridge.png" alt="Oak Ridge" /></div>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <div class="partner-logo"><img src="/images/partners/equinox.png" alt="Equinox" /></div>
+          <div class="partner-logo"><img src="/images/partners/evergreen.png" alt="Evergreen" /></div>
+          <div class="partner-logo"><img src="/images/partners/cadwell.png" alt="Cadwell" /></div>
+          <div class="partner-logo"><img src="/images/partners/sezzle.png" alt="Sezzle" /></div>
+          <div class="partner-logo"><img src="/images/partners/argonne.png" alt="Argonne" /></div>
+          <div class="partner-logo"><img src="/images/partners/metox.png" alt="Metox" /></div>
+          <div class="partner-logo"><img src="/images/partners/tree.png" alt="Tree Tech" /></div>
+          <div class="partner-logo"><img src="/images/partners/armada.png" alt="Armada" /></div>
+          <div class="partner-logo"><img src="/images/partners/sbenergy.png" alt="SB Energy" /></div>
+          <div class="partner-logo"><img src="/images/partners/berkeley.png" alt="Berkeley Lab" /></div>
+          <div class="partner-logo"><img src="/images/partners/sel.png" alt="SEL" /></div>
+          <div class="partner-logo"><img src="/images/partners/reframe.png" alt="Reframe Data Services" /></div>
+          <div class="partner-logo"><img src="/images/partners/oakridge.png" alt="Oak Ridge" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: ĐIỂM ĐẾN THỰC TẬP (card y hệt trang News) ===== -->
+  <section class="pr-sec dest-sec">
+    <div class="pr-wrap">
+      <div class="dest-head">
+        <div class="cs-header">
+          <div class="cs-line cs-line-1"><span class="cs-text-white">DESTINATIONS</span></div>
+        </div>
+      </div>
+      <div class="blog-grid">
+        {destinations.map((d) => (
+          d.open ? (
+            <a href={d.href} class="blog-card" data-title={d.title.toLowerCase()}>
+              <span class="blog-card__tag">{d.tag}</span>
+              <h3 class="blog-card__title">{d.title}</h3>
+              <div class="blog-card__media">
+                <img src={d.img} alt={d.title} loading="lazy" onerror="this.style.display='none'" />
+              </div>
+              <span class="blog-card__cta" aria-label="Xem chi tiết">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8 L16 16"/><path d="M16 9 L16 16 L9 16"/></svg>
+              </span>
             </a>
           ) : (
-            <div class="pr-card pr-card--soon" aria-disabled="true">
-              <span class="pr-card__tag pr-card__tag--soon">{t.tag}</span>
-              <h3 class="pr-card__title">{t.title}</h3>
-              <p class="pr-card__body">{t.body}</p>
-              <span class="pr-card__more pr-card__more--soon">Sắp ra mắt</span>
+            <div class="blog-card blog-card--soon" aria-disabled="true">
+              <span class="blog-card__tag blog-card__tag--soon">Đang cập nhật</span>
+              <h3 class="blog-card__title">{d.title}</h3>
+              <div class="blog-card__media"></div>
+              <span class="blog-card__cta blog-card__cta--soon">Sắp ra mắt</span>
             </div>
           )
         ))}
@@ -80,19 +197,342 @@ const items = [
     </div>
   </section>
 
-  <!-- ===== CTA ===== -->
-  <section class="pr-cta-sec">
+  <!-- ===== CASE STUDIES (bê từ trang chủ — carousel kéo + tab) ===== -->
+  <section class="case-studies-section" id="case-studies">
     <div class="pr-wrap">
-      <div class="pr-cta">
-        <h2 class="pr-cta__title">WHICH PATH FITS YOU?</h2>
-        <p class="pr-cta__sub">Đặt lịch nói chuyện để SBB đánh giá thẳng thắn xem J-1 Trainee hay visa 407 phù hợp với bạn, hoặc xem các chương trình khác.</p>
-        <div class="pr-actions pr-actions--center">
-          <a href="/apply" class="pr-btn pr-btn--onfire">Đăng ký tư vấn</a>
-          <a href="/programs" class="pr-btn pr-btn--light">Xem chương trình khác</a>
+      <div class="cs-header">
+        <div class="cs-line cs-line-1">
+          <span class="cs-text-white">THIS IS WHAT</span>
+          <div class="cs-glass-pill">
+            <span class="cs-glass-title">REAL RESULTS</span>
+            <span class="cs-glass-sub">Đo bằng sự nghiệp thực chất, không bằng lời hứa</span>
+          </div>
+        </div>
+        <div class="cs-header-bottom">
+          <div class="cs-tabs">
+            <button class="cs-tab active" data-tab="1">BUSINESS</button>
+            <button class="cs-tab" data-tab="2">HOSPITALITY</button>
+            <button class="cs-tab" data-tab="3">MARKETING</button>
+          </div>
+          <div class="cs-right-block">
+            <div class="cs-line cs-line-2">
+              <span class="cs-text-white">REAL</span> <span class="cs-text-white">GROWTH</span>
+            </div>
+            <div class="cs-line cs-line-3">
+              <span class="cs-text-white">LOOKS LIKE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-cards-wrapper">
+        <div class="cs-cards-track" id="cs-track">
+          <div class="cs-card active" id="cs-card-1">
+            <div class="cs-card-left">
+              <h3 class="cs-card-title">MY LINH<br/>LE</h3>
+              <div class="cs-card-role">Business Management · Việt Nam → Úc</div>
+              <div class="cs-content-block">
+                <h4 class="cs-block-title">STARTING POINT</h4>
+                <p class="cs-block-desc">My Linh không muốn dừng lại ở lý thuyết giảng đường. Cô tìm một môi trường doanh nghiệp Úc thật sự để thử lửa năng lực, ngay cả khi Melbourne bước vào giai đoạn lockdown.</p>
+              </div>
+              <div class="cs-content-block">
+                <h4 class="cs-block-title">REAL RESULT</h4>
+                <p class="cs-block-desc">Được huấn luyện phỏng vấn và kèm cặp sát sao, cô nhận lời mời làm việc full-time ngay sau kỳ thực tập, vững phân tích, quản trị dự án và thuyết trình. “Nỗ lực của bạn chắc chắn sẽ được đền đáp.”</p>
+              </div>
+            </div>
+            <div class="cs-card-right">
+              <div class="cs-photo">
+                <img src="/images/students/my-linh-le.jpg" alt="My Linh Le — học viên SBB" onerror="this.closest('.cs-photo').classList.add('cs-photo--empty'); this.remove();" />
+              </div>
+              <div class="cs-stats-row cs-stats-row--meta">
+                <div class="cs-stat-item">
+                  <div class="cs-stat-value">Full‑time</div>
+                  <div class="cs-stat-label">Nhận việc sau thực tập</div>
+                </div>
+                <div class="cs-stat-item">
+                  <div class="cs-stat-value">Business</div>
+                  <div class="cs-stat-label">Quản trị &amp; phân tích</div>
+                </div>
+                <div class="cs-stat-item">
+                  <div class="cs-stat-value">Melbourne</div>
+                  <div class="cs-stat-label">Thực tập tại Úc</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-card" id="cs-card-2">
+            <div class="cs-card-left">
+              <h3 class="cs-card-title">KHANH TRONG<br/>GIANG</h3>
+              <div class="cs-card-role">Culinary Arts · Việt Nam → Úc</div>
+              <div class="cs-content-block">
+                <h4 class="cs-block-title">STARTING POINT</h4>
+                <p class="cs-block-desc">Khanh tìm một trải nghiệm đa văn hóa thật sự: rèn tay nghề trong gian bếp chuyên nghiệp và nâng cao tiếng Anh ngay giữa môi trường làm việc quốc tế.</p>
+              </div>
+              <div class="cs-content-block">
+                <h4 class="cs-block-title">REAL RESULT</h4>
+                <p class="cs-block-desc">Khanh vững kỹ năng bếp, quản lý thời gian và phối hợp nhóm đa quốc gia, tiếng Anh tiến bộ rõ rệt. “Môi trường làm việc rất chuyên nghiệp, thân thiện và luôn sẵn sàng giúp đỡ.”</p>
+              </div>
+            </div>
+            <div class="cs-card-right">
+              <div class="cs-photo">
+                <img src="/images/students/khanh-giang.jpg" alt="Khanh Trong Giang — học viên SBB" onerror="this.closest('.cs-photo').classList.add('cs-photo--empty'); this.remove();" />
+              </div>
+              <div class="cs-stats-row cs-stats-row--meta">
+                <div class="cs-stat-item">
+                  <div class="cs-stat-value">Culinary</div>
+                  <div class="cs-stat-label">Bếp chuyên nghiệp</div>
+                </div>
+                <div class="cs-stat-item">
+                  <div class="cs-stat-value">Teamwork</div>
+                  <div class="cs-stat-label">Phối hợp quốc tế</div>
+                </div>
+                <div class="cs-stat-item">
+                  <div class="cs-stat-value">English</div>
+                  <div class="cs-stat-label">Nâng cao thực tế</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-card" id="cs-card-3">
+            <div class="cs-card-left">
+              <h3 class="cs-card-title">VICTORIA<br/>TRAN</h3>
+              <div class="cs-card-role">Marketing · Việt Nam → Úc</div>
+              <div class="cs-content-block">
+                <h4 class="cs-block-title">STARTING POINT</h4>
+                <p class="cs-block-desc">Victoria không muốn marketing chỉ nằm trên trang vở. Cô tìm một sân chơi quốc tế để va vào thực chiến và tự chứng minh năng lực.</p>
+              </div>
+              <div class="cs-content-block">
+                <h4 class="cs-block-title">REAL RESULT</h4>
+                <p class="cs-block-desc">Hoàn thành kỳ thực tập marketing tại Úc, cô tích lũy kinh nghiệm thực chiến và tự tay sản xuất nội dung (video/reels) kể lại hành trình, bệ phóng cho một lộ trình sự nghiệp dài hơi.</p>
+              </div>
+            </div>
+            <div class="cs-card-right">
+              <div class="cs-photo">
+                <img src="/images/students/victoria-tran.jpg" alt="Victoria Tran — học viên SBB" onerror="this.closest('.cs-photo').classList.add('cs-photo--empty'); this.remove();" />
+              </div>
+              <div class="cs-stats-row cs-stats-row--meta">
+                <div class="cs-stat-item">
+                  <div class="cs-stat-value">Marketing</div>
+                  <div class="cs-stat-label">Lĩnh vực thực tập</div>
+                </div>
+                <div class="cs-stat-item">
+                  <div class="cs-stat-value">Úc</div>
+                  <div class="cs-stat-label">Điểm đến quốc tế</div>
+                </div>
+                <div class="cs-stat-item">
+                  <div class="cs-stat-value">Content</div>
+                  <div class="cs-stat-label">Tự sản xuất reels</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.cs-cards-track -->
+
+        <button class="cs-nav cs-nav--prev" id="cs-prev" type="button" aria-label="Câu chuyện trước">&#8249;</button>
+        <button class="cs-nav cs-nav--next" id="cs-next" type="button" aria-label="Câu chuyện sau">&#8250;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ (bê thiết kế y hệt Global Internship, nội dung riêng Career Training) ===== -->
+  <section class="faq-section" id="faq">
+    <div class="pr-wrap faq-container">
+      <h2 class="faq-mega">FAQ</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary class="faq-q"><span>Career Training khác Global Internship (thực tập) ở điểm gì?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>Career Training là diện <strong>tu nghiệp</strong>: bạn sang nước ngoài học nghề và làm thật để nâng tay nghề, dành cho người đã có bằng cấp hoặc kinh nghiệm.</p>
+            <p>Khác với thực tập sinh viên, đường này hướng tới người đã có nền tảng, muốn lên chuyên môn bài bản ở môi trường quốc tế và được trả lương trong quá trình tu nghiệp.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span>SBB có những đường Career Training nào?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>Hai đường đang mở: <strong>J-1 Trainee tại Mỹ</strong> và <strong>visa 407 tại Úc</strong> (triển khai cùng đối tác Australian Internships).</p>
+            <p>Các điểm đến khác đang được hoàn thiện. Buổi tư vấn sẽ giúp bạn chọn đường hợp với ngành và mục tiêu của mình nhất.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span>J-1 Trainee tại Mỹ là gì?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>J-1 Trainee là diện tu nghiệp của visa J-1, dành cho người đã có bằng kèm kinh nghiệm. Bạn tu nghiệp có lương tại doanh nghiệp Mỹ theo kế hoạch đào tạo, thường tối đa 18 tháng.</p>
+            <p>SBB làm việc với tổ chức bảo trợ được Bộ Ngoại giao Mỹ chỉ định để cấp DS-2019 và đồng hành cùng bạn suốt quá trình.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span>Visa 407 tại Úc là gì?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>Visa 407 là diện Training của Úc, cho phép bạn sang Úc học nghề thực tế tại doanh nghiệp Úc, tối đa 2 năm.</p>
+            <p>SBB là đại diện độc quyền tại Việt Nam của Australian Internships, lo phần kết nối vị trí và bảo trợ visa cho bạn.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span>Chương trình dành cho ai, cần điều kiện gì để bắt đầu?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>Phù hợp với người đã có <strong>bằng cấp hoặc kinh nghiệm</strong> đúng ngành, muốn nâng tay nghề ở môi trường quốc tế.</p>
+            <p>Mỗi đường có điều kiện riêng về ngành, tiếng Anh và kinh nghiệm. Mọi thứ bắt đầu bằng buổi đánh giá năng lực để xác định đúng đường và lộ trình cho bạn.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span>Lộ trình tham gia diễn ra thế nào và kéo dài bao lâu?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>Hành trình đi theo các bước rõ ràng:</p>
+            <ul class="faq-stats">
+              <li><b>1 · Đánh giá năng lực.</b> Xác định đường tu nghiệp và ngành phù hợp.</li>
+              <li><b>2 · Chuẩn bị nền tảng.</b> Kỹ năng nghề, tiếng Anh ứng dụng và tác phong quốc tế.</li>
+              <li><b>3 · Kết nối doanh nghiệp.</b> Ghép bạn với host company hoặc đối tác tại nước sở tại.</li>
+              <li><b>4 · Hồ sơ &amp; visa.</b> Chuẩn bị giấy tờ bảo trợ, luyện phỏng vấn và lên đường.</li>
+            </ul>
+            <p>Thời gian tùy đường và điểm xuất phát của mỗi người. Trong buổi tư vấn, bạn nhận được lộ trình cụ thể kèm mốc thời gian cho riêng mình.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span>Đi tu nghiệp có được trả lương không?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>Có. Cả J-1 Trainee và visa 407 đều là diện tu nghiệp <strong>có trả lương</strong> theo quy định của nước sở tại và doanh nghiệp tiếp nhận.</p>
+            <p>Mức thu nhập tùy ngành, khu vực và vị trí. Mục tiêu là bạn vừa nâng tay nghề thật vừa sớm tự chủ tài chính.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span>Em chưa giỏi tiếng Anh thì có theo được không?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>Được, nếu bạn bắt đầu sớm. Lộ trình nâng tiếng Anh ứng dụng song song với chuẩn bị hồ sơ và tay nghề.</p>
+            <p>Phỏng vấn visa và công việc đều cần bạn giao tiếp được, nên SBB luyện sát đến khi bạn đủ tự tin trước khi lên đường.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span>Chi phí khoảng bao nhiêu, có hỗ trợ tài chính không?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>Chi phí tùy đường, ngành và lộ trình, nên SBB bóc tách minh bạch từng khoản ngay trong buổi tư vấn để gia đình nắm rõ trước khi quyết định.</p>
+            <p>Chương trình chia theo từng giai đoạn, kèm phương án hỗ trợ tài chính linh hoạt, để gia đình không phải dồn toàn bộ chi phí ngay từ đầu.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span>SBB hỗ trợ visa thế nào, nếu rớt visa thì sao?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>SBB đồng hành toàn bộ khâu chuẩn bị hồ sơ bảo trợ và phỏng vấn visa, giúp bạn đi đúng quy trình và tự tin hơn.</p>
+            <p>Những tình huống như hồ sơ chưa thuận lợi hay thay đổi kế hoạch đều có phương án và chính sách rõ ràng, trao đổi minh bạch ngay từ đầu để bạn yên tâm về quyền lợi.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span>Sau khi sang nước ngoài, SBB còn đồng hành không?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <div class="faq-a">
+            <p>Có. SBB đi cùng bạn trọn hành trình, từ lúc chuẩn bị ở Việt Nam, ổn định những tháng đầu nơi xứ người, đến khi bạn vững vàng trong công việc.</p>
+            <p>Cộng đồng cựu học viên SBB ở nhiều quốc gia là điểm tựa để bạn không bao giờ phải đi một mình.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA · "READY TO SHINE BEYOND BORDERS" (bê từ trang chủ) ============ -->
+  <section class="cta-final" id="get-started">
+    <div class="container cta-final-inner">
+      <div class="cs-header cta-header">
+        <div class="cs-line cs-line-1">
+          <span class="cs-text-white">READY</span>
+        </div>
+        <div class="cta-line-2">
+          <span class="cta-verb">TO SHINE</span>
+          <div class="cs-glass-pill">
+            <span class="cs-glass-title">LET'S TALK</span>
+            <span class="cs-glass-sub">Tư vấn miễn phí 30 phút — cùng SBB vẽ lộ trình rõ ràng cho bạn.</span>
+          </div>
+        </div>
+        <div class="cta-line-3">
+          <span class="cta-tail"><span class="cs-text-white">BEYOND BORDERS?</span></span>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ============ LEAD FORM · thu thập thông tin (bê từ trang chủ) ============ -->
+  <section class="lead-form" id="lead-form">
+    <div class="container">
+      <form class="lf-grid" action="#" method="POST" novalidate>
+        <!-- Hàng 1: Họ tên | Số điện thoại -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-name">HỌ TÊN CỦA BẠN<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-name" name="name" type="text" required autocomplete="name" placeholder="Nguyễn Văn A" />
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-phone">SỐ ĐIỆN THOẠI<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+84 9xx xxx xxx" />
+        </div>
+
+        <!-- Hàng 2: Email | Bạn đang là -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-email">EMAIL CỦA BẠN<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-email" name="email" type="email" required autocomplete="email" placeholder="ban@email.com" />
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-role">BẠN ĐANG LÀ?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-role" name="role">
+              <option value="" disabled selected>Chọn vai trò</option>
+              <option>Sinh viên</option>
+              <option>Người đi làm</option>
+              <option>Phụ huynh</option>
+              <option>Khác</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Hàng 3: Chương trình quan tâm | Mục tiêu -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-program">BẠN QUAN TÂM CHƯƠNG TRÌNH NÀO?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-program" name="program">
+              <option value="" disabled selected>Chọn chương trình</option>
+              <option>Global Internship — J-1 Hoa Kỳ</option>
+              <option>Career Training — Visa 407 (Úc)</option>
+              <option>GRP — Global Readiness</option>
+              <option>Office Tour</option>
+              <option>Chưa rõ — cần tư vấn</option>
+            </select>
+          </div>
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-goal">MỤC TIÊU CỦA BẠN LÀ GÌ?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-goal" name="goal">
+              <option value="" disabled selected>Chọn mục tiêu</option>
+              <option>Du học</option>
+              <option>Thực tập quốc tế</option>
+              <option>Làm việc ở nước ngoài</option>
+              <option>Định cư lâu dài</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Hàng 4: Mốc thời gian | Nút gửi -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-timeline">BẠN DỰ ĐỊNH ĐI KHI NÀO?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-timeline" name="timeline">
+              <option value="" disabled selected>Chọn mốc thời gian</option>
+              <option>Trong 6 tháng tới</option>
+              <option>6 – 12 tháng</option>
+              <option>Hơn 1 năm</option>
+              <option>Chưa xác định</option>
+            </select>
+          </div>
+        </div>
+        <div class="lf-field lf-field--submit">
+          <button class="lf-submit" type="submit">
+            <span class="lf-submit-label">GỬI THÔNG TIN</span>
+            <span class="lf-submit-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M7 7 17 17"/><path d="M17 7v10H7"/></svg>
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
 </PageLayout>
 
 <style>
@@ -100,15 +540,38 @@ const items = [
   .pr-eyebrow { display: inline-block; font-family: var(--font-headline); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: #f2420b; margin-bottom: 1.4rem; }
   .pr-accent { color: #f2420b; }
 
-  .pr-hero { position: relative; overflow: clip; padding-top: clamp(7rem, 9vw, 11rem); padding-bottom: clamp(3rem, 6vw, 6rem); min-height: 78vh; display: flex; align-items: center; }
-  .pr-hero__beam { position: absolute; top: -40px; left: 84%; transform: translateX(-50%); width: 1180px; height: 860px; pointer-events: none; z-index: 0;
+  .pr-hero { position: relative; overflow-x: clip; overflow-y: visible; padding-top: clamp(7rem, 9vw, 11rem); padding-bottom: clamp(3rem, 6vw, 6rem); min-height: 100vh; display: flex; align-items: center; }
+  .pr-hero__beam { position: absolute; top: -40px; left: 16%; transform: translateX(-50%); width: 1180px; height: 860px; pointer-events: none; z-index: 0;
     background: radial-gradient(ellipse 50% 50% at 50% 42%, rgba(255,112,60,0.60) 0%, rgba(248,82,26,0.46) 22%, rgba(242,66,11,0.30) 44%, rgba(242,66,11,0.12) 64%, transparent 84%); filter: blur(76px); }
   .cs-header { font-family: 'Inter', sans-serif; font-weight: 500; line-height: 0.95; letter-spacing: -0.045em; }
   .cs-line { display: flex; align-items: center; gap: 1.5rem; }
-  .cs-line-1 { font-size: clamp(3rem, 10.4vw, 10.5rem); letter-spacing: -0.075em; line-height: 0.95; white-space: nowrap; position: relative; z-index: 10; }
+  /* Cỡ chữ = tiêu đề cascade các trang chính (home/about/hub): clamp(8.5rem,12vw,11rem) */
+  .cs-line-1 { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.95; white-space: nowrap; position: relative; z-index: 10; }
+  /* about-hero-head: position relative để neo pill tuyệt đối trên mobile */
+  .about-hero-head { position: relative; }
+  /* Hàng 2 DESKTOP: giữ nguyên căn phải như cũ (cs-line-2 flex-end) */
+  .about-line-2 { display: flex; justify-content: flex-end; align-items: center; margin-top: 0.5rem; }
+  .about-verb { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.95; white-space: nowrap; position: relative; z-index: 10; }
   .cs-text-white { color: #ffffff; }
 
-  .pr-lead { margin: clamp(1.6rem, 3vw, 2.6rem) 0 0; max-width: 46ch; font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(0.8rem, 0.95vw, 0.92rem); line-height: 1.6; color: rgba(255,255,255,0.66); }
+  /* Glass pill kính tối trong suốt (như section): đặt SÁT chữ L cuối GLOBAL, nhích xuống, ĐỔ BÓNG xuống dưới */
+  .cs-glass-pill {
+    position: relative; z-index: 20; align-self: center; transform: translate(-1.8rem, 2.2rem);
+    display: inline-flex; flex-direction: column; flex-shrink: 0; gap: 0.5rem;
+    width: 16rem; min-height: 6.5rem; justify-content: center; text-align: left;
+    padding: 1rem 1.2rem; border-radius: 20px;
+    background: rgba(255, 255, 255, 0.045);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 34px 50px -12px rgba(0, 0, 0, 0.80),
+      0 16px 28px -10px rgba(0, 0, 0, 0.58),
+      0 0 40px rgba(242, 66, 11, 0.12),
+      inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  }
+  .cs-glass-title { font-family: var(--font-headline); font-size: clamp(1.1rem, 1.4vw, 1.4rem); font-weight: 600; color: #ffffff; line-height: 1.1; letter-spacing: normal; white-space: nowrap; }
+  .cs-glass-sub { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 400; color: var(--ink-soft); line-height: 1.45; letter-spacing: normal; white-space: normal; margin: 0; }
+
   .pr-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: clamp(1.6rem, 3vw, 2.4rem); }
   .pr-actions--center { justify-content: center; }
   .pr-btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-headline); font-weight: 700; font-size: 0.9rem; text-decoration: none; border-radius: 999px; padding: 0.85rem 1.7rem; transition: transform .25s ease, background .25s ease, box-shadow .25s ease, border-color .25s ease, color .25s ease; }
@@ -182,13 +645,880 @@ const items = [
   .pr-cta__title { font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.7rem, 3vw, 2.4rem); color: #fff; margin: 0 0 0.8rem; }
   .pr-cta__sub { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.05rem; line-height: 1.6; color: rgba(255,255,255,0.92); margin: 0 auto 1.8rem; max-width: 52ch; }
 
+  /* ===== SECTION LOGO ĐỐI TÁC (marquee) — bê NGUYÊN giá trị từ home (bản dark) ===== */
+  .partner-marquee-section { min-height: auto; padding-top: clamp(2rem, 4vw, 4rem); padding-bottom: var(--sec-pad); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4rem; position: relative; z-index: 1; }
+  .partner-text-block { text-align: center; max-width: 1200px; width: 100%; margin-inline: auto; padding-inline: var(--space-4); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .partner-headline { font-family: var(--font-headline); font-size: var(--text-xl); font-weight: var(--weight-light); letter-spacing: 0.02em; line-height: 1.25; color: #ffffff; margin-bottom: 2.5rem; text-transform: uppercase; text-align: center; }
+  .headline-dimmed { color: rgba(255, 255, 255, 0.80); white-space: nowrap; }
+  .partner-subtext { font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: rgba(255, 255, 255, 0.80); line-height: 1.4; letter-spacing: -0.01em; text-align: center; }
+  .marquee-wrapper { width: 100%; overflow: hidden; position: relative; display: flex; flex-direction: column; gap: 4.5rem; }
+  .marquee-wrapper::before, .marquee-wrapper::after { content: ""; position: absolute; top: 0; width: 15%; height: 100%; z-index: 2; pointer-events: none; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .marquee-wrapper::before { left: 0; -webkit-mask-image: linear-gradient(to right, black 0%, transparent 100%); mask-image: linear-gradient(to right, black 0%, transparent 100%); }
+  .marquee-wrapper::after { right: 0; -webkit-mask-image: linear-gradient(to left, black 0%, transparent 100%); mask-image: linear-gradient(to left, black 0%, transparent 100%); }
+  .marquee-track { display: flex; width: max-content; animation: marqueeScroll 45s linear infinite; }
+  .marquee-track--reverse { animation-direction: reverse; }
+  .marquee-content { display: flex; align-items: center; gap: 7rem; padding-inline: 3.5rem; }
+  .partner-logo { display: flex; align-items: center; justify-content: center; user-select: none; }
+  .partner-logo img { height: 85px; width: auto; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; transform: translateZ(0); backface-visibility: hidden; will-change: transform, filter; filter: brightness(0) invert(1) opacity(0.6); transition: all 0.3s ease; }
+  .partner-logo img:hover { filter: brightness(0) invert(1) opacity(1); transform: scale(1.05) translateZ(0); }
+  @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
   @media (max-width: 980px) {
+    /* Hero sát header: bỏ align-items:center (không kéo giữa 100vh), thu padding */
+    .pr-hero { padding-top: clamp(12rem, 24vw, 14rem) !important; padding-bottom: clamp(2rem, 4vw, 3rem) !important; align-items: flex-start !important; min-height: auto !important; }
     .cs-line { flex-wrap: wrap; gap: 0.5rem; }
-    .cs-line-1 { font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; letter-spacing: -0.097em !important; line-height: 0.92 !important; white-space: normal; }
+    .cs-line-1 { font-size: clamp(3rem, 13vw, 5rem); white-space: normal; }
+    /* Hero pr-hero: GLOBAL + INTERNSHIP = 72px (scoped !important thắng global ≤600px) */
+    .pr-hero .cs-line-1 { font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; letter-spacing: -0.097em !important; line-height: 0.9 !important; }
+    .pr-hero .about-verb { font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; letter-spacing: -0.097em !important; line-height: 0.9 !important; }
+    /* about-line-2: dọc, căn trái */
+    .about-line-2 { flex-direction: column; align-items: flex-start; gap: 0; margin-top: 0.05rem; }
+    /* pill NHIỀU ĐIỂM ĐẾN: absolute neo PHẢI, đỉnh pill = đỉnh chữ GLOBAL */
+    .about-hero-head .cs-glass-pill {
+      position: absolute !important; right: 0 !important; left: auto !important;
+      top: -3.5rem !important; transform: none !important; margin: 0 !important; align-self: auto !important;
+      width: 42vw !important; min-width: 158px !important; max-width: 196px !important;
+      min-height: 0 !important; padding: 0.68rem 0.85rem !important; gap: 0.25rem !important;
+    }
+    .cs-glass-title { font-size: 0.92rem !important; font-weight: 700 !important; color: #ffffff !important; white-space: nowrap !important; line-height: 1.1 !important; letter-spacing: 0.01em !important; }
+    .cs-glass-sub { font-size: 0.68rem !important; line-height: 1.32 !important; letter-spacing: normal !important; color: rgba(255,255,255,0.5) !important; max-width: 100% !important; }
     .pr-split { grid-template-columns: 1fr; }
-    .pr-grid--3 { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 600px) {
     .pr-grid--2, .pr-grid--3 { grid-template-columns: 1fr; }
   }
+
+  /* ===== SECTION ĐIỂM ĐẾN: card BÊ NGUYÊN từ trang News (.blog-card) ===== */
+  .dest-sec { padding-block: clamp(2.5rem, 5vw, 5rem) var(--sec-pad); }
+  /* Tiêu đề DESTINATIONS: fill hết chiều rộng container (căn mép với hero), calc vw trừ 4rem padding */
+  .dest-head { margin-bottom: clamp(2.6rem, 5vw, 4.5rem); }
+  .dest-head .cs-line-1 { font-size: clamp(2rem, calc(14.5vw - 0.72rem), 16.7rem) !important; white-space: nowrap !important; }
+
+  .blog-grid {
+    display: grid; gap: clamp(1.5rem, 2vw, 2.4rem);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* TỐI mặc định, CHỈ SÁNG KHI HOVER — bloom cam từ góc dưới-phải. */
+  .blog-card {
+    position: relative; display: flex; flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 28px;
+    background: transparent;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    padding: clamp(1.9rem, 2.6vw, 2.9rem);
+    text-decoration: none; overflow: hidden;
+    transition: border-color .4s ease, background .4s ease, box-shadow .4s ease, transform .4s ease;
+  }
+  .blog-card:hover {
+    background:
+      radial-gradient(180% 150% at 100% 100%,
+        rgba(255, 126, 72, 0.90) 0%,
+        rgba(255, 100, 30, 0.80) 25%,
+        rgba(242, 66, 11, 0.60) 50%,
+        rgba(20, 10, 5, 0.90) 80%,
+        rgba(10, 5, 2, 0.98) 100%);
+    border-color: #f2420b;
+    box-shadow: 0 26px 64px -24px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px);
+  }
+  .blog-card__tag {
+    display: inline-block; align-self: flex-start;
+    font-family: var(--font-headline); font-weight: 600; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b;
+    border: 1px solid rgba(242, 66, 11, 0.4); border-radius: 999px; padding: 0.28rem 0.75rem;
+    margin-bottom: 0.95rem;
+  }
+  .blog-card__title {
+    font-family: var(--font-headline); font-weight: 700;
+    font-size: clamp(1.25rem, 1.6vw, 1.7rem); line-height: 1.34;
+    color: #fff; text-transform: uppercase; letter-spacing: -0.01em;
+    margin: 0 0 clamp(1.5rem, 2.2vw, 2rem);
+  }
+  .blog-card__media {
+    position: relative; border-radius: 18px; overflow: hidden;
+    aspect-ratio: 16 / 11; background: linear-gradient(160deg, #2a1109, #160a05);
+    margin-bottom: clamp(1.6rem, 2.2vw, 2.2rem);
+  }
+  .blog-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .blog-card__cta {
+    margin-top: auto; display: flex; align-items: center; justify-content: center;
+    padding: 0.85rem 1.4rem; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18); color: rgba(255, 255, 255, 0.85);
+    transition: background .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .blog-card:hover .blog-card__cta {
+    border-color: rgba(255, 255, 255, 0.34); background: rgba(255, 255, 255, 0.06); color: #fff;
+  }
+
+  /* Biến thể "đang cập nhật": card phẳng, mờ nhẹ, không bloom, không bấm */
+  .blog-card--soon { cursor: default; opacity: 0.62; }
+  .blog-card--soon:hover {
+    background: transparent; border-color: rgba(255, 255, 255, 0.10);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); transform: none;
+  }
+  .blog-card__tag--soon { color: rgba(255, 255, 255, 0.6); border-color: rgba(255, 255, 255, 0.22); }
+  .blog-card__cta--soon {
+    font-family: var(--font-headline); font-weight: 600; font-size: 0.72rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.55);
+  }
+
+  @media (max-width: 980px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 680px) { .blog-grid { grid-template-columns: 1fr; } }
+
+  /* ===== CASE STUDIES — bê từ trang chủ (bản DARK FIRE; card lửa đã dark sẵn ở base) ===== */
+  .case-studies-section { position: relative; background: transparent; padding: var(--sec-pad) 0; z-index: 10; }
+  /* Header line tweaks — SCOPE trong section để KHÔNG đụng hero (hero cũng dùng .cs-line-2 / .cs-glass-pill) */
+  .case-studies-section .cs-header { margin-bottom: clamp(3rem, 5vw, 5rem); }
+  .case-studies-section .cs-line-2, .case-studies-section .cs-line-3 {
+    font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; justify-content: flex-start;
+  }
+  .case-studies-section .cs-glass-pill { width: 210px; min-height: 7.25rem; align-self: auto; margin-left: -4rem; transform: translateY(2.6rem); }
+  .cs-header-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-top: 1.25rem; }
+  .cs-right-block { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; width: max-content; position: relative; z-index: 1; }
+  /* Tabs (dark) */
+  .cs-tabs { display: flex; gap: 1rem; margin: 0; }
+  .cs-tab {
+    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.72);
+    padding: 1rem 2.5rem; border-radius: 100px; font-size: 1rem; font-weight: 400; letter-spacing: 1px;
+    cursor: pointer; transition: all 0.3s ease;
+  }
+  .cs-tab:hover { color: #f2420b; border-color: rgba(242, 66, 11, 0.45); }
+  .cs-tab.active { background: #f2420b; border-color: transparent; color: #fff; box-shadow: 0 6px 18px rgba(242, 66, 11, 0.30); }
+  /* Carousel */
+  .cs-cards-wrapper { position: relative; margin-top: clamp(1.25rem, 2.4vw, 2.25rem); width: 100%; min-height: 600px; overflow: hidden; border-radius: 48px; background: transparent; box-shadow: 0 0 55px -12px rgba(242, 66, 11, 0.10); touch-action: pan-y; }
+  .cs-cards-track { display: flex; width: 100%; cursor: grab; user-select: none; transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; }
+  .cs-cards-track.is-dragging { transition: none; cursor: grabbing; }
+  .cs-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 2.7rem; height: 2.7rem; align-items: center; justify-content: center; padding-bottom: 0.15rem; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.5); background: rgba(242, 66, 11, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #fff; font-size: 1.5rem; line-height: 1; cursor: pointer; display: none; opacity: 0; transition: background .2s ease, opacity .25s ease, transform .2s ease; }
+  .cs-nav:disabled { opacity: 0; pointer-events: none; }
+  .cs-card {
+    flex: 0 0 100%; width: 100%;
+    background:
+      radial-gradient(150% 120% at 50% 100%,
+        rgba(255, 126, 72, 0.95) 0%,
+        rgba(255, 100, 30, 0.90) 25%,
+        rgba(242, 66, 11, 0.75) 50%,
+        rgba(20, 10, 5, 0.90) 80%,
+        rgba(10, 5, 2, 0.95) 100%);
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    border-radius: 48px; border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10), 0 26px 64px -24px rgba(0, 0, 0, 0.5);
+    display: flex; padding: 3.4rem; gap: 3rem; overflow: hidden; position: relative;
+  }
+  .cs-card::after {
+    content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+    background-size: 130px 130px; opacity: 0.3; mix-blend-mode: overlay;
+  }
+  .cs-card-left { flex: 0 0 46%; display: flex; flex-direction: column; gap: 0; position: relative; z-index: 1; }
+  .cs-card-title { font-size: 4.8rem; font-weight: 500; color: #fff; line-height: 0.95; letter-spacing: -0.03em; font-family: 'Inter', sans-serif; }
+  .cs-card-role { font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.9); margin-top: 0.7rem; margin-bottom: 0.2rem; }
+  .cs-content-block { margin-top: auto; display: flex; flex-direction: column; gap: 1.15rem; }
+  .cs-content-block + .cs-content-block { padding-top: 1rem; }
+  .cs-block-title { font-size: 1.65rem; color: #fff; font-weight: 500; letter-spacing: 0.05em; }
+  .cs-block-desc { font-size: 1.05rem; color: rgba(255, 255, 255, 0.7); line-height: 1.5; font-weight: 300; }
+  .cs-card-right { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; position: relative; z-index: 1; }
+  .cs-photo { flex-grow: 0; height: clamp(400px, 62vh, 680px); min-height: 0; margin-bottom: 1.8rem; border-radius: 20px; overflow: hidden; position: relative; background-color: rgba(90, 33, 8, 0.25); border: 1px solid rgba(255, 255, 255, 0.2); }
+  .cs-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
+  #cs-card-3 .cs-photo img { object-position: center 40%; }
+  .cs-photo::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to top, rgba(90, 33, 8, 0.40) 0%, transparent 42%), linear-gradient(120deg, rgba(242, 66, 11, 0.10), transparent 55%); }
+  .cs-photo--empty::after { content: "Ảnh học viên — đang cập nhật"; position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: rgba(255, 255, 255, 0.75); font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .cs-stats-row { display: flex; justify-content: space-between; padding-top: 2.2rem; }
+  .cs-stat-item { display: flex; flex-direction: column; gap: 0.5rem; }
+  .cs-stat-value { font-size: 4rem; font-weight: 500; color: #fff; letter-spacing: -0.02em; line-height: 1; font-family: 'Inter', sans-serif; }
+  .cs-stat-label { font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; }
+  .cs-stats-row--meta .cs-stat-value { font-size: 1.6rem; font-weight: 600; text-transform: none; letter-spacing: -0.01em; }
+  @media (max-width: 1200px) {
+    .cs-card { flex-direction: column; padding: 3rem; gap: 3rem; }
+    .cs-card-left { flex: none; width: 100%; }
+    .cs-card-title { font-size: 4rem; }
+    .cs-header-bottom { flex-direction: column-reverse; align-items: flex-start; gap: 2rem; margin-top: 2rem; }
+  }
+  @media (max-width: 768px) {
+    .cs-line { flex-wrap: wrap; }
+    .cs-line-2, .cs-line-3 { justify-content: flex-start; }
+    .cs-glass-pill { transform: translateY(0); margin-left: 0; margin-top: 1rem; }
+    /* mobile: THIS IS WHAT ↔ REAL GROWTH sát lại (margin-top nhỏ); REAL GROWTH ↔ tabs CÁCH thêm */
+    .cs-header-bottom { gap: 2.2rem !important; margin-top: 0.35rem !important; }
+    /* Moments: LIFE BEYOND ↔ BORDERS sát lại Y HỆT (mvh-bottom thay cho cs-header-bottom) */
+    #moments .mvh-bottom { margin-top: 0.35rem !important; align-items: flex-start !important; }
+    /* CÁCH XA section trên = ĐÚNG nhịp Programs→Case Studies (≈142px tới pill).
+       Tiêu đề 1 dòng -> pill nằm cao (trên dòng 1) -> cần ~12.5rem để khoảng tới pill khớp ~142px. */
+    #moments { padding-top: 12.5rem !important; }
+    /* Cụm tiêu đề LIFE BEYOND BORDERS cách video coverflow ở dưới xa thêm 1 chút */
+    #moments .mvh { margin-bottom: 6rem !important; }
+
+    /* PILL "REAL RESULTS" lên TRÊN tiêu đề + HẠ SÁT đỉnh chữ THIS IS WHAT (áp cho cả Moments) */
+    #case-studies .cs-line-1,
+    #moments .cs-line-1,
+    #testimonials .cs-line-1,
+    #get-started .cs-line-1 {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;  /* THIS IS WHAT: RẤT TO, tràn 2 mép */
+      line-height: 0.9 !important;
+      letter-spacing: -0.097em !important;                   /* siết chữ thêm để chữ to vẫn vừa 1 dòng */
+      white-space: nowrap !important;                        /* ép 1 dòng */
+    }
+    /* Pill lên TRÊN + ĐÈ đỉnh chữ + dịch phải (áp cho cả Moments REAL MOMENTS) */
+    #case-studies .cs-glass-pill,
+    #moments .cs-glass-pill,
+    #get-started .cs-glass-pill {
+      order: -1 !important;
+      margin: 0 0 -1.3rem 1.6rem !important;   /* đè nhẹ + DỊCH PHẢI vào trong 1 chút */
+      width: 34vw !important;                   /* DÀI tới qua chữ I của IS */
+      min-width: 138px !important;
+      max-width: 168px !important;
+      padding: 0.7rem 0.95rem !important;        /* đệm thoáng kiểu Omni */
+      gap: 0.3rem !important;
+      position: relative; z-index: 5;
+    }
+    /* Chữ trong pill CÂN ĐỐI như Omni: title TO + đậm + trắng (1 dòng), sub xám đọc được */
+    #case-studies .cs-glass-title,
+    #moments .cs-glass-title,
+    #testimonials .cs-glass-title,
+    #get-started .cs-glass-title {
+      font-size: 0.92rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.015em !important;
+      color: #ffffff !important;
+      white-space: normal !important;
+      line-height: 1.05 !important;
+    }
+    #case-studies .cs-glass-sub,
+    #moments .cs-glass-sub,
+    #testimonials .cs-glass-sub,
+    #get-started .cs-glass-sub {
+      font-size: 0.7rem !important;
+      line-height: 1.35 !important;
+      letter-spacing: normal !important;
+      color: rgba(255, 255, 255, 0.5) !important;
+      max-width: 100% !important;
+    }
+    /* Moments: pill REAL MOMENTS DÀI hơn -> title KHÔNG xuống dòng */
+    #moments .cs-glass-title { white-space: nowrap !important; }
+    /* Tiêu đề 1 DÒNG "LIFE BEYOND" + BORDERS (dòng 2). Pill NEO PHẢI trên chữ "OND",
+       NÂNG CAO hơn (mép dưới chỉ chạm/đè nhẹ đỉnh chữ). */
+    #moments .cs-line-1 { position: relative !important; }
+    #moments .cs-glass-pill {
+      position: absolute !important;
+      margin: 0 !important;
+      left: auto !important;
+      right: 0.75rem !important;      /* phủ OND của BEYOND, lùi trái 1 chút khỏi mép phải */
+      bottom: 12.5vw !important;      /* NÂNG CAO 1 chút so với trước (10.5vw) */
+      width: -moz-fit-content !important;
+      width: fit-content !important;
+      min-width: 150px !important;
+      max-width: 225px !important;
+      z-index: 6 !important;
+    }
+    /* Dòng 2 (REAL GROWTH/LOOKS LIKE · BORDERS): TO nhưng nhỏ hơn dòng 1 */
+    #case-studies .cs-line-2,
+    #case-studies .cs-line-3,
+    #moments .cs-line-2,
+    #testimonials .cs-line-2 {
+      font-size: clamp(2.4rem, 11.4vw, 3.2rem) !important;
+      line-height: 0.96 !important;
+      letter-spacing: -0.045em !important;
+    }
+    /* không cho dòng tiêu đề tràn mép -> tự xuống dòng thay vì bị cắt */
+    #case-studies .cs-line,
+    #moments .cs-line,
+    #testimonials .cs-line,
+    #get-started .cs-line { max-width: 100% !important; }
+
+    /* ===== TESTIMONIALS mobile: tiêu đề HOÀNH TRÁNG lấp đầy bề ngang + pill căn giữa TO ===== */
+    /* Header gần full-bleed (KHÔNG đụng card tm-stage) */
+    #testimonials .cs-header { margin-left: -1.1rem !important; margin-right: -1.1rem !important; }
+    /* Tiêu đề DÙNG ĐÚNG cỡ chữ + letter-spacing của Case Studies (cs-line-1 72px / cs-line-2 49px)
+       qua rule CHUNG -> KHÔNG override cỡ riêng (đồng bộ mọi section: CS = chuẩn). Cỡ 49px giúp
+       "SAY ABOUT US" gọn 1 dòng (không tràn chữ US). */
+    #testimonials .cs-line-2 { white-space: nowrap !important; }
+    /* Pill "REAL VOICES" CĂN GIỮA đỉnh "WHAT THEY" (khác CS trái & Moments phải) + TO hơn,
+       đè đỉnh chữ + đổ bóng xuống nhờ box-shadow sẵn có của .cs-glass-pill. */
+    #testimonials .cs-glass-pill {
+      order: -1 !important;
+      align-self: center !important;
+      margin: 0 auto -0.75rem !important;
+      width: -moz-fit-content !important;
+      width: fit-content !important;
+      min-width: 182px !important;
+      max-width: 264px !important;
+      min-height: 0 !important;
+      padding: 0.95rem 1.2rem !important;
+      gap: 0.35rem !important;
+      transform: none !important;
+      position: relative !important;
+      z-index: 5 !important;
+    }
+    #testimonials .cs-glass-title { font-size: 1.1rem !important; }
+    #testimonials .cs-glass-sub { font-size: 0.8rem !important; }
+    /* Văn bản phụ (tm-desc): full bề ngang + căn ĐỀU 2 mép (justify), hết wrap hẹp ở giữa */
+    #testimonials .tm-right { width: 100% !important; max-width: 100% !important; }
+    #testimonials .tm-desc { max-width: none !important; text-align: justify !important; }
+    /* Ảnh đối tác: khôi phục khung DỌC 4/5. Desktop để flex:0 0 33% -> ở layout cột mobile nó set
+       CHIỀU CAO = 33% card (khung DẸT ngang 366x267) -> chân dung bị cắt cụt mặt (Career).
+       flex:0 0 auto cho aspect-ratio điều khiển -> chân dung đứng, đủ mặt. */
+    #testimonials .tm-media { flex: 0 0 auto !important; width: 100% !important; aspect-ratio: 4 / 5 !important; }
+    #testimonials .tm-media img { object-position: center 20% !important; }
+    /* 3 stat chip: hạ cỡ num để 3 cụm KHÔNG tràn/cắt chữ (IKI tràn 71px, Career 132px ở 30px) + dàn đều cân đối */
+    #testimonials .tm-stats { gap: 0.5rem !important; }
+    #testimonials .tm-stat-num { font-size: 1.12rem !important; }
+    #testimonials .tm-stat-label { font-size: 0.7rem !important; margin-top: 0.4rem !important; }
+    /* TABS ABE/IKI/CAREER = 1 HÀNG như Case Studies (.cs-tabs): không xuống dòng, cuộn ngang nếu cần */
+    #testimonials .tm-switch {
+      flex-wrap: nowrap !important; justify-content: center !important;
+      overflow-x: auto !important; -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: none !important; gap: 0.6rem !important;
+    }
+    #testimonials .tm-switch::-webkit-scrollbar { display: none !important; }
+    #testimonials .tm-tab {
+      flex: 0 0 auto !important; white-space: nowrap !important;
+      padding: 0.7rem 1.4rem !important; font-size: 0.82rem !important;
+    }
+    /* Bỏ mũi tên 2 bên trên mobile -> vuốt + tab điều khiển (giống Case Studies) */
+    #testimonials .tm-nav { display: none !important; }
+
+    /* ===== CTA "READY TO SHINE BEYOND BORDERS?" — tiêu đề ĐỒNG BỘ các section trên ===== */
+    /* Header gần full-bleed như các section trên */
+    #get-started .cta-header { margin-left: -1.1rem !important; margin-right: -1.1rem !important; }
+    /* SHINE = động từ LỚN = cs-line-1 size (72px, -0.097em); BEYOND/BORDERS? = đuôi = cs-line-2 size (49px, -0.045em) */
+    #get-started .cta-verb {
+      font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;
+      letter-spacing: -0.097em !important;
+      line-height: 0.9 !important;
+      margin-left: 0 !important;
+    }
+    #get-started .cta-tail {
+      font-size: clamp(2rem, 10vw, 2.9rem) !important;  /* nhỏ hơn line-2 chuẩn 1 chút để "BEYOND BORDERS?" (15 ký tự) vừa 1 dòng */
+      letter-spacing: -0.045em !important;
+      line-height: 0.96 !important;
+      margin-right: 0 !important;
+      white-space: nowrap !important;
+    }
+    /* Dòng "TO SHINE": cta-line-2 làm MỐC cho card tuyệt đối (card KHÔNG chiếm chỗ -> READY sát TO SHINE) */
+    #get-started .cta-line-2 {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+      gap: 0 !important;
+      margin-top: 0.35rem !important;
+      position: relative !important;
+    }
+    #get-started .cta-line-3 { margin-top: 0.35rem !important; }
+    /* Pill LET'S TALK: TUYỆT ĐỐI (không đẩy TO SHINE xuống) -> READY sát TO SHINE; neo MÉP PHẢI, đè đỉnh chữ SHINE */
+    #get-started .cs-glass-pill {
+      transform: none !important;
+      position: absolute !important;
+      right: 0 !important;
+      left: auto !important;
+      bottom: 2.6rem !important;
+      margin: 0 !important;
+    }
+
+    /* XÓA ĐƯỜNG CHIA Programs ↔ Case Studies: tắt quầng trang trí (dùng #services để THẮNG override dark ở dưới) */
+    #services::before,
+    #services::after { display: none !important; }
+    /* Mọi container sát 2 mép trên mobile (hero wrap + các section) */
+    .pr-wrap, .pr-hero__wrap { width: calc(100% - 1rem) !important; }
+    #moments .mv-container { padding: 0 0.5rem !important; }
+
+    /* FAQ mobile: tiêu đề "FAQ" = ĐÚNG cỡ tiêu đề lớn các section trên (cs-line-1 = 72px),
+       không để 136px khổng lồ (mặc định clamp 8.5rem floor). */
+    #faq .faq-mega {
+      font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;
+      line-height: 0.9 !important;
+      letter-spacing: -0.097em !important;
+    }
+    /* Card hỏi (faq-q) THẤP hơn chút: giảm đệm dọc 2.9rem -> 2.2rem (đang hơi cao) */
+    #faq .faq-q {
+      padding-top: 2.2rem !important;
+      padding-bottom: 2.2rem !important;
+    }
+
+    /* TAB = 3 chip bằng nhau, vừa hàng ngang (cân đối) */
+    .cs-tabs {
+      flex-wrap: nowrap !important;
+      gap: 0.4rem !important;
+      width: 100% !important;
+    }
+    .cs-tab {
+      flex: 1 !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      padding: 0.65rem 0.3rem !important;
+      font-size: 0.72rem !important;
+      min-width: 0 !important;
+      letter-spacing: 0.06em !important;
+    }
+
+    /* CARD theo bố cục Omni: 1 cột — TÊN to · 2 khối · ẢNH (chỗ biểu đồ) · 3 SỐ ngang ở ĐÁY */
+    /* CÁCH 3 tab (card chip top) ↔ card học viên RA XA */
+    .cs-cards-wrapper { min-height: 0 !important; border-radius: 26px !important; margin-top: 1.4rem !important; }
+    .cs-card { padding: 1.6rem !important; gap: 1.25rem !important; border-radius: 26px !important; }
+    #case-studies .cs-card-title { font-size: clamp(2.9rem, 14vw, 4rem) !important; }
+    .cs-card-role { font-size: 0.72rem !important; margin-top: 0.5rem !important; }
+    .cs-card-left { gap: 0.9rem !important; }
+    .cs-content-block { gap: 0.45rem !important; }
+    .cs-content-block + .cs-content-block { padding-top: 0.8rem !important; }
+    .cs-block-title { font-size: 1.02rem !important; }
+    .cs-block-desc { font-size: 0.83rem !important; line-height: 1.45 !important; }
+    /* Ảnh học viên đứng ĐÚNG VỊ TRÍ biểu đồ của Omni (giữ ảnh, không dùng chart) */
+    .cs-card-right { gap: 1.1rem !important; }
+    .cs-photo { height: clamp(220px, 35vh, 320px) !important; margin-bottom: 0 !important; border-radius: 16px !important; }
+    /* 3 SỐ NẰM NGANG, to ở ĐÁY, CĂN GIỮA trang */
+    .cs-stats-row { flex-direction: row !important; justify-content: center !important; gap: 1.6rem !important; padding-top: 1.3rem !important; }
+    .cs-stat-item { flex: 0 1 auto !important; min-width: 0 !important; gap: 0.25rem !important; text-align: center !important; align-items: center !important; }
+    .cs-stats-row--meta .cs-stat-value { font-size: clamp(1.1rem, 4.8vw, 1.45rem) !important; font-weight: 600 !important; line-height: 1.05 !important; }
+    .cs-stat-label { font-size: 0.55rem !important; letter-spacing: 0.03em !important; line-height: 1.3 !important; }
+  }
+
+  /* ===== FAQ — bê từ trang chủ, bản DARK FIRE (card lửa tối, KHÔNG nền kem/card trắng) ===== */
+  .faq-section { position: relative; background: transparent; padding: var(--sec-pad) 0; overflow: visible; }
+  .faq-container { position: relative; z-index: 1; }
+  /* Tiêu đề section: Inter 500, cỡ LỚN cascade, TRẮNG, tiếng Anh — như mọi tiêu đề section */
+  .faq-mega {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(8.5rem, 12vw, 11rem); line-height: 0.95;
+    letter-spacing: -0.085em; text-transform: uppercase; color: #ffffff;
+    margin-block: 0 clamp(3.5rem, 6.5vw, 6.25rem);
+  }
+  .faq-list { display: flex; flex-direction: column; gap: clamp(1.1rem, 1.6vw, 1.6rem); }
+  .faq-item {
+    position: relative; border: 1px solid rgba(242, 66, 11, 0.35); border-radius: 40px;
+    background:
+      radial-gradient(150% 150% at 0% 100%,
+        rgba(255, 112, 60, 0.80) 0%,
+        rgba(248, 82, 26, 0.70) 25%,
+        rgba(242, 66, 11, 0.50) 50%,
+        rgba(20, 10, 5, 0.85) 80%,
+        rgba(10, 5, 2, 0.95) 100%);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+  .faq-item:hover, .faq-item[open] {
+    border-color: rgba(242, 66, 11, 0.65);
+    background:
+      radial-gradient(150% 150% at 0% 100%,
+        rgba(255, 126, 72, 0.90) 0%,
+        rgba(248, 92, 32, 0.80) 25%,
+        rgba(242, 66, 11, 0.60) 50%,
+        rgba(20, 10, 5, 0.85) 80%,
+        rgba(10, 5, 2, 0.95) 100%);
+  }
+  .faq-q {
+    display: flex; align-items: center; justify-content: space-between; gap: clamp(1.5rem, 3vw, 3rem);
+    list-style: none; cursor: pointer;
+    padding: clamp(2.9rem, 4.6vw, 4.25rem) clamp(2rem, 3.2vw, 3rem);
+    font-family: var(--font-headline); font-weight: 600;
+    font-size: clamp(1.15rem, 1.6vw, 1.7rem); text-transform: uppercase;
+    letter-spacing: 0.01em; line-height: 1.2; color: #ffffff;
+    transition: color 0.25s ease;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-icon { position: relative; flex: 0 0 42px; width: 42px; height: 42px; }
+  .faq-icon::before, .faq-icon::after {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); border-radius: 2px; background: rgba(255, 120, 50, 0.8);
+  }
+  .faq-icon::before { width: 24px; height: 1px; }
+  .faq-icon::after  { width: 1px; height: 24px; transition: transform 0.3s ease; }
+  .faq-item[open] .faq-icon::after { transform: translate(-50%, -50%) scaleY(0); }
+  .faq-a {
+    padding: 0 clamp(2.5rem, 7vw, 7rem) clamp(2.2rem, 3.2vw, 2.9rem) clamp(2rem, 3.2vw, 3rem);
+    max-width: none; animation: faqReveal 0.4s ease;
+  }
+  .faq-a p { margin: 0 0 1.05rem; max-width: none; color: rgba(255, 255, 255, 0.80); line-height: 1.75; font-size: clamp(1.02rem, 1.2vw, 1.15rem); }
+  .faq-a p:last-child { margin-bottom: 0; }
+  .faq-a strong { color: #ffffff; font-weight: 600; }
+  .faq-stats { list-style: none; margin: 0.2rem 0 1rem; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; }
+  .faq-stats li { position: relative; padding-left: 1.5rem; color: rgba(255, 255, 255, 0.80); line-height: 1.55; }
+  .faq-stats li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .faq-stats b { color: #ff7a52; font-weight: 700; }
+  @keyframes faqReveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 980px) { .faq-q { font-size: 0.98rem; padding: 2rem 1.5rem; } }
+
+  /* ============================================
+     FINAL CTA + LEAD FORM — bê nguyên từ trang chủ (base + DARK OVERRIDE)
+     ============================================ */
+  .cta-final {
+    position: relative;
+    margin-top: -1px;
+    background:
+      radial-gradient(60% 780px at 41% -250px, rgba(242, 66, 11, 0.12) 0%, rgba(242, 66, 11, 0.07) 32%, rgba(242, 66, 11, 0.04) 60%, rgba(242, 66, 11, 0.02) 78%, transparent 92%),
+      #D9D1CA;
+    padding: var(--sec-pad) 0 clamp(2rem, 4vw, 3.5rem);
+    overflow: hidden;
+    text-align: left;
+  }
+  .cta-final::before {
+    content: ''; position: absolute; left: 28%; top: 56%;
+    transform: translate(-50%, -50%);
+    width: 95%; height: 120%; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse 50% 44% at 40% 60%, rgba(242, 66, 11, 0.06) 0%, transparent 62%);
+  }
+  .cta-final-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; }
+  .cta-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  @media (min-width: 992px) {
+    .cta-final .cs-header {
+      width: calc(100vw - var(--sbw, 0px) - 4rem);
+      max-width: 120rem;
+      margin-left: calc(50% - (50vw - var(--sbw, 0px) / 2) + 2rem);
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+  }
+  /* Cascade trái: READY / TO SHINE (+pill) / BEYOND BORDERS? — đồng bộ home/about */
+  .cta-line-2 { display: flex; align-items: flex-start; gap: 1.5rem; margin-top: 0.5rem; }
+  .cta-verb {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9;
+    color: #f2420b; white-space: nowrap;
+  }
+  .cta-line-3 { margin-top: 0.5rem; }
+  .cta-tail {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; line-height: 0.9;
+  }
+  .cta-tail span { display: block; }
+  .cta-final .cs-glass-pill { transform: translateY(2.6rem); width: 210px; }
+
+  .lead-form {
+    position: relative;
+    background: #D9D1CA;
+    padding: clamp(2rem, 4vw, 4rem) 0 var(--sec-pad);
+    overflow: visible;
+  }
+  .lead-form::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background: radial-gradient(58% 42% at 32% 30%, rgba(242, 66, 11, 0.04) 0%, transparent 60%);
+  }
+  .lead-form .container { position: relative; z-index: 1; }
+  .lf-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    column-gap: clamp(2.5rem, 6vw, 7rem);
+    row-gap: clamp(2.2rem, 4vw, 3.4rem);
+  }
+  .lf-field { display: flex; flex-direction: column; min-width: 0; }
+  .lf-label {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1.05rem, 1.7vw, 1.65rem); line-height: 1.15;
+    letter-spacing: -0.01em; text-transform: uppercase;
+    color: #1a1a1a; margin: 0 0 clamp(1rem, 1.8vw, 1.7rem);
+  }
+  .lf-req { color: var(--accent); margin-left: 0.12em; }
+  .lf-input {
+    width: 100%; box-sizing: border-box;
+    background: transparent; border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+    color: #1a1a1a; font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1rem, 1.25vw, 1.15rem);
+    padding: 0.55rem 0 0.95rem; line-height: 1.4;
+    transition: border-color 0.25s ease;
+  }
+  .lf-input::placeholder { color: #A7A7A7; }
+  .lf-input:focus { outline: none; border-bottom-color: var(--accent); }
+  .lf-select-wrap { position: relative; }
+  .lf-select-wrap::after {
+    content: ''; position: absolute; right: 0.25rem; top: 42%;
+    width: 0.62rem; height: 0.62rem; pointer-events: none;
+    border-right: 1.5px solid rgba(0, 0, 0, 0.45);
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.45);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .lf-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    padding-right: 2rem; cursor: pointer; border-radius: 0;
+  }
+  .lf-select option { color: #16100c; }
+  .lf-select-wrap.is-enhanced > .lf-select { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+  .lf-select-wrap.is-enhanced::after { display: none; }
+  .lf-dd { position: relative; }
+  .lf-dd-trigger {
+    width: 100%; box-sizing: border-box;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: transparent; border: none; border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+    color: #1a1a1a; font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.4;
+    padding: 0.55rem 0 0.95rem; cursor: pointer; text-align: left;
+    transition: border-color 0.25s ease;
+  }
+  .lf-dd-trigger:focus-visible, .lf-dd.is-open .lf-dd-trigger { outline: none; border-bottom-color: var(--accent); }
+  .lf-dd-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lf-dd-value.is-placeholder { color: #A7A7A7; }
+  .lf-dd-caret { display: flex; flex: 0 0 auto; color: rgba(0, 0, 0, 0.45); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease; }
+  .lf-dd-caret svg { width: 1.15rem; height: 1.15rem; }
+  .lf-dd.is-open .lf-dd-caret { transform: rotate(180deg); color: var(--accent); }
+  .lf-dd-panel {
+    list-style: none; margin: 0; padding: 0.4rem;
+    position: absolute; top: calc(100% + 0.6rem); left: 0; right: 0; z-index: 60;
+    background: rgba(255, 255, 255, 0.98);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.10); border-radius: 14px;
+    box-shadow: 0 26px 64px -20px rgba(0, 0, 0, 0.18), 0 4px 14px rgba(0, 0, 0, 0.10);
+    max-height: 16rem; overflow-y: auto; overscroll-behavior: contain;
+    opacity: 0; transform: translateY(-8px) scale(0.985); transform-origin: top center; pointer-events: none;
+    transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .lf-dd.is-open .lf-dd-panel { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .lf-dd-option {
+    padding: 0.8rem 0.95rem; border-radius: 9px; cursor: pointer;
+    color: #1a1a1a; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.25;
+    transition: background 0.16s ease, color 0.16s ease;
+  }
+  .lf-dd-option:hover, .lf-dd-option.is-active { background: rgba(242, 66, 11, 0.10); color: #f2420b; }
+  .lf-dd-option.is-selected { color: var(--accent); font-weight: 500; }
+  .lf-dd-panel::-webkit-scrollbar { width: 8px; }
+  .lf-dd-panel::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.18); border-radius: 8px; }
+  .lf-field--submit { justify-content: flex-end; }
+  .lf-submit {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    width: 100%; cursor: pointer; color: #fff; background: var(--accent);
+    border: 1px solid var(--accent); border-radius: 100px;
+    padding: clamp(1.1rem, 1.6vw, 1.5rem) clamp(1.8rem, 2.4vw, 2.4rem);
+    font-family: 'Inter', sans-serif; font-weight: 600;
+    font-size: clamp(0.95rem, 1.1vw, 1.1rem); letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .lf-submit:hover {
+    background: var(--accent-2); border-color: var(--accent-2); transform: translateY(-2px);
+    box-shadow: 0 16px 44px -16px rgba(242, 66, 11, 0.5);
+  }
+  .lf-submit-arrow { display: flex; }
+  @media (min-width: 1024px) {
+    .lf-grid { width: 78%; margin-left: auto; }
+  }
+  @media (max-width: 720px) {
+    .lf-grid { grid-template-columns: 1fr; row-gap: 2rem; }
+    .lf-field--submit { margin-top: 0.5rem; }
+  }
+
+  /* DARK OVERRIDE cho CTA + FORM (trang này dark theme) */
+  .cta-final { overflow: visible !important; }
+  .cta-final::before {
+    display: block !important;
+    width: 100vw !important; height: 130% !important;
+    left: 50% !important; top: 50% !important;
+    background: radial-gradient(circle 470px at 25% 45%,
+      rgba(255, 112, 60, 0.80) 0%,
+      rgba(248, 82, 26, 0.70) 30%,
+      rgba(242, 66, 11, 0.50) 55%,
+      rgba(20, 10, 5, 0.85) 85%,
+      rgba(10, 5, 2, 0.95) 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+  }
+  .cta-final, .lead-form { background: transparent !important; background-image: none !important; }
+  .lead-form::before { display: none !important; }
+  .cta-verb { color: #ffffff !important; }
+  .lf-label, .lf-input, .lf-dd-trigger, .lf-dd-option { color: #ffffff !important; }
+  .lf-input::placeholder, .lf-dd-value.is-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-input, .lf-dd-trigger { border-bottom-color: rgba(255, 255, 255, 0.2) !important; }
+  .lf-select-wrap::after { border-right-color: rgba(255, 255, 255, 0.5) !important; border-bottom-color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-dd-caret { color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-dd-panel { background: rgba(20, 10, 5, 0.85) !important; border-color: rgba(255, 255, 255, 0.1) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important; }
+  .lf-dd-option:hover { background: rgba(255, 255, 255, 0.1) !important; }
+  .lf-dd-option.is-selected { background: rgba(242, 66, 11, 0.2) !important; color: #ffffff !important; }
 </style>
+
+<script>
+  /* FAQ: mở mục này thì các mục khác tự đóng (bê từ trang chủ) */
+  (function () {
+    const items = Array.prototype.slice.call(document.querySelectorAll('.faq-item'));
+    items.forEach((it) => it.addEventListener('toggle', () => {
+      if (it.open) items.forEach((o) => { if (o !== it) o.open = false; });
+    }));
+  })();
+</script>
+
+<script>
+  /* CASE STUDIES: carousel kéo/vuốt + tab BUSINESS/HOSPITALITY/MARKETING (bê từ trang chủ) */
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrapper = document.querySelector('.cs-cards-wrapper');
+    const track = document.getElementById('cs-track');
+    const tabs = [...document.querySelectorAll('.cs-tab')];
+    const cards = [...document.querySelectorAll('.cs-card')];
+    const prevBtn = document.getElementById('cs-prev');
+    const nextBtn = document.getElementById('cs-next');
+    if (!wrapper || !track || !cards.length) return;
+
+    const total = cards.length;
+    let index = 0;
+
+    function update() {
+      track.style.transform = `translateX(${-index * 100}%)`;
+      tabs.forEach((t, k) => t.classList.toggle('active', k === index));
+      cards.forEach((c, k) => c.classList.toggle('active', k === index));
+      if (prevBtn) prevBtn.disabled = index === 0;
+      if (nextBtn) nextBtn.disabled = index === total - 1;
+    }
+    function goTo(i) { index = Math.max(0, Math.min(total - 1, i)); update(); }
+
+    tabs.forEach((tab, k) => tab.addEventListener('click', () => goTo(k)));
+    prevBtn && prevBtn.addEventListener('click', () => goTo(index - 1));
+    nextBtn && nextBtn.addEventListener('click', () => goTo(index + 1));
+
+    let startX = 0, startY = 0, dragging = false, axis = null, dx = 0;
+    wrapper.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.cs-nav')) return;
+      startX = e.clientX; startY = e.clientY;
+      dragging = true; axis = null; dx = 0;
+    });
+    wrapper.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const mx = e.clientX - startX, my = e.clientY - startY;
+      if (axis === null && (Math.abs(mx) > 8 || Math.abs(my) > 8)) {
+        axis = Math.abs(mx) > Math.abs(my) ? 'x' : 'y';
+        if (axis === 'x') {
+          track.classList.add('is-dragging');
+          try { wrapper.setPointerCapture(e.pointerId); } catch (_) {}
+        }
+      }
+      if (axis === 'x') {
+        e.preventDefault();
+        dx = mx;
+        const pct = -index * 100 + (mx / wrapper.offsetWidth) * 100;
+        track.style.transform = `translateX(${pct}%)`;
+      }
+    });
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      if (axis === 'x') {
+        track.classList.remove('is-dragging');
+        const threshold = wrapper.offsetWidth * 0.16;
+        if (dx < -threshold) goTo(index + 1);
+        else if (dx > threshold) goTo(index - 1);
+        else update();
+      }
+      axis = null; dx = 0;
+    }
+    wrapper.addEventListener('pointerup', endDrag);
+    wrapper.addEventListener('pointercancel', endDrag);
+    wrapper.addEventListener('dragstart', (e) => e.preventDefault());
+
+    window.addEventListener('keydown', (e) => {
+      const r = wrapper.getBoundingClientRect();
+      const visible = r.top < window.innerHeight * 0.8 && r.bottom > window.innerHeight * 0.2;
+      if (!visible) return;
+      if (e.key === 'ArrowRight') goTo(index + 1);
+      else if (e.key === 'ArrowLeft') goTo(index - 1);
+    });
+
+    update();
+  });
+</script>
+
+<script>
+  /* Dropdown CUSTOM cho form (bê từ trang chủ) — progressive enhancement, giữ <select> thật để submit/fallback */
+  (function () {
+    function enhance(select) {
+      const wrap = select.closest('.lf-select-wrap');
+      if (!wrap || wrap.classList.contains('is-enhanced')) return;
+
+      const opts = Array.prototype.slice.call(select.options);
+      const placeholder = opts.filter(function (o) { return o.disabled; })[0] || null;
+      const choices = opts.filter(function (o) { return !o.disabled; });
+
+      const dd = document.createElement('div');
+      dd.className = 'lf-dd';
+
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'lf-dd-trigger';
+      trigger.setAttribute('aria-haspopup', 'listbox');
+      trigger.setAttribute('aria-expanded', 'false');
+
+      const valueEl = document.createElement('span');
+      valueEl.className = 'lf-dd-value';
+
+      const caret = document.createElement('span');
+      caret.className = 'lf-dd-caret';
+      caret.setAttribute('aria-hidden', 'true');
+      caret.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+
+      trigger.appendChild(valueEl);
+      trigger.appendChild(caret);
+
+      const panel = document.createElement('ul');
+      panel.className = 'lf-dd-panel';
+      panel.setAttribute('role', 'listbox');
+
+      let activeIdx = -1;
+
+      function syncDisplay() {
+        const sel = select.options[select.selectedIndex];
+        const isPlaceholder = !!(sel && sel.disabled);
+        valueEl.textContent = sel ? sel.text : (placeholder ? placeholder.text : '');
+        valueEl.classList.toggle('is-placeholder', isPlaceholder);
+        const curVal = sel ? sel.value : '';
+        Array.prototype.forEach.call(panel.children, function (li) {
+          li.classList.toggle('is-selected', !isPlaceholder && li.getAttribute('data-value') === curVal);
+        });
+      }
+      function choose(opt) {
+        select.value = opt.value;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        syncDisplay();
+      }
+      choices.forEach(function (opt) {
+        const li = document.createElement('li');
+        li.className = 'lf-dd-option';
+        li.setAttribute('role', 'option');
+        li.setAttribute('data-value', opt.value);
+        li.textContent = opt.text;
+        li.addEventListener('click', function () { choose(opt); closeDd(); trigger.focus(); });
+        panel.appendChild(li);
+      });
+      function setActive(i) {
+        activeIdx = i;
+        Array.prototype.forEach.call(panel.children, function (li, idx) { li.classList.toggle('is-active', idx === i); });
+        if (i >= 0 && panel.children[i]) panel.children[i].scrollIntoView({ block: 'nearest' });
+      }
+      function openDd() {
+        dd.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        let selIdx = -1;
+        const cur = select.options[select.selectedIndex];
+        if (cur && !cur.disabled) selIdx = choices.map(function (o) { return o.value; }).indexOf(cur.value);
+        setActive(selIdx >= 0 ? selIdx : 0);
+      }
+      function closeDd() { dd.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); setActive(-1); }
+      function isOpen() { return dd.classList.contains('is-open'); }
+
+      trigger.addEventListener('click', function (e) { e.stopPropagation(); isOpen() ? closeDd() : openDd(); });
+      trigger.addEventListener('keydown', function (e) {
+        switch (e.key) {
+          case 'ArrowDown': e.preventDefault(); isOpen() ? setActive(Math.min(choices.length - 1, activeIdx + 1)) : openDd(); break;
+          case 'ArrowUp': e.preventDefault(); isOpen() ? setActive(Math.max(0, activeIdx - 1)) : openDd(); break;
+          case 'Enter': case ' ': e.preventDefault(); if (!isOpen()) openDd(); else if (activeIdx >= 0) { choose(choices[activeIdx]); closeDd(); } break;
+          case 'Escape': if (isOpen()) { e.preventDefault(); closeDd(); } break;
+          case 'Tab': if (isOpen()) closeDd(); break;
+        }
+      });
+      document.addEventListener('click', function (e) { if (isOpen() && !dd.contains(e.target)) closeDd(); });
+
+      dd.appendChild(trigger);
+      dd.appendChild(panel);
+      wrap.appendChild(dd);
+      /* Astro scope CSS theo attr data-astro-cid-*; element tạo bằng JS không có -> copy cid từ .lf-select-wrap sang */
+      var cidAttr = null;
+      for (var i = 0; i < wrap.attributes.length; i++) { if (wrap.attributes[i].name.indexOf('data-astro-cid-') === 0) { cidAttr = wrap.attributes[i].name; break; } }
+      if (cidAttr) { dd.setAttribute(cidAttr, ''); var all = dd.querySelectorAll('*'); for (var j = 0; j < all.length; j++) all[j].setAttribute(cidAttr, ''); }
+      wrap.classList.add('is-enhanced');
+      syncDisplay();
+    }
+    function init() { Array.prototype.forEach.call(document.querySelectorAll('.lf-select'), enhance); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+
+  /* --sbw = bề rộng scrollbar dọc -> break-out tiêu đề CTA sát 2 mép chuẩn như homepage */
+  (function () {
+    var setSbw = function () {
+      document.documentElement.style.setProperty('--sbw', (window.innerWidth - document.documentElement.clientWidth) + 'px');
+    };
+    setSbw();
+    window.addEventListener('resize', setSbw, { passive: true });
+  })();
+</script>
