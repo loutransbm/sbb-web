@@ -356,7 +356,7 @@ const benefits = [
 
   <!-- ===== FAQ (bê thiết kế y hệt homepage, nội dung riêng J-1) ===== -->
   <section class="faq-section" id="faq">
-    <div class="pr-wrap faq-container">
+    <div class="container faq-container">
       <h2 class="faq-mega">FAQ</h2>
       <div class="faq-list">
         <details class="faq-item">
@@ -864,12 +864,21 @@ const benefits = [
   .faq-stats li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 7px; height: 7px; border-radius: 50%; background: #f2420b; }
   .faq-stats b { color: #f2420b; font-weight: 700; }
   @keyframes faqReveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
-  /* FAQ mobile: tiêu đề cỡ tiêu đề lớn chuẩn các section trên (không để 136px khổng lồ) */
+  /* DESKTOP: tiêu đề + danh sách card BREAK-OUT ra 120rem, căn mép thẳng nav (y hệt homepage) */
+  @media (min-width: 992px) {
+    .faq-mega, .faq-list {
+      width: calc(100vw - var(--sbw, 0px) - 4rem);
+      max-width: 120rem;
+      margin-left: calc(50% - (50vw - var(--sbw, 0px) / 2) + 2rem);
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+  }
+  /* MOBILE: tiêu đề FAQ = cỡ tiêu đề lớn chuẩn (y hệt homepage) — #faq + !important để THẮNG rule
+     global .faq-mega ở ≤600px (clamp 2.6rem/12.5vw/4rem !important ép nhỏ còn ~47px). */
   @media (max-width: 768px) {
-    .faq-mega { font-size: clamp(3.5rem, 16.8vw, 4.55rem); line-height: 0.9; letter-spacing: -0.097em; }
-    .faq-q { font-size: 0.95rem; padding: 2.2rem 1.4rem; gap: 1rem; }
-    .faq-icon { flex-basis: 32px; width: 32px; height: 32px; }
-    .faq-a { padding: 0 1.4rem 1.9rem; }
+    #faq .faq-mega { font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; line-height: 0.9 !important; letter-spacing: -0.097em !important; }
+    #faq .faq-q { font-size: 0.95rem; padding-top: 2.2rem; padding-bottom: 2.2rem; }
   }
 </style>
 
