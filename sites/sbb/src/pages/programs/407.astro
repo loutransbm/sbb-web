@@ -200,49 +200,6 @@ const truths = [
     </div>
   </section>
 
-  <!-- ===== FIELDS ===== -->
-  <section class="pr-sec pr-sec--beam" id="fields">
-    <div class="pr-beam pr-beam--right" aria-hidden="true"></div>
-    <div class="pr-wrap">
-      <div class="pr-head">
-        <span class="pr-eyebrow">Sectors</span>
-        <div class="cs-header pr-sec-head">
-          <div class="cs-line cs-line-1"><span class="cs-text-white">WHAT YOU'LL</span></div>
-          <div class="cs-line cs-line-1"><span class="cs-text-white">DO</span></div>
-        </div>
-        <p class="pr-desc">Visa 407 mở đường vào những mảng nghề mà nước Úc đang thật sự cần người. Đây là ba hướng SBB tập trung.</p>
-      </div>
-      <div class="pr-grid pr-grid--3">
-        {fields.map((f) => (
-          <article class="pr-card">
-            <span class="pr-card__tag">{f.tag}</span>
-            <h3 class="pr-card__title">{f.title}</h3>
-            <p class="pr-card__body">{f.body}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== ELIGIBILITY ===== -->
-  <section class="pr-sec">
-    <div class="pr-wrap">
-      <div class="pr-split">
-        <div>
-          <span class="pr-eyebrow">Who fits</span>
-          <div class="cs-header pr-sec-head">
-            <div class="cs-line cs-line-1"><span class="cs-text-white">ARE YOU</span></div>
-            <div class="cs-line cs-line-1"><span class="cs-text-white">A FIT</span></div>
-          </div>
-          <p class="pr-desc">Đường Úc không hợp với tất cả mọi người. Dưới đây là những điều nên có trước khi bạn nghĩ tới visa 407.</p>
-        </div>
-        <ul class="pr-checks">
-          {eligibility.map((e) => <li>{e}</li>)}
-        </ul>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== CASE STUDIES (bê từ Global Internship — carousel kéo + tab) ===== -->
   <section class="case-studies-section" id="case-studies">
     <div class="pr-wrap">
@@ -378,6 +335,49 @@ const truths = [
 
         <button class="cs-nav cs-nav--prev" id="cs-prev" type="button" aria-label="Câu chuyện trước">&#8249;</button>
         <button class="cs-nav cs-nav--next" id="cs-next" type="button" aria-label="Câu chuyện sau">&#8250;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FIELDS ===== -->
+  <section class="pr-sec pr-sec--beam" id="fields">
+    <div class="pr-beam pr-beam--right" aria-hidden="true"></div>
+    <div class="pr-wrap">
+      <div class="pr-head">
+        <span class="pr-eyebrow">Sectors</span>
+        <div class="cs-header pr-sec-head">
+          <div class="cs-line cs-line-1"><span class="cs-text-white">WHAT YOU'LL</span></div>
+          <div class="cs-line cs-line-1"><span class="cs-text-white">DO</span></div>
+        </div>
+        <p class="pr-desc">Visa 407 mở đường vào những mảng nghề mà nước Úc đang thật sự cần người. Đây là ba hướng SBB tập trung.</p>
+      </div>
+      <div class="pr-grid pr-grid--3">
+        {fields.map((f) => (
+          <article class="pr-card">
+            <span class="pr-card__tag">{f.tag}</span>
+            <h3 class="pr-card__title">{f.title}</h3>
+            <p class="pr-card__body">{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ELIGIBILITY ===== -->
+  <section class="pr-sec">
+    <div class="pr-wrap">
+      <div class="pr-split">
+        <div>
+          <span class="pr-eyebrow">Who fits</span>
+          <div class="cs-header pr-sec-head">
+            <div class="cs-line cs-line-1"><span class="cs-text-white">ARE YOU</span></div>
+            <div class="cs-line cs-line-1"><span class="cs-text-white">A FIT</span></div>
+          </div>
+          <p class="pr-desc">Đường Úc không hợp với tất cả mọi người. Dưới đây là những điều nên có trước khi bạn nghĩ tới visa 407.</p>
+        </div>
+        <ul class="pr-checks">
+          {eligibility.map((e) => <li>{e}</li>)}
+        </ul>
       </div>
     </div>
   </section>
