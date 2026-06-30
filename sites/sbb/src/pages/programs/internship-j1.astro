@@ -593,7 +593,7 @@ const benefits = [
 
   /* ===== ABOUT J-1 — card kính + glow đỉnh (kiểu MMRS CO.) ===== */
   /* A: ABOUT = panel kính trầm (không glow cam) · B: +đệm đáy tạo dải tối nghỉ trước INDUSTRIES */
-  .about-sec { position: relative; padding-bottom: clamp(1.75rem, 3vw, 2.75rem); }
+  .about-sec { position: relative; padding-bottom: clamp(1.75rem, 3vw, 2.75rem); margin-top: -2px; }
   .about-card { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; border-radius: clamp(28px, 3vw, 46px); border: 1px solid rgba(255,255,255,0.08); background: linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.012) 42%, rgba(255,255,255,0.004) 100%); padding: clamp(3rem, 6vw, 6.5rem) clamp(2rem, 5vw, 5.5rem); min-height: clamp(520px, 58vh, 640px); overflow: hidden; }
   /* tí ánh sáng cam hắt lên từ đáy card (clip theo bo góc) */
   .about-card::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: min(74%, 58rem); height: clamp(190px, 25vw, 300px); z-index: 0; pointer-events: none; background: radial-gradient(60% 100% at 50% 100%, rgba(255,92,38,0.32) 0%, rgba(242,66,11,0.15) 36%, rgba(242,66,11,0.05) 62%, transparent 78%); filter: blur(14px); }
@@ -683,7 +683,7 @@ const benefits = [
   /* ===== SECTION VIDEO "LIFE BEYOND BORDERS" — bê từ trang chủ (bản DARK) ===== */
   .moments-section { position: relative; z-index: 8; padding: var(--sec-pad) 0; background: transparent; overflow-x: clip; overflow-y: visible; }
   /* quầng sáng cam mềm hắt lên từ đáy section video */
-  .moments-section::after { content: ''; position: absolute; left: 50%; bottom: -8%; transform: translateX(-50%); width: 130%; height: 52%; z-index: 0; pointer-events: none; background: radial-gradient(62% 100% at 50% 100%, rgba(255,92,38,0.30) 0%, rgba(242,66,11,0.16) 34%, rgba(242,66,11,0.06) 60%, transparent 80%); filter: blur(10px); }
+  .moments-section::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 130%; height: 60%; z-index: 0; pointer-events: none; background: radial-gradient(62% 100% at 50% 100%, rgba(255,92,38,0.30) 0%, rgba(242,66,11,0.16) 34%, rgba(242,66,11,0.06) 60%, transparent 80%); filter: blur(10px); }
   .mv-container { max-width: 120rem; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; } /* khớp bề rộng hero (pr-wrap) — header + coverflow rộng như homepage, hết chật chữ */
   .mvh { margin-bottom: clamp(4rem, 7.5vw, 7rem); }
   /* BORDERS = TO bằng LIFE BEYOND (cs-line-1, 175px). Scope trong moments để KHÔNG đụng "J-1 USA" của hero (cũng cs-line-2). */
