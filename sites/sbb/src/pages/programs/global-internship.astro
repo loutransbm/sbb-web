@@ -1008,8 +1008,8 @@ const destinations = [
     /* XÓA ĐƯỜNG CHIA Programs ↔ Case Studies: tắt quầng trang trí (dùng #services để THẮNG override dark ở dưới) */
     #services::before,
     #services::after { display: none !important; }
-    /* Container rộng gần kín màn (4rem -> 1rem) -> tiêu đề + tabs + card sát 2 mép */
-    #case-studies .pr-wrap { width: calc(100% - 1rem) !important; }
+    /* Mọi .pr-wrap (destinations, case-studies, faq) sát 2 mép trên mobile */
+    .pr-wrap { width: calc(100% - 1rem) !important; }
     #moments .mv-container { padding: 0 0.5rem !important; }
 
     /* FAQ mobile: tiêu đề "FAQ" = ĐÚNG cỡ tiêu đề lớn các section trên (cs-line-1 = 72px),
