@@ -167,25 +167,17 @@ const truths = [
     </div>
   </section>
 
-  <!-- ===== OVERVIEW + STATS ===== -->
-  <section class="pr-sec">
+  <!-- ===== ABOUT — card kính + glow đáy (kiểu ABOUT trang J-1) ===== -->
+  <section class="pr-sec about-sec" id="about">
     <div class="pr-wrap">
-      <div class="pr-split">
-        <div>
-          <span class="pr-eyebrow">Overview</span>
-          <p class="pr-statement">Một con đường nghề <span class="pr-accent">nghiêm túc</span> tới Úc.</p>
+      <div class="about-card">
+        <div class="about-card__inner">
+          <div class="cs-header about-title">
+            <div class="cs-line cs-line-1"><span class="cs-text-white">ABOUT</span></div>
+            <div class="cs-line cs-line-1 cs-line-2"><span class="cs-text-white">VISA 407</span></div>
+          </div>
+          <p class="about-body">Visa 407 là diện Training của đường Úc: bạn sang Úc để học nghề và làm việc thực tế có giám sát tại doanh nghiệp tiếp nhận, không phải du học thuần tuý. Trọng tâm là Aged Care, Child Care và Hospitality, triển khai cùng đối tác Australian Internships.</p>
         </div>
-        <ul class="pr-checks">
-          <li>Visa 407 là diện training: sang Úc để học nghề và làm thật, không phải du học thuần tuý.</li>
-          <li>Tập trung vào các mảng nhu cầu cao và ổn định tại Úc.</li>
-          <li>Triển khai cùng đối tác đào tạo quốc tế Australian Internships.</li>
-          <li>Cùng tinh thần với hệ SBB: chuẩn bị để bạn được tin và trọng dụng, không chỉ được đi.</li>
-        </ul>
-      </div>
-      <div class="pr-stats">
-        {stats.map((s) => (
-          <div class="pr-stat"><span class="pr-stat__num">{s.num}</span><span class="pr-stat__label">{s.label}</span></div>
-        ))}
       </div>
     </div>
   </section>
@@ -758,6 +750,19 @@ const truths = [
     .cs-stat-item { flex: 0 1 auto !important; min-width: 0 !important; gap: 0.25rem !important; text-align: center !important; align-items: center !important; }
     .cs-stats-row--meta .cs-stat-value { font-size: clamp(1.1rem, 4.8vw, 1.45rem) !important; font-weight: 600 !important; line-height: 1.05 !important; }
     .cs-stat-label { font-size: 0.55rem !important; letter-spacing: 0.03em !important; line-height: 1.3 !important; }
+  }
+
+  /* ===== ABOUT — card kính + glow đáy (bê y hệt ABOUT trang J-1) ===== */
+  .about-sec { position: relative; padding-bottom: clamp(1.75rem, 3vw, 2.75rem); }
+  .about-card { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; border-radius: clamp(28px, 3vw, 46px); border: 1px solid rgba(255,255,255,0.08); background: linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.012) 42%, rgba(255,255,255,0.004) 100%); padding: clamp(3rem, 6vw, 6.5rem) clamp(2rem, 5vw, 5.5rem); min-height: clamp(520px, 58vh, 640px); overflow: hidden; }
+  .about-card::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: min(74%, 58rem); height: clamp(190px, 25vw, 300px); z-index: 0; pointer-events: none; background: radial-gradient(60% 100% at 50% 100%, rgba(255,92,38,0.32) 0%, rgba(242,66,11,0.15) 36%, rgba(242,66,11,0.05) 62%, transparent 78%); filter: blur(14px); }
+  .about-card__inner { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start; gap: clamp(2rem, 6vw, 6rem); flex-wrap: wrap; }
+  .about-title .cs-line-1 { font-size: clamp(4rem, 6.8vw, 7.6rem); letter-spacing: -0.05em; line-height: 0.97; }
+  .about-title .cs-line-2 { justify-content: flex-start; margin: 0; }
+  .about-body { max-width: 31rem; margin: clamp(0.4rem, 0.8vw, 0.8rem) 0 0; color: rgba(255,255,255,0.60); font-family: var(--font-body); font-size: clamp(1rem, 1.12vw, 1.17rem); line-height: 1.62; }
+  @media (max-width: 880px) {
+    .about-card__inner { flex-direction: column; gap: clamp(1.4rem, 4vw, 2.4rem); }
+    .about-body { max-width: 100%; }
   }
 </style>
 
