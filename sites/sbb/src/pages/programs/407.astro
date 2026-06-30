@@ -189,7 +189,14 @@ const truths = [
       <div class="spon-row">
         <div class="spon-logo"><img src="/images/partners/australian-internships.png" alt="Australian Internships" /></div>
       </div>
-      <p class="spon-note">SBB triển khai chương trình visa 407 cùng Australian Internships — tổ chức đào tạo &amp; tiếp nhận uy tín tại Úc.</p>
+      <div class="spon-stats">
+        <div class="spon-stat"><span class="spon-stat__num">16,531</span><span class="spon-stat__label">Internship programs arranged</span></div>
+        <div class="spon-stat"><span class="spon-stat__num">90+</span><span class="spon-stat__label">Nationalities</span></div>
+        <div class="spon-stat"><span class="spon-stat__num">1,308</span><span class="spon-stat__label">Active candidates</span></div>
+        <div class="spon-stat"><span class="spon-stat__num">12,000+</span><span class="spon-stat__label">Active host organisations</span></div>
+        <div class="spon-stat"><span class="spon-stat__num">24</span><span class="spon-stat__label">Australian cities</span></div>
+      </div>
+      <p class="spon-note">SBB là <strong>đại diện độc quyền tại Việt Nam</strong> của Australian Internships, tổ chức đào tạo và tiếp nhận thực tập uy tín hàng đầu nước Úc.</p>
     </div>
   </section>
 
@@ -582,9 +589,20 @@ const truths = [
   .spon-sec { text-align: center; padding-top: clamp(4.25rem, 7vw, 6rem); }
   .spon-eyebrow { font-family: var(--font-headline); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: #f2420b; margin: 0 auto clamp(3.75rem, 6vw, 5.25rem); }
   .spon-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(3rem, 6.5vw, 7rem); }
-  .spon-logo img { height: clamp(54px, 6.2vw, 82px); width: auto; object-fit: contain; filter: brightness(0) invert(1) opacity(0.62); transition: filter 0.3s ease, transform 0.3s ease; }
-  .spon-logo img:hover { filter: brightness(0) invert(1) opacity(1); transform: scale(1.05); }
-  .spon-note { margin: clamp(3.75rem, 6vw, 5.25rem) auto 0; max-width: 40rem; font-family: var(--font-body); font-size: 0.95rem; color: rgba(255,255,255,0.5); line-height: 1.55; }
+  .spon-logo img { height: clamp(104px, 13vw, 150px); width: auto; object-fit: contain; filter: brightness(0) invert(1) opacity(0.95); transition: filter 0.3s ease, transform 0.3s ease; }
+  .spon-logo img:hover { filter: brightness(0) invert(1) opacity(1); transform: scale(1.04); }
+  /* Số liệu năng lực Australian Internships (hàng stat cam, label English) */
+  .spon-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(1.8rem, 4vw, 3.2rem) clamp(2rem, 5vw, 4.5rem); margin: clamp(3rem, 5.5vw, 4.75rem) auto 0; max-width: 66rem; }
+  .spon-stat { display: flex; flex-direction: column; align-items: center; gap: 0.45rem; }
+  .spon-stat__num { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(2.1rem, 3.4vw, 3.25rem); line-height: 1; color: #f2420b; letter-spacing: -0.02em; }
+  .spon-stat__label { font-family: var(--font-headline); font-weight: 700; font-size: clamp(0.62rem, 0.85vw, 0.78rem); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); max-width: 11rem; line-height: 1.32; }
+  .spon-note { margin: clamp(3rem, 5vw, 4.25rem) auto 0; max-width: 40rem; font-family: var(--font-body); font-size: 0.98rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .spon-note strong { color: #fff; font-weight: 600; }
+  @media (max-width: 600px) {
+    .spon-stats { gap: 2rem 1.6rem; }
+    .spon-stat { flex: 0 1 40%; }
+    .spon-stat__label { font-size: 0.6rem; }
+  }
 
   /* ===== CASE STUDIES — bê từ Global Internship (bản DARK FIRE; card lửa đã dark sẵn ở base) ===== */
   .case-studies-section { position: relative; background: transparent; padding: var(--sec-pad) 0; z-index: 10; }
