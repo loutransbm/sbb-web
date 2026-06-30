@@ -681,7 +681,7 @@ const benefits = [
   @media (max-width: 560px) { .ind-grid { grid-template-columns: 1fr 1fr; } }
 
   /* ===== SECTION VIDEO "LIFE BEYOND BORDERS" — bê từ trang chủ (bản DARK) ===== */
-  .moments-section { position: relative; z-index: 8; padding: var(--sec-pad) 0; background: transparent; overflow-x: clip; overflow-y: visible; }
+  .moments-section { position: relative; z-index: 8; padding: var(--sec-pad) 0; background: transparent; overflow: visible; }
   /* quầng sáng cam mềm hắt lên từ đáy section video */
   .moments-section::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 130%; height: 60%; z-index: 0; pointer-events: none; background: radial-gradient(62% 100% at 50% 100%, rgba(255,92,38,0.30) 0%, rgba(242,66,11,0.16) 34%, rgba(242,66,11,0.06) 60%, transparent 80%); filter: blur(10px); }
   .mv-container { max-width: 120rem; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; } /* khớp bề rộng hero (pr-wrap) — header + coverflow rộng như homepage, hết chật chữ */
