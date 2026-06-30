@@ -453,7 +453,7 @@ const truths = [
 
 <style>
   .pr-wrap, .pr-hero__wrap { width: calc(100% - 4rem); max-width: 120rem; margin-inline: auto; position: relative; z-index: 2; }
-  .pr-eyebrow { display: inline-block; font-family: var(--font-headline); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: #f2420b; margin-bottom: 1.4rem; }
+  .pr-eyebrow { display: inline-block; font-family: var(--font-headline); font-weight: 400; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: #f2420b; margin-bottom: 1.4rem; }
   .pr-eyebrow--back { text-decoration: none; transition: color .25s ease, transform .25s ease; }
   .pr-eyebrow--back:hover { color: #ff5c26; transform: translateX(-3px); }
   .pr-accent { color: #f2420b; }
@@ -490,7 +490,7 @@ const truths = [
     transition: transform .4s ease, border-color .4s ease;
   }
   .hero-stat:hover { transform: translateY(-4px); border-color: rgba(242, 66, 11, 0.45); }
-  .hero-stat__num { font-family: var(--font-headline); font-weight: 700; font-size: clamp(2.4rem, 3.6vw, 3.4rem); color: #ffffff; line-height: 1; letter-spacing: -0.02em; }
+  .hero-stat__num { font-family: var(--font-headline); font-weight: 400; font-size: clamp(2.4rem, 3.6vw, 3.4rem); color: #ffffff; line-height: 1; letter-spacing: -0.02em; }
   .hero-stat__label { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(0.78rem, 0.95vw, 0.9rem); color: rgba(255, 255, 255, 0.72); line-height: 1.4; }
   @media (max-width: 980px) { .hero-stats { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) { .hero-stats { grid-template-columns: 1fr; } }
@@ -499,7 +499,7 @@ const truths = [
   .pr-lead { margin: clamp(1.6rem, 3vw, 2.6rem) 0 0; max-width: 46ch; font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(0.8rem, 0.95vw, 0.92rem); line-height: 1.6; color: rgba(255,255,255,0.66); }
   .pr-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: clamp(1.6rem, 3vw, 2.4rem); }
   .pr-actions--center { justify-content: center; }
-  .pr-btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-headline); font-weight: 700; font-size: 0.9rem; text-decoration: none; border-radius: 999px; padding: 0.85rem 1.7rem; transition: transform .25s ease, background .25s ease, box-shadow .25s ease, border-color .25s ease, color .25s ease; }
+  .pr-btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-headline); font-weight: 400; font-size: 0.9rem; text-decoration: none; border-radius: 999px; padding: 0.85rem 1.7rem; transition: transform .25s ease, background .25s ease, box-shadow .25s ease, border-color .25s ease, color .25s ease; }
   .pr-btn--primary { background: #f2420b; color: #fff; box-shadow: 0 14px 30px -12px rgba(242,66,11,0.7); }
   .pr-btn--primary:hover { background: #ff5c26; transform: translateY(-2px); }
   .pr-btn--ghost { background: rgba(255,255,255,0.04); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
@@ -517,17 +517,17 @@ const truths = [
   .pr-beam--left { left: 14%; transform: translateX(-50%); }
 
   .pr-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 4rem); align-items: start; }
-  .pr-statement { font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.15; color: #fff; margin: 0; letter-spacing: -0.01em; }
+  .pr-statement { font-family: var(--font-headline); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.15; color: #fff; margin: 0; letter-spacing: -0.01em; }
   .pr-checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.9rem; }
   .pr-checks li { position: relative; padding-left: 1.8rem; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1rem; line-height: 1.6; color: rgba(255,255,255,0.72); }
   .pr-checks li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.65rem; height: 0.65rem; border-radius: 999px; background: #f2420b; box-shadow: 0 0 0 4px rgba(242,66,11,0.18); }
 
   .pr-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: clamp(2rem, 4vw, 3rem); border-top: 1px solid rgba(255,255,255,0.12); }
-  .pr-stat__num { display: block; font-family: var(--font-headline); font-weight: 700; font-size: clamp(2rem, 3.5vw, 3rem); color: #f2420b; line-height: 1; }
+  .pr-stat__num { display: block; font-family: var(--font-headline); font-weight: 400; font-size: clamp(2rem, 3.5vw, 3rem); color: #f2420b; line-height: 1; }
   .pr-stat__label { display: block; margin-top: 0.5rem; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.86rem; color: rgba(255,255,255,0.6); }
 
   .pr-head { max-width: 60ch; margin-bottom: clamp(2.2rem, 4vw, 3.4rem); }
-  .pr-h2 { font-family: var(--font-headline); font-weight: 700; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.08; color: #fff; letter-spacing: -0.02em; margin: 0; text-transform: none; }
+  .pr-h2 { font-family: var(--font-headline); font-weight: 400; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.08; color: #fff; letter-spacing: -0.02em; margin: 0; text-transform: none; }
   .pr-desc { font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(0.96rem, 1.1vw, 1.08rem); line-height: 1.65; color: rgba(255,255,255,0.6); margin: 0.9rem 0 0; max-width: 60ch; }
 
   /* ===== CARD = KÍNH TỐI PHỦ LỬA (KHÔNG nền trắng) ===== */
@@ -551,8 +551,8 @@ const truths = [
     border-color: rgba(242,66,11,0.40);
     box-shadow: 0 26px 64px -24px rgba(0,0,0,0.55);
   }
-  .pr-card__tag { align-self: flex-start; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: #ffb59c; background: rgba(242,66,11,0.18); border: 1px solid rgba(242,66,11,0.30); border-radius: 999px; padding: 0.28rem 0.7rem; }
-  .pr-card__title { font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.2rem, 1.6vw, 1.5rem); color: #F5EDE6; margin: 0.8rem 0 0.7rem; letter-spacing: -0.01em; text-transform: none; }
+  .pr-card__tag { align-self: flex-start; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: #ffb59c; background: rgba(242,66,11,0.18); border: 1px solid rgba(242,66,11,0.30); border-radius: 999px; padding: 0.28rem 0.7rem; }
+  .pr-card__title { font-family: var(--font-headline); font-weight: 400; font-size: clamp(1.2rem, 1.6vw, 1.5rem); color: #F5EDE6; margin: 0.8rem 0 0.7rem; letter-spacing: -0.01em; text-transform: none; }
   .pr-card__body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.96rem; line-height: 1.6; color: rgba(255,255,255,0.78); margin: 0; }
 
   /* ===== SECTORS — card từng ngành kiểu Industries J-1 (quầng lửa đậm như hero stat) ===== */
@@ -583,8 +583,8 @@ const truths = [
     transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.4s ease, box-shadow 0.4s ease;
   }
   .ind-card:hover { transform: translateY(-5px); border-color: rgba(242,66,11,0.55); box-shadow: 0 20px 44px -16px rgba(242,66,11,0.45); }
-  .ind-card__num { margin: 0 0 auto; font-family: var(--font-headline); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.14em; color: rgba(255,255,255,0.55); }
-  .ind-card__name { margin: 0 0 0.7rem; font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.12rem, 1.32vw, 1.36rem); line-height: 1.14; color: #fff; }
+  .ind-card__num { margin: 0 0 auto; font-family: var(--font-headline); font-weight: 400; font-size: 0.8rem; letter-spacing: 0.14em; color: rgba(255,255,255,0.55); }
+  .ind-card__name { margin: 0 0 0.7rem; font-family: var(--font-headline); font-weight: 400; font-size: clamp(1.12rem, 1.32vw, 1.36rem); line-height: 1.14; color: #fff; }
   .ind-card__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
   .ind-card__list li { position: relative; padding-left: 1rem; font-family: var(--font-body); font-size: 0.875rem; color: rgba(255,255,255,0.72); line-height: 1.4; }
   .ind-card__list li::before { content: ''; position: absolute; left: 0; top: 0.52em; width: 5px; height: 5px; border-radius: 50%; background: #f2420b; }
@@ -595,23 +595,23 @@ const truths = [
   .pr-rows { display: flex; flex-direction: column; gap: 0.7rem; }
   .pr-row { display: flex; gap: 1.4rem; align-items: flex-start; padding: 1.3rem 1.5rem; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); transition: border-color .3s ease, background .3s ease; }
   .pr-row:hover { border-color: rgba(242,66,11,0.3); background: rgba(242,66,11,0.04); }
-  .pr-row__num { flex: 0 0 auto; font-family: var(--font-headline); font-weight: 700; font-size: 1.3rem; color: #f2420b; line-height: 1.4; min-width: 2.2rem; }
-  .pr-row__title { font-family: var(--font-headline); font-weight: 700; font-size: 1.1rem; color: #fff; margin: 0 0 0.4rem; text-transform: none; }
+  .pr-row__num { flex: 0 0 auto; font-family: var(--font-headline); font-weight: 400; font-size: 1.3rem; color: #f2420b; line-height: 1.4; min-width: 2.2rem; }
+  .pr-row__title { font-family: var(--font-headline); font-weight: 400; font-size: 1.1rem; color: #fff; margin: 0 0 0.4rem; text-transform: none; }
   .pr-row__body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.96rem; line-height: 1.6; color: rgba(255,255,255,0.62); margin: 0; }
 
   /* ===== PILLS ===== */
   .pr-pills { display: flex; flex-wrap: wrap; gap: 0.7rem; }
-  .pr-pill { font-family: var(--font-headline); font-weight: 700; font-size: 0.9rem; color: #fff; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; padding: 0.6rem 1.2rem; }
+  .pr-pill { font-family: var(--font-headline); font-weight: 400; font-size: 0.9rem; color: #fff; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; padding: 0.6rem 1.2rem; }
 
   /* ===== CTA ===== */
   .pr-cta-sec { padding-block: clamp(3rem, 6vw, 6rem) clamp(4rem, 8vw, 8rem); }
   .pr-cta { text-align: center; border-radius: 28px; padding: clamp(2.6rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem); background: linear-gradient(135deg, #f2420b, #c2380a); box-shadow: 0 28px 66px -24px rgba(242,66,11,0.6); }
-  .pr-cta__title { font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.7rem, 3vw, 2.4rem); color: #fff; margin: 0 0 0.8rem; }
+  .pr-cta__title { font-family: var(--font-headline); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.4rem); color: #fff; margin: 0 0 0.8rem; }
   .pr-cta__sub { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.05rem; line-height: 1.6; color: rgba(255,255,255,0.92); margin: 0 auto 1.8rem; max-width: 52ch; }
 
   /* ===== ALL PARTNERS — marquee logo đối tác (bê từ J-1) ===== */
   .allp-sec { text-align: center; overflow: clip; }
-  .allp-eyebrow { font-family: var(--font-headline); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: #f2420b; margin: 0 auto clamp(1rem, 1.6vw, 1.4rem); }
+  .allp-eyebrow { font-family: var(--font-headline); font-weight: 400; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: #f2420b; margin: 0 auto clamp(1rem, 1.6vw, 1.4rem); }
   .allp-desc { margin: 0 auto clamp(2.75rem, 4.5vw, 4rem); max-width: 44rem; font-family: var(--font-body); font-size: clamp(1rem, 1.1vw, 1.15rem); color: rgba(255,255,255,0.6); line-height: 1.55; }
   .marquee-wrapper { width: 100%; overflow: hidden; position: relative; display: flex; flex-direction: column; gap: clamp(2.5rem, 4vw, 4.5rem); }
   .marquee-wrapper::before, .marquee-wrapper::after { content: ""; position: absolute; top: 0; width: 12%; height: 100%; z-index: 2; pointer-events: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
@@ -628,17 +628,17 @@ const truths = [
 
   /* ===== SPONSOR — hàng logo bảo trợ (mono trắng như J-1) ===== */
   .spon-sec { text-align: center; padding-top: clamp(4.25rem, 7vw, 6rem); }
-  .spon-eyebrow { font-family: var(--font-headline); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: #f2420b; margin: 0 auto clamp(3.75rem, 6vw, 5.25rem); }
+  .spon-eyebrow { font-family: var(--font-headline); font-weight: 400; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: #f2420b; margin: 0 auto clamp(3.75rem, 6vw, 5.25rem); }
   .spon-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(3rem, 6.5vw, 7rem); }
   .spon-logo img { height: clamp(128px, 15vw, 172px); width: auto; object-fit: contain; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
   .spon-logo img:hover { transform: scale(1.04); }
   /* Số liệu năng lực Australian Internships (hàng stat cam, label English) */
   .spon-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(1.8rem, 4vw, 3.2rem) clamp(2rem, 5vw, 4.5rem); margin: clamp(3rem, 5.5vw, 4.75rem) auto 0; max-width: 66rem; }
   .spon-stat { display: flex; flex-direction: column; align-items: center; gap: 0.45rem; }
-  .spon-stat__num { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(2.1rem, 3.4vw, 3.25rem); line-height: 1; color: #f2420b; letter-spacing: -0.02em; }
-  .spon-stat__label { font-family: var(--font-headline); font-weight: 700; font-size: clamp(0.62rem, 0.85vw, 0.78rem); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); max-width: 11rem; line-height: 1.32; }
+  .spon-stat__num { font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(2.1rem, 3.4vw, 3.25rem); line-height: 1; color: #f2420b; letter-spacing: -0.02em; }
+  .spon-stat__label { font-family: var(--font-headline); font-weight: 400; font-size: clamp(0.62rem, 0.85vw, 0.78rem); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); max-width: 11rem; line-height: 1.32; }
   .spon-note { margin: clamp(3rem, 5vw, 4.25rem) auto 0; max-width: 40rem; font-family: var(--font-body); font-size: 0.98rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
-  .spon-note strong { color: #fff; font-weight: 600; }
+  .spon-note strong { color: #fff; font-weight: 400; }
   @media (max-width: 600px) {
     .spon-stats { gap: 2rem 1.6rem; }
     .spon-stat { flex: 0 1 40%; }
@@ -664,7 +664,7 @@ const truths = [
       0 0 40px rgba(242, 66, 11, 0.12),
       inset 0 1px 1px rgba(255, 255, 255, 0.12);
   }
-  .cs-glass-title { font-family: var(--font-headline); font-size: clamp(1.1rem, 1.4vw, 1.4rem); font-weight: 600; color: #ffffff; line-height: 1.1; letter-spacing: normal; white-space: nowrap; }
+  .cs-glass-title { font-family: var(--font-headline); font-size: clamp(1.1rem, 1.4vw, 1.4rem); font-weight: 400; color: #ffffff; line-height: 1.1; letter-spacing: normal; white-space: nowrap; }
   .cs-glass-sub { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 400; color: var(--ink-soft); line-height: 1.45; letter-spacing: normal; white-space: normal; margin: 0; }
   /* Header line tweaks — SCOPE trong section để KHÔNG đụng hero (hero cũng dùng .cs-line-2 / .cs-glass-pill) */
   .case-studies-section .cs-header { margin-bottom: clamp(3rem, 5vw, 5rem); }
@@ -710,7 +710,7 @@ const truths = [
   }
   .cs-card-left { flex: 0 0 46%; display: flex; flex-direction: column; gap: 0; position: relative; z-index: 1; }
   .cs-card-title { font-size: 4.8rem; font-weight: 500; color: #fff; line-height: 0.95; letter-spacing: -0.03em; font-family: 'Inter', sans-serif; }
-  .cs-card-role { font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.9); margin-top: 0.7rem; margin-bottom: 0.2rem; }
+  .cs-card-role { font-family: var(--font-body); font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.9); margin-top: 0.7rem; margin-bottom: 0.2rem; }
   .cs-content-block { margin-top: auto; display: flex; flex-direction: column; gap: 1.15rem; }
   .cs-content-block + .cs-content-block { padding-top: 1rem; }
   .cs-block-title { font-size: 1.65rem; color: #fff; font-weight: 500; letter-spacing: 0.05em; }
@@ -725,7 +725,7 @@ const truths = [
   .cs-stat-item { display: flex; flex-direction: column; gap: 0.5rem; }
   .cs-stat-value { font-size: 4rem; font-weight: 500; color: #fff; letter-spacing: -0.02em; line-height: 1; font-family: 'Inter', sans-serif; }
   .cs-stat-label { font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; }
-  .cs-stats-row--meta .cs-stat-value { font-size: 1.6rem; font-weight: 600; text-transform: none; letter-spacing: -0.01em; }
+  .cs-stats-row--meta .cs-stat-value { font-size: 1.6rem; font-weight: 400; text-transform: none; letter-spacing: -0.01em; }
   @media (max-width: 1200px) {
     .cs-card { flex-direction: column; padding: 3rem; gap: 3rem; }
     .cs-card-left { flex: none; width: 100%; }
@@ -771,7 +771,7 @@ const truths = [
     /* Chữ trong pill CÂN ĐỐI như Omni: title TO + đậm + trắng (1 dòng), sub xám đọc được */
     #case-studies .cs-glass-title {
       font-size: 0.92rem !important;
-      font-weight: 700 !important;
+      font-weight: 400 !important;
       letter-spacing: 0.015em !important;
       color: #ffffff !important;
       white-space: normal !important;
@@ -826,7 +826,7 @@ const truths = [
     /* 3 SỐ NẰM NGANG, to ở ĐÁY, CĂN GIỮA trang */
     .cs-stats-row { flex-direction: row !important; justify-content: center !important; gap: 1.6rem !important; padding-top: 1.3rem !important; }
     .cs-stat-item { flex: 0 1 auto !important; min-width: 0 !important; gap: 0.25rem !important; text-align: center !important; align-items: center !important; }
-    .cs-stats-row--meta .cs-stat-value { font-size: clamp(1.1rem, 4.8vw, 1.45rem) !important; font-weight: 600 !important; line-height: 1.05 !important; }
+    .cs-stats-row--meta .cs-stat-value { font-size: clamp(1.1rem, 4.8vw, 1.45rem) !important; font-weight: 400 !important; line-height: 1.05 !important; }
     .cs-stat-label { font-size: 0.55rem !important; letter-spacing: 0.03em !important; line-height: 1.3 !important; }
   }
 
