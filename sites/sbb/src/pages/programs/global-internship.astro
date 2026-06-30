@@ -681,8 +681,9 @@ const destinations = [
 
   /* ===== SECTION ĐIỂM ĐẾN: card BÊ NGUYÊN từ trang News (.blog-card) ===== */
   .dest-sec { padding-block: clamp(2.5rem, 5vw, 5rem) var(--sec-pad); }
-  /* Tiêu đề section = cỡ LỚN cascade (.cs-line-1/.cs-text-white), TIẾNG ANH — như mọi tiêu đề section */
+  /* Tiêu đề DESTINATIONS: fill hết chiều rộng container (căn mép với hero), calc vw trừ 4rem padding */
   .dest-head { margin-bottom: clamp(2.6rem, 5vw, 4.5rem); }
+  .dest-head .cs-line-1 { font-size: clamp(2.5rem, calc(17.9vw - 0.67rem), 20.9rem) !important; white-space: nowrap !important; }
 
   .blog-grid {
     display: grid; gap: clamp(1.5rem, 2vw, 2.4rem);
