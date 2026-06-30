@@ -349,8 +349,8 @@ const truths = [
       <div class="ind-head">
         <div class="cs-header pr-sec-head ind-title">
           <div class="cs-line cs-line-1"><span class="cs-text-white">WHAT</span></div>
-          <div class="cs-line cs-line-1 ind-step-2"><span class="cs-text-white">YOU'LL</span></div>
-          <div class="cs-line cs-line-1 ind-step-3"><span class="cs-text-white">DO</span></div>
+          <div class="cs-line cs-line-1"><span class="cs-text-white"><span class="ghost" aria-hidden="true">WHA</span>YOU'LL</span></div>
+          <div class="cs-line cs-line-1"><span class="cs-text-white"><span class="ghost" aria-hidden="true">WHAYOU'L</span>DO</span></div>
         </div>
         <p class="ind-desc">Các mảng ngành Australian Internships đang tiếp nhận trên khắp nước Úc. Suất thực tế tùy ngành nghề và thời điểm tuyển dụng của đối tác tiếp nhận.</p>
       </div>
@@ -557,10 +557,15 @@ const truths = [
 
   /* ===== SECTORS — card từng ngành kiểu Industries J-1 (quầng lửa đậm như hero stat) ===== */
   .ind-head { margin-bottom: clamp(3.75rem, 6vw, 6rem); }
-  /* Tiêu đề bậc thang: 3 dòng, mỗi dòng thụt vào sâu hơn */
-  .ind-title .cs-line { line-height: 0.86; }
-  .ind-title .ind-step-2 { padding-left: clamp(2.5rem, 8vw, 8rem); }
-  .ind-title .ind-step-3 { padding-left: clamp(5rem, 16vw, 16rem); }
+  /* Tiêu đề bậc thang nối: chữ Y nằm dưới chữ T, chữ D nằm dưới chữ L.
+     Dùng "chữ bóng" ẩn (cùng metrics) để canh tuyệt đối ở mọi cỡ chữ/letter-spacing. */
+  .ind-title .cs-line { line-height: 0.9; }
+  .ind-title .ghost { visibility: hidden; }
+  /* Màn hẹp: dòng dài nhất ("…DO") của bậc thang nối rộng ~5.7em, sẽ tràn ở điện thoại.
+     Thu nhỏ riêng tiêu đề này để vừa khít mà vẫn canh đúng chữ. Tablet/desktop giữ nguyên cỡ. */
+  @media (max-width: 600px) {
+    .ind-title .cs-line-1 { font-size: clamp(2.5rem, 13.5vw, 4rem) !important; white-space: nowrap !important; }
+  }
   .ind-desc { margin: clamp(1rem, 1.6vw, 1.6rem) 0 0; max-width: 42rem; font-family: var(--font-body); font-size: clamp(1rem, 1.1vw, 1.15rem); color: rgba(255,255,255,0.6); line-height: 1.55; }
   .ind-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr)); gap: clamp(0.9rem, 1.2vw, 1.3rem); }
   .ind-card {
