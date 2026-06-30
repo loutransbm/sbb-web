@@ -11,21 +11,90 @@ const stats = [
 ];
 
 const fields = [
-  { name: 'Professional', points: ['Hầu hết các ngành học', '6–26 tuần thực tập', 'Không lương · toàn nước Úc'] },
-  { name: 'Hospitality', points: ['F&B, Culinary & Front Office', '6–12 tháng thực tập', 'Có lương · toàn nước Úc'] },
-  { name: 'STEM', points: ['Science, Technology, Engineering & Mathematics', '12–26 tuần thực tập', 'Không lương · toàn nước Úc'] },
-  { name: 'Stipend', points: ['Marketing, HR & Event Management', '20–26 tuần thực tập', 'Trợ cấp AUD$ 600–1.000/tháng'] },
-  { name: 'Virtual', points: ['Các ngành phù hợp', '6–12 tuần thực tập', 'Không lương · toàn nước Úc'] },
-  { name: 'Early Childhood Education', points: ['Early Childhood Educator', '12–24 tháng thực tập', 'Có lương · toàn nước Úc'] },
-  { name: 'Aged & Disability Care', points: ['Aged & Disability Care, Nursing', '6 tháng đến 2 năm', 'Có lương · toàn nước Úc'] },
+  {
+    name: 'Professional',
+    points: ['Hầu hết các ngành học', '6–26 tuần thực tập', 'Không lương · toàn nước Úc'],
+    who: 'Sinh viên và người mới tốt nghiệp có động lực, sẵn sàng trải nghiệm thực tế trong ngành mình theo đuổi.',
+    conds: [
+      'Từ 18 tuổi trở lên',
+      'Đang theo học hoặc làm đúng lĩnh vực liên quan trực tiếp tới vị trí thực tập',
+      'Tiếng Anh khá đến giỏi (IELTS 5.5 hoặc tương đương)',
+      'Có tối thiểu 6 tháng kinh nghiệm làm việc hoặc học tập liên quan toàn thời gian (ví dụ thực tập, kiến tập trong quá trình học)',
+    ],
+  },
+  {
+    name: 'Hospitality',
+    points: ['F&B, Culinary & Front Office', '6–12 tháng thực tập', 'Có lương · toàn nước Úc'],
+    who: 'Ứng viên có động lực, đang theo đuổi sự nghiệp ngành nhà hàng khách sạn và sẵn sàng cho trải nghiệm quốc tế thực tế.',
+    conds: [
+      'Từ 18 tuổi trở lên',
+      'Có tối thiểu bằng Diploma ngành Ẩm thực (Culinary) hoặc Nhà hàng Khách sạn (Hospitality)',
+      'Chứng minh tối thiểu 12 tháng kinh nghiệm toàn thời gian và/hoặc học tập liên quan tới nghề trong vòng 24 tháng tính đến khi nộp visa. Nếu mới tốt nghiệp: tối thiểu 6 tháng toàn thời gian (hoặc 12 tháng bán thời gian) kinh nghiệm gần đây trong F&B, bếp hoặc lễ tân',
+      'Đang làm ở vị trí phù hợp trong ngành (F&B, Culinary, Quản lý khách sạn/motel hoặc Lễ tân), yếu tố quan trọng tại thời điểm nộp visa',
+      'Tiếng Anh khá đến giỏi (tối thiểu IELTS 5.5)',
+    ],
+  },
+  {
+    name: 'STEM',
+    points: ['Science, Technology, Engineering & Mathematics', '12–26 tuần thực tập', 'Không lương · toàn nước Úc'],
+    who: 'Sinh viên và người mới tốt nghiệp có động lực, sẵn sàng trải nghiệm thực tế trong ngành mình theo đuổi.',
+    conds: [
+      'Từ 18 tuổi trở lên',
+      'Đang theo học hoặc làm đúng lĩnh vực liên quan trực tiếp tới vị trí thực tập',
+      'Tiếng Anh khá đến giỏi (IELTS 5.5 hoặc tương đương)',
+      'Có tối thiểu 6 tháng kinh nghiệm làm việc hoặc học tập liên quan toàn thời gian (ví dụ thực tập, kiến tập trong quá trình học)',
+    ],
+  },
+  {
+    name: 'Stipend',
+    points: ['Marketing, HR & Event Management', '20–26 tuần thực tập', 'Trợ cấp AUD$ 600–1.000/tháng'],
+    who: 'Sinh viên và người mới tốt nghiệp có động lực, sẵn sàng cho thử thách chuyên môn và phần thưởng thực tế.',
+    conds: [
+      'Từ 18 tuổi trở lên',
+      'Đang theo học hoặc mới tốt nghiệp chương trình đại học (Cử nhân trở lên) ngành Marketing, Nhân sự (HR) hoặc Quản trị Sự kiện',
+      'Tiếng Anh khá đến giỏi (tương đương IELTS 5.5)',
+      'Chứng minh tối thiểu 6 tháng kinh nghiệm liên quan trong Marketing, HR hoặc Sự kiện',
+    ],
+  },
+  {
+    name: 'Virtual',
+    points: ['Các ngành phù hợp', '6–12 tuần thực tập', 'Không lương · toàn nước Úc'],
+    who: 'Sinh viên và người mới tốt nghiệp có động lực, muốn tích lũy kinh nghiệm quốc tế theo hình thức làm từ xa.',
+    conds: [
+      'Từ 18 tuổi trở lên',
+      'Đang theo học hoặc vừa hoàn thành chương trình đại học (Cử nhân trở lên)',
+      'Tiếng Anh khá đến giỏi (IELTS 5.5 hoặc tương đương)',
+      'Chọn lĩnh vực thực tập liên quan trực tiếp tới ngành học hoặc nền tảng chuyên môn',
+    ],
+  },
+  {
+    name: 'Early Childhood Education',
+    points: ['Early Childhood Educator', '12–24 tháng thực tập', 'Có lương · toàn nước Úc'],
+    who: 'Để đủ điều kiện tham gia chương trình Thực tập Giáo dục Mầm non, bạn cần đáp ứng các yêu cầu sau.',
+    conds: [
+      'Từ 18 tuổi trở lên',
+      'Đã học hoặc đang theo học khóa đào tạo bậc cao được ACECQA công nhận về Giáo dục Mầm non, hoặc có chứng nhận ACECQA',
+      'Lĩnh vực học và kinh nghiệm liên quan tới Giáo dục và Chăm sóc Mầm non',
+      'Đang làm việc hoặc học tập trong lĩnh vực mầm non',
+      'Tiếng Anh khá đến giỏi (tương đương IELTS 6.0 trở lên)',
+      'Sẵn sàng chuyển tới bất kỳ đâu tại Úc, kể cả vùng nông thôn và vùng xa',
+      'Kinh nghiệm: mới tốt nghiệp cần tối thiểu 6 tháng toàn thời gian trong ngành mầm non; người đã đi làm cần tối thiểu 2 năm kinh nghiệm trong ngành trong 5 năm gần nhất',
+    ],
+  },
+  {
+    name: 'Aged & Disability Care',
+    points: ['Aged & Disability Care, Nursing', '6 tháng đến 2 năm', 'Có lương · toàn nước Úc'],
+    who: 'Để đủ điều kiện tham gia chương trình Thực tập Chăm sóc Người cao tuổi và Người khuyết tật, bạn cần đáp ứng các yêu cầu sau.',
+    conds: [
+      'Từ 18 tuổi trở lên',
+      'Có tối thiểu 2 năm đào tạo bậc cao ngành Chăm sóc người cao tuổi và khuyết tật hoặc Điều dưỡng (Diploma trở lên): đang theo học, hoặc mới tốt nghiệp trong vòng 12 tháng tính đến khi nộp visa',
+      'Có tối thiểu 6 tháng kinh nghiệm toàn thời gian trong ngành Chăm sóc hoặc Điều dưỡng trong 12 tháng gần nhất, và đang làm việc trong lĩnh vực Điều dưỡng hoặc Chăm sóc người cao tuổi',
+      'Tiếng Anh khá đến giỏi (tương đương IELTS 6.0)',
+      'Đã tiêm đầy đủ các vắc-xin: Viêm gan A, Viêm gan B, Cúm, Sởi, Quai bị, Rubella, Thủy đậu (Varicella)',
+    ],
+  },
 ];
 
-const eligibility = [
-  'Nhắm đúng một trong các mảng Aged Care, Child Care hoặc Hospitality.',
-  'Có nền tảng ngoại ngữ đủ dùng cho công việc và phỏng vấn.',
-  'Tác phong nghiêm túc, sẵn sàng làm thật và học thật ở môi trường quốc tế.',
-  'Hồ sơ rõ ràng và trung thực, yếu tố quyết định khi đối tác xét duyệt.',
-];
 
 const steps = [
   { num: '01', title: 'Đánh giá ban đầu', body: 'Nói chuyện thẳng thắn với SBB để xem hồ sơ của bạn có thật sự hợp với đường Úc qua visa 407 hay không. Không hợp, SBB nói thẳng.' },
@@ -356,33 +425,21 @@ const truths = [
       </div>
       <div class="ind-grid">
         {fields.map((f, i) => (
-          <article class="ind-card">
+          <article class="ind-card" data-name={f.name}>
             <span class="ind-card__num">{String(i + 1).padStart(2, '0')}</span>
             <h3 class="ind-card__name">{f.name}</h3>
             <ul class="ind-card__list">
               {f.points.map((p) => <li>{p}</li>)}
             </ul>
+            <button class="ind-card__more" type="button" aria-haspopup="dialog" aria-label={`Điều kiện cơ bản: ${f.name}`}>Điều kiện cơ bản <span aria-hidden="true">→</span></button>
+            <template>
+              <p class="cond-who">{f.who}</p>
+              <ul class="cond-list">
+                {f.conds.map((c) => <li>{c}</li>)}
+              </ul>
+            </template>
           </article>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== ELIGIBILITY ===== -->
-  <section class="pr-sec">
-    <div class="pr-wrap">
-      <div class="pr-split">
-        <div>
-          <span class="pr-eyebrow">Who fits</span>
-          <div class="cs-header pr-sec-head">
-            <div class="cs-line cs-line-1"><span class="cs-text-white">ARE YOU</span></div>
-            <div class="cs-line cs-line-1"><span class="cs-text-white">A FIT</span></div>
-          </div>
-          <p class="pr-desc">Đường Úc không hợp với tất cả mọi người. Dưới đây là những điều nên có trước khi bạn nghĩ tới visa 407.</p>
-        </div>
-        <ul class="pr-checks">
-          {eligibility.map((e) => <li>{e}</li>)}
-        </ul>
       </div>
     </div>
   </section>
@@ -449,6 +506,18 @@ const truths = [
       </div>
     </div>
   </section>
+
+  <!-- ===== MODAL: bảng điều kiện cơ bản theo ngành (WHAT YOU'LL DO) ===== -->
+  <div class="cond-modal" id="condModal" aria-hidden="true">
+    <div class="cond-modal__overlay" data-close></div>
+    <div class="cond-modal__panel" role="dialog" aria-modal="true" aria-labelledby="condTitle">
+      <button class="cond-modal__close" type="button" data-close aria-label="Đóng">&times;</button>
+      <p class="cond-modal__eyebrow">Điều kiện cơ bản</p>
+      <h3 class="cond-modal__title" id="condTitle"></h3>
+      <div class="cond-modal__body"></div>
+      <p class="cond-modal__foot">Đây là điều kiện cơ bản để xét duyệt. Gửi hồ sơ để SBB đánh giá cụ thể cho trường hợp của bạn.</p>
+    </div>
+  </div>
 </PageLayout>
 
 <style>
@@ -588,6 +657,29 @@ const truths = [
   .ind-card__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
   .ind-card__list li { position: relative; padding-left: 1rem; font-family: var(--font-body); font-weight: 300; font-size: 0.875rem; color: rgba(255,255,255,0.72); line-height: 1.4; }
   .ind-card__list li::before { content: ''; position: absolute; left: 0; top: 0.52em; width: 5px; height: 5px; border-radius: 50%; background: #f2420b; }
+
+  /* WHAT YOU'LL DO — card bấm được để mở bảng điều kiện */
+  .ind-card { cursor: pointer; }
+  .ind-card__more { align-self: flex-start; margin-top: 1.1rem; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0; background: none; border: none; font-family: var(--font-body); font-weight: 400; font-size: 0.82rem; letter-spacing: 0.02em; color: #ff7a45; cursor: pointer; transition: gap .25s ease, color .25s ease; }
+  .ind-card:hover .ind-card__more { gap: 0.75rem; color: #ff8a5a; }
+  .ind-card__more:focus-visible { outline: 2px solid #f2420b; outline-offset: 3px; border-radius: 4px; }
+
+  /* MODAL bảng điều kiện */
+  .cond-modal { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: clamp(1rem, 4vw, 2.5rem); opacity: 0; visibility: hidden; transition: opacity .28s ease, visibility .28s ease; }
+  .cond-modal.is-open { opacity: 1; visibility: visible; }
+  .cond-modal__overlay { position: absolute; inset: 0; background: rgba(8,3,1,0.74); backdrop-filter: blur(6px); }
+  .cond-modal__panel { position: relative; z-index: 1; width: min(40rem, 100%); max-height: 86vh; overflow-y: auto; border-radius: 24px; border: 1px solid rgba(242,66,11,0.32); background: radial-gradient(130% 130% at 0% 0%, rgba(255,120,50,0.20) 0%, rgba(20,10,5,0.96) 46%, rgba(10,5,2,0.98) 100%), #120502; padding: clamp(1.7rem, 3vw, 2.8rem); box-shadow: 0 40px 90px -28px rgba(0,0,0,0.82); transform: translateY(14px) scale(0.985); transition: transform .32s cubic-bezier(.16,1,.3,1); }
+  .cond-modal.is-open .cond-modal__panel { transform: none; }
+  .cond-modal__close { position: absolute; top: 0.85rem; right: 0.95rem; width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: #fff; font-size: 1.35rem; line-height: 1; cursor: pointer; transition: background .2s ease, border-color .2s ease; }
+  .cond-modal__close:hover { background: rgba(242,66,11,0.26); border-color: rgba(242,66,11,0.5); }
+  .cond-modal__eyebrow { margin: 0 0 0.45rem; font-family: var(--font-headline); font-weight: 400; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: #f2420b; }
+  .cond-modal__title { margin: 0 0 1.15rem; font-family: var(--font-headline); font-weight: 500; font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.05; color: #fff; }
+  .cond-modal :global(.cond-who) { margin: 0 0 1.35rem; font-family: var(--font-body); font-weight: 300; font-size: 0.98rem; line-height: 1.6; color: rgba(255,255,255,0.7); }
+  .cond-modal :global(.cond-list) { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+  .cond-modal :global(.cond-list li) { position: relative; padding-left: 1.7rem; font-family: var(--font-body); font-weight: 300; font-size: 0.95rem; line-height: 1.55; color: rgba(255,255,255,0.82); }
+  .cond-modal :global(.cond-list li::before) { content: ''; position: absolute; left: 0; top: 0.5em; width: 7px; height: 7px; border-radius: 50%; background: #f2420b; box-shadow: 0 0 0 3px rgba(242,66,11,0.16); }
+  .cond-modal__foot { margin: 1.65rem 0 0; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,0.1); font-family: var(--font-body); font-weight: 300; font-size: 0.82rem; line-height: 1.5; color: rgba(255,255,255,0.5); }
+  @media (max-width: 600px) { .cond-modal__panel { border-radius: 18px; } }
   @media (max-width: 700px) { .ind-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 480px) { .ind-grid { grid-template-columns: 1fr; } }
 
@@ -919,5 +1011,43 @@ const truths = [
     });
 
     update();
+  });
+</script>
+
+<script>
+  /* WHAT YOU'LL DO: bấm card mở modal bảng điều kiện cơ bản theo ngành */
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('condModal');
+    if (!modal) return;
+    const titleEl = modal.querySelector('.cond-modal__title');
+    const bodyEl = modal.querySelector('.cond-modal__body');
+    const closeBtn = modal.querySelector('.cond-modal__close');
+    let lastFocused = null;
+
+    function openModal(card) {
+      const tpl = card.querySelector('template');
+      if (!tpl) return;
+      lastFocused = document.activeElement;
+      titleEl.textContent = card.dataset.name || '';
+      bodyEl.replaceChildren(tpl.content.cloneNode(true));
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+
+    document.querySelectorAll('.ind-card').forEach((card) => {
+      card.addEventListener('click', () => openModal(card));
+    });
+    modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeModal));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
   });
 </script>
