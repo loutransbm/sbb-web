@@ -7,13 +7,17 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
 const stats = [
   { num: '407', label: 'Loại visa (Training)' },
   { num: 'ÚC', label: 'Điểm đến' },
-  { num: '03', label: 'Mảng ngành trọng tâm' },
+  { num: '07', label: 'Nhóm ngành tiếp nhận' },
 ];
 
 const fields = [
-  { tag: 'Aged Care', title: 'Chăm sóc người cao tuổi', body: 'Một trong những mảng nhu cầu lớn và ổn định nhất tại Úc. Hợp với người muốn theo nghề chăm sóc bài bản, có tâm và có nghề.' },
-  { tag: 'Child Care', title: 'Chăm sóc & giáo dục trẻ', body: 'Môi trường làm việc đề cao chuẩn mực và sự tận tâm. Phù hợp nếu bạn yêu thích công việc với trẻ nhỏ và muốn học cách làm chuyên nghiệp.' },
-  { tag: 'Hospitality', title: 'Du lịch & Khách sạn', body: 'Mảng dịch vụ rộng, dễ tiếp cận với người có nền tảng ngoại ngữ và tác phong tốt, cũng là thế mạnh quen thuộc của hệ sinh thái SBB.' },
+  { name: 'Professional', points: ['Hầu hết các ngành học', '6–26 tuần thực tập', 'Không lương · toàn nước Úc'] },
+  { name: 'Hospitality', points: ['F&B, Culinary & Front Office', '6–12 tháng thực tập', 'Có lương · toàn nước Úc'] },
+  { name: 'STEM', points: ['Science, Technology, Engineering & Mathematics', '12–26 tuần thực tập', 'Không lương · toàn nước Úc'] },
+  { name: 'Stipend', points: ['Marketing, HR & Event Management', '20–26 tuần thực tập', 'Trợ cấp AUD$ 600–1.000/tháng'] },
+  { name: 'Virtual', points: ['Các ngành phù hợp', '6–12 tuần thực tập', 'Không lương · toàn nước Úc'] },
+  { name: 'Early Childhood Education', points: ['Early Childhood Educator', '12–24 tháng thực tập', 'Có lương · toàn nước Úc'] },
+  { name: 'Aged & Disability Care', points: ['Aged & Disability Care, Nursing', '6 tháng đến 2 năm', 'Có lương · toàn nước Úc'] },
 ];
 
 const eligibility = [
@@ -339,24 +343,24 @@ const truths = [
     </div>
   </section>
 
-  <!-- ===== FIELDS ===== -->
-  <section class="pr-sec pr-sec--beam" id="fields">
-    <div class="pr-beam pr-beam--right" aria-hidden="true"></div>
+  <!-- ===== FIELDS / SECTORS (kiểu Industries trang J-1) ===== -->
+  <section class="pr-sec ind-sec" id="fields">
     <div class="pr-wrap">
-      <div class="pr-head">
-        <span class="pr-eyebrow">Sectors</span>
+      <div class="ind-head">
         <div class="cs-header pr-sec-head">
           <div class="cs-line cs-line-1"><span class="cs-text-white">WHAT YOU'LL</span></div>
           <div class="cs-line cs-line-1"><span class="cs-text-white">DO</span></div>
         </div>
-        <p class="pr-desc">Visa 407 mở đường vào những mảng nghề mà nước Úc đang thật sự cần người. Đây là ba hướng SBB tập trung.</p>
+        <p class="ind-desc">Các mảng ngành Australian Internships đang tiếp nhận trên khắp nước Úc. Suất thực tế tùy ngành nghề và thời điểm tuyển dụng của đối tác tiếp nhận.</p>
       </div>
-      <div class="pr-grid pr-grid--3">
-        {fields.map((f) => (
-          <article class="pr-card">
-            <span class="pr-card__tag">{f.tag}</span>
-            <h3 class="pr-card__title">{f.title}</h3>
-            <p class="pr-card__body">{f.body}</p>
+      <div class="ind-grid">
+        {fields.map((f, i) => (
+          <article class="ind-card">
+            <span class="ind-card__num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="ind-card__name">{f.name}</h3>
+            <ul class="ind-card__list">
+              {f.points.map((p) => <li>{p}</li>)}
+            </ul>
           </article>
         ))}
       </div>
@@ -549,6 +553,31 @@ const truths = [
   .pr-card__tag { align-self: flex-start; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: #ffb59c; background: rgba(242,66,11,0.18); border: 1px solid rgba(242,66,11,0.30); border-radius: 999px; padding: 0.28rem 0.7rem; }
   .pr-card__title { font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.2rem, 1.6vw, 1.5rem); color: #F5EDE6; margin: 0.8rem 0 0.7rem; letter-spacing: -0.01em; text-transform: none; }
   .pr-card__body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.96rem; line-height: 1.6; color: rgba(255,255,255,0.78); margin: 0; }
+
+  /* ===== SECTORS — card từng ngành kiểu Industries J-1 (quầng lửa đậm như hero stat) ===== */
+  .ind-head { margin-bottom: clamp(3.75rem, 6vw, 6rem); }
+  .ind-desc { margin: clamp(1rem, 1.6vw, 1.6rem) 0 0; max-width: 42rem; font-family: var(--font-body); font-size: clamp(1rem, 1.1vw, 1.15rem); color: rgba(255,255,255,0.6); line-height: 1.55; }
+  .ind-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr)); gap: clamp(0.9rem, 1.2vw, 1.3rem); }
+  .ind-card {
+    position: relative; overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.09);
+    min-height: clamp(200px, 22vh, 240px);
+    padding: clamp(1.5rem, 1.9vw, 2rem);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    background:
+      radial-gradient(125% 125% at 0% 100%, rgba(255,120,50,0.62) 0%, rgba(248,82,26,0.44) 24%, rgba(242,66,11,0.24) 45%, rgba(20,10,5,0.50) 72%, rgba(10,5,2,0.55) 100%),
+      rgba(255,255,255,0.03);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .ind-card:hover { transform: translateY(-5px); border-color: rgba(242,66,11,0.55); box-shadow: 0 20px 44px -16px rgba(242,66,11,0.45); }
+  .ind-card__num { margin: 0 0 auto; font-family: var(--font-headline); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.14em; color: rgba(255,255,255,0.55); }
+  .ind-card__name { margin: 0 0 0.7rem; font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.12rem, 1.32vw, 1.36rem); line-height: 1.14; color: #fff; }
+  .ind-card__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .ind-card__list li { position: relative; padding-left: 1rem; font-family: var(--font-body); font-size: 0.875rem; color: rgba(255,255,255,0.72); line-height: 1.4; }
+  .ind-card__list li::before { content: ''; position: absolute; left: 0; top: 0.52em; width: 5px; height: 5px; border-radius: 50%; background: #f2420b; }
+  @media (max-width: 700px) { .ind-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .ind-grid { grid-template-columns: 1fr; } }
 
   /* ===== ROWS ===== */
   .pr-rows { display: flex; flex-direction: column; gap: 0.7rem; }
