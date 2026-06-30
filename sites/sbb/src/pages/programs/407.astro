@@ -1365,7 +1365,8 @@ const truths = [
 
   /* ===== FAQ (bê thiết kế y hệt J-1; chữ theo chuẩn KHÔNG-đậm của 407) ===== */
   .faq-section { position: relative; padding: var(--sec-pad) 0; background: transparent; overflow: visible; }
-  .faq-section::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 62% 300px at 50% 0%, rgba(242,66,11,0.10) 0%, rgba(242,66,11,0.04) 45%, transparent 76%); }
+  /* Glow nền FAQ: dời tâm XUỐNG (50% 270px) để đỉnh quầng KHÔNG nằm ngay mép trên — tránh tạo đường chia cắt với section Visa phía trên (mép trên fade về 0). */
+  .faq-section::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 70% 340px at 50% 270px, rgba(242,66,11,0.11) 0%, rgba(242,66,11,0.045) 40%, transparent 72%); }
   .faq-container { position: relative; z-index: 1; }
   .faq-mega { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(8.5rem, 12vw, 11rem); line-height: 0.95; letter-spacing: -0.085em; text-transform: uppercase; color: #ffffff; margin: 0 0 clamp(3.5rem, 6.5vw, 6.25rem); }
   .faq-list { display: flex; flex-direction: column; gap: clamp(1.1rem, 1.6vw, 1.6rem); }
