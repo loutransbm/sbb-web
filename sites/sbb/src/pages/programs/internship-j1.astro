@@ -439,6 +439,111 @@ const benefits = [
       </div>
     </div>
   </section>
+
+  <!-- ============ FINAL CTA · "READY TO SHINE BEYOND BORDERS" (bê từ trang chủ) ============ -->
+  <section class="cta-final" id="get-started">
+    <div class="container cta-final-inner">
+      <div class="cs-header cta-header">
+        <div class="cs-line cs-line-1">
+          <span class="cs-text-white">READY</span>
+        </div>
+        <div class="cta-line-2">
+          <span class="cta-verb">TO SHINE</span>
+          <div class="cs-glass-pill">
+            <span class="cs-glass-title">LET'S TALK</span>
+            <span class="cs-glass-sub">Tư vấn miễn phí 30 phút — cùng SBB vẽ lộ trình rõ ràng cho bạn.</span>
+          </div>
+        </div>
+        <div class="cta-line-3">
+          <span class="cta-tail"><span class="cs-text-white">BEYOND BORDERS?</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEAD FORM · thu thập thông tin (bê từ trang chủ) ============ -->
+  <section class="lead-form" id="lead-form">
+    <div class="container">
+      <form class="lf-grid" action="#" method="POST" novalidate>
+        <!-- Hàng 1: Họ tên | Số điện thoại -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-name">HỌ TÊN CỦA BẠN<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-name" name="name" type="text" required autocomplete="name" placeholder="Nguyễn Văn A" />
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-phone">SỐ ĐIỆN THOẠI<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+84 9xx xxx xxx" />
+        </div>
+
+        <!-- Hàng 2: Email | Bạn đang là -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-email">EMAIL CỦA BẠN<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-email" name="email" type="email" required autocomplete="email" placeholder="ban@email.com" />
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-role">BẠN ĐANG LÀ?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-role" name="role">
+              <option value="" disabled selected>Chọn vai trò</option>
+              <option>Sinh viên</option>
+              <option>Người đi làm</option>
+              <option>Phụ huynh</option>
+              <option>Khác</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Hàng 3: Chương trình quan tâm | Mục tiêu -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-program">BẠN QUAN TÂM CHƯƠNG TRÌNH NÀO?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-program" name="program">
+              <option value="" disabled selected>Chọn chương trình</option>
+              <option>Global Internship — J-1 Hoa Kỳ</option>
+              <option>Career Training — Visa 407 (Úc)</option>
+              <option>GRP — Global Readiness</option>
+              <option>Office Tour</option>
+              <option>Chưa rõ — cần tư vấn</option>
+            </select>
+          </div>
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-goal">MỤC TIÊU CỦA BẠN LÀ GÌ?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-goal" name="goal">
+              <option value="" disabled selected>Chọn mục tiêu</option>
+              <option>Du học</option>
+              <option>Thực tập quốc tế</option>
+              <option>Làm việc ở nước ngoài</option>
+              <option>Định cư lâu dài</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Hàng 4: Mốc thời gian | Nút gửi -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-timeline">BẠN DỰ ĐỊNH ĐI KHI NÀO?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-timeline" name="timeline">
+              <option value="" disabled selected>Chọn mốc thời gian</option>
+              <option>Trong 6 tháng tới</option>
+              <option>6 – 12 tháng</option>
+              <option>Hơn 1 năm</option>
+              <option>Chưa xác định</option>
+            </select>
+          </div>
+        </div>
+        <div class="lf-field lf-field--submit">
+          <button class="lf-submit" type="submit">
+            <span class="lf-submit-label">GỬI THÔNG TIN</span>
+            <span class="lf-submit-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M7 7 17 17"/><path d="M17 7v10H7"/></svg>
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
 </PageLayout>
 
 <style>
@@ -880,6 +985,221 @@ const benefits = [
     #faq .faq-mega { font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; line-height: 0.9 !important; letter-spacing: -0.097em !important; }
     #faq .faq-q { font-size: 0.95rem; padding-top: 2.2rem; padding-bottom: 2.2rem; }
   }
+
+  /* ===== CTA "READY TO SHINE BEYOND BORDERS" + LEAD FORM (bê y hệt trang chủ, bản DARK FIRE) ===== */
+  .cta-final {
+    position: relative;
+    margin-top: -1px;
+    background:
+      radial-gradient(60% 780px at 41% -250px, rgba(242, 66, 11, 0.12) 0%, rgba(242, 66, 11, 0.07) 32%, rgba(242, 66, 11, 0.04) 60%, rgba(242, 66, 11, 0.02) 78%, transparent 92%),
+      #D9D1CA;
+    padding: var(--sec-pad) 0 clamp(2rem, 4vw, 3.5rem);
+    overflow: hidden;
+    text-align: left;
+  }
+  .cta-final::before {
+    content: ''; position: absolute; left: 28%; top: 56%;
+    transform: translate(-50%, -50%);
+    width: 95%; height: 120%; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse 50% 44% at 40% 60%, rgba(242, 66, 11, 0.06) 0%, transparent 62%);
+  }
+  .cta-final-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; }
+  .cta-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  @media (min-width: 992px) {
+    .cta-final .cs-header {
+      width: calc(100vw - var(--sbw, 0px) - 4rem);
+      max-width: 120rem;
+      margin-left: calc(50% - (50vw - var(--sbw, 0px) / 2) + 2rem);
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+  }
+  /* Cascade trái: READY / TO SHINE (+pill) / BEYOND BORDERS? — đồng bộ home/about */
+  .cta-line-2 { display: flex; align-items: flex-start; gap: 1.5rem; margin-top: 0.5rem; }
+  .cta-verb {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9;
+    color: #f2420b; white-space: nowrap;
+  }
+  .cta-line-3 { margin-top: 0.5rem; }
+  .cta-tail {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; line-height: 0.9;
+  }
+  .cta-tail span { display: block; }
+  .cta-final .cs-glass-pill { transform: translateY(2.6rem); width: 210px; }
+
+  .lead-form {
+    position: relative;
+    background: #D9D1CA;
+    padding: clamp(2rem, 4vw, 4rem) 0 var(--sec-pad);
+    overflow: visible;
+  }
+  .lead-form::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background: radial-gradient(58% 42% at 32% 30%, rgba(242, 66, 11, 0.04) 0%, transparent 60%);
+  }
+  .lead-form .container { position: relative; z-index: 1; }
+  .lf-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    column-gap: clamp(2.5rem, 6vw, 7rem);
+    row-gap: clamp(2.2rem, 4vw, 3.4rem);
+  }
+  .lf-field { display: flex; flex-direction: column; min-width: 0; }
+  .lf-label {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1.05rem, 1.7vw, 1.65rem); line-height: 1.15;
+    letter-spacing: -0.01em; text-transform: uppercase;
+    color: #1a1a1a; margin: 0 0 clamp(1rem, 1.8vw, 1.7rem);
+  }
+  .lf-req { color: var(--accent); margin-left: 0.12em; }
+  .lf-input {
+    width: 100%; box-sizing: border-box;
+    background: transparent; border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+    color: #1a1a1a; font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1rem, 1.25vw, 1.15rem);
+    padding: 0.55rem 0 0.95rem; line-height: 1.4;
+    transition: border-color 0.25s ease;
+  }
+  .lf-input::placeholder { color: #A7A7A7; }
+  .lf-input:focus { outline: none; border-bottom-color: var(--accent); }
+  .lf-select-wrap { position: relative; }
+  .lf-select-wrap::after {
+    content: ''; position: absolute; right: 0.25rem; top: 42%;
+    width: 0.62rem; height: 0.62rem; pointer-events: none;
+    border-right: 1.5px solid rgba(0, 0, 0, 0.45);
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.45);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .lf-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    padding-right: 2rem; cursor: pointer; border-radius: 0;
+  }
+  .lf-select option { color: #16100c; }
+  .lf-select-wrap.is-enhanced > .lf-select { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+  .lf-select-wrap.is-enhanced::after { display: none; }
+  .lf-dd { position: relative; }
+  .lf-dd-trigger {
+    width: 100%; box-sizing: border-box;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: transparent; border: none; border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+    color: #1a1a1a; font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.4;
+    padding: 0.55rem 0 0.95rem; cursor: pointer; text-align: left;
+    transition: border-color 0.25s ease;
+  }
+  .lf-dd-trigger:focus-visible, .lf-dd.is-open .lf-dd-trigger { outline: none; border-bottom-color: var(--accent); }
+  .lf-dd-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lf-dd-value.is-placeholder { color: #A7A7A7; }
+  .lf-dd-caret { display: flex; flex: 0 0 auto; color: rgba(0, 0, 0, 0.45); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease; }
+  .lf-dd-caret svg { width: 1.15rem; height: 1.15rem; }
+  .lf-dd.is-open .lf-dd-caret { transform: rotate(180deg); color: var(--accent); }
+  .lf-dd-panel {
+    list-style: none; margin: 0; padding: 0.4rem;
+    position: absolute; top: calc(100% + 0.6rem); left: 0; right: 0; z-index: 60;
+    background: rgba(255, 255, 255, 0.98);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.10); border-radius: 14px;
+    box-shadow: 0 26px 64px -20px rgba(0, 0, 0, 0.18), 0 4px 14px rgba(0, 0, 0, 0.10);
+    max-height: 16rem; overflow-y: auto; overscroll-behavior: contain;
+    opacity: 0; transform: translateY(-8px) scale(0.985); transform-origin: top center; pointer-events: none;
+    transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .lf-dd.is-open .lf-dd-panel { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .lf-dd-option {
+    padding: 0.8rem 0.95rem; border-radius: 9px; cursor: pointer;
+    color: #1a1a1a; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.25;
+    transition: background 0.16s ease, color 0.16s ease;
+  }
+  .lf-dd-option:hover, .lf-dd-option.is-active { background: rgba(242, 66, 11, 0.10); color: #f2420b; }
+  .lf-dd-option.is-selected { color: var(--accent); font-weight: 500; }
+  .lf-dd-panel::-webkit-scrollbar { width: 8px; }
+  .lf-dd-panel::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.18); border-radius: 8px; }
+  .lf-field--submit { justify-content: flex-end; }
+  .lf-submit {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    width: 100%; cursor: pointer; color: #fff; background: var(--accent);
+    border: 1px solid var(--accent); border-radius: 100px;
+    padding: clamp(1.1rem, 1.6vw, 1.5rem) clamp(1.8rem, 2.4vw, 2.4rem);
+    font-family: 'Inter', sans-serif; font-weight: 600;
+    font-size: clamp(0.95rem, 1.1vw, 1.1rem); letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .lf-submit:hover {
+    background: var(--accent-2); border-color: var(--accent-2); transform: translateY(-2px);
+    box-shadow: 0 16px 44px -16px rgba(242, 66, 11, 0.5);
+  }
+  .lf-submit-arrow { display: flex; }
+  @media (min-width: 1024px) {
+    .lf-grid { width: 78%; margin-left: auto; }
+  }
+  @media (max-width: 720px) {
+    .lf-grid { grid-template-columns: 1fr; row-gap: 2rem; }
+    .lf-field--submit { margin-top: 0.5rem; }
+  }
+
+  /* DARK OVERRIDE cho CTA + FORM (trang này dark theme) */
+  .cta-final { overflow: visible !important; }
+  .cta-final::before {
+    display: block !important;
+    width: 100vw !important; height: 130% !important;
+    left: 50% !important; top: 50% !important;
+    background: radial-gradient(circle 470px at 25% 45%,
+      rgba(255, 112, 60, 0.80) 0%,
+      rgba(248, 82, 26, 0.70) 30%,
+      rgba(242, 66, 11, 0.50) 55%,
+      rgba(20, 10, 5, 0.85) 85%,
+      rgba(10, 5, 2, 0.95) 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+  }
+  .cta-final, .lead-form { background: transparent !important; background-image: none !important; }
+  .lead-form::before { display: none !important; }
+  .cta-verb { color: #ffffff !important; }
+  .lf-label, .lf-input, .lf-dd-trigger, .lf-dd-option { color: #ffffff !important; }
+  .lf-input::placeholder, .lf-dd-value.is-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-input, .lf-dd-trigger { border-bottom-color: rgba(255, 255, 255, 0.2) !important; }
+  .lf-select-wrap::after { border-right-color: rgba(255, 255, 255, 0.5) !important; border-bottom-color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-dd-caret { color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-dd-panel { background: rgba(20, 10, 5, 0.85) !important; border-color: rgba(255, 255, 255, 0.1) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important; }
+  .lf-dd-option:hover { background: rgba(255, 255, 255, 0.1) !important; }
+  .lf-dd-option.is-selected { background: rgba(242, 66, 11, 0.2) !important; color: #ffffff !important; }
+
+  /* MOBILE CTA: cascade tiêu đề + pill (bê y hệt trang chủ) */
+  @media (max-width: 980px) {
+    #get-started .cta-header { margin-left: -1.1rem !important; margin-right: -1.1rem !important; }
+    #get-started .cta-verb {
+      font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important;
+      letter-spacing: -0.097em !important;
+      line-height: 0.9 !important;
+      margin-left: 0 !important;
+    }
+    #get-started .cta-tail {
+      font-size: clamp(2rem, 10vw, 2.9rem) !important;
+      letter-spacing: -0.045em !important;
+      line-height: 0.96 !important;
+      margin-right: 0 !important;
+      white-space: nowrap !important;
+    }
+    #get-started .cta-line-2 {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+      gap: 0 !important;
+      margin-top: 0.35rem !important;
+      position: relative !important;
+    }
+    #get-started .cta-line-3 { margin-top: 0.35rem !important; }
+    #get-started .cs-glass-pill {
+      transform: none !important;
+      position: absolute !important;
+      right: 0 !important;
+      left: auto !important;
+      bottom: 2.6rem !important;
+      margin: 0 !important;
+    }
+  }
 </style>
 
 <script>
@@ -1014,5 +1334,129 @@ const benefits = [
     window.addEventListener('resize', () => { measure(); place(); });
     if (window.ResizeObserver) new ResizeObserver(() => { measure(); place(); }).observe(track);
     startAuto();
+  })();
+</script>
+
+<script>
+  /* FAQ: mở mục này thì các mục khác tự đóng (bê từ trang chủ) */
+  (function () {
+    const items = Array.prototype.slice.call(document.querySelectorAll('.faq-item'));
+    items.forEach((it) => it.addEventListener('toggle', () => {
+      if (it.open) items.forEach((o) => { if (o !== it) o.open = false; });
+    }));
+  })();
+</script>
+
+<script>
+  /* Dropdown CUSTOM cho form (bê từ trang chủ) — progressive enhancement, giữ <select> thật để submit/fallback */
+  (function () {
+    function enhance(select) {
+      const wrap = select.closest('.lf-select-wrap');
+      if (!wrap || wrap.classList.contains('is-enhanced')) return;
+
+      const opts = Array.prototype.slice.call(select.options);
+      const placeholder = opts.filter(function (o) { return o.disabled; })[0] || null;
+      const choices = opts.filter(function (o) { return !o.disabled; });
+
+      const dd = document.createElement('div');
+      dd.className = 'lf-dd';
+
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'lf-dd-trigger';
+      trigger.setAttribute('aria-haspopup', 'listbox');
+      trigger.setAttribute('aria-expanded', 'false');
+
+      const valueEl = document.createElement('span');
+      valueEl.className = 'lf-dd-value';
+
+      const caret = document.createElement('span');
+      caret.className = 'lf-dd-caret';
+      caret.setAttribute('aria-hidden', 'true');
+      caret.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+
+      trigger.appendChild(valueEl);
+      trigger.appendChild(caret);
+
+      const panel = document.createElement('ul');
+      panel.className = 'lf-dd-panel';
+      panel.setAttribute('role', 'listbox');
+
+      let activeIdx = -1;
+
+      function syncDisplay() {
+        const sel = select.options[select.selectedIndex];
+        const isPlaceholder = !!(sel && sel.disabled);
+        valueEl.textContent = sel ? sel.text : (placeholder ? placeholder.text : '');
+        valueEl.classList.toggle('is-placeholder', isPlaceholder);
+        const curVal = sel ? sel.value : '';
+        Array.prototype.forEach.call(panel.children, function (li) {
+          li.classList.toggle('is-selected', !isPlaceholder && li.getAttribute('data-value') === curVal);
+        });
+      }
+      function choose(opt) {
+        select.value = opt.value;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        syncDisplay();
+      }
+      choices.forEach(function (opt) {
+        const li = document.createElement('li');
+        li.className = 'lf-dd-option';
+        li.setAttribute('role', 'option');
+        li.setAttribute('data-value', opt.value);
+        li.textContent = opt.text;
+        li.addEventListener('click', function () { choose(opt); closeDd(); trigger.focus(); });
+        panel.appendChild(li);
+      });
+      function setActive(i) {
+        activeIdx = i;
+        Array.prototype.forEach.call(panel.children, function (li, idx) { li.classList.toggle('is-active', idx === i); });
+        if (i >= 0 && panel.children[i]) panel.children[i].scrollIntoView({ block: 'nearest' });
+      }
+      function openDd() {
+        dd.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        let selIdx = -1;
+        const cur = select.options[select.selectedIndex];
+        if (cur && !cur.disabled) selIdx = choices.map(function (o) { return o.value; }).indexOf(cur.value);
+        setActive(selIdx >= 0 ? selIdx : 0);
+      }
+      function closeDd() { dd.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); setActive(-1); }
+      function isOpen() { return dd.classList.contains('is-open'); }
+
+      trigger.addEventListener('click', function (e) { e.stopPropagation(); isOpen() ? closeDd() : openDd(); });
+      trigger.addEventListener('keydown', function (e) {
+        switch (e.key) {
+          case 'ArrowDown': e.preventDefault(); isOpen() ? setActive(Math.min(choices.length - 1, activeIdx + 1)) : openDd(); break;
+          case 'ArrowUp': e.preventDefault(); isOpen() ? setActive(Math.max(0, activeIdx - 1)) : openDd(); break;
+          case 'Enter': case ' ': e.preventDefault(); if (!isOpen()) openDd(); else if (activeIdx >= 0) { choose(choices[activeIdx]); closeDd(); } break;
+          case 'Escape': if (isOpen()) { e.preventDefault(); closeDd(); } break;
+          case 'Tab': if (isOpen()) closeDd(); break;
+        }
+      });
+      document.addEventListener('click', function (e) { if (isOpen() && !dd.contains(e.target)) closeDd(); });
+
+      dd.appendChild(trigger);
+      dd.appendChild(panel);
+      wrap.appendChild(dd);
+      /* Astro scope CSS theo attr data-astro-cid-*; element tạo bằng JS không có -> copy cid từ .lf-select-wrap sang */
+      var cidAttr = null;
+      for (var i = 0; i < wrap.attributes.length; i++) { if (wrap.attributes[i].name.indexOf('data-astro-cid-') === 0) { cidAttr = wrap.attributes[i].name; break; } }
+      if (cidAttr) { dd.setAttribute(cidAttr, ''); var all = dd.querySelectorAll('*'); for (var j = 0; j < all.length; j++) all[j].setAttribute(cidAttr, ''); }
+      wrap.classList.add('is-enhanced');
+      syncDisplay();
+    }
+    function init() { Array.prototype.forEach.call(document.querySelectorAll('.lf-select'), enhance); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+
+  /* --sbw = bề rộng scrollbar dọc -> break-out tiêu đề CTA + FAQ sát 2 mép chuẩn như homepage */
+  (function () {
+    var setSbw = function () {
+      document.documentElement.style.setProperty('--sbw', (window.innerWidth - document.documentElement.clientWidth) + 'px');
+    };
+    setSbw();
+    window.addEventListener('resize', setSbw, { passive: true });
   })();
 </script>
