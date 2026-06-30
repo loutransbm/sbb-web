@@ -469,6 +469,27 @@ const truths = [
     </div>
   </section>
 
+  <!-- ===== VISA GALLERY — visa 407 Úc đã duyệt (giống section VISA APPROVED trang J-1) ===== -->
+  <section class="pr-sec visa-sec">
+    <div class="pr-wrap">
+      <div class="visa-head">
+        <span class="pr-eyebrow">Our Students</span>
+        <div class="cs-header">
+          <div class="cs-line cs-line-1"><span class="cs-text-white">VISA</span></div>
+          <div class="cs-line cs-line-1"><span class="cs-text-white">APPROVED</span></div>
+        </div>
+      </div>
+      <div class="visa-grid">
+        <div class="visa-item"><img src="/images/visa-au/1782803021184_789313747082018093_7552048111139923223_913302399241a6bd79d451fc1317e09c.jpg" alt="Visa 407 Úc đã duyệt" loading="lazy" /></div>
+        <div class="visa-item"><img src="/images/visa-au/1782804259358_789313747082018093_7552048111139923223_a43369a11167d94d7d0c6cc29d390cf3.jpg" alt="Visa 407 Úc đã duyệt" loading="lazy" /></div>
+        <div class="visa-item"><img src="/images/visa-au/1782805294818_789313747082018093_7552048111139923223_ec1c15569cf5013989cb7dc8db3c2864.jpg" alt="Visa 407 Úc đã duyệt" loading="lazy" /></div>
+        <div class="visa-item"><img src="/images/visa-au/1782806359029_789313747082018093_7552048111139923223_f0629726e2330fc13791d2d2a8640364.jpg" alt="Visa 407 Úc đã duyệt" loading="lazy" /></div>
+        <div class="visa-item"><img src="/images/visa-au/1782806751583_789313747082018093_7552048111139923223_232eb59a1d9bb3c19bf8e2b4a2001ab1.jpg" alt="Visa 407 Úc đã duyệt" loading="lazy" /></div>
+        <div class="visa-item"><img src="/images/visa-au/1782806981662_789313747082018093_7552048111139923223_04eb0a677bba47794f1836b3760bd9ff.jpg" alt="Visa 407 Úc đã duyệt" loading="lazy" /></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== REALITY + PARTNER ===== -->
   <section class="pr-sec">
     <div class="pr-wrap">
@@ -694,6 +715,8 @@ const truths = [
   .pr-row__body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.96rem; line-height: 1.6; color: rgba(255,255,255,0.62); margin: 0; }
 
   /* ===== ROADMAP — timeline (line lửa + node số), bê từ trang J-1, chữ theo chuẩn không-đậm của 407 ===== */
+  /* Fix đường chia cắt với section trên: cho beam tràn dọc tự nhiên (không cắt cứng), vẫn clip ngang để không tràn trang */
+  .pr-sec.rm-sec { overflow-x: clip; overflow-y: visible; margin-top: -1px; }
   .rm-head { margin-bottom: clamp(3.5rem, 6vw, 6rem); }
   .rm-desc { margin: clamp(1rem, 1.6vw, 1.6rem) 0 0; max-width: 42rem; font-family: var(--font-body); font-weight: 300; font-size: clamp(1rem, 1.1vw, 1.15rem); color: rgba(255,255,255,0.6); line-height: 1.55; }
   .rm-card { position: relative; overflow: hidden; border-radius: clamp(24px, 2.6vw, 40px); border: 1px solid rgba(255,255,255,0.08); background: linear-gradient(180deg, rgba(255,255,255,0.028) 0%, rgba(255,255,255,0.008) 60%, rgba(255,255,255,0.004) 100%); padding: clamp(2.75rem, 5vw, 5rem) clamp(2rem, 4.5vw, 4.5rem); }
@@ -711,6 +734,19 @@ const truths = [
   .rm-step:nth-child(even) .rm-body { margin-right: auto; max-width: 27rem; }
   .rm-note { margin: clamp(2.5rem, 4vw, 3.75rem) auto 0; padding-top: clamp(1.5rem, 2.5vw, 2rem); border-top: 1px solid rgba(255,255,255,0.08); max-width: 52rem; text-align: center; font-family: var(--font-body); font-weight: 300; font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
   .rm-note strong { color: #ff7a52; font-weight: 400; }
+
+  /* ===== VISA GALLERY — visa Úc đã duyệt (giống J-1; khổ DỌC vì là thư cấp visa A4) ===== */
+  .visa-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .visa-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
+  .visa-item {
+    border-radius: 22px; overflow: hidden; aspect-ratio: 17 / 24;
+    background: #1a0a04; border: 1px solid rgba(242,66,11,0.22);
+    box-shadow: 0 12px 40px -10px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.07);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+  .visa-item:hover { transform: translateY(-4px); border-color: rgba(242,66,11,0.55); box-shadow: 0 24px 56px -16px rgba(0,0,0,0.7), 0 0 32px -8px rgba(242,66,11,0.18), inset 0 1px 0 rgba(255,255,255,0.10); }
+  .visa-item img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  @media (max-width: 600px) { .visa-grid { grid-template-columns: 1fr; gap: 0.8rem; } .visa-item { border-radius: 14px; } }
   @media (max-width: 760px) {
     .rm-timeline::before { left: calc(var(--node) / 2); }
     .rm-step { grid-template-columns: var(--node) 1fr; column-gap: clamp(1.1rem, 3vw, 1.6rem); align-items: start; }
