@@ -714,9 +714,9 @@ const benefits = [
     grid-template-columns: repeat(2, 1fr);
     gap: clamp(0.75rem, 1.5vw, 1.25rem);
   }
-  .visa-item { border-radius: 18px; overflow: hidden; aspect-ratio: 9 / 16; }
-  .visa-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
-  .visa-item:hover img { transform: scale(1.03); }
+  .visa-item { border-radius: 18px; overflow: hidden; background: rgba(255,255,255,0.03); }
+  .visa-item img { width: 100%; height: auto; display: block; }
+  .visa-item:hover img { transform: scale(1.02); transition: transform 0.4s ease; }
   @media (max-width: 600px) { .visa-grid { gap: 0.5rem; } .visa-item { border-radius: 12px; } }
 </style>
 
