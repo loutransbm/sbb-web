@@ -711,14 +711,13 @@ const benefits = [
   .visa-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
   .visa-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: clamp(0.5rem, 1vw, 0.9rem);
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
   }
-  .visa-item { border-radius: 14px; overflow: hidden; aspect-ratio: 9 / 16; }
+  .visa-item { border-radius: 18px; overflow: hidden; aspect-ratio: 9 / 16; }
   .visa-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
-  .visa-item:hover img { transform: scale(1.04); }
-  @media (max-width: 980px) { .visa-grid { grid-template-columns: repeat(4, 1fr); } }
-  @media (max-width: 600px) { .visa-grid { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; } .visa-item { border-radius: 10px; } }
+  .visa-item:hover img { transform: scale(1.03); }
+  @media (max-width: 600px) { .visa-grid { gap: 0.5rem; } .visa-item { border-radius: 12px; } }
 </style>
 
 <script>
