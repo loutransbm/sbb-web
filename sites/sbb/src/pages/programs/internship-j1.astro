@@ -463,7 +463,8 @@ const benefits = [
   .pr-btn--light:hover { background: rgba(255,255,255,0.12); }
 
   /* ===== SECTIONS ===== */
-  .pr-sec { position: relative; overflow: clip; padding-block: clamp(3.5rem, 7vw, 7rem); }
+  .pr-sec { position: relative; overflow: visible; padding-block: clamp(3.5rem, 7vw, 7rem); margin-top: -1px; }
+  .pr-sec--beam { overflow-x: hidden; }
   .pr-sec--beam { z-index: 1; }
   .pr-beam { position: absolute; top: -60px; width: 900px; height: 760px; pointer-events: none; z-index: 0; filter: blur(80px);
     background: radial-gradient(ellipse 50% 50% at 50% 42%, rgba(255,112,60,0.30) 0%, rgba(242,66,11,0.16) 40%, rgba(242,66,11,0.05) 66%, transparent 86%); }
@@ -593,7 +594,7 @@ const benefits = [
 
   /* ===== ABOUT J-1 — card kính + glow đỉnh (kiểu MMRS CO.) ===== */
   /* A: ABOUT = panel kính trầm (không glow cam) · B: +đệm đáy tạo dải tối nghỉ trước INDUSTRIES */
-  .about-sec { position: relative; padding-bottom: clamp(1.75rem, 3vw, 2.75rem); margin-top: -2px; }
+  .about-sec { position: relative; padding-bottom: clamp(1.75rem, 3vw, 2.75rem); }
   .about-card { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; border-radius: clamp(28px, 3vw, 46px); border: 1px solid rgba(255,255,255,0.08); background: linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.012) 42%, rgba(255,255,255,0.004) 100%); padding: clamp(3rem, 6vw, 6.5rem) clamp(2rem, 5vw, 5.5rem); min-height: clamp(520px, 58vh, 640px); overflow: hidden; }
   /* tí ánh sáng cam hắt lên từ đáy card (clip theo bo góc) */
   .about-card::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: min(74%, 58rem); height: clamp(190px, 25vw, 300px); z-index: 0; pointer-events: none; background: radial-gradient(60% 100% at 50% 100%, rgba(255,92,38,0.32) 0%, rgba(242,66,11,0.15) 36%, rgba(242,66,11,0.05) 62%, transparent 78%); filter: blur(14px); }
