@@ -1025,21 +1025,20 @@ const destinations = [
       padding-bottom: 2.2rem !important;
     }
 
-    /* TAB = pill CUỘN NGANG như Omni (không xuống dòng) */
+    /* TAB = 3 chip bằng nhau, vừa hàng ngang (cân đối) */
     .cs-tabs {
       flex-wrap: nowrap !important;
-      overflow-x: auto !important;
-      -webkit-overflow-scrolling: touch !important;
-      scrollbar-width: none !important;
-      gap: 0.6rem !important;
-      padding-bottom: 0.25rem !important;
+      gap: 0.4rem !important;
+      width: 100% !important;
     }
-    .cs-tabs::-webkit-scrollbar { display: none !important; }
     .cs-tab {
-      flex: 0 0 auto !important;
+      flex: 1 !important;
+      text-align: center !important;
       white-space: nowrap !important;
-      padding: 0.7rem 1.5rem !important;
-      font-size: 0.82rem !important;
+      padding: 0.65rem 0.3rem !important;
+      font-size: 0.72rem !important;
+      min-width: 0 !important;
+      letter-spacing: 0.06em !important;
     }
 
     /* CARD theo bố cục Omni: 1 cột — TÊN to · 2 khối · ẢNH (chỗ biểu đồ) · 3 SỐ ngang ở ĐÁY */
