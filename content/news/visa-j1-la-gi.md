@@ -63,6 +63,8 @@ Hai diện này giống nhau ở chỗ đều là làm thực tế tại một h
 | Thời hạn tối đa | 12 tháng | 18 tháng |
 | Bản chất | Thực tập theo ngành đang học | Đào tạo nâng cao theo nghề |
 
+![Bảng so sánh diện Intern và Trainee của J-1](/images/j1-01/graphic-1.webp)
+
 Nguồn điều kiện: chương trình BridgeUSA của Bộ Ngoại giao Mỹ. Điều kiện chi tiết có thể đổi theo thời điểm và theo từng sponsor, nên kiểm tra lại trước khi nộp.
 
 <a id="so-sanh"></a>
@@ -94,6 +96,8 @@ Một điểm sâu hơn cái bảng: J-1 là visa không định cư. Khi phỏn
 6. Kết thúc, có 30 ngày grace để thu xếp, rồi về nước hoặc chuyển hướng hợp pháp khác.
 
 Mỗi bước này có một bài riêng đi sâu, từ DS-2019, DS-7002, phỏng vấn, tới thuế và chuyện sau chương trình.
+
+![Đồ họa vòng đời một kỳ J-1 từ hồ sơ tới khi về nước](/images/j1-01/graphic-2.webp)
 
 <a id="hieu-lam"></a>
 

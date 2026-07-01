@@ -158,6 +158,10 @@ const dateISO = d.published.toISOString().slice(0, 10);
     border-left: 3px solid var(--accent, #f2420b); color: rgba(255,255,255,0.7); font-style: italic;
   }
   .na-prose :global(hr) { border: 0; border-top: 1px solid rgba(255,255,255,0.12); margin: 2.4rem 0; }
+  .na-prose :global(img) { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); margin: 1.9rem 0; background: linear-gradient(160deg, #2a1109, #160a05); }
+  .na-prose :global(figure) { margin: 1.9rem 0; }
+  .na-prose :global(figure img) { margin: 0; }
+  .na-prose :global(figcaption) { margin-top: 0.6rem; font-size: 0.85rem; color: rgba(255,255,255,0.52); text-align: center; }
   /* Tables */
   .na-prose :global(table) {
     width: 100%; border-collapse: collapse; margin: 1.6rem 0; font-size: 0.94rem;
