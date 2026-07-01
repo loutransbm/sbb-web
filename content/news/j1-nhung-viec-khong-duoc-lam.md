@@ -34,6 +34,8 @@ Vị trí của bạn phải là đào tạo hoặc thực tập đúng ngành, 
 
 ## Danh sách việc không được làm
 
+![Đồ họa danh sách công việc bị cấm trong J-1](/images/j1-05/graphic-1.webp)
+
 - Lao động phổ thông hoặc việc thời vụ không cần kỹ năng.
 - Vị trí có trên 20% là việc hành chính, văn thư, giấy tờ.
 - Chăm trẻ, trông trẻ, làm ở nhà trẻ.
@@ -61,6 +63,8 @@ Quan trọng hơn, chúng bảo vệ bạn. Một vị trí có lộ trình đà
 <a id="dau-hieu"></a>
 
 ## Dấu hiệu một vị trí trá hình
+
+![Khối dấu hiệu host hoặc vị trí không hợp lệ](/images/j1-05/graphic-2.webp)
 
 Vài cờ đỏ thường thấy:
 
