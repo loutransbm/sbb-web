@@ -38,7 +38,8 @@ present.sort((a, b) => ((catOrder.indexOf(a) + 1) || 99) - ((catOrder.indexOf(b)
 const blogCats = [{ id: 'all', label: 'Tất cả' }, ...present.map((c) => ({ id: c, label: c }))];
 
 // Mobile = kiểu tạp chí: carousel bài nổi bật (lướt ngang) + chip đổi chủ đề + mỗi chủ đề vài bài mới nhất.
-const featured = posts.slice(0, 5);
+const LEAD = 5; // số card carousel nổi bật (overview: mới nhất toàn site; khi lọc: mới nhất CỦA chủ đề đó)
+const featured = posts.slice(0, LEAD);
 const groups = present
   .map((theme) => ({ theme, posts: posts.filter((p) => p.cat === theme) }))
   .filter((g) => g.posts.length);
@@ -120,8 +121,8 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
           ))}
         </div>
 
-        <!-- Nổi bật: carousel LƯỚT NGANG (scroll-snap) + chấm chỉ vị trí -->
-        <div class="mag-feat" data-overview-only>
+        <!-- Nổi bật (overview): carousel LƯỚT NGANG bài mới nhất TOÀN SITE + chấm -->
+        <div class="mag-feat mag-feat--all" data-overview-only>
           <div class="mag-feat__rail">
             {featured.map((p) => (
               <a href={p.href} class="mag-featcard">
@@ -143,9 +144,29 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
         {groups.map((g) => (
           <section class="blog-group" data-theme={g.theme}>
             <h2 class="blog-group__title">{g.theme}</h2>
+            <!-- Carousel nổi bật RIÊNG của chủ đề — chỉ hiện khi lọc vào chủ đề này -->
+            <div class="mag-feat mag-feat--theme">
+              <div class="mag-feat__rail">
+                {g.posts.slice(0, LEAD).map((p) => (
+                  <a href={p.href} class="mag-featcard">
+                    <div class="mag-featcard__media"><img src={p.img} alt={p.title} loading="lazy" onerror="this.closest('.mag-featcard__media').style.display='none'" /></div>
+                    <div class="mag-featcard__body">
+                      <span class="mag-featcard__tag">{p.catLabel}</span>
+                      <h3 class="mag-featcard__title">{p.title}</h3>
+                      <time class="mag-featcard__date">{p.date}</time>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              {g.posts.length > 1 && (
+                <div class="mag-dots" aria-hidden="true">
+                  {g.posts.slice(0, LEAD).map((_, i) => (<span class:list={["mag-dot", i === 0 && "is-active"]}></span>))}
+                </div>
+              )}
+            </div>
             <div class="blog-row">
               {g.posts.map((p, i) => (
-                <a href={p.href} class="blog-rowcard" data-extra={i >= CAP ? "1" : undefined}>
+                <a href={p.href} class="blog-rowcard" data-lead={i < LEAD ? "1" : undefined} data-extra={i >= CAP ? "1" : undefined}>
                   <span class="blog-rowcard__thumb"><img src={p.img} alt="" loading="lazy" onerror="this.style.display='none'" /></span>
                   <span class="blog-rowcard__body">
                     <span class="blog-rowcard__title">{p.title}</span>
@@ -555,14 +576,22 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
     }
     .blog-more:active { background: rgba(242, 66, 11, 0.10); }
 
+    /* Carousel riêng của chủ đề: ẩn mặc định (chỉ bật khi lọc vào chủ đề) */
+    .mag-feat--theme { display: none; }
+
     /* --- OVERVIEW: mỗi chủ đề chỉ hiện CAP bài; ẩn bài dư --- */
     .blog-mag[data-mode="overview"] .blog-rowcard[data-extra] { display: none; }
 
-    /* --- FILTERED (đã chọn 1 chủ đề): ẩn carousel + chủ đề khác; hiện ĐỦ bài chủ đề đang chọn --- */
+    /* --- FILTERED (đã chọn 1 chủ đề): GIỮ bố cục "Tất cả" nhưng gói trong 1 chủ đề.
+       Ẩn carousel tổng + chủ đề khác + tiêu đề nhóm; hiện carousel RIÊNG của chủ đề +
+       phần bài CÒN LẠI (bỏ 5 bài đã lên carousel để không lặp). --- */
     .blog-mag[data-mode="filtered"] [data-overview-only] { display: none; }
     .blog-mag[data-mode="filtered"] .blog-group { display: none; }
     .blog-mag[data-mode="filtered"] .blog-group.is-active { display: block; }
+    .blog-mag[data-mode="filtered"] .blog-group.is-active .blog-group__title { display: none; }
+    .blog-mag[data-mode="filtered"] .blog-group.is-active .mag-feat--theme { display: block; }
     .blog-mag[data-mode="filtered"] .blog-group.is-active .blog-rowcard[data-extra] { display: flex; }
+    .blog-mag[data-mode="filtered"] .blog-group.is-active .blog-rowcard[data-lead] { display: none; }
     .blog-mag[data-mode="filtered"] .blog-group.is-active .blog-more { display: none; }
   }
 
@@ -932,10 +961,11 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
     chips.forEach(function (c) { c.addEventListener('click', function () { selectTheme(c.getAttribute('data-theme'), true); }); });
     mores.forEach(function (b) { b.addEventListener('click', function () { selectTheme(b.getAttribute('data-theme'), true); }); });
 
-    // Chấm chỉ vị trí carousel nổi bật
-    var rail = mag.querySelector('.mag-feat__rail');
-    var dots = Array.prototype.slice.call(mag.querySelectorAll('.mag-dot'));
-    if (rail && dots.length) {
+    // Chấm chỉ vị trí cho MỌI carousel (tổng + riêng từng chủ đề)
+    Array.prototype.slice.call(mag.querySelectorAll('.mag-feat')).forEach(function (feat) {
+      var rail = feat.querySelector('.mag-feat__rail');
+      var dots = Array.prototype.slice.call(feat.querySelectorAll('.mag-dot'));
+      if (!rail || dots.length < 2) return;
       var card = rail.querySelector('.mag-featcard');
       var ticking = false;
       rail.addEventListener('scroll', function () {
@@ -947,7 +977,7 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
           ticking = false;
         });
       }, { passive: true });
-    }
+    });
   })();
 
   /* Dropdown CUSTOM cho form (clean & smooth) — progressive enhancement:
