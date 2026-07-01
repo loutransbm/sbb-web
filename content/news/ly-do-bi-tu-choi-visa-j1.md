@@ -27,6 +27,8 @@ published: 2026-06-14
 
 ## Các lý do hay gặp
 
+![Đồ họa các lý do bị từ chối visa J-1](/images/j1-15/graphic-1.webp)
+
 - Chưa chứng minh được ý định quay về, tức ràng buộc gia đình, học tập, công việc ở Việt Nam còn yếu trong mắt viên chức.
 - Chương trình mơ hồ, hoặc vị trí không khớp ngành học và nghề.
 - Tiếng Anh chưa đủ để theo chương trình.
@@ -56,6 +58,8 @@ Biết mình rơi vào loại nào thì biết bước tiếp theo nên làm gì
 <a id="nop-lai"></a>
 
 ## Các bước nộp lại sau khi trượt
+
+![Đồ họa các bước nộp lại visa J-1](/images/j1-15/graphic-2.webp)
 
 1. **Hỏi rõ lý do.** Xác định bạn rớt 214(b) hay bị 221(g), vì hai loại xử lý khác nhau.
 2. **Đánh giá điểm yếu thật.** Thường là ràng buộc về nước hoặc sự rõ ràng của chương trình.
