@@ -30,6 +30,8 @@ Tiền nhà là khoản lớn nhất, và nó chênh lệch mạnh giữa các t
 
 Ngoài tiền nhà, chi phí đi lại, ăn uống, và sinh hoạt cũng khác nhau theo vùng. Vì vậy, hai bạn cùng lương nhưng ở hai thành phố khác nhau có thể có số dư rất khác.
 
+![Đồ họa so sánh chi phí sống giữa các nhóm thành phố](/images/j1-19/graphic-1.webp)
+
 <a id="nhom-chi-phi"></a>
 
 ## Các nhóm chi phí
@@ -41,6 +43,8 @@ Ngoài tiền nhà, chi phí đi lại, ăn uống, và sinh hoạt cũng khác 
 <a id="toi-uu"></a>
 
 ## Cách tối ưu
+
+![Khối mẹo tối ưu chi phí sống khi đi J-1](/images/j1-19/graphic-2.webp)
 
 - Ở ghép để chia tiền nhà, khoản lớn nhất.
 - Tự nấu ăn phần lớn các bữa.
