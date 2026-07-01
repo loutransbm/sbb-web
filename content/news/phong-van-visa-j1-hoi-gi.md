@@ -34,6 +34,8 @@ Mọi câu hỏi đều xoay quanh ba trục. Một, chương trình có thật 
 
 ## Nhóm câu hỏi và câu trả lời mẫu
 
+![Đồ họa các nhóm câu hỏi phỏng vấn J-1](/images/j1-14/graphic-1.webp)
+
 Các câu trả lời dưới là mẫu để tham khảo. Hãy điều chỉnh theo tình huống thật của bạn, và luôn trả lời trung thực.
 
 **Về chương trình. "Bạn sẽ làm gì ở Mỹ?"**
@@ -63,6 +65,8 @@ Sắp gọn theo thứ tự để khi được hỏi là lấy ra ngay.
 <a id="luyen-tap"></a>
 
 ## Kế hoạch luyện trong 1 tuần
+
+![Đồ họa kế hoạch luyện phỏng vấn J-1](/images/j1-14/graphic-2.webp)
 
 1. **Ngày 1 tới 2.** Viết câu trả lời thật của bạn cho ba nhóm câu hỏi, ngắn gọn.
 2. **Ngày 3 tới 4.** Nói to trước gương hoặc ghi âm, nghe lại, cắt bớt phần thừa.
