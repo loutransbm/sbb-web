@@ -37,11 +37,12 @@ const present = Array.from(new Set(posts.map((p) => p.cat)));
 present.sort((a, b) => ((catOrder.indexOf(a) + 1) || 99) - ((catOrder.indexOf(b) + 1) || 99));
 const blogCats = [{ id: 'all', label: 'Tất cả' }, ...present.map((c) => ({ id: c, label: c }))];
 
-// Mobile = kiểu tạp chí: 1 bài nổi bật (mới nhất) + các bài còn lại gom theo chủ đề.
-const feature = posts[0];
+// Mobile = kiểu tạp chí: carousel bài nổi bật (lướt ngang) + chip đổi chủ đề + mỗi chủ đề vài bài mới nhất.
+const featured = posts.slice(0, 5);
 const groups = present
-  .map((theme) => ({ theme, posts: posts.filter((p) => p.cat === theme && p.slug !== feature?.slug) }))
+  .map((theme) => ({ theme, posts: posts.filter((p) => p.cat === theme) }))
   .filter((g) => g.posts.length);
+const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, còn lại ẩn sau nút "Xem tất cả"
 ---
 
 <PageLayout
@@ -109,24 +110,42 @@ const groups = present
       </div>
       <p class="blog-empty" hidden>Không tìm thấy bài viết phù hợp với bộ lọc.</p>
 
-      <!-- ===== MAGAZINE (chỉ mobile ≤680px): 1 bài nổi bật + gom theo chủ đề ===== -->
-      <div class="blog-mag">
-        {feature && (
-          <a href={feature.href} class="blog-feature">
-            <div class="blog-feature__media"><img src={feature.img} alt={feature.title} loading="lazy" onerror="this.closest('.blog-feature__media').style.display='none'" /></div>
-            <div class="blog-feature__body">
-              <span class="blog-feature__tag">{feature.catLabel}</span>
-              <h3 class="blog-feature__title">{feature.title}</h3>
-              <time class="blog-feature__date">{feature.date}</time>
-            </div>
-          </a>
-        )}
+      <!-- ===== MAGAZINE (chỉ mobile ≤680px): chip đổi chủ đề + carousel nổi bật + mỗi chủ đề vài bài ===== -->
+      <div class="blog-mag" data-mode="overview">
+        <!-- Chip đổi chủ đề: ngay đầu, thấy hết chủ đề, vuốt ngang, chạm để lọc -->
+        <div class="mag-chips" role="tablist" aria-label="Chọn chủ đề">
+          <button type="button" class="mag-chip is-active" data-theme="all">Tất cả</button>
+          {groups.map((g) => (
+            <button type="button" class="mag-chip" data-theme={g.theme}>{g.theme}</button>
+          ))}
+        </div>
+
+        <!-- Nổi bật: carousel LƯỚT NGANG (scroll-snap) + chấm chỉ vị trí -->
+        <div class="mag-feat" data-overview-only>
+          <div class="mag-feat__rail">
+            {featured.map((p) => (
+              <a href={p.href} class="mag-featcard">
+                <div class="mag-featcard__media"><img src={p.img} alt={p.title} loading="lazy" onerror="this.closest('.mag-featcard__media').style.display='none'" /></div>
+                <div class="mag-featcard__body">
+                  <span class="mag-featcard__tag">{p.catLabel}</span>
+                  <h3 class="mag-featcard__title">{p.title}</h3>
+                  <time class="mag-featcard__date">{p.date}</time>
+                </div>
+              </a>
+            ))}
+          </div>
+          <div class="mag-dots" aria-hidden="true">
+            {featured.map((_, i) => (<span class:list={["mag-dot", i === 0 && "is-active"]}></span>))}
+          </div>
+        </div>
+
+        <!-- Các chủ đề: overview chỉ hiện CAP bài mới nhất, còn lại ẩn sau "Xem tất cả" -->
         {groups.map((g) => (
-          <section class="blog-group">
+          <section class="blog-group" data-theme={g.theme}>
             <h2 class="blog-group__title">{g.theme}</h2>
             <div class="blog-row">
-              {g.posts.map((p) => (
-                <a href={p.href} class="blog-rowcard">
+              {g.posts.map((p, i) => (
+                <a href={p.href} class="blog-rowcard" data-extra={i >= CAP ? "1" : undefined}>
                   <span class="blog-rowcard__thumb"><img src={p.img} alt="" loading="lazy" onerror="this.style.display='none'" /></span>
                   <span class="blog-rowcard__body">
                     <span class="blog-rowcard__title">{p.title}</span>
@@ -138,6 +157,9 @@ const groups = present
                 </a>
               ))}
             </div>
+            {g.posts.length > CAP && (
+              <button type="button" class="blog-more" data-theme={g.theme}>Xem tất cả {g.posts.length} bài →</button>
+            )}
           </section>
         ))}
       </div>
@@ -442,26 +464,56 @@ const groups = present
     .blog-mag { display: block; }
     .blog-section { padding-top: clamp(0.5rem, 2vw, 1.5rem); }
 
-    /* --- Bài nổi bật (ảnh lớn trên cùng) --- */
-    .blog-feature {
-      display: block; text-decoration: none; overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 22px;
-      background: transparent; margin-bottom: 2.2rem;
+    /* --- Chip đổi chủ đề: dải vuốt ngang, tràn 2 mép, ngay đầu trang --- */
+    .mag-chips {
+      display: flex; gap: 0.5rem; overflow-x: auto; scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      margin: 0 -1.5rem 1.7rem; padding: 0 1.5rem 0.15rem; scroll-margin-top: 82px;
+    }
+    .mag-chips::-webkit-scrollbar { display: none; }
+    .mag-chip {
+      flex: 0 0 auto; scroll-snap-align: start; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.01em;
+      color: rgba(255, 255, 255, 0.8); white-space: nowrap;
+      padding: 0.5rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.05);
+      transition: background .25s ease, border-color .25s ease, color .25s ease;
+    }
+    .mag-chip.is-active {
+      color: #fff; border-color: transparent;
+      background: linear-gradient(180deg, #ff5c26 0%, #f2420b 100%);
+      box-shadow: 0 10px 24px -10px rgba(242, 66, 11, 0.5);
+    }
+
+    /* --- Nổi bật: carousel LƯỚT NGANG (peek card kế) + chấm --- */
+    .mag-feat { margin: 0 -1.5rem 2.3rem; }
+    .mag-feat__rail {
+      display: flex; gap: 0.9rem; overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 1.5rem 0.2rem;
+    }
+    .mag-feat__rail::-webkit-scrollbar { display: none; }
+    .mag-featcard {
+      flex: 0 0 84%; scroll-snap-align: center; text-decoration: none; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 20px; background: transparent;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
-    .blog-feature__media { aspect-ratio: 16 / 10; background: linear-gradient(160deg, #2a1109, #160a05); }
-    .blog-feature__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .blog-feature__body { padding: 1.1rem 1.15rem 1.3rem; }
-    .blog-feature__tag {
+    .mag-featcard__media { aspect-ratio: 16 / 10; background: linear-gradient(160deg, #2a1109, #160a05); }
+    .mag-featcard__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .mag-featcard__body { padding: 1rem 1.05rem 1.2rem; }
+    .mag-featcard__tag {
       display: inline-block; font-family: var(--font-headline); font-weight: 600;
-      font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b;
-      border: 1px solid rgba(242, 66, 11, 0.4); border-radius: 999px; padding: 0.24rem 0.7rem; margin-bottom: 0.7rem;
+      font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b;
+      border: 1px solid rgba(242, 66, 11, 0.4); border-radius: 999px; padding: 0.22rem 0.65rem; margin-bottom: 0.6rem;
     }
-    .blog-feature__title {
-      font-family: 'Inter', sans-serif; font-weight: 500; font-size: 1.35rem; line-height: 1.25;
-      color: #fff; letter-spacing: -0.02em; margin: 0 0 0.6rem;
+    .mag-featcard__title {
+      font-family: 'Inter', sans-serif; font-weight: 500; font-size: 1.2rem; line-height: 1.28;
+      color: #fff; letter-spacing: -0.02em; margin: 0 0 0.5rem;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     }
-    .blog-feature__date { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.78rem; color: rgba(255, 255, 255, 0.45); }
+    .mag-featcard__date { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.76rem; color: rgba(255, 255, 255, 0.45); }
+    .mag-dots { display: flex; justify-content: center; gap: 0.4rem; margin-top: 0.9rem; }
+    .mag-dot { width: 6px; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.25); transition: width .25s ease, background .25s ease; }
+    .mag-dot.is-active { width: 18px; background: #f2420b; }
 
     /* --- Nhóm chủ đề: tiêu đề nhỏ + đường kẻ --- */
     .blog-group { margin-bottom: 1.9rem; }
@@ -493,6 +545,25 @@ const groups = present
     }
     .blog-rowcard__date { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.72rem; color: rgba(255, 255, 255, 0.42); }
     .blog-rowcard__arrow { flex: 0 0 auto; display: flex; color: rgba(255, 255, 255, 0.4); }
+
+    /* --- Nút "Xem tất cả" cuối mỗi nhóm --- */
+    .blog-more {
+      margin-top: 1rem; cursor: pointer; display: inline-flex; align-items: center;
+      font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.01em;
+      color: #f2420b; background: transparent; border: 1px solid rgba(242, 66, 11, 0.4);
+      border-radius: 999px; padding: 0.5rem 1.1rem;
+    }
+    .blog-more:active { background: rgba(242, 66, 11, 0.10); }
+
+    /* --- OVERVIEW: mỗi chủ đề chỉ hiện CAP bài; ẩn bài dư --- */
+    .blog-mag[data-mode="overview"] .blog-rowcard[data-extra] { display: none; }
+
+    /* --- FILTERED (đã chọn 1 chủ đề): ẩn carousel + chủ đề khác; hiện ĐỦ bài chủ đề đang chọn --- */
+    .blog-mag[data-mode="filtered"] [data-overview-only] { display: none; }
+    .blog-mag[data-mode="filtered"] .blog-group { display: none; }
+    .blog-mag[data-mode="filtered"] .blog-group.is-active { display: block; }
+    .blog-mag[data-mode="filtered"] .blog-group.is-active .blog-rowcard[data-extra] { display: flex; }
+    .blog-mag[data-mode="filtered"] .blog-group.is-active .blog-more { display: none; }
   }
 
   /* ============================================
@@ -832,6 +903,51 @@ const groups = present
       apply();
     }));
     if (search) search.addEventListener('input', apply);
+  })();
+
+  /* Magazine mobile: chip đổi chủ đề (lọc) + nút "Xem tất cả" + chấm carousel nổi bật */
+  (function () {
+    var mag = document.querySelector('.blog-mag');
+    if (!mag) return;
+    var chips = Array.prototype.slice.call(mag.querySelectorAll('.mag-chip'));
+    var groups = Array.prototype.slice.call(mag.querySelectorAll('.blog-group'));
+    var mores = Array.prototype.slice.call(mag.querySelectorAll('.blog-more'));
+    var chipsBar = mag.querySelector('.mag-chips');
+
+    function setActiveChip(theme) {
+      chips.forEach(function (c) { c.classList.toggle('is-active', c.getAttribute('data-theme') === theme); });
+    }
+    function selectTheme(theme, scroll) {
+      if (!theme || theme === 'all') {
+        mag.setAttribute('data-mode', 'overview');
+        groups.forEach(function (g) { g.classList.remove('is-active'); });
+        setActiveChip('all');
+      } else {
+        mag.setAttribute('data-mode', 'filtered');
+        groups.forEach(function (g) { g.classList.toggle('is-active', g.getAttribute('data-theme') === theme); });
+        setActiveChip(theme);
+      }
+      if (scroll && chipsBar) chipsBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    chips.forEach(function (c) { c.addEventListener('click', function () { selectTheme(c.getAttribute('data-theme'), true); }); });
+    mores.forEach(function (b) { b.addEventListener('click', function () { selectTheme(b.getAttribute('data-theme'), true); }); });
+
+    // Chấm chỉ vị trí carousel nổi bật
+    var rail = mag.querySelector('.mag-feat__rail');
+    var dots = Array.prototype.slice.call(mag.querySelectorAll('.mag-dot'));
+    if (rail && dots.length) {
+      var card = rail.querySelector('.mag-featcard');
+      var ticking = false;
+      rail.addEventListener('scroll', function () {
+        if (ticking) return; ticking = true;
+        requestAnimationFrame(function () {
+          var step = card ? card.getBoundingClientRect().width + 14 : 1; // 14 ≈ gap 0.9rem
+          var idx = Math.max(0, Math.min(dots.length - 1, Math.round(rail.scrollLeft / step)));
+          dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
+          ticking = false;
+        });
+      }, { passive: true });
+    }
   })();
 
   /* Dropdown CUSTOM cho form (clean & smooth) — progressive enhancement:
