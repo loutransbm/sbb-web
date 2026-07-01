@@ -36,6 +36,12 @@ const catOrder = ['Visa & Hồ sơ', 'Ngành & Công việc', 'Chi phí & Thuế
 const present = Array.from(new Set(posts.map((p) => p.cat)));
 present.sort((a, b) => ((catOrder.indexOf(a) + 1) || 99) - ((catOrder.indexOf(b) + 1) || 99));
 const blogCats = [{ id: 'all', label: 'Tất cả' }, ...present.map((c) => ({ id: c, label: c }))];
+
+// Mobile = kiểu tạp chí: 1 bài nổi bật (mới nhất) + các bài còn lại gom theo chủ đề.
+const feature = posts[0];
+const groups = present
+  .map((theme) => ({ theme, posts: posts.filter((p) => p.cat === theme && p.slug !== feature?.slug) }))
+  .filter((g) => g.posts.length);
 ---
 
 <PageLayout
@@ -102,6 +108,39 @@ const blogCats = [{ id: 'all', label: 'Tất cả' }, ...present.map((c) => ({ i
         ))}
       </div>
       <p class="blog-empty" hidden>Không tìm thấy bài viết phù hợp với bộ lọc.</p>
+
+      <!-- ===== MAGAZINE (chỉ mobile ≤680px): 1 bài nổi bật + gom theo chủ đề ===== -->
+      <div class="blog-mag">
+        {feature && (
+          <a href={feature.href} class="blog-feature">
+            <div class="blog-feature__media"><img src={feature.img} alt={feature.title} loading="lazy" onerror="this.closest('.blog-feature__media').style.display='none'" /></div>
+            <div class="blog-feature__body">
+              <span class="blog-feature__tag">{feature.catLabel}</span>
+              <h3 class="blog-feature__title">{feature.title}</h3>
+              <time class="blog-feature__date">{feature.date}</time>
+            </div>
+          </a>
+        )}
+        {groups.map((g) => (
+          <section class="blog-group">
+            <h2 class="blog-group__title">{g.theme}</h2>
+            <div class="blog-row">
+              {g.posts.map((p) => (
+                <a href={p.href} class="blog-rowcard">
+                  <span class="blog-rowcard__thumb"><img src={p.img} alt="" loading="lazy" onerror="this.style.display='none'" /></span>
+                  <span class="blog-rowcard__body">
+                    <span class="blog-rowcard__title">{p.title}</span>
+                    <time class="blog-rowcard__date">{p.date}</time>
+                  </span>
+                  <span class="blog-rowcard__arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -393,12 +432,67 @@ const blogCats = [{ id: 'all', label: 'Tất cả' }, ...present.map((c) => ({ i
   }
   .blog-card[hidden] { display: none !important; }
   .blog-empty { text-align: center; color: rgba(255, 255, 255, 0.55); padding: 2.5rem 0 0; font-size: 1rem; }
+  /* Magazine chỉ hiện ở mobile ≤680px (bật trong media query bên dưới) */
+  .blog-mag { display: none; }
 
   @media (max-width: 980px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 680px) {
-    .blog-grid { grid-template-columns: 1fr; }
-    .blog-toolbar { flex-direction: column; align-items: stretch; }
-    .blog-search { min-width: 0; }
+    /* ===== MOBILE = KIỂU TẠP CHÍ: ẩn toolbar + lưới card, hiện magazine ===== */
+    .blog-toolbar, .blog-grid, .blog-empty { display: none !important; }
+    .blog-mag { display: block; }
+    .blog-section { padding-top: clamp(0.5rem, 2vw, 1.5rem); }
+
+    /* --- Bài nổi bật (ảnh lớn trên cùng) --- */
+    .blog-feature {
+      display: block; text-decoration: none; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 22px;
+      background: transparent; margin-bottom: 2.2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .blog-feature__media { aspect-ratio: 16 / 10; background: linear-gradient(160deg, #2a1109, #160a05); }
+    .blog-feature__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .blog-feature__body { padding: 1.1rem 1.15rem 1.3rem; }
+    .blog-feature__tag {
+      display: inline-block; font-family: var(--font-headline); font-weight: 600;
+      font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b;
+      border: 1px solid rgba(242, 66, 11, 0.4); border-radius: 999px; padding: 0.24rem 0.7rem; margin-bottom: 0.7rem;
+    }
+    .blog-feature__title {
+      font-family: 'Inter', sans-serif; font-weight: 500; font-size: 1.35rem; line-height: 1.25;
+      color: #fff; letter-spacing: -0.02em; margin: 0 0 0.6rem;
+    }
+    .blog-feature__date { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.78rem; color: rgba(255, 255, 255, 0.45); }
+
+    /* --- Nhóm chủ đề: tiêu đề nhỏ + đường kẻ --- */
+    .blog-group { margin-bottom: 1.9rem; }
+    .blog-group__title {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-family: var(--font-headline); font-weight: 600; font-size: 0.72rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: #f2420b; margin: 0 0 0.35rem;
+    }
+    .blog-group__title::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.14); }
+
+    /* --- Hàng bài gọn: thumbnail trái, tiêu đề + ngày phải --- */
+    .blog-row { display: flex; flex-direction: column; }
+    .blog-rowcard {
+      display: flex; align-items: center; gap: 0.9rem; text-decoration: none;
+      padding: 0.9rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: background .25s ease;
+    }
+    .blog-rowcard:active { background: rgba(242, 66, 11, 0.06); }
+    .blog-rowcard__thumb {
+      flex: 0 0 auto; width: 88px; height: 64px; border-radius: 12px; overflow: hidden;
+      background: linear-gradient(160deg, #2a1109, #160a05);
+    }
+    .blog-rowcard__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .blog-rowcard__body { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; flex: 1; }
+    .blog-rowcard__title {
+      font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.95rem; line-height: 1.3;
+      color: #fff; letter-spacing: -0.01em;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .blog-rowcard__date { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.72rem; color: rgba(255, 255, 255, 0.42); }
+    .blog-rowcard__arrow { flex: 0 0 auto; display: flex; color: rgba(255, 255, 255, 0.4); }
   }
 
   /* ============================================
