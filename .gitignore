@@ -6,3 +6,6 @@ dist/
 .DS_Store
 .env
 .env.*
+
+# Blog source drafts (converted to content/news; keep local, don't deploy)
+sites/sbb/public/Blog_J1/

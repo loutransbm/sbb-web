@@ -1,0 +1,198 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const all = await getCollection('news');
+  const bySlug = Object.fromEntries(all.map((e) => [e.id, e]));
+  return all.map((entry) => {
+    const related = (entry.data.read_next || [])
+      .map((s) => bySlug[s])
+      .filter(Boolean)
+      .map((e) => ({ slug: e.id, title: e.data.title }));
+    return { params: { slug: entry.id }, props: { entry, related } };
+  });
+}
+
+const { entry, related } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const cumLabels = {
+  'internship-j1': 'Internship J-1',
+  'reality-check': 'Reality Check',
+  'tu-duy-ra-the-gioi': 'Tư duy ra thế giới',
+  'grp': 'GRP',
+  'office-tour': 'Office Tour',
+  'tieng-noi-hanh-trinh': 'Tiếng nói hành trình',
+};
+const loaiLabels = {
+  story: 'Câu chuyện', 'reality-check': 'Reality Check', guide: 'Hướng dẫn',
+  explainer: 'Giải thích', 'path-step': 'Lộ trình', resource: 'Tài nguyên',
+  update: 'Cập nhật', voice: 'Tiếng nói',
+};
+const cumLabel = cumLabels[d.cum_chinh] || d.cum_chinh;
+const loaiLabel = loaiLabels[d.loai] || d.loai;
+const dateStr = d.published.toLocaleDateString('vi-VN', { year: 'numeric', month: 'long', day: 'numeric' });
+const dateISO = d.published.toISOString().slice(0, 10);
+---
+
+<PageLayout title={d.title} description={d.description || ''} site="sbb" currentPath="/news" schemaType="Article">
+  <article class="na">
+    <div class="na-glow" aria-hidden="true"></div>
+    <div class="na-wrap">
+      <nav class="na-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><a href="/news">News</a><span>/</span><span class="na-crumb-cur">{cumLabel}</span>
+      </nav>
+
+      <div class="na-meta">
+        <span class="na-badge">{cumLabel}</span>
+        <span class="na-type">{loaiLabel}</span>
+        <time datetime={dateISO}>{dateStr}</time>
+      </div>
+
+      <h1 class="na-title">{d.title}</h1>
+      {d.description && <p class="na-lead">{d.description}</p>}
+
+      <div class="na-prose">
+        <Content />
+      </div>
+
+      <p class="na-disclaimer">Nội dung mang tính tham khảo, cập nhật theo thời điểm và có thể thay đổi theo từng chương trình. Không thay thế tư vấn pháp lý cho trường hợp cụ thể.</p>
+
+      {related.length > 0 && (
+        <aside class="na-readnext" aria-label="Đọc tiếp">
+          <h2 class="na-rn-title">Đọc tiếp</h2>
+          <ul class="na-rn-list">
+            {related.map((r) => (
+              <li><a href={`/news/${r.slug}`}><span class="na-rn-arrow" aria-hidden="true">→</span>{r.title}</a></li>
+            ))}
+          </ul>
+        </aside>
+      )}
+
+      <div class="na-foot">
+        <a href="/apply" class="na-cta">Nhận tư vấn miễn phí về J-1 <span aria-hidden="true">→</span></a>
+        <a href="/news" class="na-back"><span aria-hidden="true">←</span> Về trang News</a>
+      </div>
+    </div>
+  </article>
+</PageLayout>
+
+<style>
+  .na { position: relative; overflow: clip; padding: clamp(7rem, 10vw, 10rem) 0 clamp(4rem, 7vw, 7rem); }
+  .na-glow {
+    position: absolute; top: -8%; left: 50%; transform: translateX(-50%);
+    width: 1100px; height: 620px; max-width: 130vw; pointer-events: none; z-index: 0; filter: blur(80px);
+    background: radial-gradient(ellipse 50% 50% at 50% 50%,
+      rgba(255,112,60,0.30) 0%, rgba(248,82,26,0.18) 34%, rgba(242,66,11,0.08) 58%, transparent 80%);
+  }
+  .na-wrap {
+    position: relative; z-index: 1;
+    width: calc(100% - 3rem); max-width: 46rem; margin-inline: auto;
+  }
+
+  /* Breadcrumb */
+  .na-crumb {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+    font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 300;
+    color: rgba(255,255,255,0.5); margin-bottom: clamp(1.6rem, 3vw, 2.4rem);
+  }
+  .na-crumb a { color: rgba(255,255,255,0.62); text-decoration: none; }
+  .na-crumb a:hover { color: var(--accent-2, #ff5c26); }
+  .na-crumb-cur { color: rgba(255,255,255,0.42); }
+
+  /* Meta row */
+  .na-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-bottom: 1.1rem; }
+  .na-badge {
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b;
+    border: 1px solid rgba(242,66,11,0.4); border-radius: 999px; padding: 0.3rem 0.8rem;
+  }
+  .na-type {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.78rem;
+    letter-spacing: 0.04em; text-transform: uppercase; color: rgba(255,255,255,0.55);
+  }
+  .na-meta time { font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,0.45); margin-left: auto; }
+
+  /* Title + lead */
+  .na-title {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(2rem, 4.4vw, 3.15rem); line-height: 1.1; letter-spacing: -0.025em;
+    color: #fff; margin: 0 0 1.1rem;
+  }
+  .na-lead {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: clamp(1.05rem, 1.5vw, 1.22rem); line-height: 1.6;
+    color: rgba(255,255,255,0.66); margin: 0 0 clamp(2.4rem, 4vw, 3.2rem);
+    padding-bottom: clamp(2rem, 3.5vw, 2.8rem); border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ===== Prose ===== */
+  .na-prose { font-family: 'Inter', sans-serif; font-weight: 300; color: rgba(255,255,255,0.8); font-size: 1.02rem; line-height: 1.75; }
+  .na-prose :global(h2) {
+    font-weight: 500; font-size: clamp(1.35rem, 2.4vw, 1.7rem); line-height: 1.25;
+    letter-spacing: -0.015em; color: #fff; margin: clamp(2.6rem, 4vw, 3.4rem) 0 1rem;
+  }
+  .na-prose :global(h3) {
+    font-weight: 500; font-size: clamp(1.12rem, 1.8vw, 1.32rem); line-height: 1.3;
+    color: #fff; margin: 2rem 0 0.75rem;
+  }
+  .na-prose :global(p) { margin: 0 0 1.15rem; }
+  .na-prose :global(strong) { font-weight: 500; color: #fff; }
+  .na-prose :global(a) { color: var(--accent-2, #ff5c26); text-decoration: none; border-bottom: 1px solid rgba(255,92,38,0.35); }
+  .na-prose :global(a:hover) { border-bottom-color: rgba(255,92,38,0.8); }
+  .na-prose :global(ul), .na-prose :global(ol) { margin: 0 0 1.3rem; padding-left: 1.35rem; }
+  .na-prose :global(li) { margin: 0 0 0.55rem; padding-left: 0.2rem; }
+  .na-prose :global(li)::marker { color: rgba(242,66,11,0.75); }
+  .na-prose :global(blockquote) {
+    margin: 1.6rem 0; padding: 0.4rem 0 0.4rem 1.4rem;
+    border-left: 3px solid var(--accent, #f2420b); color: rgba(255,255,255,0.7); font-style: italic;
+  }
+  .na-prose :global(hr) { border: 0; border-top: 1px solid rgba(255,255,255,0.12); margin: 2.4rem 0; }
+  /* Tables */
+  .na-prose :global(table) {
+    width: 100%; border-collapse: collapse; margin: 1.6rem 0; font-size: 0.94rem;
+    display: block; overflow-x: auto;
+  }
+  .na-prose :global(th), .na-prose :global(td) {
+    border: 1px solid rgba(255,255,255,0.14); padding: 0.7rem 0.9rem; text-align: left; vertical-align: top;
+  }
+  .na-prose :global(th) { background: rgba(242,66,11,0.12); color: #fff; font-weight: 500; }
+  .na-prose :global(td) { color: rgba(255,255,255,0.76); }
+  .na-prose :global(tr:nth-child(even) td) { background: rgba(255,255,255,0.02); }
+  /* anchor offset for TOC jumps */
+  .na-prose :global(a[id]) { scroll-margin-top: 6rem; display: block; height: 0; }
+
+  .na-disclaimer {
+    margin: clamp(2.6rem, 4vw, 3.4rem) 0 0; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.1);
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.45);
+  }
+
+  /* Read next */
+  .na-readnext { margin-top: clamp(2.6rem, 4vw, 3.4rem); padding: clamp(1.6rem, 3vw, 2.2rem); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; background: rgba(255,255,255,0.02); }
+  .na-rn-title { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin: 0 0 1.1rem; }
+  .na-rn-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.15rem; }
+  .na-rn-list li { margin: 0; }
+  .na-rn-list a {
+    display: flex; gap: 0.7rem; align-items: baseline; padding: 0.7rem 0;
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(1rem, 1.4vw, 1.12rem); line-height: 1.4;
+    color: rgba(255,255,255,0.85); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: color 0.2s ease;
+  }
+  .na-rn-list li:last-child a { border-bottom: 0; }
+  .na-rn-list a:hover { color: var(--accent-2, #ff5c26); }
+  .na-rn-arrow { color: #f2420b; flex: 0 0 auto; }
+
+  /* Foot */
+  .na-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: clamp(2.6rem, 4vw, 3.4rem); }
+  .na-cta {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.95rem;
+    color: #fff; background: var(--accent, #f2420b); border-radius: 999px; padding: 0.85rem 1.6rem; text-decoration: none;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .na-cta:hover { background: var(--accent-2, #ff5c26); transform: translateY(-2px); }
+  .na-back { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.9rem; color: rgba(255,255,255,0.6); text-decoration: none; }
+  .na-back:hover { color: #fff; }
+</style>

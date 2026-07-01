@@ -1,36 +1,40 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
 
-// Danh mục lọc cho lưới blog (Omni style). 'all' = Tất cả.
-const blogCats = [
-  { id: 'all', label: 'Tất cả' },
-  { id: 'tin-tuc', label: 'Tin tức' },
-  { id: 'blog-insight', label: 'Blog Insight' },
-  { id: 'hanh-trinh', label: 'Hành trình học viên' },
-  { id: 'reality-check', label: 'Reality Check' },
-];
-
-// 18 bài = 6 hàng x 3 cột. (Tiêu đề/ảnh tạm dùng pool sẵn có; thay nội dung & link thật sau.)
-const posts = [
-  { cat: 'hanh-trinh',    catLabel: 'Hành trình học viên', title: 'Từ phòng trọ Hà Nội đến gian bếp ở Colorado',         img: '/images/hero_student.png',            href: '/news' },
-  { cat: 'reality-check', catLabel: 'Reality Check',        title: 'Lương cao ở nước ngoài: phần họ không kể bạn nghe',    img: '/images/reality_face.png',            href: '/news' },
-  { cat: 'tin-tuc',       catLabel: 'Tin tức',              title: 'Internship J-1 mùa Thu 2026 chính thức mở đơn',        img: '/images/office_tour.png',             href: '/news' },
-  { cat: 'hanh-trinh',    catLabel: 'Hành trình học viên', title: 'Cô gái Quảng Nam và bài học từ lần bị từ chối visa',   img: '/images/students/khanh-giang.jpg',    href: '/news' },
-  { cat: 'blog-insight',  catLabel: 'Blog Insight',         title: 'Chọn J-1 hay GRP? Bảng so sánh sòng phẳng cho người mới', img: '/images/case-studies/cs3.jpg',     href: '/news' },
-  { cat: 'reality-check', catLabel: 'Reality Check',        title: 'Đi để trải nghiệm hay đi để xây sự nghiệp?',           img: '/images/case-studies/cs5.webp',       href: '/news' },
-  { cat: 'tin-tuc',       catLabel: 'Tin tức',              title: 'GRP Foundation khai giảng khóa mùa Hè: lịch học & học phí', img: '/images/case-studies/cs1.jpg',   href: '/news' },
-  { cat: 'hanh-trinh',    catLabel: 'Hành trình học viên', title: '"Mình ước có ai nói thật với mình sớm hơn"',           img: '/images/students/my-linh-le.jpg',     href: '/news' },
-  { cat: 'blog-insight',  catLabel: 'Blog Insight',         title: '5 sai lầm khiến hồ sơ phỏng vấn visa bị đánh trượt',   img: '/images/mentorship.png',              href: '/news' },
-  { cat: 'reality-check', catLabel: 'Reality Check',        title: "Ca làm 10 tiếng và sự thật về 'giấc mơ Mỹ'",          img: '/images/case-studies/cs6.webp',       href: '/news' },
-  { cat: 'tin-tuc',       catLabel: 'Tin tức',              title: 'SBB mở thêm tuyến visa 407 sang Úc cho ngành Aged Care', img: '/images/case-studies/cs4.webp',     href: '/news' },
-  { cat: 'hanh-trinh',    catLabel: 'Hành trình học viên', title: 'Victoria và hành trình từ sinh viên tỉnh lẻ đến JP Morgan', img: '/images/students/victoria-tran.jpg', href: '/news' },
-  { cat: 'blog-insight',  catLabel: 'Blog Insight',         title: 'Tiền lương thật sự còn lại sau thuế, nhà ở và đi lại', img: '/images/workspace_laptop.png',        href: '/news' },
-  { cat: 'reality-check', catLabel: 'Reality Check',        title: 'Cô đơn nơi xứ người: điều không brochure nào nói',     img: '/images/cinema_silhouette.png',       href: '/news' },
-  { cat: 'tin-tuc',       catLabel: 'Tin tức',              title: 'Lịch hội thảo định hướng du học nghề quý III/2026',    img: '/images/modern_office_workspace.png', href: '/news' },
-  { cat: 'hanh-trinh',    catLabel: 'Hành trình học viên', title: 'Từ thất bại IELTS đến hợp đồng thực tập tại Singapore', img: '/images/case-studies/cs7.webp',     href: '/news' },
-  { cat: 'blog-insight',  catLabel: 'Blog Insight',         title: 'Checklist chuẩn bị 90 ngày trước khi bay',             img: '/images/case-studies/cs8.webp',       href: '/news' },
-  { cat: 'reality-check', catLabel: 'Reality Check',        title: 'Về nước sau 2 năm: được gì, mất gì, học gì',           img: '/images/case-studies/cs9.webp',       href: '/news' },
-];
+// Danh mục + bài News lấy từ content collection (build spec mục 7).
+const cumLabels = {
+  'internship-j1': 'Internship J-1', 'reality-check': 'Reality Check',
+  'tu-duy-ra-the-gioi': 'Tư duy ra thế giới', 'grp': 'GRP',
+  'office-tour': 'Office Tour', 'tieng-noi-hanh-trinh': 'Tiếng nói hành trình',
+};
+// Gom bài J-1 theo chủ đề cho bộ lọc gọn; bài cụm khác dùng nhãn cụm.
+function themeOf(slug, cum) {
+  if (cum !== 'internship-j1') return cumLabels[cum] || 'Khác';
+  if (/thue|fica|hoan-thue|khai-thue|luong|thuc-nhan|chi-phi|gui-tien/.test(slug)) return 'Chi phí & Thuế';
+  if (/sau-j1|212e|ve-nuoc|dinh-cu|grace/.test(slug)) return 'Sau chương trình';
+  if (/mo-tai-khoan|ssn|sim|thue-nha|di-lai|tuan-dau|tips/.test(slug)) return 'Cuộc sống ở Mỹ';
+  if (/nganh|host|bao-hiem|khong-duoc-lam/.test(slug)) return 'Ngành & Công việc';
+  return 'Visa & Hồ sơ';
+}
+const fmtDate = (dt) => dt.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+const entries = await getCollection('news');
+const posts = entries
+  .map((e) => ({
+    slug: e.id,
+    title: e.data.title,
+    desc: e.data.description || '',
+    cat: themeOf(e.id, e.data.cum_chinh),
+    catLabel: themeOf(e.id, e.data.cum_chinh),
+    date: fmtDate(e.data.published),
+    ts: e.data.published.getTime(),
+    href: `/news/${e.id}`,
+  }))
+  .sort((a, b) => b.ts - a.ts);
+const catOrder = ['Visa & Hồ sơ', 'Ngành & Công việc', 'Chi phí & Thuế', 'Cuộc sống ở Mỹ', 'Sau chương trình'];
+const present = Array.from(new Set(posts.map((p) => p.cat)));
+present.sort((a, b) => ((catOrder.indexOf(a) + 1) || 99) - ((catOrder.indexOf(b) + 1) || 99));
+const blogCats = [{ id: 'all', label: 'Tất cả' }, ...present.map((c) => ({ id: c, label: c }))];
 ---
 
 <PageLayout
@@ -85,12 +89,13 @@ const posts = [
           <a href={p.href} class="blog-card" data-cat={p.cat} data-title={p.title.toLowerCase()}>
             <span class="blog-card__tag">{p.catLabel}</span>
             <h3 class="blog-card__title">{p.title}</h3>
-            <div class="blog-card__media">
-              <img src={p.img} alt={p.title} loading="lazy" onerror="this.style.display='none'" />
+            {p.desc && <p class="blog-card__desc">{p.desc}</p>}
+            <div class="blog-card__foot">
+              <time class="blog-card__date">{p.date}</time>
+              <span class="blog-card__cta" aria-label="Đọc bài">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              </span>
             </div>
-            <span class="blog-card__cta" aria-label="Đọc bài">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8 L16 16"/><path d="M16 9 L16 16 L9 16"/></svg>
-            </span>
           </a>
         ))}
       </div>
@@ -355,23 +360,31 @@ const posts = [
     border: 1px solid rgba(242, 66, 11, 0.4); border-radius: 999px; padding: 0.28rem 0.75rem;
     margin-bottom: 0.95rem;
   }
-  .blog-card__title {
-    font-family: var(--font-headline); font-weight: 700;
-    font-size: clamp(1.25rem, 1.6vw, 1.7rem); line-height: 1.34;
-    color: #fff; text-transform: uppercase; letter-spacing: -0.01em;
-    margin: 0 0 clamp(1.5rem, 2.2vw, 2rem);
+    .blog-card__title {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(1.1rem, 1.45vw, 1.4rem); line-height: 1.3;
+    color: #fff; text-transform: none; letter-spacing: -0.015em;
+    margin: 0 0 0.85rem;
   }
+  .blog-card__desc {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 0.92rem; line-height: 1.6; color: rgba(255,255,255,0.6);
+    margin: 0 0 clamp(1.4rem, 2vw, 1.8rem);
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .blog-card__foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .blog-card__date { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.8rem; color: rgba(255,255,255,0.45); }
   .blog-card__media {
     position: relative; border-radius: 18px; overflow: hidden;
     aspect-ratio: 16 / 11; background: linear-gradient(160deg, #2a1109, #160a05);
     margin-bottom: clamp(1.6rem, 2.2vw, 2.2rem);
   }
   .blog-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .blog-card__cta {
-    margin-top: auto; display: flex; align-items: center; justify-content: center;
-    padding: 0.85rem 1.4rem; border-radius: 999px;
+    .blog-card__cta {
+    flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+    width: 2.4rem; height: 2.4rem; border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, 0.18); color: rgba(255, 255, 255, 0.85);
-    transition: background .3s ease, border-color .3s ease, color .3s ease;
+    transition: background .3s ease, border-color .3s ease, color .3s ease, transform .3s ease;
   }
   .blog-card:hover .blog-card__cta {
     border-color: rgba(255, 255, 255, 0.34); background: rgba(255, 255, 255, 0.06); color: #fff;
