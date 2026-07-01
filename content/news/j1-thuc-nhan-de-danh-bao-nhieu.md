@@ -34,6 +34,8 @@ Cùng một mức lương, hai người có thể để dành rất khác nhau, 
 
 ## Các khoản trừ chính
 
+![Đồ họa các khoản trừ từ lương J-1](/images/j1-17/graphic-1.webp)
+
 - Thuế thu nhập liên bang và bang. J-1 non-student thường được miễn FICA trong giai đoạn đầu, nên giữ lại được khoản đó.
 - Tiền nhà. Đây là khoản lớn nhất, và ở ghép thường rẻ hơn nhiều so với thuê riêng.
 - Ăn uống. Tự nấu giúp tiết kiệm rõ rệt so với ăn ngoài.
@@ -50,6 +52,8 @@ Cùng một mức lương, hai người có thể để dành rất khác nhau, 
 <a id="tang-de-danh"></a>
 
 ## Cách tăng tiền để dành
+
+![Khối cách tăng tiền để dành khi đi J-1](/images/j1-17/graphic-2.webp)
 
 - Chọn host ở nơi chi phí sống hợp lý.
 - Ở ghép để chia tiền nhà.
