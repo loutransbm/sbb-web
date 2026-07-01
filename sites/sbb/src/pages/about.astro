@@ -10,7 +10,7 @@ const blocks = [
   {
     num: '02',
     title: 'Vai trò trong cộng đồng',
-    body: 'SBB kết nối những người trẻ muốn đi thật với những cơ hội nghề thật ở nước ngoài — đồng thời xây dựng cộng đồng để người đi trước dẫn đường cho người đi sau.',
+    body: 'SBB kết nối những người trẻ muốn đi thật với những cơ hội nghề thật ở nước ngoài, đồng thời xây dựng cộng đồng để người đi trước dẫn đường cho người đi sau.',
   },
 ];
 
@@ -19,7 +19,7 @@ const blocks = [
 // MỖI NGƯỜI = 1 card + 1 câu chuyện + 1 ảnh khớp chủ đề (public/images/case-studies/). cs10 = kế toán (ảnh văn phòng), cs11 = phục vụ FOH (ảnh set bàn).
 // ĐÃ BỎ ảnh lộ địa điểm: cs5.webp (koala) + cs6.webp (Study Gold Coast/$30,000) → thay bằng cs3.jpg (2 bạn F&B) + cs2.jpg (bạn nam ở Vessel). 2 file cs5/cs6.webp còn trên disk nhưng KHÔNG còn dùng.
 const caseStudies = [
-  { title: 'Từ người được phỏng vấn đến người chọn nhân tài', img: '/images/case-studies/cs1.jpg', body: 'Mong muốn có kinh nghiệm thực tế ngoài giảng đường, bạn ấy đảm nhận công tác tuyển dụng — trực tiếp phỏng vấn và đánh giá ứng viên. Từ vị trí người luôn được phỏng vấn, bạn vươn lên thành người chọn nhân tài, làm chủ cả quy trình tuyển dụng chuyên nghiệp.' },
+  { title: 'Từ người được phỏng vấn đến người chọn nhân tài', img: '/images/case-studies/cs1.jpg', body: 'Mong muốn có kinh nghiệm thực tế ngoài giảng đường, bạn ấy đảm nhận công tác tuyển dụng, trực tiếp phỏng vấn và đánh giá ứng viên. Từ vị trí người luôn được phỏng vấn, bạn vươn lên thành người chọn nhân tài, làm chủ cả quy trình tuyển dụng chuyên nghiệp.' },
   { title: 'My Linh Le: nhận việc full‑time ngay sau kỳ thực tập', img: '/images/students/my-linh-le.jpg' },
   { title: 'Từ mơ ước đứng lớp đến giáo viên tự tin thực thụ', img: '/images/case-studies/cs4.webp', body: 'Mang khát khao trở thành giáo viên, bạn ấy bước vào lớp học thật, quan sát nhiều phương pháp rồi tự đứng lớp. Những giờ dạy thực tế giúp bạn làm chủ cách truyền đạt và tìm thấy ngọn lửa đam mê nghề giáo.' },
   { title: 'Khanh Giang: vững tay nghề bếp & tiếng Anh thực chiến', img: '/images/students/khanh-giang.jpg' },
@@ -27,17 +27,17 @@ const caseStudies = [
   { title: 'Victoria Tran: cọ xát marketing thực chiến quốc tế', img: '/images/students/victoria-tran.jpg' },
   { title: 'Mỗi ngày cọ xát thực tế, bản lĩnh nghề nghiệp lớn dần', img: '/images/case-studies/cs3.jpg', body: 'Khao khát mở rộng tầm nhìn và rèn giao tiếp trước khi ra trường, bạn ấy dấn thân vào môi trường làm việc thật. Mỗi ngày được thực hành, bạn tự tin hơn và tích lũy góc nhìn nghề nghiệp quý giá.' },
   { title: 'Vượt qua biến cố, khởi động lại hành trình sự nghiệp', img: '/images/case-studies/cs7.webp', body: 'Sau khi giành vị trí thực tập trong một lĩnh vực kỹ thuật đầy cạnh tranh, bạn ấy phải tạm hoãn vì biến cố cá nhân. Bằng nghị lực và sự chuẩn bị kỹ lưỡng, bạn trở lại, tỏa sáng và tích lũy kỹ năng để lại dấu ấn lâu dài.' },
-  { title: 'Tác phẩm đầu tay được đăng tải, đam mê bùng cháy', img: '/images/case-studies/cs8.webp', body: 'Bước vào bộ phận marketing với mong muốn thực chiến, bạn ấy trực tiếp viết nội dung và tin bài để xuất bản. Khoảnh khắc thấy tác phẩm của mình hiện diện trên các nền tảng là niềm hạnh phúc vỡ òa — một bước tiến nghề nghiệp thật sự.' },
+  { title: 'Tác phẩm đầu tay được đăng tải, đam mê bùng cháy', img: '/images/case-studies/cs8.webp', body: 'Bước vào bộ phận marketing với mong muốn thực chiến, bạn ấy trực tiếp viết nội dung và tin bài để xuất bản. Khoảnh khắc thấy tác phẩm của mình hiện diện trên các nền tảng là niềm hạnh phúc vỡ òa. Một bước tiến nghề nghiệp thật sự.' },
   { title: 'Rèn nghề khách sạn bài bản, vững vàng chuyên môn', img: '/images/case-studies/cs9.webp', body: 'Theo đuổi giấc mơ quản lý khách sạn, bạn ấy được rèn luyện thực tế trong môi trường chuyên nghiệp. Không chỉ thành thạo nghiệp vụ vận hành, bạn còn thấm bài học cốt lõi: tôn trọng người khác chính là cách để được tôn trọng.' },
-  { title: 'Lần đầu thử thách môi trường mới, trưởng thành vượt bậc', img: '/images/case-studies/cs10.webp', body: 'Quyết tâm thử thách bản thân trong một môi trường hoàn toàn mới, bạn ấy giao tiếp chuyên nghiệp mỗi ngày và chỉ sau ít tuần đã đủ tự tin dẫn dắt, hướng dẫn người đến sau — học được cách tự giải quyết vấn đề và tích lũy kinh nghiệm thực thụ.' },
-  { title: 'Từ con số không đến vững tay nghề phục vụ', img: '/images/case-studies/cs11.webp', body: 'Khởi đầu gần như từ con số không, bạn ấy lăn lộn qua đủ môi trường phục vụ — từ nhà hàng cao cấp, bistro đến các sự kiện lớn. Môi trường đa dạng giúp bạn bứt phá, thu nhận vô số kỹ năng để vững vàng theo nghề.' },
+  { title: 'Lần đầu thử thách môi trường mới, trưởng thành vượt bậc', img: '/images/case-studies/cs10.webp', body: 'Quyết tâm thử thách bản thân trong một môi trường hoàn toàn mới, bạn ấy giao tiếp chuyên nghiệp mỗi ngày và chỉ sau ít tuần đã đủ tự tin dẫn dắt, hướng dẫn người đến sau, học được cách tự giải quyết vấn đề và tích lũy kinh nghiệm thực thụ.' },
+  { title: 'Từ con số không đến vững tay nghề phục vụ', img: '/images/case-studies/cs11.webp', body: 'Khởi đầu gần như từ con số không, bạn ấy lăn lộn qua đủ môi trường phục vụ, từ nhà hàng cao cấp, bistro đến các sự kiện lớn. Môi trường đa dạng giúp bạn bứt phá, thu nhận vô số kỹ năng để vững vàng theo nghề.' },
 ];
 
 const notWhat = ['Công ty du học', 'Môi giới visa', 'Đội sale chạy số'];
 
 const values = [
   { t: 'Nói thật', d: 'Đủ thẳng để nói điều bạn cần nghe, chứ không phải điều bạn muốn nghe.' },
-  { t: 'Trọng năng lực', d: 'Chuẩn bị để bạn được tin tưởng và trọng dụng — không chỉ “được đi”.' },
+  { t: 'Trọng năng lực', d: 'Chuẩn bị để bạn được tin tưởng và trọng dụng, không chỉ “được đi”.' },
   { t: 'Không buông tay', d: 'Đồng hành tới khi bạn vững vàng, không bỏ bạn lại giữa chừng.' },
 ];
 
@@ -279,7 +279,7 @@ const team = [
         <span class="cs-text-white">OUR<br/>CASE</span>
         <div class="cs-glass-pill">
           <span class="cs-glass-title">CONTENT REEL</span>
-          <span class="cs-glass-sub">Lát cắt thật từ hành trình học viên SBB — không tô vẽ.</span>
+          <span class="cs-glass-sub">Lát cắt thật từ hành trình học viên SBB, không tô vẽ.</span>
         </div>
       </div>
       <div class="about-line-2">
@@ -367,21 +367,21 @@ const team = [
           <summary class="faq-q"><span>SBB là gì, và khác gì so với một trung tâm tư vấn du học thông thường?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
             <p>SBB (Shine Beyond Borders) là học viện đào tạo và đưa người trẻ Việt ra thế giới bằng <strong>năng lực nghề thật</strong>, không chỉ bằng một tấm vé du học.</p>
-            <p>Phần lớn trung tâm dừng lại ở hồ sơ và visa. SBB xây dựng <strong>năng lực thực chất</strong> — để bạn được tin tưởng và trọng dụng ở môi trường quốc tế, chứ không chỉ “được đi”.</p>
+            <p>Phần lớn trung tâm dừng lại ở hồ sơ và visa. SBB xây dựng <strong>năng lực thực chất</strong>, để bạn được tin tưởng và trọng dụng ở môi trường quốc tế, chứ không chỉ “được đi”.</p>
             <p>Chúng tôi đào tạo kỹ năng nghề, tư duy làm việc chuẩn quốc tế và ngoại ngữ ứng dụng, đồng thời kết nối trực tiếp với doanh nghiệp tại Úc. Trước mỗi hành trình, bạn được đánh giá năng lực bài bản để biết chính xác mình cần chuẩn bị gì.</p>
           </div>
         </details>
         <details class="faq-item">
           <summary class="faq-q"><span>Chương trình này dành cho ai? Em cần điều kiện gì để bắt đầu?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
-            <p>SBB phù hợp với bạn trẻ <strong>muốn xây dựng sự nghiệp quốc tế bằng năng lực thật</strong> — dù bạn vừa tốt nghiệp THPT, đang là sinh viên, hay đã đi làm và muốn đổi hướng.</p>
+            <p>SBB phù hợp với bạn trẻ <strong>muốn xây dựng sự nghiệp quốc tế bằng năng lực thật</strong>, dù bạn vừa tốt nghiệp THPT, đang là sinh viên, hay đã đi làm và muốn đổi hướng.</p>
             <p>Bạn không cần bằng cấp cao hay tiếng Anh giỏi sẵn. Điều cần nhất là tinh thần cầu tiến và sự nghiêm túc với hành trình của mình. Mọi thứ bắt đầu bằng một buổi đánh giá năng lực để xác định điểm xuất phát và lộ trình phù hợp cho riêng bạn.</p>
           </div>
         </details>
         <details class="faq-item">
           <summary class="faq-q"><span>Em chưa giỏi tiếng Anh hoặc chưa có kinh nghiệm thì có theo được không?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
-            <p>Hoàn toàn được. Lộ trình SBB bắt đầu từ nền tảng và nâng dần theo năng lực từng người — từ tiếng Anh ứng dụng, kỹ năng nghề đến tác phong làm việc quốc tế.</p>
+            <p>Hoàn toàn được. Lộ trình SBB bắt đầu từ nền tảng và nâng dần theo năng lực từng người: từ tiếng Anh ứng dụng, kỹ năng nghề đến tác phong làm việc quốc tế.</p>
             <p>Bạn không cần hoàn hảo lúc bắt đầu; bạn cần một lộ trình đúng và người đồng hành sát sao. Đó chính là việc của SBB.</p>
           </div>
         </details>
@@ -389,7 +389,7 @@ const team = [
           <summary class="faq-q"><span>SBB đào tạo những ngành nào, và đưa học viên sang đâu?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
             <p>Chúng tôi mạnh ở các ngành có nhu cầu nhân lực quốc tế cao và bền vững: <strong>Bếp &amp; Ẩm thực (Culinary), Nhà hàng – Khách sạn (Hospitality), Kinh doanh – Quản lý (Business) và Marketing</strong>. Mỗi ngành có lộ trình đào tạo riêng, gắn với mạng lưới doanh nghiệp đối tác.</p>
-            <p>Điểm đến trọng tâm hiện nay là <strong>Úc</strong> — nơi bạn được thực hành và làm việc thật ngay trong ngành đã chọn. Cộng đồng cựu học viên SBB cũng đã có mặt ở nhiều quốc gia, là điểm tựa cho bạn dù đi tới đâu.</p>
+            <p>Điểm đến trọng tâm hiện nay là <strong>Úc</strong>, nơi bạn được thực hành và làm việc thật ngay trong ngành đã chọn. Cộng đồng cựu học viên SBB cũng đã có mặt ở nhiều quốc gia, là điểm tựa cho bạn dù đi tới đâu.</p>
           </div>
         </details>
         <details class="faq-item">
@@ -397,10 +397,10 @@ const team = [
           <div class="faq-a">
             <p>Hành trình đi theo những bước rõ ràng, chứ không phải "đăng ký rồi chờ":</p>
             <ul class="faq-stats">
-              <li><b>1 · Đánh giá năng lực</b> — xác định điểm xuất phát, mục tiêu và ngành phù hợp.</li>
-              <li><b>2 · Đào tạo nền tảng</b> — kỹ năng nghề, tiếng Anh ứng dụng và tác phong làm việc quốc tế.</li>
-              <li><b>3 · Kết nối &amp; thực hành</b> — làm việc thật cùng doanh nghiệp đối tác.</li>
-              <li><b>4 · Hồ sơ &amp; lên đường</b> — chuẩn bị visa, định hướng và hỗ trợ ổn định nơi xứ người.</li>
+              <li><b>1 · Đánh giá năng lực</b>: xác định điểm xuất phát, mục tiêu và ngành phù hợp.</li>
+              <li><b>2 · Đào tạo nền tảng</b>: kỹ năng nghề, tiếng Anh ứng dụng và tác phong làm việc quốc tế.</li>
+              <li><b>3 · Kết nối &amp; thực hành</b>: làm việc thật cùng doanh nghiệp đối tác.</li>
+              <li><b>4 · Hồ sơ &amp; lên đường</b>: chuẩn bị visa, định hướng và hỗ trợ ổn định nơi xứ người.</li>
             </ul>
             <p>Thời gian tùy theo ngành và điểm xuất phát của mỗi người. Trong buổi tư vấn, bạn sẽ nhận được một lộ trình cụ thể kèm mốc thời gian rõ ràng cho riêng mình.</p>
           </div>
@@ -408,14 +408,14 @@ const team = [
         <details class="faq-item">
           <summary class="faq-q"><span>Chi phí khoảng bao nhiêu? Có hỗ trợ trả góp hay học bổng không?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
-            <p>Chi phí phụ thuộc vào ngành, lộ trình và điểm xuất phát của từng bạn — nên thay vì một con số chung chung, SBB <strong>bóc tách minh bạch từng khoản</strong> ngay trong buổi tư vấn để gia đình nắm rõ trước khi quyết định.</p>
+            <p>Chi phí phụ thuộc vào ngành, lộ trình và điểm xuất phát của từng bạn, nên thay vì một con số chung chung, SBB <strong>bóc tách minh bạch từng khoản</strong> ngay trong buổi tư vấn để gia đình nắm rõ trước khi quyết định.</p>
             <p>Chương trình được thiết kế theo từng giai đoạn, cùng các phương án hỗ trợ tài chính linh hoạt, để gia đình không phải dồn toàn bộ chi phí ngay từ đầu. Mục tiêu là khoản đầu tư luôn đi cùng kết quả thật ở mỗi chặng.</p>
           </div>
         </details>
         <details class="faq-item">
           <summary class="faq-q"><span>Gia đình em chưa muốn cam kết một khoản lớn ngay từ đầu thì sao?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
-            <p>Mọi thứ bắt đầu bằng một buổi tư vấn miễn phí và một bài đánh giá năng lực — không ràng buộc.</p>
+            <p>Mọi thứ bắt đầu bằng một buổi tư vấn miễn phí và một bài đánh giá năng lực, không ràng buộc.</p>
             <p>Bạn sẽ thấy rõ lộ trình, chi phí và kết quả kỳ vọng <strong>trước khi</strong> quyết định. SBB thiết kế theo từng giai đoạn để gia đình luôn chủ động.</p>
           </div>
         </details>
@@ -423,22 +423,22 @@ const team = [
           <summary class="faq-q"><span>SBB có hỗ trợ visa không, và cơ hội định cư (PR) ra sao?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
             <p>Có. SBB đồng hành cùng bạn trong toàn bộ quá trình chuẩn bị hồ sơ và visa, và ưu tiên những lộ trình ngành nghề <strong>có tiềm năng định cư lâu dài</strong>, chứ không chỉ để "được đi".</p>
-            <p>Cơ hội định cư phụ thuộc vào ngành, năng lực và chính sách của nước sở tại tại từng thời điểm — nên SBB tư vấn thẳng thắn về con đường thực tế nhất cho trường hợp của bạn, thay vì hứa hẹn điều không chắc chắn.</p>
+            <p>Cơ hội định cư phụ thuộc vào ngành, năng lực và chính sách của nước sở tại tại từng thời điểm, nên SBB tư vấn thẳng thắn về con đường thực tế nhất cho trường hợp của bạn, thay vì hứa hẹn điều không chắc chắn.</p>
           </div>
         </details>
         <details class="faq-item">
           <summary class="faq-q"><span>Sang nước ngoài em có được đi làm thêm và có thu nhập không?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
             <p>Được. Một trong những giá trị lớn nhất của lộ trình SBB là bạn <strong>vừa học vừa làm thật</strong> trong chính ngành mình theo đuổi, thông qua mạng lưới doanh nghiệp đối tác.</p>
-            <p>Mức thu nhập tùy ngành, khu vực và năng lực mỗi người, nhưng mục tiêu rất rõ: giúp bạn sớm tự chủ tài chính và tích lũy kinh nghiệm có giá trị — chứ không chỉ làm thêm để trang trải.</p>
+            <p>Mức thu nhập tùy ngành, khu vực và năng lực mỗi người, nhưng mục tiêu rất rõ: giúp bạn sớm tự chủ tài chính và tích lũy kinh nghiệm có giá trị, chứ không chỉ làm thêm để trang trải.</p>
           </div>
         </details>
         <details class="faq-item">
           <summary class="faq-q"><span>Làm sao để biết chương trình thực sự xứng đáng với chi phí?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
-            <p>Chúng tôi đo bằng kết quả thật — việc làm đúng ngành, mức thu nhập và lộ trình định cư, chứ không phải lời hứa.</p>
+            <p>Chúng tôi đo bằng kết quả thật: việc làm đúng ngành, mức thu nhập và lộ trình định cư, chứ không phải lời hứa.</p>
             <ul class="faq-stats">
-              <li><b>86%</b> học viên tăng thu nhập trên 50% trong 12 tháng — hoặc thăng tiến lên vị trí quản lý.</li>
+              <li><b>86%</b> học viên tăng thu nhập trên 50% trong 12 tháng, hoặc thăng tiến lên vị trí quản lý.</li>
               <li><b>93%</b> có việc làm hoặc thực tập đúng ngành trong 45 ngày đầu tại nước sở tại.</li>
               <li><b>81%</b> tiếp tục gắn bó và phát triển sự nghiệp quốc tế sau 18 tháng.</li>
             </ul>
@@ -449,13 +449,13 @@ const team = [
           <summary class="faq-q"><span>Nếu em rớt visa hoặc đổi kế hoạch giữa chừng thì sao?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
             <p>SBB hiểu đây là quyết định lớn của cả gia đình, nên lộ trình được thiết kế theo từng giai đoạn để bạn luôn chủ động, thay vì đặt cược tất cả vào một lần.</p>
-            <p>Những tình huống như hồ sơ chưa thuận lợi hay thay đổi kế hoạch đều có phương án xử lý và chính sách rõ ràng — chúng tôi trao đổi minh bạch ngay từ đầu để bạn yên tâm về quyền lợi của mình trước khi cam kết.</p>
+            <p>Những tình huống như hồ sơ chưa thuận lợi hay thay đổi kế hoạch đều có phương án xử lý và chính sách rõ ràng, chúng tôi trao đổi minh bạch ngay từ đầu để bạn yên tâm về quyền lợi của mình trước khi cam kết.</p>
           </div>
         </details>
         <details class="faq-item">
           <summary class="faq-q"><span>Sau khi sang nước ngoài, SBB còn đồng hành không?</span><span class="faq-icon" aria-hidden="true"></span></summary>
           <div class="faq-a">
-            <p>Có. SBB đồng hành trọn hành trình — từ lúc chuẩn bị ở Việt Nam, ổn định những tháng đầu nơi xứ người, đến khi bạn vững vàng trong công việc và lộ trình định cư.</p>
+            <p>Có. SBB đồng hành trọn hành trình: từ lúc chuẩn bị ở Việt Nam, ổn định những tháng đầu nơi xứ người, đến khi bạn vững vàng trong công việc và lộ trình định cư.</p>
             <p>Cộng đồng cựu học viên SBB ở nhiều quốc gia là điểm tựa để bạn không bao giờ phải đi một mình.</p>
           </div>
         </details>
@@ -482,7 +482,7 @@ const team = [
           </div>
           <div class="cs-right-block tm-right">
             <div class="cs-line cs-line-2"><span class="cs-text-white">SAY ABOUT US</span></div>
-            <p class="tm-desc">Không phải lời quảng cáo. Đây là tiếng nói từ các đối tác đồng hành cùng SBB — tổ chức kiểm định, doanh nghiệp và chương trình quốc tế — về cách chúng tôi làm việc.</p>
+            <p class="tm-desc">Không phải lời quảng cáo. Đây là tiếng nói từ các đối tác đồng hành cùng SBB (tổ chức kiểm định, doanh nghiệp và chương trình quốc tế) về cách chúng tôi làm việc.</p>
           </div>
         </div>
       </div>
@@ -495,7 +495,7 @@ const team = [
                    onerror="this.closest('.tm-media').classList.add('tm-media--empty'); this.remove();" />
             </div>
             <div class="tm-body">
-              <blockquote class="tm-quote">“Chương trình GRP của SBB được thiết kế bài bản theo khung năng lực quốc tế — nền tảng để chúng tôi đồng hành kiểm định chất lượng đầu ra.”</blockquote>
+              <blockquote class="tm-quote">“Chương trình GRP của SBB được thiết kế bài bản theo khung năng lực quốc tế, nền tảng để chúng tôi đồng hành kiểm định chất lượng đầu ra.”</blockquote>
               <div class="tm-stats">
                 <div class="tm-stat"><span class="tm-stat-num">GRP</span><span class="tm-stat-label">Chương trình kiểm định</span></div>
                 <div class="tm-stat"><span class="tm-stat-num">UNESCO</span><span class="tm-stat-label">Khung tiêu chuẩn</span></div>
@@ -555,7 +555,7 @@ const team = [
           <span class="cta-verb">TO SHINE</span>
           <div class="cs-glass-pill">
             <span class="cs-glass-title">LET'S TALK</span>
-            <span class="cs-glass-sub">Tư vấn miễn phí 30 phút — cùng SBB vẽ lộ trình rõ ràng cho bạn.</span>
+            <span class="cs-glass-sub">Tư vấn miễn phí 30 phút, cùng SBB vẽ lộ trình rõ ràng cho bạn.</span>
           </div>
         </div>
         <div class="cta-line-3">
@@ -3738,7 +3738,7 @@ const team = [
   }
   /* Trạng thái chưa có ảnh (file chưa được thêm vào) */
   .cs-photo--empty::after {
-    content: "Ảnh học viên — đang cập nhật";
+    content: "Ảnh học viên đang cập nhật";
     position: absolute;
     inset: 0;
     z-index: 2;
@@ -4294,7 +4294,7 @@ const team = [
   }
   .mv-card--noimg .mv-photo { background: linear-gradient(160deg, #f2f2f2, #e6e6e6); }
   .mv-card--noimg .mv-photo::after {
-    content: 'Khoảnh khắc — đang cập nhật';
+    content: 'Khoảnh khắc đang cập nhật';
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     text-align: center; padding: 1.5rem; color: #A7A7A7; font-size: 0.85rem;
   }
