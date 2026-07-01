@@ -37,6 +37,8 @@ featured: true
 - Có bảo hiểm y tế đạt chuẩn suốt thời gian chương trình.
 - Thể hiện ý định quay về nước sau chương trình, vì đây là visa không định cư.
 
+![Đồ họa các nhóm điều kiện J-1](/images/j1-03/graphic-1.webp)
+
 <a id="rieng"></a>
 
 ## Điều kiện riêng từng diện
@@ -70,6 +72,8 @@ Mức cần là đủ để làm việc an toàn và hiểu hướng dẫn tại
 Nhiều bạn tập trung vào lương và địa điểm mà quên yếu tố quyết định: vị trí ở Mỹ phải khớp ngành học hoặc nghề của bạn.
 
 Ví dụ, sinh viên ngành quản trị khách sạn xin vị trí vận hành nhà hàng là khớp. Nhưng một người học kế toán xin vị trí bếp thì lệch, và sẽ vướng ở bước duyệt kế hoạch đào tạo. Khi chuẩn bị, hãy nối rõ ràng giữa ngành của bạn và vị trí bạn nhắm tới.
+
+![Checklist tự đánh giá điều kiện J-1](/images/j1-03/graphic-2.webp)
 
 <a id="tu-kiem-tra"></a>
 
