@@ -35,6 +35,8 @@ published: 2026-06-20
 - Ghi chú về quy định về nước 2 năm 212(e), nếu có.
 - Một con số ước tính chi phí chương trình.
 
+![Đồ họa các thông tin chính trên DS-2019](/images/j1-09/graphic-1.webp)
+
 <a id="vi-sao"></a>
 
 ## Vì sao quan trọng
@@ -64,6 +66,8 @@ Trong thời gian chương trình, nếu bạn ra khỏi Mỹ rồi muốn quay 
 <a id="mat-sai"></a>
 
 ## Mất hoặc sai thông tin thì sao
+
+![Khối lưu ý cách giữ và xử lý DS-2019](/images/j1-09/graphic-2.webp)
 
 Nếu mất DS-2019, báo sponsor để xin cấp lại, có thể phát sinh phí và thời gian. Nếu thông tin sai, cũng báo sponsor sửa và cấp bản đúng. Giữ bản gốc cẩn thận, chụp lại một bản lưu, và mang theo khi phỏng vấn cũng như khi nhập cảnh.
 
