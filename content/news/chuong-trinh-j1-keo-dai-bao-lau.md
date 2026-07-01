@@ -36,6 +36,8 @@ published: 2026-06-25
 
 Thời hạn cụ thể của bạn ghi rõ trên mẫu DS-2019, theo kế hoạch đào tạo đã duyệt. Chương trình có thể ngắn hơn mức trần, ví dụ một kỳ Intern 6 tháng, tùy thỏa thuận với host.
 
+![Đồ họa thời hạn Intern 12 tháng và Trainee 18 tháng](/images/j1-04/graphic-1.webp)
+
 <a id="30-ngay"></a>
 
 ## 30 ngày trước và 30 ngày sau
@@ -63,6 +65,8 @@ Việc tham gia lại, nhất là chuyển từ Intern sang Trainee hay làm Tra
 <a id="3-nam"></a>
 
 ## Sự thật về con số 3 năm
+
+![Khối hiểu lầm và sự thật về thời hạn J-1](/images/j1-04/graphic-2.webp)
 
 Nhiều quảng cáo ghi J-1 đi được 2 tới 3 năm. Sự thật là Intern tối đa 12 tháng và Trainee tối đa 18 tháng. Con số dài hơn thường là nhầm sang loại hình hoặc visa khác, hoặc gộp nhiều chương trình lại để nghe hấp dẫn.
 
