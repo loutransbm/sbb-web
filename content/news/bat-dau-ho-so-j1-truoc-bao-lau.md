@@ -33,6 +33,8 @@ Nhiều khâu phụ thuộc bên thứ ba, nên bạn không tự rút ngắn đ
 
 ## Đếm lùi từ ngày muốn bay
 
+![Đồ họa timeline ngược chuẩn bị J-1](/images/j1-12/graphic-1.webp)
+
 | Mốc | Thời điểm so với ngày bay |
 | --- | --- |
 | Bắt đầu hồ sơ, khớp host | 4 tới 5 tháng trước |
