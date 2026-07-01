@@ -38,6 +38,8 @@ Bộ Ngoại giao Mỹ chia chương trình Intern và Trainee theo nhiều nhó
 - Nông, lâm, ngư nghiệp.
 - Hành chính công và luật.
 
+![Đồ họa các nhóm ngành J-1](/images/j1-07/graphic-1.webp)
+
 <a id="pho-bien"></a>
 
 ## Ngành phổ biến nhất với người Việt
@@ -57,6 +59,8 @@ Một lưu ý thực tế: ngành văn phòng thường ít suất hơn hospital
 <a id="khong-thuoc"></a>
 
 ## Ngành không nằm trong diện này
+
+![Khối lưu ý ngành không thuộc diện Intern và Trainee](/images/j1-07/graphic-2.webp)
 
 Chăm trẻ, chăm người già, chăm sóc bệnh nhân không thuộc diện J-1 Intern và Trainee. Các vị trí có yếu tố chăm sóc hoặc tiếp xúc bệnh nhân, gồm y khoa, nha khoa, thú y, trị liệu, đều không được duyệt cho hai diện này. Nếu mục tiêu của bạn nằm ở các lĩnh vực đó, cần xét chương trình hoặc diện visa khác phù hợp.
 
