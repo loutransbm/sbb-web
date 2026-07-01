@@ -116,7 +116,7 @@ const caseStudies = [
     <!-- Tiêu đề break-out cascade HỆT hero/team -->
     <div class="cs-header about-cases-head">
       <div class="cs-line cs-line-1">
-        <span class="cs-text-white">OUR<br/>CASE</span>
+        <span class="cs-text-white">OUR <br class="hero-br-mobile"/>CASE</span>
         <div class="cs-glass-pill">
           <span class="cs-glass-title">CONTENT REEL</span>
           <span class="cs-glass-sub">Lát cắt thật từ hành trình học viên SBB, không tô vẽ.</span>
@@ -534,6 +534,8 @@ const caseStudies = [
   .cs-header { margin-bottom: 0; font-weight: 500; line-height: 0.95; letter-spacing: -0.045em; font-family: 'Inter', sans-serif; }
   .cs-line { display: flex; align-items: center; gap: 1.5rem; }
   .cs-line-1 { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; white-space: nowrap; position: relative; z-index: 10; }
+  /* <br class="hero-br-mobile"> chỉ ngắt ở MOBILE; desktop bỏ ngắt để "OUR CASE" nằm 1 dòng (khớp News). */
+  .hero-br-mobile { display: none; }
   /* Big cascade headings → BLUE (new primary). */
   .cs-text-white { color: #f2420b; }
   .about-line-2 { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; margin-top: 0.5rem; }
@@ -1006,6 +1008,7 @@ const caseStudies = [
     .pr-programs-head, .pr-how-head, .pr-cta { width: calc(100% - 3rem); }
     .pr-programs .container, .pr-how .container { width: calc(100% - 3rem); }
     .cs-line { flex-wrap: wrap; gap: 0.4rem; }
+    .hero-br-mobile { display: inline; }  /* mobile: bật lại ngắt -> OUR / CASE (cascade) */
     .cs-line-1, .about-verb { font-size: clamp(3.5rem, 16.8vw, 4.55rem); letter-spacing: -0.097em; line-height: 0.9; white-space: nowrap; }
     .about-verb { margin-left: 0; }
     .pr-programs-head .about-verb, .pr-how-head .about-verb { margin-left: 0; }

@@ -65,7 +65,7 @@ const team = [
       <div class="cs-header about-hero-head">
         <!-- Dòng 1: ABOUT SBB (trắng lớn) + glass pill chườm cuối chữ (như Omni "WORK FLOW") -->
         <div class="cs-line cs-line-1">
-          <span class="cs-text-white">ABOUT<br/>SBB</span>
+          <span class="cs-text-white">ABOUT <br class="hero-br-mobile"/>SBB</span>
           <div class="cs-glass-pill">
             <span class="cs-glass-title">HOW WE WORK</span>
             <span class="cs-glass-sub">Nói thật, làm thật, đi cùng tới cùng.</span>
@@ -276,7 +276,7 @@ const team = [
     <!-- Tiêu đề break-out cascade HỆT hero/team -->
     <div class="cs-header about-cases-head">
       <div class="cs-line cs-line-1">
-        <span class="cs-text-white">OUR<br/>CASE</span>
+        <span class="cs-text-white">OUR <br class="hero-br-mobile"/>CASE</span>
         <div class="cs-glass-pill">
           <span class="cs-glass-title">CONTENT REEL</span>
           <span class="cs-glass-sub">Lát cắt thật từ hành trình học viên SBB, không tô vẽ.</span>
@@ -886,6 +886,9 @@ const team = [
     .cs-line { display: flex; align-items: center; gap: 1.5rem; }
     /* Cụm "ABOUT SBB INSTITUTE" = HỆT cỡ DÒNG 1 các section homepage (.cs-line-1) */
     .cs-line-1 { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; white-space: nowrap; position: relative; z-index: 10; }
+    /* <br class="hero-br-mobile"> CHỈ ngắt dòng ở MOBILE; desktop bỏ ngắt để "ABOUT SBB" / "OUR CASE" nằm CÙNG 1 dòng (khớp News).
+       (Trước đây br cứng thêm cho cascade mobile đã làm xô luôn desktop → chính là chỗ "bị đụng khi sửa mobile".) */
+    .hero-br-mobile { display: none; }
     /* Cascade hero/section headings (display lớn) -> CAM theo rule 2 */
     .cs-text-white { color: var(--accent); }
     /* Dòng 2: INSTITUTE (trái, = cỡ dòng 1) + đuôi (phải, = cỡ dòng 2) — space-between như Omni "DIGITAL  & THE WAY WE".
@@ -1336,6 +1339,7 @@ const team = [
     @media (max-width: 991px) {
       .about-hero-wrap { width: calc(100% - 3rem); }  /* mobile: lề 1.5rem mỗi bên cho khớp nav */
       .cs-line { flex-wrap: wrap; gap: 0.4rem; }
+      .hero-br-mobile { display: inline; }  /* mobile: bật lại ngắt -> ABOUT / SBB, OUR / CASE (cascade) */
       .cs-line-1, .about-verb { font-size: clamp(3rem, 13vw, 5rem); white-space: normal; }
       .about-verb { margin-left: 0; }
       .about-hero-head .cs-glass-pill { transform: translateY(0); margin-left: 0; margin-top: 1rem; }
