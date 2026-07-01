@@ -33,6 +33,8 @@ published: 2026-06-19
 - Cách theo dõi và đánh giá tiến độ.
 - Số giờ mỗi tuần và thông tin vị trí.
 
+![Đồ họa cấu trúc một kế hoạch DS-7002](/images/j1-10/graphic-1.webp)
+
 Điểm cốt lõi: DS-7002 chia chương trình thành các giai đoạn có kỹ năng tăng dần, không phải một mô tả công việc lặp lại suốt thời gian.
 
 <a id="lan-ranh"></a>
@@ -56,6 +58,8 @@ Khi đọc DS-7002, hãy tự hỏi: sau chương trình này, mình giỏi thê
 <a id="ban-lam-gi"></a>
 
 ## Bạn cần làm gì với DS-7002
+
+![Khối việc cần làm với DS-7002](/images/j1-10/graphic-2.webp)
 
 Đọc kỹ trước khi ký. Đây là kế hoạch cho chính bạn, nên bạn có quyền góp ý để nó phản ánh đúng mục tiêu nghề. Hỏi rõ ai là người giám sát và họ sẽ hướng dẫn bạn ra sao. Đảm bảo các kỹ năng ghi trong kế hoạch là thứ bạn thực sự muốn học và khớp ngành. Khi sang Mỹ, công việc thực tế nên trùng với những gì ghi ở đây.
 
