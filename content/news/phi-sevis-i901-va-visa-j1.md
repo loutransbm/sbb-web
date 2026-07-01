@@ -53,6 +53,8 @@ Nhưng mỗi lần nộp đơn visa mới vẫn cần khai DS-160 mới và đó
 
 ## Một khoản phí mới đang chờ
 
+![Khối lưu ý phí mới đang chờ áp dụng](/images/j1-11/graphic-2.webp)
+
 Có một khoản phí mới tên Visa Integrity Fee, mức khoảng 250 đô, đã được luật hóa nhưng đầu năm 2026 chưa thu trên thực tế. Tình trạng này có thể thay đổi, nên trước khi đi hãy kiểm tra thông tin chính thức xem khoản này đã áp dụng chưa.
 
 <a id="phan-biet"></a>
