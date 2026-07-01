@@ -5,7 +5,7 @@
 - **Category:** Global Career Development Organization — không phải agency, không phải trường học
 - **Mission:** Kiến tạo thế hệ người trẻ Việt được tin và được trọng dụng
 - **Core tagline pillars:** MINDSET. CONDUCT. CAPABILITY.
-- **Brand spokesperson:** Lou Tran — CEO & Founder của SBB. Xuất hiện trong Results section (headshot). Đây là gương mặt đại diện chính thức của tổ chức.
+- **Brand spokesperson:** Lou Tran — Founder & CEO của SBB. Xuất hiện trong Results section (headshot). Đây là gương mặt đại diện chính thức của tổ chức.
 
 ---
 
