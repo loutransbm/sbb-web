@@ -34,6 +34,8 @@ Chi phí y tế ở Mỹ rất cao, một ca cấp cứu có thể tốn hàng c
 
 ## Các mức tối thiểu theo quy định
 
+![Đồ họa các hạng mục bảo hiểm J-1 bắt buộc](/images/j1-06/graphic-1.webp)
+
 Quy định của Bộ Ngoại giao Mỹ yêu cầu bảo hiểm phủ các hạng mục sau, với mức tối thiểu. Con số dưới là mức thường được dẫn, hãy xác nhận lại bản cập nhật với sponsor:
 
 | Hạng mục | Mức tối thiểu thường áp dụng |
@@ -54,6 +56,8 @@ Với phần lớn gói J-1, bảo hiểm đạt chuẩn được sponsor sắp 
 <a id="khong-gom"></a>
 
 ## Cái bảo hiểm thường không gồm
+
+![Khối lưu ý về duy trì và phạm vi bảo hiểm J-1](/images/j1-06/graphic-2.webp)
 
 Đây là phần ít người để ý. Bảo hiểm J-1 mức tối thiểu tập trung vào y tế, cấp cứu, vận chuyển và hồi hương. Những thứ thường không nằm trong phần bắt buộc gồm khám răng, khám mắt, và đôi khi có thời gian chờ với bệnh có sẵn.
 
