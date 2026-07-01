@@ -1,6 +1,8 @@
 ---
 title: "Quy định về nước 2 năm 212(e) là gì và ai bị áp"
 description: "212(e) buộc một số người J-1 về nước 2 năm. Ai bị áp, và vì sao phần lớn ứng viên Việt tự túc hiện không thuộc diện này sau khi Việt Nam ra khỏi Skills List 9/12/2024."
+image: /images/j1-27/thumb.webp
+hero: /images/j1-27/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

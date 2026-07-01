@@ -1,6 +1,8 @@
 ---
 title: "Đi lại ở Mỹ khi đi J-1: công cộng, gọi xe, và lái xe"
 description: "Hướng dẫn đi lại ở Mỹ cho người đi J-1: dùng giao thông công cộng và ứng dụng gọi xe, có cần bằng lái Mỹ không, dùng bằng Việt Nam và IDP ra sao."
+image: /images/j1-37/thumb.webp
+hero: /images/j1-37/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

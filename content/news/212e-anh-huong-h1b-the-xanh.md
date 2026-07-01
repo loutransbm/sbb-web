@@ -1,6 +1,8 @@
 ---
 title: "Quy định 212(e) ảnh hưởng thế nào tới việc xin H-1B, thẻ xanh hay visa khác sau này"
 description: "Nếu thuộc 212(e), bạn bị chặn xin H-1B, thẻ xanh và đổi tình trạng trong Mỹ cho tới khi về nước 2 năm hoặc được waiver. Nhưng vẫn xin được F-1. Giải thích đầy đủ."
+image: /images/j1-28/thumb.webp
+hero: /images/j1-28/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

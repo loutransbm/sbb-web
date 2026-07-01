@@ -47,6 +47,8 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
+    image: z.string().optional(),   // thumbnail (card)
+    hero: z.string().optional(),    // ảnh đầu bài
     cum_chinh: z.enum([
       'tu-duy-ra-the-gioi', 'reality-check', 'internship-j1',
       'grp', 'office-tour', 'tieng-noi-hanh-trinh'

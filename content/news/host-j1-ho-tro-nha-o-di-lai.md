@@ -1,6 +1,8 @@
 ---
 title: "Host có hỗ trợ nhà ở, đi lại hay ăn uống không, và tính thế nào vào thu nhập"
 description: "Nhiều host J-1 hỗ trợ nhà ở, đi lại hoặc ăn uống, nhưng không phải tất cả. Bài viết giải thích cách quy đổi phúc lợi này vào thu nhập thật và các câu cần hỏi."
+image: /images/j1-21/thumb.webp
+hero: /images/j1-21/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer

@@ -1,6 +1,8 @@
 ---
 title: "Phỏng vấn visa J-1 hỏi gì, trả lời ra sao, và luyện thế nào"
 description: "Phỏng vấn visa J-1 hỏi gì và trả lời ra sao. Bài viết có nhóm câu hỏi, câu trả lời mẫu, giấy tờ cần mang, kế hoạch luyện tập và lỗi nên tránh."
+image: /images/j1-14/thumb.webp
+hero: /images/j1-14/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

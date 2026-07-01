@@ -1,6 +1,8 @@
 ---
 title: "DS-7002 là gì và cần chuẩn bị thế nào"
 description: "DS-7002 là kế hoạch đào tạo bắt buộc cho J-1 Intern và Trainee. Giải thích nội dung, vì sao nó là lằn ranh giữa đào tạo thật và lao động trá hình, và bạn cần làm gì."
+image: /images/j1-10/thumb.webp
+hero: /images/j1-10/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer

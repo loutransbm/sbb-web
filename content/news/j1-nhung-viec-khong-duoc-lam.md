@@ -1,6 +1,8 @@
 ---
 title: "Những công việc và vị trí không được phép làm khi đi J-1"
 description: "J-1 Intern và Trainee không được làm lao động phổ thông, quá 20% việc hành chính, chăm trẻ, chăm già, chăm bệnh, và nhiều nghề khác. Kèm dấu hiệu host không hợp lệ."
+image: /images/j1-05/thumb.webp
+hero: /images/j1-05/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

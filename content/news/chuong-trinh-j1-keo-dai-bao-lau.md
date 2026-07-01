@@ -1,6 +1,8 @@
 ---
 title: "Chương trình J-1 kéo dài tối đa bao lâu theo từng diện"
 description: "J-1 Intern tối đa 12 tháng, Trainee tối đa 18 tháng. Giải thích thời hạn từng diện, 30 ngày trước và sau, gia hạn, tham gia lại, và sự thật về con số 3 năm."
+image: /images/j1-04/thumb.webp
+hero: /images/j1-04/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer

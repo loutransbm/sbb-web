@@ -1,6 +1,8 @@
 ---
 title: "Quy trình xin visa J-1 gồm những bước nào, từ lúc nộp tới lúc bay"
 description: "Hướng dẫn từng bước xin visa J-1, từ khớp host, đóng phí SEVIS, nhận DS-2019, khai DS-160, đặt lịch và phỏng vấn. Kèm link nộp chính thức và chỗ hay kẹt."
+image: /images/j1-08/thumb.webp
+hero: /images/j1-08/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: guide

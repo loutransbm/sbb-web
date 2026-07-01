@@ -1,6 +1,8 @@
 ---
 title: "Những tuần đầu ở Mỹ theo diện J-1: checklist từng việc theo thứ tự"
 description: "Checklist ưu tiên cho người mới sang Mỹ theo J-1, theo thứ tự nên làm: kích hoạt SEVIS, chỗ ở, sim, ngân hàng, SSN, đi lại, gửi tiền. Mỗi việc có hướng dẫn chi tiết riêng."
+image: /images/j1-31/thumb.webp
+hero: /images/j1-31/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

@@ -1,6 +1,8 @@
 ---
 title: "Điều kiện để đủ tiêu chuẩn tham gia J-1 Intern hoặc Trainee"
 description: "Điều kiện đi J-1: học vấn, kinh nghiệm, tiếng Anh, khớp ngành, tài chính, bảo hiểm, ý định về nước. Có phần tự kiểm tra và các sai lầm hay gặp."
+image: /images/j1-03/thumb.webp
+hero: /images/j1-03/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer

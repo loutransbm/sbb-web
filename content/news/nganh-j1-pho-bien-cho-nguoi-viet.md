@@ -1,6 +1,8 @@
 ---
 title: "Ngành nào đang mở nhiều suất J-1 nhất cho sinh viên Việt"
 description: "J-1 Intern và Trainee phủ nhiều nhóm ngành. Hospitality vẫn lớn nhất với người Việt và đang mở rộng sang IT, business, finance, design. Cách kiểm tra ngành của bạn có suất."
+image: /images/j1-07/thumb.webp
+hero: /images/j1-07/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer

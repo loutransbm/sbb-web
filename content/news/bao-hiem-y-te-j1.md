@@ -1,6 +1,8 @@
 ---
 title: "Bảo hiểm y tế bắt buộc cho người đi J-1 gồm những gì"
 description: "J-1 bắt buộc có bảo hiểm y tế suốt chương trình, với mức tối thiểu cho chi phí y tế, vận chuyển và hồi hương. Giải thích từng hạng mục, cái thường không gồm, và lưu ý."
+image: /images/j1-06/thumb.webp
+hero: /images/j1-06/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

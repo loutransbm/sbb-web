@@ -1,6 +1,8 @@
 ---
 title: "Cách gửi tiền từ Mỹ về Việt Nam khi đi J-1, tiết kiệm phí"
 description: "Hướng dẫn gửi tiền từ Mỹ về Việt Nam: các cách gửi, so sánh tổng chi phí gồm phí và chênh lệch tỉ giá, các bước an toàn, và cách tránh lừa đảo đổi tiền."
+image: /images/j1-38/thumb.webp
+hero: /images/j1-38/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

@@ -1,6 +1,8 @@
 ---
 title: "Visa J-1 là gì? Hướng dẫn đầy đủ cho người Việt"
 description: "Visa J-1 là gì, gồm những diện nào, Intern và Trainee khác gì nhau, khác du học và du lịch ra sao, và hành trình J-1 diễn ra thế nào. Giải thích đầy đủ, dẫn nguồn chính thống."
+image: /images/j1-01/thumb.webp
+hero: /images/j1-01/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

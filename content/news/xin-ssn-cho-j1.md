@@ -1,6 +1,8 @@
 ---
 title: "Cách xin SSN khi đi J-1, từng bước"
 description: "Hướng dẫn xin số an sinh xã hội SSN cho người đi J-1: khi nào đủ điều kiện, giấy tờ cần mang, các bước tại văn phòng SSA, và việc cần làm sau khi có số."
+image: /images/j1-34/thumb.webp
+hero: /images/j1-34/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

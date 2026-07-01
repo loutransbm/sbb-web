@@ -22,6 +22,7 @@ const entries = await getCollection('news');
 const posts = entries
   .map((e) => ({
     slug: e.id,
+    img: e.data.image,
     title: e.data.title,
     desc: e.data.description || '',
     cat: themeOf(e.id, e.data.cum_chinh),
@@ -87,6 +88,7 @@ const blogCats = [{ id: 'all', label: 'Tất cả' }, ...present.map((c) => ({ i
       <div class="blog-grid">
         {posts.map((p) => (
           <a href={p.href} class="blog-card" data-cat={p.cat} data-title={p.title.toLowerCase()}>
+            <div class="blog-card__media"><img src={p.img} alt={p.title} loading="lazy" onerror="this.closest('.blog-card__media').style.display='none'" /></div>
             <span class="blog-card__tag">{p.catLabel}</span>
             <h3 class="blog-card__title">{p.title}</h3>
             {p.desc && <p class="blog-card__desc">{p.desc}</p>}

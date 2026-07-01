@@ -1,6 +1,8 @@
 ---
 title: "Vì sao hồ sơ J-1 bị từ chối visa, và cách nộp lại"
 description: "Lý do hồ sơ J-1 bị từ chối, phân biệt 214(b) và 221(g), cách giảm rủi ro, và các bước nộp lại sau khi trượt. Có checklist và link chính thống."
+image: /images/j1-15/thumb.webp
+hero: /images/j1-15/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: guide

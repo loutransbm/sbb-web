@@ -1,6 +1,8 @@
 ---
 title: "Tổng chi phí trọn gói để đi J-1 gồm những khoản nào"
 description: "Chi phí đi J-1 không chỉ là phí chương trình. Bài viết bóc tách đủ các khoản: phí nhà nước, sponsor, bảo hiểm, vé, sinh hoạt ban đầu, và cách yêu cầu báo giá minh bạch."
+image: /images/j1-20/thumb.webp
+hero: /images/j1-20/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

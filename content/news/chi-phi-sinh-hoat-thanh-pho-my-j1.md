@@ -1,6 +1,8 @@
 ---
 title: "Chi phí sinh hoạt các thành phố Mỹ khác nhau ra sao, nên chọn nơi nào để tối ưu"
 description: "Cùng một mức lương J-1, ở thành phố này bạn dư tiền, thành phố kia thì hết sạch. Cách đọc chi phí sống để chọn nơi đặt host tối ưu, kèm cách so sánh theo số dư thật."
+image: /images/j1-19/thumb.webp
+hero: /images/j1-19/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer

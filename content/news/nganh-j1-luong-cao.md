@@ -1,6 +1,8 @@
 ---
 title: "Ngành nào của J-1 trả lương cao hơn"
 description: "Nhóm kỹ thuật, IT, tài chính thường lương theo giờ cao hơn. Hospitality mạnh ở tổng thu nhập nhờ tip và chi phí sống thấp. Cách chọn ngành theo cả lương lẫn chi phí."
+image: /images/j1-18/thumb.webp
+hero: /images/j1-18/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer

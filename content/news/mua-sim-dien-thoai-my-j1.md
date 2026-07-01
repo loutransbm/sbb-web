@@ -1,6 +1,8 @@
 ---
 title: "Mua sim và dùng điện thoại ở Mỹ khi đi J-1, từng bước"
 description: "Người mới sang Mỹ nên dùng sim trả trước, không cần SSN hay lịch sử tín dụng. Hướng dẫn chọn nhà mạng, kích hoạt sim hoặc eSIM, và giữ số Việt Nam."
+image: /images/j1-35/thumb.webp
+hero: /images/j1-35/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

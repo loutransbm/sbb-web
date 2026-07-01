@@ -1,6 +1,8 @@
 ---
 title: "Tips để kỳ J-1 thật sự giúp ích cho sự nghiệp sau khi về nước"
 description: "J-1 chỉ thành tài sản nghề nghiệp nếu bạn chủ động. Bài viết gồm tips ghi lại kỹ năng, xin thư giới thiệu, dựng hồ sơ, kết nối với bước tiếp theo và vượt sốc văn hóa ngược."
+image: /images/j1-32/thumb.webp
+hero: /images/j1-32/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer

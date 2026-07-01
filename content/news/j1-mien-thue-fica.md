@@ -1,6 +1,8 @@
 ---
 title: "Vì sao nhiều người đi J-1 được miễn thuế FICA, và khi nào thì mất quyền miễn đó"
 description: "J-1 dạng không phải sinh viên thường được miễn thuế FICA trong hai năm đầu. Giải thích điều kiện, khi nào quyền miễn bị mất, và cách đòi lại nếu bị trừ nhầm."
+image: /images/j1-23/thumb.webp
+hero: /images/j1-23/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer

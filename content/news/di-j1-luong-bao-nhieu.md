@@ -1,6 +1,8 @@
 ---
 title: "Đi J-1 lương khoảng bao nhiêu một giờ và một tháng"
 description: "Lương J-1 thường khoảng 13 tới 22 đô một giờ, tương đương 2.000 tới 4.500 đô một tháng tùy ngành và bang. Bài viết tách rõ khoảng lương, yếu tố ảnh hưởng và nơi xem con số thật."
+image: /images/j1-16/thumb.webp
+hero: /images/j1-16/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

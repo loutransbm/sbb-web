@@ -1,6 +1,8 @@
 ---
 title: "Xin visa J-1 mất bao lâu, và mùa nào hồ sơ hay bị chậm"
 description: "Tổng thời gian xin visa J-1 thường 6 tới 12 tuần. Bài viết tách rõ thời gian từng khâu, mùa cao điểm dễ chậm, khả năng bị xử lý hành chính, và cách giảm trễ."
+image: /images/j1-13/thumb.webp
+hero: /images/j1-13/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

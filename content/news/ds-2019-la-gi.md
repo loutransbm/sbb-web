@@ -1,6 +1,8 @@
 ---
 title: "DS-2019 là gì và vì sao nó quan trọng với hồ sơ J-1"
 description: "DS-2019 là giấy chứng nhận đủ điều kiện J-1 do sponsor cấp. Giải thích thông tin trên DS-2019, cách đọc và kiểm tra, chữ ký đi lại, mất hoặc sai thì xử lý ra sao."
+image: /images/j1-09/thumb.webp
+hero: /images/j1-09/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer

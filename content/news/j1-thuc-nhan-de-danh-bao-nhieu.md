@@ -1,6 +1,8 @@
 ---
 title: "Sau thuế và chi phí, mỗi tháng đi J-1 thực sự để dành được bao nhiêu"
 description: "Thực nhận J-1 bằng lương trừ thuế và chi phí sống. Bài viết tách rõ các khoản trừ, cho ví dụ minh họa theo thành phố, và cách tăng tiền để dành."
+image: /images/j1-17/thumb.webp
+hero: /images/j1-17/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

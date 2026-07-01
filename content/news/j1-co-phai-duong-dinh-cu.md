@@ -1,6 +1,8 @@
 ---
 title: "J-1 có thật sự là con đường định cư Mỹ không, và những lời hứa \"đi rồi ở lại\" có đáng tin không"
 description: "J-1 là visa không định cư, không phải con đường định cư trực tiếp. Bài viết bóc tách lời hứa \"đi rồi ở lại\", các lộ trình hợp pháp có thật, và giá trị thật của J-1."
+image: /images/j1-29/thumb.webp
+hero: /images/j1-29/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

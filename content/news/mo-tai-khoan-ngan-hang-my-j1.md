@@ -1,6 +1,8 @@
 ---
 title: "Cách mở tài khoản ngân hàng ở Mỹ cho người đi J-1, từng bước"
 description: "Hướng dẫn đầy đủ mở tài khoản ngân hàng ở Mỹ khi đi J-1, kể cả khi chưa có SSN. Giấy tờ cần mang, các bước tại quầy, câu nói mẫu, phí cần hỏi, và link tra cứu."
+image: /images/j1-33/thumb.webp
+hero: /images/j1-33/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

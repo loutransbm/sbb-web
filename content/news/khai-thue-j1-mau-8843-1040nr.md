@@ -1,6 +1,8 @@
 ---
 title: "Cuối kỳ J-1 phải khai những mẫu thuế nào, và khai thế nào"
 description: "Hướng dẫn khai thuế cho người đi J-1: ai nộp Form 8843, khi nào nộp 1040-NR, các bước khai, phần mềm cho người không cư trú, hạn nộp và giấy tờ cần giữ."
+image: /images/j1-24/thumb.webp
+hero: /images/j1-24/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

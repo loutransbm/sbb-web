@@ -1,6 +1,8 @@
 ---
 title: "Phí SEVIS I-901 và phí visa J-1 là bao nhiêu, có được hoàn lại không"
 description: "Phí SEVIS I-901 cho J-1 khoảng 220 đô, phí visa MRV khoảng 185 đô, đều không hoàn lại. Giải thích các loại phí, phí mới đang chờ, và phải đóng lại gì khi phỏng vấn lại."
+image: /images/j1-11/thumb.webp
+hero: /images/j1-11/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

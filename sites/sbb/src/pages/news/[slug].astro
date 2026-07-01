@@ -54,6 +54,12 @@ const dateISO = d.published.toISOString().slice(0, 10);
       <h1 class="na-title">{d.title}</h1>
       {d.description && <p class="na-lead">{d.description}</p>}
 
+      {d.hero && (
+        <figure class="na-hero">
+          <img src={d.hero} alt={d.title} loading="lazy" onerror="this.closest('.na-hero').remove()" />
+        </figure>
+      )}
+
       <div class="na-prose">
         <Content />
       </div>
@@ -127,6 +133,8 @@ const dateISO = d.published.toISOString().slice(0, 10);
     color: rgba(255,255,255,0.66); margin: 0 0 clamp(2.4rem, 4vw, 3.2rem);
     padding-bottom: clamp(2rem, 3.5vw, 2.8rem); border-bottom: 1px solid rgba(255,255,255,0.1);
   }
+  .na-hero { margin: clamp(2rem, 3.5vw, 2.8rem) 0 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: linear-gradient(160deg, #2a1109, #160a05); aspect-ratio: 16 / 9; }
+  .na-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   /* ===== Prose ===== */
   .na-prose { font-family: 'Inter', sans-serif; font-weight: 300; color: rgba(255,255,255,0.8); font-size: 1.02rem; line-height: 1.75; }

@@ -1,6 +1,8 @@
 ---
 title: "Cách thuê nhà ở Mỹ khi đi J-1 và tránh lừa đảo, từng bước"
 description: "Hướng dẫn thuê nhà cho người đi J-1: các kiểu chỗ ở, đọc hợp đồng và tiền cọc, các bước an toàn, và dấu hiệu lừa đảo cần tránh khi thuê từ xa."
+image: /images/j1-36/thumb.webp
+hero: /images/j1-36/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

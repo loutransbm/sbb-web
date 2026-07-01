@@ -1,6 +1,8 @@
 ---
 title: "Nên bắt đầu chuẩn bị hồ sơ J-1 trước bao lâu so với ngày bay"
 description: "Nên khởi động hồ sơ J-1 trước 4 tới 5 tháng. Bài viết dựng timeline ngược từ ngày muốn bay, kèm việc cần làm ở mỗi mốc và một ví dụ tính cụ thể."
+image: /images/j1-12/thumb.webp
+hero: /images/j1-12/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: guide

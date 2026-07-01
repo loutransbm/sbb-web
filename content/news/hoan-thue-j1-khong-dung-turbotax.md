@@ -1,6 +1,8 @@
 ---
 title: "Xin hoàn thuế sau J-1 thế nào, từng bước"
 description: "Bị khấu trừ thuế dư, người J-1 có thể xin hoàn qua Form 1040-NR. Hướng dẫn từng bước, phần mềm cho người không cư trú, và cách đòi lại FICA bị trừ nhầm."
+image: /images/j1-25/thumb.webp
+hero: /images/j1-25/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

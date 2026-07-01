@@ -1,6 +1,8 @@
 ---
 title: "30 ngày sau khi kết thúc J-1: được gì, không được gì, và làm gì"
 description: "Sau ngày kết thúc J-1 bạn có 30 ngày grace period. Bài viết nói rõ được và không được làm gì, kèm kế hoạch thu xếp rời đi từng bước để không quá hạn."
+image: /images/j1-30/thumb.webp
+hero: /images/j1-30/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: guide

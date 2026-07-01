@@ -1,6 +1,8 @@
 ---
 title: "Đi J-1 có phải đóng thuế ở Mỹ không, và những loại thuế nào"
 description: "J-1 vẫn nộp thuế thu nhập liên bang và bang, nhưng thường được miễn FICA trong 2 năm đầu. Giải thích cư trú thuế, các loại thuế, sai lầm tốn tiền và cách khai đúng."
+image: /images/j1-22/thumb.webp
+hero: /images/j1-22/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

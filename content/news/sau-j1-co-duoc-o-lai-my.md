@@ -1,6 +1,8 @@
 ---
 title: "Sau khi hết chương trình J-1 có được ở lại Mỹ không"
 description: "J-1 là visa có thời hạn, không định cư. Sau chương trình có 30 ngày grace. Muốn ở lại hợp pháp phải chuyển sang diện khác đúng quy trình và xét quy định 212(e)."
+image: /images/j1-26/thumb.webp
+hero: /images/j1-26/hero.webp
 cum_chinh: internship-j1
 lang_kinh: phu-huynh
 loai: explainer

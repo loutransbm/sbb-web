@@ -1,6 +1,8 @@
 ---
 title: "J-1 Intern và Trainee khác nhau thế nào? Ai hợp diện nào"
 description: "Phân biệt J-1 Intern và Trainee về điều kiện, thời hạn, ngành nghề, kèm các tình huống ngách như cửa sổ 12 tháng sau tốt nghiệp và mức trần hospitality."
+image: /images/j1-02/thumb.webp
+hero: /images/j1-02/hero.webp
 cum_chinh: internship-j1
 lang_kinh: sinh-vien
 loai: explainer
