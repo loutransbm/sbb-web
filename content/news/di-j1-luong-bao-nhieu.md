@@ -34,6 +34,8 @@ Mức tối thiểu mà chương trình yêu cầu bạn tiếp cận được l
 
 ## Khoảng lương theo nhóm ngành
 
+![Đồ họa khoảng lương J-1 theo nhóm ngành](/images/j1-16/graphic-1.webp)
+
 | Nhóm ngành | Khoảng lương tham khảo mỗi tháng |
 | --- | --- |
 | Kỹ thuật, IT, tài chính | thường cao hơn, có thể trên 4.000 đô |
@@ -45,6 +47,8 @@ Bảng trên là khoảng ước lượng từ dữ liệu ngành, không phải
 <a id="yeu-to"></a>
 
 ## Yếu tố ảnh hưởng tới lương
+
+![Khối các yếu tố ảnh hưởng lương J-1](/images/j1-16/graphic-2.webp)
 
 Lương phụ thuộc ngành, bang, quy mô host, và kinh nghiệm của bạn. Hai vị trí cùng mức lương giờ vẫn cho thu nhập khác nhau nếu một nơi có nhiều giờ và tip hơn. Vị trí trả lương cũng phải tuân thủ luật lương tối thiểu của bang và liên bang.
 
