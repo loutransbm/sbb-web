@@ -34,6 +34,8 @@ Bạn được hoàn khi tổng thuế đã bị trừ trong năm lớn hơn ngh
 
 ## Các bước xin hoàn thuế
 
+![Đồ họa quy trình xin hoàn thuế J-1](/images/j1-25/graphic-1.webp)
+
 1. **Nhận W-2** từ nơi trả lương sau khi kết thúc năm thuế.
 2. **Chọn phần mềm cho người không cư trú** như Sprintax, hoặc một chuyên gia thuế.
 3. **Khai Form 1040-NR**, kèm Form 8843, và tờ bang nếu cần.
@@ -44,6 +46,8 @@ Bạn được hoàn khi tổng thuế đã bị trừ trong năm lớn hơn ngh
 <a id="turbotax"></a>
 
 ## Vì sao không dùng TurboTax
+
+![Khối cảnh báo về dùng sai phần mềm thuế](/images/j1-25/graphic-2.webp)
 
 TurboTax và phần mềm phổ thông thiết kế cho người cư trú, không hỗ trợ Form 1040-NR. Dùng chúng dễ áp các khoản giảm trừ dành cho người cư trú mà bạn không đủ điều kiện. Hậu quả là khai sai, và có thể bị cơ quan thuế gửi thư nhắc hoặc phạt sau này. Một khoản hoàn trông lớn nhưng khai sai diện là rủi ro thật.
 

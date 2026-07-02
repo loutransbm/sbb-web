@@ -28,6 +28,8 @@ published: 2026-06-03
 
 Bạn có 30 ngày gọi là grace period. Trong thời gian này bạn không được tiếp tục làm việc, và nếu rời khỏi Mỹ thì không quay lại bằng J-1 được nữa. Ở quá 30 ngày mà không có diện hợp lệ là quá hạn, vi phạm tình trạng, và ảnh hưởng xấu tới hồ sơ nhập cảnh sau này.
 
+![Đồ họa các lựa chọn sau khi hết J-1](/images/j1-26/graphic-1.webp)
+
 <a id="o-lai"></a>
 
 ## Muốn ở lại hợp pháp thì cần gì
@@ -39,6 +41,8 @@ Việc này phải làm bài bản và đúng thời điểm, không để rơi 
 <a id="212e"></a>
 
 ## Phải kiểm tra quy định 212(e)
+
+![Khối lưu ý kiểm tra 212e trước khi tính ở lại](/images/j1-26/graphic-2.webp)
 
 212(e) là quy định buộc một số người J-1 phải về nước 2 năm trước khi xin vài loại visa nhất định, gồm visa làm việc và thẻ xanh. Có người thuộc diện này, có người không.
 

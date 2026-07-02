@@ -26,6 +26,8 @@ published: 2026-06-01
 
 ## 212(e) chặn những gì
 
+![Đồ họa 212e chặn và không chặn diện nào](/images/j1-28/graphic-1.webp)
+
 - Chặn visa làm việc H-1B.
 - Chặn các diện L và K.
 - Chặn thẻ xanh, tức thường trú nhân.
@@ -52,6 +54,8 @@ Lưu ý quan trọng cho ứng viên Việt: phần lớn người đi J-1 tự 
 <a id="co-so-waiver"></a>
 
 ## Các cơ sở xin waiver
+
+![Khối các cơ sở xin waiver 212e](/images/j1-28/graphic-2.webp)
 
 Nếu thuộc diện và muốn xin waiver, một số cơ sở gồm: thư không phản đối từ nước mình, đề nghị từ một cơ quan chính phủ Mỹ có liên quan, lý do gây khó khăn nghiêm trọng cho vợ chồng hoặc con là công dân hoặc thường trú nhân Mỹ, hoặc lo sợ bị ngược đãi. Với bác sĩ còn có dạng waiver riêng.
 
