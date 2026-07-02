@@ -153,33 +153,9 @@ const orgSchema = {
     })();
   </script>
 
-  <!-- GSAP & Lenis CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" is:inline></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" is:inline></script>
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.28/dist/lenis.min.js" is:inline></script>
-
-  <!-- Viewport reveal & Smooth Scroll animation -->
+  <!-- Cuộn GỐC trình duyệt — đã BỎ smooth-scroll Lenis + GSAP/ScrollTrigger (không còn dùng) để hết lag cuộn & nhẹ tải -->
   <script is:inline>
-    // Only run animations if user doesn't prefer reduced motion
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      // Initialize Lenis
-      if (typeof Lenis !== 'undefined') {
-        const lenis = new Lenis({
-          duration: 1.0,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          smoothWheel: true,
-          touchMultiplier: 1.5,
-        });
-        // 1 DRIVER rAF duy nhất. Trước đây vừa requestAnimationFrame vừa gsap.ticker cùng gọi lenis.raf
-        // -> chạy 2 lần/khung = giật/rung. Bỏ gsap.ticker, chỉ dùng rAF.
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-        requestAnimationFrame(raf);
-        if (typeof ScrollTrigger !== 'undefined') lenis.on('scroll', ScrollTrigger.update);
-      }
-
-    }
-
-    // ===== SCROLL REVEAL đa dạng (IntersectionObserver + CSS — nhẹ hơn ScrollTrigger, chạy 1 lần/phần tử) =====
+    // ===== SCROLL REVEAL đa dạng (IntersectionObserver + CSS — nhẹ, chạy 1 lần/phần tử) =====
     (function () {
       var SEL = '[data-reveal],[data-reveal-stagger],.reveal,.reveal-stagger';
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
