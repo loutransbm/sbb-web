@@ -29,6 +29,8 @@ published: 2026-06-06
 
 FICA gồm hai phần: An sinh xã hội 6,2% và Medicare 1,45%, tổng 7,65% lương. Với người Mỹ, khoản này trừ thẳng vào lương để đóng vào hệ thống an sinh. Với người J-1 đủ điều kiện, khoản này được miễn, nên bạn giữ lại được phần đó trong lương.
 
+![Đồ họa cơ cấu thuế FICA và phần được miễn](/images/j1-23/graphic-1.webp)
+
 <a id="ai-duoc-mien"></a>
 
 ## Ai được miễn và trong bao lâu
@@ -40,6 +42,8 @@ Lưu ý phân biệt: diện sinh viên có thời gian được tính là khôn
 <a id="khi-nao-mat"></a>
 
 ## Khi nào mất quyền miễn
+
+![Khối các trường hợp mất quyền miễn FICA](/images/j1-23/graphic-2.webp)
 
 - Khi bạn làm việc không nằm trong phạm vi được phép của chương trình. Lúc đó khoản FICA có thể bị tính đủ.
 - Khi qua giai đoạn đầu và trở thành người cư trú về thuế theo quy định. Lúc đó nghĩa vụ FICA thường bắt đầu.

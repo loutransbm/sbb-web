@@ -45,6 +45,8 @@ Hiểu hai trục này rồi, các phần sau chỉ là chi tiết.
 
 ## Các loại thuế khi đi J-1
 
+![Đồ họa các loại thuế áp dụng cho người đi J-1](/images/j1-22/graphic-1.webp)
+
 | Loại thuế | Áp dụng với J-1 | Ghi chú |
 | --- | --- | --- |
 | Thuế thu nhập liên bang | Có | Tính trên lương, theo biểu thuế người không cư trú |
@@ -65,6 +67,8 @@ FICA gồm hai phần, An sinh xã hội 6,2% và Medicare 1,45%, tổng 7,65% l
 **Khi nào mất quyền miễn.** Có ba tình huống hay gặp. Một, bạn làm việc ngoài phạm vi được phép, lúc đó khoản FICA có thể bị tính đủ. Hai, bạn qua giai đoạn đầu và trở thành người cư trú về thuế. Ba, bạn chuyển sang một diện làm việc như H-1B, lúc đó nghĩa vụ FICA thường bắt đầu.
 
 **Bị trừ nhầm FICA thì làm sao.** Đây là tình huống rất thực tế, vì nhiều bộ phận lương không quen diện J-1. Trước hết, đề nghị nơi trả lương hoàn lại và sửa cách tính. Nếu họ không xử lý, bạn có thể tự xin lại với cơ quan thuế bằng Form 843 kèm Form 8316. Giữ lại bảng lương để chứng minh khoản đã bị trừ.
+
+![Đồ họa cơ cấu FICA và quy trình đòi lại khi bị trừ nhầm](/images/j1-22/graphic-2.webp)
 
 <a id="hiep-dinh"></a>
 
@@ -89,6 +93,8 @@ Hệ quả thực tế: bạn cần khai đúng diện người không cư trú,
 <a id="khai-gi"></a>
 
 ## Cuối kỳ khai gì
+
+![Đồ họa các mẫu thuế cần khai cuối kỳ J-1](/images/j1-22/graphic-1.webp)
 
 - **Form 8843.** Gần như mọi người J-1 đều nộp, kể cả khi không có thu nhập. Đây là bản giải trình vì sao những ngày ở Mỹ của bạn không tính vào diện cư trú.
 - **Form 1040-NR.** Nộp nếu bạn có thu nhập từ Mỹ chịu thuế, ví dụ tiền lương. Đây là tờ khai thuế cho người không cư trú.
