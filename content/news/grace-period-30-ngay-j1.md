@@ -27,6 +27,8 @@ published: 2026-05-30
 
 ## Được làm gì
 
+![Đồ họa được và không được trong 30 ngày grace](/images/j1-30/graphic-1.webp)
+
 - Thu xếp đồ đạc, kết thúc hợp đồng thuê nhà, chuẩn bị về nước.
 - Đi du lịch, tham quan trong phạm vi nước Mỹ.
 - Chào tạm biệt host và mạng lưới, xin thư giới thiệu nếu chưa kịp.
@@ -44,6 +46,8 @@ published: 2026-05-30
 <a id="ke-hoach"></a>
 
 ## Kế hoạch thu xếp rời đi từng bước
+
+![Đồ họa các bước thu xếp rời Mỹ sau J-1](/images/j1-30/graphic-2.webp)
 
 1. **Đặt vé máy bay sớm**, trong giới hạn 30 ngày sau ngày kết thúc.
 2. **Báo chủ nhà** và thu xếp trả nhà, lấy lại tiền cọc, chụp ảnh hiện trạng.
