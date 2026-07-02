@@ -26,6 +26,8 @@ published: 2026-06-09
 
 ## Các nhóm chi phí
 
+![Đồ họa bóc tách chi phí trọn gói đi J-1](/images/j1-20/graphic-1.webp)
+
 | Nhóm | Gồm gì |
 | --- | --- |
 | Phí nhà nước | SEVIS I-901 khoảng 220 đô, phí visa khoảng 185 đô |
@@ -45,6 +47,8 @@ Chương trình cũng yêu cầu chứng minh tiếp cận được tối thiể
 <a id="minh-bach"></a>
 
 ## Hỏi cho minh bạch trước khi ký
+
+![Khối câu hỏi minh bạch về chi phí J-1](/images/j1-20/graphic-2.webp)
 
 Yêu cầu một bảng chi phí ghi rõ từng khoản: khoản nào bắt buộc, khoản nào tùy chọn, khoản nào hoàn lại được, và mỗi khoản đã gồm hay chưa gồm gì. Một đơn vị nghiêm túc sẽ trả lời rõ ràng.
 
