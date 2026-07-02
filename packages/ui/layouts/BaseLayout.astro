@@ -184,14 +184,20 @@ const orgSchema = {
       var SEL = '[data-reveal],[data-reveal-stagger],.reveal,.reveal-stagger';
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Auto-gán hiệu ứng LUÂN PHIÊN cho mọi <section> chưa gắn reveal thủ công (đa dạng, áp mọi trang). Bỏ mục đầu/hero.
+      // Auto-gán reveal cho TỪNG KHỐI NỘI DUNG bên trong mỗi <section> chưa gắn thủ công
+      // (không gán cả section — vì section cao thì mép trên vừa ló đã animate xong phần dưới -> "hiện sẵn trước khi lướt tới").
+      // Mỗi khối được observe riêng -> hiện đúng lúc lướt tới nó. Bỏ mục đầu/hero.
       var VARS = ['up', 'scale', 'zoom', 'up', 'right', 'scale', 'left', 'up', 'zoom', 'scale'];
       var main = document.querySelector('main') || document.body;
       var vi = 0;
+      var keep = function (el) { return el.nodeType === 1 && !el.hasAttribute('aria-hidden') && el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE'; };
       Array.prototype.forEach.call(main.querySelectorAll('section'), function (sec, i) {
         if (i === 0 || /hero/i.test(sec.className)) return;
         if (sec.matches(SEL) || sec.querySelector(SEL)) return;
-        sec.setAttribute('data-reveal', VARS[vi % VARS.length]); vi++;
+        var blocks = Array.prototype.filter.call(sec.children, keep);
+        if (blocks.length === 1 && blocks[0].children.length > 1) blocks = Array.prototype.filter.call(blocks[0].children, keep); // mở 1 lớp wrapper (.container…)
+        if (blocks.length <= 1) blocks = [sec]; // không tách được -> gán cả mục
+        blocks.forEach(function (b) { b.setAttribute('data-reveal', VARS[vi % VARS.length]); vi++; });
       });
 
       var targets = Array.prototype.slice.call(document.querySelectorAll(SEL));
@@ -201,7 +207,7 @@ const orgSchema = {
       }
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      }, { rootMargin: '0px 0px -15% 0px', threshold: 0 });
       targets.forEach(function (el) { if (!el.classList.contains('is-in')) io.observe(el); });
     })();
   </script>
