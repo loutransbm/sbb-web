@@ -77,7 +77,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   </section>
 
   <section class="partner-marquee-section">
-    <div class="partner-text-block reveal">
+    <div class="partner-text-block" data-reveal="left">
       <h2 class="partner-headline">
         MINDSET. CONDUCT. CAPABILITY.<br/>
         NĂNG LỰC THỰC CHẤT CHO SỰ NGHIỆP TOÀN CẦU.<br/>
@@ -200,7 +200,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     <div class="wall-glow-left"></div>
     <div class="wall-glow-right"></div>
     
-    <div class="cinema-stage reveal">
+    <div class="cinema-stage" data-reveal="scale">
       <div class="premium-display">
         <div class="display-bezel">
           <div class="cinema-screen">
@@ -252,11 +252,11 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     <!-- Vệt sáng nhẹ hắt từ đáy TV xuống đầu Programs (nối liền 2 section) -->
     <div class="program-light-spill" aria-hidden="true"></div>
     <div class="services-container">
-      <h2 class="services-heading reveal">PROGRAMS</h2>
+      <h2 class="services-heading" data-reveal="up">PROGRAMS</h2>
       
-      <div class="services-grid">
+      <div class="services-grid" data-reveal-stagger>
         <div class="services-row services-row--top">
-        <div class="service-card reveal s-pos-1">
+        <div class="service-card s-pos-1">
           <div class="s-card-number">01</div>
           <div class="s-card-icon-wrapper">
             <img loading="lazy" decoding="async" src="/global-3d-nobg.png" alt="Global Internship 3D" class="s-icon-image" />
@@ -267,7 +267,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           </div>
         </div>
         
-        <div class="service-card reveal s-pos-2">
+        <div class="service-card s-pos-2">
           <div class="s-card-number">02</div>
           <div class="s-card-icon-wrapper">
             <img loading="lazy" decoding="async" src="/plane-3d-nobg.png" alt="Office Tour 3D Plane" class="s-icon-image" />
@@ -280,7 +280,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
         </div>
 
         <div class="services-row services-row--bottom">
-        <div class="service-card reveal s-pos-3">
+        <div class="service-card s-pos-3">
           <div class="s-card-number">03</div>
           <div class="s-card-icon-wrapper">
             <img loading="lazy" decoding="async" src="/grp-3d-globe-nobg.png" alt="GRP Foundation 3D" class="s-icon-image" />
@@ -291,7 +291,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
           </div>
         </div>
 
-        <div class="service-card reveal s-pos-4">
+        <div class="service-card s-pos-4">
           <div class="s-card-number">04</div>
           <div class="s-card-icon-wrapper">
             <img loading="lazy" decoding="async" src="/career-3d-nobg-v2.png" alt="Career Training 3D" class="s-icon-image" />
@@ -346,7 +346,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   <section class="case-studies-section" id="case-studies">
     <div class="cs-container">
       
-      <div class="cs-header reveal">
+      <div class="cs-header" data-reveal="right">
         <div class="cs-line cs-line-1">
           <span class="cs-text-white">THIS IS WHAT</span>
           <div class="cs-glass-pill">
@@ -371,7 +371,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
         </div>
       </div>
 
-      <div class="cs-cards-wrapper reveal">
+      <div class="cs-cards-wrapper" data-reveal-stagger>
         <div class="cs-cards-track" id="cs-track">
         <div class="cs-card active" id="cs-card-1">
           <div class="cs-card-left">
