@@ -47,6 +47,8 @@ Hai điều kiện quan trọng về thời điểm:
 
 ## Giấy tờ cần mang
 
+![Đồ họa giấy tờ cần mang khi xin SSN](/images/j1-34/graphic-1.webp)
+
 Mang bản gốc các giấy tờ sau tới văn phòng SSA:
 
 - **Mẫu SS-5**, là đơn xin SSN. Có thể điền trước.
@@ -58,6 +60,8 @@ Mang bản gốc các giấy tờ sau tới văn phòng SSA:
 <a id="cac-buoc"></a>
 
 ## Các bước xin SSN
+
+![Đồ họa các bước xin SSN cho J-1](/images/j1-34/graphic-2.webp)
 
 1. **Trình diện sponsor để kích hoạt SEVIS** ngay khi tới Mỹ.
 2. **Đợi đủ thời gian**, ít nhất khoảng 10 ngày sau nhập cảnh và vài ngày sau khi SEVIS hoạt động.
