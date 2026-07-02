@@ -28,6 +28,8 @@ published: 2026-05-29
 
 ## Ngày 1 tới 3: việc gấp nhất
 
+![Đồ họa thứ tự việc cần làm tuần đầu ở Mỹ](/images/j1-31/graphic-1.webp)
+
 1. **Trình diện sponsor để kích hoạt SEVIS.** Đây là việc số một, vì xin SSN và nhiều thủ tục khác cần SEVIS hoạt động. Làm theo đúng hướng dẫn của sponsor.
 2. **Ổn định chỗ ở.** Nếu host lo chỗ ở thì nhận và kiểm tra. Nếu tự thuê, xem hướng dẫn ở bài [Thuê nhà ở Mỹ](thue-nha-o-my-j1) và cẩn thận lừa đảo.
 3. **Có sóng điện thoại.** Mua sim prepaid để liên lạc ngay, chi tiết ở bài [Mua sim và dùng điện thoại ở Mỹ](mua-sim-dien-thoai-my-j1).
@@ -54,6 +56,8 @@ published: 2026-05-29
 <a id="checklist"></a>
 
 ## Checklist tổng
+
+![Đồ họa checklist tổng tuần đầu ở Mỹ](/images/j1-31/graphic-2.webp)
 
 - [ ] Trình diện sponsor, SEVIS hoạt động
 - [ ] Ổn định chỗ ở
