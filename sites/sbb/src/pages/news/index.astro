@@ -2,13 +2,13 @@
 import PageLayout from '@ui/layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 
-// Danh mục + bài News lấy từ content collection (build spec mục 7).
+// ===== J-1 SERIES — dữ liệu: hero identity + hành trình 4 giai đoạn + bài nổi bật + 5 hạng mục (Phần) =====
 const cumLabels = {
   'internship-j1': 'Internship J-1', 'reality-check': 'Reality Check',
   'tu-duy-ra-the-gioi': 'Tư duy ra thế giới', 'grp': 'GRP',
   'office-tour': 'Office Tour', 'tieng-noi-hanh-trinh': 'Tiếng nói hành trình',
 };
-// Gom bài J-1 theo chủ đề cho bộ lọc gọn; bài cụm khác dùng nhãn cụm.
+// Gom bài J-1 theo hạng mục (suy từ slug); bài cụm khác dùng nhãn cụm.
 function themeOf(slug, cum) {
   if (cum !== 'internship-j1') return cumLabels[cum] || 'Khác';
   if (/thue|fica|hoan-thue|khai-thue|luong|thuc-nhan|chi-phi|gui-tien/.test(slug)) return 'Chi phí & Thuế';
@@ -27,28 +27,68 @@ const posts = entries
     desc: e.data.description || '',
     cat: themeOf(e.id, e.data.cum_chinh),
     catLabel: themeOf(e.id, e.data.cum_chinh),
+    stage: e.data.giai_doan || '',
+    isFeatured: e.data.featured === true,
     date: fmtDate(e.data.published),
     ts: e.data.published.getTime(),
     href: `/news/${e.id}`,
   }))
   .sort((a, b) => b.ts - a.ts);
-const catOrder = ['Visa & Hồ sơ', 'Ngành & Công việc', 'Chi phí & Thuế', 'Cuộc sống ở Mỹ', 'Sau chương trình'];
-const present = Array.from(new Set(posts.map((p) => p.cat)));
-present.sort((a, b) => ((catOrder.indexOf(a) + 1) || 99) - ((catOrder.indexOf(b) + 1) || 99));
-const blogCats = [{ id: 'all', label: 'Tất cả' }, ...present.map((c) => ({ id: c, label: c }))];
 
-// Mobile = kiểu tạp chí: carousel bài nổi bật (lướt ngang) + chip đổi chủ đề + mỗi chủ đề vài bài mới nhất.
+// --- 5 hạng mục J-1 = 5 "Phần" của series (nhãn EN + mô tả cho header chương) ---
+const THEME_META = {
+  'Visa & Hồ sơ':      { en: 'Visa & Paperwork', desc: 'Hiểu visa J-1, điều kiện tham gia, hồ sơ và phỏng vấn.' },
+  'Ngành & Công việc': { en: 'Field & Work',      desc: 'Chọn ngành, tìm host và hiểu công việc thực tế ở Mỹ.' },
+  'Chi phí & Thuế':    { en: 'Money & Tax',        desc: 'Lương, chi phí sinh hoạt, thuế và cách hoàn thuế.' },
+  'Cuộc sống ở Mỹ':    { en: 'Life in the US',     desc: 'SSN, ngân hàng, SIM, thuê nhà, đi lại, gửi tiền về.' },
+  'Sau chương trình':  { en: 'After the Program',  desc: 'Grace period, quy định về nước hai năm, đường ở lại.' },
+};
+const catOrder = ['Visa & Hồ sơ', 'Ngành & Công việc', 'Chi phí & Thuế', 'Cuộc sống ở Mỹ', 'Sau chương trình'];
+const chapters = catOrder
+  .map((theme, i) => ({
+    theme,
+    en: (THEME_META[theme] || {}).en || theme,
+    desc: (THEME_META[theme] || {}).desc || '',
+    num: String(i + 1).padStart(2, '0'),
+    posts: posts.filter((p) => p.cat === theme),
+  }))
+  .filter((c) => c.posts.length);
+const bonusPosts = posts.filter((p) => !catOrder.includes(p.cat)); // reality-check + tư duy → mục cuối
+
+// --- "Bắt đầu từ đây": 4 bài nền tảng (featured), theo thứ tự nhập môn ---
+const bySlug = Object.fromEntries(posts.map((p) => [p.slug, p]));
+const startOrder = ['visa-j1-la-gi', 'reality-check-dau-tien', 'dieu-kien-tham-gia-j1', 'phan-biet-j1-intern-va-trainee'];
+let featuredPosts = startOrder.map((s) => bySlug[s]).filter(Boolean);
+if (featuredPosts.length < 4) { // fallback: bù thêm bài featured:true rồi bài mới nhất nếu thiếu
+  const extra = posts.filter((p) => p.isFeatured && !featuredPosts.includes(p));
+  featuredPosts = [...featuredPosts, ...extra, ...posts].filter((p, i, a) => a.indexOf(p) === i).slice(0, 4);
+}
+const featPrimary = featuredPosts[0];
+const featRest = featuredPosts.slice(1);
+
+// --- Hành trình 4 giai đoạn (giai_doan) = mạch xuyên suốt series ---
+const stages = [
+  { id: 'kham-pha',  num: '01', vi: 'Khám phá',  en: 'Discover',   desc: 'J-1 là gì và hợp với ai.' },
+  { id: 'hieu',      num: '02', vi: 'Hiểu',      en: 'Understand', desc: 'Điều kiện, phân loại, luật chơi.' },
+  { id: 'chuan-bi',  num: '03', vi: 'Chuẩn bị',  en: 'Prepare',    desc: 'Hồ sơ, ngành nghề, chi phí, thuế.' },
+  { id: 'hanh-dong', num: '04', vi: 'Hành động', en: 'Act',        desc: 'Ổn định cuộc sống khi đã sang Mỹ.' },
+].map((s) => ({ ...s, count: posts.filter((p) => p.stage === s.id).length }));
+const totalPosts = posts.length;
+
+// ===== MOBILE magazine (giữ nguyên cơ chế cũ): carousel + chip đổi chủ đề =====
+const groups = [
+  ...chapters.map((c) => ({ theme: c.theme, posts: c.posts })),
+  ...(bonusPosts.length ? [{ theme: 'Góc nhìn & Tư duy', posts: bonusPosts }] : []),
+];
+const present = groups.map((g) => g.theme);
 const LEAD = 5; // số card carousel nổi bật (overview: mới nhất toàn site; khi lọc: mới nhất CỦA chủ đề đó)
 const featured = posts.slice(0, LEAD);
-const groups = present
-  .map((theme) => ({ theme, posts: posts.filter((p) => p.cat === theme) }))
-  .filter((g) => g.posts.length);
 const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, còn lại ẩn sau nút "Xem tất cả"
 ---
 
 <PageLayout
-  title="News"
-  description="Câu chuyện thật của học viên, reality check không tô vẽ, và tiếng nói sinh viên trên hành trình bước ra thế giới."
+  title="J-1 Series"
+  description="Trọn bộ cẩm nang J-1 của SBB: từ hiểu visa, chuẩn bị hồ sơ đến ổn định cuộc sống ở Mỹ. Chia theo hành trình và hạng mục, đúng thứ tự bạn cần."
   site="sbb"
   currentPath="/news"
 >
@@ -59,57 +99,159 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
     <div class="about-hero-wrap">
       <div class="cs-header about-hero-head">
         <div class="cs-line cs-line-1">
-          <span class="cs-text-white">OUR BLOG</span>
+          <span class="cs-text-white">THE J-1</span>
           <div class="cs-glass-pill">
-            <span class="cs-glass-title">CONTENT HUB</span>
-            <span class="cs-glass-sub">Câu chuyện thật và reality check cho hành trình bước ra thế giới.</span>
+            <span class="cs-glass-title">FIELD GUIDE</span>
+            <span class="cs-glass-sub">Từ hiểu visa đến ổn định cuộc sống ở Mỹ, theo đúng thứ tự bạn cần.</span>
           </div>
         </div>
         <div class="about-line-2">
-          <span class="about-verb cs-text-white">INSIGHTS</span>
+          <span class="about-verb cs-text-white">SERIES</span>
           <span class="about-tail">
-            <span class="cs-text-white">&amp; REAL</span>
-            <span class="cs-text-white">STORIES</span>
+            <span class="cs-text-white">{totalPosts} BÀI</span>
+            <span class="cs-text-white">· 5 PHẦN</span>
           </span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== BLOG GRID (Omni style: lọc danh mục + tìm kiếm + card ảnh) ===== -->
-  <section class="o-section blog-section">
+  <!-- ===== HÀNH TRÌNH J-1 · dải 4 giai đoạn (mạch xuyên suốt series) ===== -->
+  <section class="o-section series-intro">
     <div class="container">
-      <!-- Toolbar: pill lọc danh mục + ô tìm kiếm -->
-      <div class="blog-toolbar">
-        <div class="blog-filters" role="group" aria-label="Lọc theo danh mục">
-          {blogCats.map((c, i) => (
-            <button type="button" class:list={["blog-filter", i === 0 && "is-active"]} data-filter={c.id}>{c.label}</button>
-          ))}
-        </div>
-        <label class="blog-search">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.2-4.2"/></svg>
-          <input type="search" id="blogSearch" placeholder="Tìm bài viết..." autocomplete="off" aria-label="Tìm bài viết" />
-        </label>
+      <div class="series-head">
+        <span class="series-eyebrow">Hành trình J-1</span>
+        <h2 class="series-h"><span class="cs-text-white">THE</span> <span class="cs-text-white">JOURNEY</span></h2>
+        <p class="series-lead">Series đi cùng bạn qua trọn hành trình J-1, chia thành bốn giai đoạn. Bắt đầu từ đâu cũng được, nhưng đây là mạch tự nhiên nhất.</p>
       </div>
+      <ol class="roadmap">
+        {stages.map((s) => (
+          <li class="roadmap-step">
+            <span class="roadmap-step__num">{s.num}</span>
+            <span class="roadmap-step__en">{s.en}</span>
+            <span class="roadmap-step__vi">{s.vi}</span>
+            <span class="roadmap-step__desc">{s.desc}</span>
+            <span class="roadmap-step__count">{s.count} bài</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
 
-      <!-- Lưới card (prototype: 1 hàng 3 card) -->
-      <div class="blog-grid">
-        {posts.map((p) => (
-          <a href={p.href} class="blog-card" data-cat={p.cat} data-title={p.title.toLowerCase()}>
-            <div class="blog-card__media"><img src={p.img} alt={p.title} loading="lazy" onerror="this.closest('.blog-card__media').style.display='none'" /></div>
-            <span class="blog-card__tag">{p.catLabel}</span>
-            <h3 class="blog-card__title">{p.title}</h3>
-            {p.desc && <p class="blog-card__desc">{p.desc}</p>}
-            <div class="blog-card__foot">
-              <time class="blog-card__date">{p.date}</time>
-              <span class="blog-card__cta" aria-label="Đọc bài">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+  <!-- ===== BẮT ĐẦU TỪ ĐÂY · 4 bài nền tảng (1 lớn + 3 danh sách) ===== -->
+  <section class="o-section series-start">
+    <div class="container">
+      <div class="series-head">
+        <span class="series-eyebrow">Bắt đầu từ đây</span>
+        <h2 class="series-h"><span class="cs-text-white">START</span> <span class="cs-text-white">HERE</span></h2>
+        <p class="series-lead">Bốn bài nền tảng nên đọc trước. Xong bốn bài này, bạn biết J-1 có hợp với mình không và cần chuẩn bị gì.</p>
+      </div>
+      <div class="start-grid">
+        {featPrimary && (
+          <a href={featPrimary.href} class="start-hero">
+            <div class="start-hero__media"><img src={featPrimary.img} alt={featPrimary.title} loading="lazy" onerror="this.closest('.start-hero__media').style.display='none'" /></div>
+            <div class="start-hero__body">
+              <span class="start-index">01</span>
+              <span class="blog-card__tag">{featPrimary.catLabel}</span>
+              <h3 class="start-hero__title">{featPrimary.title}</h3>
+              {featPrimary.desc && <p class="start-hero__desc">{featPrimary.desc}</p>}
+              <span class="start-hero__cue">Đọc bài
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
               </span>
             </div>
           </a>
-        ))}
+        )}
+        <div class="start-list">
+          {featRest.map((p, i) => (
+            <a href={p.href} class="start-item">
+              <span class="start-index">{String(i + 2).padStart(2, '0')}</span>
+              <span class="start-item__body">
+                <span class="blog-card__tag">{p.catLabel}</span>
+                <span class="start-item__title">{p.title}</span>
+              </span>
+              {p.img && <span class="start-item__thumb"><img src={p.img} alt="" loading="lazy" onerror="this.closest('.start-item__thumb').style.display='none'" /></span>}
+            </a>
+          ))}
+        </div>
       </div>
-      <p class="blog-empty" hidden>Không tìm thấy bài viết phù hợp với bộ lọc.</p>
+    </div>
+  </section>
+
+  <!-- ===== TOÀN BỘ SERIES · 5 hạng mục = 5 Phần đánh số (desktop) + magazine (mobile) ===== -->
+  <section class="o-section blog-section">
+    <div class="container">
+      <div class="series-chapters">
+        <div class="series-head">
+          <span class="series-eyebrow">Toàn bộ series</span>
+          <h2 class="series-h"><span class="cs-text-white">THE</span> <span class="cs-text-white">CHAPTERS</span></h2>
+          <p class="series-lead">Năm hạng mục, {totalPosts} bài. Nhảy tới phần bạn cần.</p>
+        </div>
+        <!-- Mục lục: nhảy tới từng Phần -->
+        <nav class="chapter-toc" aria-label="Mục lục các phần">
+          {chapters.map((c) => (
+            <a href={`#ch-${c.num}`} class="chapter-toc__item"><b>{c.num}</b><span>{c.theme}</span><i>{c.posts.length}</i></a>
+          ))}
+        </nav>
+        <!-- Các Phần -->
+        {chapters.map((c) => (
+          <section class="chapter" id={`ch-${c.num}`}>
+            <header class="chapter-head">
+              <span class="chapter-head__num">{c.num}</span>
+              <div class="chapter-head__meta">
+                <span class="chapter-head__en">{c.en}</span>
+                <h3 class="chapter-head__title">{c.theme}</h3>
+                <p class="chapter-head__desc">{c.desc}</p>
+              </div>
+              <span class="chapter-head__count">{c.posts.length} bài</span>
+            </header>
+            <div class="blog-grid">
+              {c.posts.map((p) => (
+                <a href={p.href} class="blog-card">
+                  <div class="blog-card__media"><img src={p.img} alt={p.title} loading="lazy" onerror="this.closest('.blog-card__media').style.display='none'" /></div>
+                  <span class="blog-card__tag">{p.catLabel}</span>
+                  <h3 class="blog-card__title">{p.title}</h3>
+                  {p.desc && <p class="blog-card__desc">{p.desc}</p>}
+                  <div class="blog-card__foot">
+                    <time class="blog-card__date">{p.date}</time>
+                    <span class="blog-card__cta" aria-label="Đọc bài">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))}
+        {bonusPosts.length > 0 && (
+          <section class="chapter chapter--bonus" id="ch-bonus">
+            <header class="chapter-head">
+              <span class="chapter-head__num">★</span>
+              <div class="chapter-head__meta">
+                <span class="chapter-head__en">More from SBB</span>
+                <h3 class="chapter-head__title">Góc nhìn &amp; Tư duy</h3>
+                <p class="chapter-head__desc">Reality check thẳng thắn và tư duy nền tảng trước khi bước ra thế giới.</p>
+              </div>
+              <span class="chapter-head__count">{bonusPosts.length} bài</span>
+            </header>
+            <div class="blog-grid">
+              {bonusPosts.map((p) => (
+                <a href={p.href} class="blog-card">
+                  <div class="blog-card__media"><img src={p.img} alt={p.title} loading="lazy" onerror="this.closest('.blog-card__media').style.display='none'" /></div>
+                  <span class="blog-card__tag">{p.catLabel}</span>
+                  <h3 class="blog-card__title">{p.title}</h3>
+                  {p.desc && <p class="blog-card__desc">{p.desc}</p>}
+                  <div class="blog-card__foot">
+                    <time class="blog-card__date">{p.date}</time>
+                    <span class="blog-card__cta" aria-label="Đọc bài">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
 
       <!-- ===== MAGAZINE (chỉ mobile ≤680px): chip đổi chủ đề + carousel nổi bật + mỗi chủ đề vài bài ===== -->
       <div class="blog-mag" data-mode="overview">
@@ -368,6 +510,148 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
     letter-spacing: normal;
   }
 
+  /* ============================================================
+     J-1 SERIES — section heading (cascade EN), roadmap, start-here, chapters
+     ============================================================ */
+  /* Căn lề 3 section series thẳng nhau (full-bleed như blog-section) */
+  .series-intro .container, .series-start .container {
+    max-width: none; width: 100%; padding-inline: clamp(1.5rem, 3.2vw, 3.25rem);
+  }
+  /* Tiêu đề section: LUÔN English + cascade lớn trắng (Inter 500) — chuẩn brand */
+  .series-head { max-width: 64rem; margin-bottom: clamp(2.6rem, 4vw, 4rem); }
+  .series-eyebrow {
+    display: inline-block; font-family: var(--font-headline); font-weight: 600;
+    font-size: 0.8rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: #f2420b; margin-bottom: 1.1rem;
+  }
+  .series-h {
+    font-family: 'Inter', sans-serif; font-weight: 500; line-height: 0.92;
+    letter-spacing: -0.05em; font-size: clamp(2.6rem, 6.5vw, 6.5rem); margin: 0 0 1.3rem;
+  }
+  .series-lead {
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.6;
+    color: rgba(255, 255, 255, 0.62); max-width: 54ch; margin: 0;
+  }
+
+  /* --- Roadmap: 4 giai đoạn nối bằng mũi tên cam --- */
+  .roadmap {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.9rem, 1.4vw, 1.4rem);
+  }
+  .roadmap-step {
+    position: relative; display: flex; flex-direction: column;
+    padding: clamp(1.5rem, 2vw, 2.1rem) clamp(1.3rem, 1.7vw, 1.8rem);
+    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 22px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+    overflow: hidden; transition: border-color .35s ease, background .35s ease, transform .35s ease;
+  }
+  .roadmap-step:hover {
+    border-color: rgba(242, 66, 11, 0.45); transform: translateY(-3px);
+    background: linear-gradient(160deg, rgba(242, 66, 11, 0.12), rgba(255, 255, 255, 0.02));
+  }
+  .roadmap-step:not(:last-child)::after {
+    content: ''; position: absolute; top: 50%; right: -0.72rem; z-index: 3;
+    width: 0.72rem; height: 0.72rem; transform: translateY(-50%) rotate(45deg);
+    border-top: 2px solid rgba(242, 66, 11, 0.65); border-right: 2px solid rgba(242, 66, 11, 0.65);
+  }
+  .roadmap-step__num {
+    font-family: var(--font-headline); font-weight: 700; font-size: 0.72rem;
+    letter-spacing: 0.14em; color: #f2420b; margin-bottom: 1rem;
+  }
+  .roadmap-step__en {
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(1.35rem, 2vw, 1.9rem);
+    letter-spacing: -0.02em; color: #fff; line-height: 1;
+  }
+  .roadmap-step__vi { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); margin-top: 0.3rem; }
+  .roadmap-step__desc { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.82rem; line-height: 1.5; color: rgba(255, 255, 255, 0.5); margin-top: 0.85rem; }
+  .roadmap-step__count {
+    margin-top: auto; padding-top: 1.2rem;
+    font-family: var(--font-headline); font-weight: 600; font-size: 0.7rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* --- Start Here: 1 card lớn + 3 dòng danh sách --- */
+  .start-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(1.5rem, 2.4vw, 2.6rem); align-items: stretch; }
+  .start-hero {
+    position: relative; display: flex; flex-direction: column; text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 28px; overflow: hidden; background: transparent;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+    transition: border-color .4s ease, transform .4s ease, box-shadow .4s ease;
+  }
+  .start-hero:hover { border-color: #f2420b; transform: translateY(-4px); box-shadow: 0 30px 70px -26px rgba(0, 0, 0, 0.55); }
+  .start-hero__media { aspect-ratio: 16 / 10; background: linear-gradient(160deg, #2a1109, #160a05); overflow: hidden; }
+  .start-hero__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.16, 1, .3, 1); }
+  .start-hero:hover .start-hero__media img { transform: scale(1.04); }
+  .start-hero__body { display: flex; flex-direction: column; flex: 1; padding: clamp(1.6rem, 2.2vw, 2.3rem); }
+  .start-index { font-family: var(--font-headline); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.1em; color: #f2420b; margin-bottom: 0.7rem; }
+  .start-hero__title { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(1.4rem, 1.9vw, 1.85rem); line-height: 1.25; letter-spacing: -0.02em; color: #fff; margin: 0 0 0.8rem; }
+  .start-hero__desc {
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.95rem; line-height: 1.6; color: rgba(255, 255, 255, 0.6); margin: 0 0 1.4rem;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .start-hero__cue { margin-top: auto; display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9rem; color: #ff5c26; }
+  .start-list { display: flex; flex-direction: column; gap: clamp(0.8rem, 1.2vw, 1.1rem); }
+  .start-item {
+    display: flex; align-items: center; gap: 1.1rem; flex: 1; text-decoration: none;
+    padding: clamp(1rem, 1.4vw, 1.3rem); border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 20px; background: transparent;
+    transition: border-color .35s ease, background .35s ease, transform .35s ease;
+  }
+  .start-item:hover { border-color: rgba(242, 66, 11, 0.5); background: rgba(242, 66, 11, 0.06); transform: translateX(4px); }
+  .start-item .start-index { margin: 0; flex: 0 0 auto; }
+  .start-item__body { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; flex: 1; }
+  .start-item__title {
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(1rem, 1.2vw, 1.12rem); line-height: 1.3; color: #fff; letter-spacing: -0.015em;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .start-item__thumb { flex: 0 0 auto; width: 84px; height: 68px; border-radius: 12px; overflow: hidden; background: linear-gradient(160deg, #2a1109, #160a05); }
+  .start-item__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* --- Chapters: mục lục + header chương số lớn viền cam --- */
+  .series-chapters { display: block; }
+  .chapter-toc {
+    display: flex; flex-wrap: wrap; gap: 0.7rem;
+    margin-bottom: clamp(3rem, 5vw, 5rem); padding-bottom: clamp(2rem, 3vw, 3rem);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .chapter-toc__item {
+    display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none;
+    padding: 0.6rem 1rem 0.6rem 0.8rem; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.82); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 500;
+    transition: border-color .25s ease, background .25s ease, color .25s ease;
+  }
+  .chapter-toc__item:hover { border-color: rgba(242, 66, 11, 0.5); background: rgba(242, 66, 11, 0.08); color: #fff; }
+  .chapter-toc__item b { font-family: var(--font-headline); font-weight: 700; color: #f2420b; font-size: 0.78rem; }
+  .chapter-toc__item i { font-style: normal; font-size: 0.72rem; color: rgba(255, 255, 255, 0.45); border-left: 1px solid rgba(255, 255, 255, 0.16); padding-left: 0.6rem; }
+  .chapter { margin-bottom: clamp(4rem, 7vw, 7rem); scroll-margin-top: 92px; }
+  .chapter:last-child { margin-bottom: 0; }
+  .chapter-head { display: flex; align-items: flex-start; gap: clamp(1rem, 2vw, 2rem); margin-bottom: clamp(2rem, 3vw, 3rem); }
+  .chapter-head__num {
+    flex: 0 0 auto; font-family: 'Inter', sans-serif; font-weight: 500; line-height: 0.85;
+    font-size: clamp(3rem, 5vw, 5.2rem); letter-spacing: -0.05em;
+    color: transparent; -webkit-text-stroke: 1.5px rgba(242, 66, 11, 0.55);
+  }
+  .chapter-head__meta { flex: 1; padding-top: 0.4rem; }
+  .chapter-head__en { display: block; font-family: var(--font-headline); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: #f2420b; margin-bottom: 0.5rem; }
+  .chapter-head__title { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(1.6rem, 2.4vw, 2.4rem); line-height: 1.1; letter-spacing: -0.025em; color: #fff; margin: 0 0 0.6rem; }
+  .chapter-head__desc { font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(0.92rem, 1.1vw, 1.05rem); line-height: 1.55; color: rgba(255, 255, 255, 0.55); margin: 0; max-width: 54ch; }
+  .chapter-head__count {
+    flex: 0 0 auto; align-self: center; white-space: nowrap;
+    font-family: var(--font-headline); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; padding: 0.4rem 0.9rem;
+  }
+  .chapter--bonus .chapter-head__num { -webkit-text-stroke: 0; color: #f2420b; font-size: clamp(2.4rem, 4vw, 3.6rem); }
+
+  /* Responsive series (tablet): roadmap 2 cột, start 1 cột */
+  @media (max-width: 900px) {
+    .roadmap { grid-template-columns: repeat(2, 1fr); }
+    .roadmap-step:not(:last-child)::after { display: none; }
+    .start-grid { grid-template-columns: 1fr; }
+    .chapter-head { flex-wrap: wrap; }
+    .chapter-head__count { align-self: flex-start; }
+  }
+
   /* ===== BLOG GRID (Omni style: toolbar lọc + tìm kiếm + card ảnh) ===== */
   /* Bỏ tiêu đề "ĐỌC GÌ HÔM NAY" -> siết top để vào là thấy tin tức luôn */
   .blog-section { padding-top: clamp(1rem, 2vw, 2.2rem); }
@@ -480,8 +764,8 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
 
   @media (max-width: 980px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 680px) {
-    /* ===== MOBILE = KIỂU TẠP CHÍ: ẩn toolbar + lưới card, hiện magazine ===== */
-    .blog-toolbar, .blog-grid, .blog-empty { display: none !important; }
+    /* ===== MOBILE = KIỂU TẠP CHÍ: ẩn chapters desktop, hiện magazine ===== */
+    .series-chapters, .blog-grid { display: none !important; }
     .blog-mag { display: block; }
     .blog-section { padding-top: clamp(0.5rem, 2vw, 1.5rem); }
 
@@ -904,35 +1188,8 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
 </style>
 
 <script>
-  // Lọc lưới blog theo danh mục (pill) + tìm kiếm theo tiêu đề.
-  (() => {
-    const filters = Array.from(document.querySelectorAll('.blog-filter'));
-    const cards = Array.from(document.querySelectorAll('.blog-card'));
-    const search = document.getElementById('blogSearch');
-    const empty = document.querySelector('.blog-empty');
-    let activeCat = 'all';
-
-    const apply = () => {
-      const q = ((search && search.value) || '').trim().toLowerCase();
-      let shown = 0;
-      cards.forEach((c) => {
-        const catOk = activeCat === 'all' || c.dataset.cat === activeCat;
-        const textOk = !q || (c.dataset.title || '').includes(q);
-        const show = catOk && textOk;
-        c.hidden = !show;
-        if (show) shown += 1;
-      });
-      if (empty) empty.hidden = shown !== 0;
-    };
-
-    filters.forEach((b) => b.addEventListener('click', () => {
-      filters.forEach((x) => x.classList.remove('is-active'));
-      b.classList.add('is-active');
-      activeCat = b.dataset.filter || 'all';
-      apply();
-    }));
-    if (search) search.addEventListener('input', apply);
-  })();
+  /* Desktop giờ duyệt theo Phần (chapters) + mục lục neo — không còn lọc lưới phẳng.
+     Mục lục dùng anchor #ch-xx (CSS scroll-margin-top lo canh). */
 
   /* Magazine mobile: chip đổi chủ đề (lọc) + nút "Xem tất cả" + chấm carousel nổi bật */
   (function () {
