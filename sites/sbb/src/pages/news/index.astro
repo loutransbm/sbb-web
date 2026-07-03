@@ -44,6 +44,11 @@ const groups = present
   .map((theme) => ({ theme, posts: posts.filter((p) => p.cat === theme) }))
   .filter((g) => g.posts.length);
 const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, còn lại ẩn sau nút "Xem tất cả"
+
+// Desktop hub: carousel "BÀI NỔI BẬT" lướt ngang (top mới nhất) — hết dàn trải
+const topPosts = posts.slice(0, 8);
+// Ảnh cover cho card J-1 Series (ưu tiên bài mở màn, fallback bài đầu có ảnh)
+const seriesCover = (posts.find((p) => p.slug === 'visa-j1-la-gi') || posts.find((p) => p.img) || {}).img;
 ---
 
 <PageLayout
@@ -76,20 +81,54 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
     </div>
   </section>
 
-  <!-- ===== CHUYÊN ĐỀ nổi bật: lối vào J-1 Series (trang series nằm trong News) ===== -->
-  <section class="o-section series-promo-sec">
+  <!-- ===== BÀI NỔI BẬT · carousel lướt ngang (desktop) — top mới nhất ===== -->
+  <section class="o-section hub-feat-sec">
     <div class="container">
-      <a href="/news/j1-series" class="series-promo">
-        <span class="series-promo__glow" aria-hidden="true"></span>
-        <span class="series-promo__body">
-          <span class="series-promo__eyebrow">Chuyên đề · Series</span>
-          <span class="series-promo__title">J-1 Series — cẩm nang đầy đủ</span>
-          <span class="series-promo__desc">Trọn hành trình J-1 qua 4 giai đoạn và 5 hạng mục: từ hiểu visa đến ổn định cuộc sống ở Mỹ. {posts.length} bài, đọc theo đúng thứ tự bạn cần.</span>
-        </span>
-        <span class="series-promo__cta">
-          Vào series
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-        </span>
+      <div class="hub-feat__head">
+        <div class="hub-feat__heading">
+          <span class="hub-feat__eyebrow">Mới nhất</span>
+          <h2 class="hub-feat__title">FRESH READS</h2>
+        </div>
+        <div class="hub-feat__arrows">
+          <button type="button" class="hub-feat__arrow" data-dir="-1" aria-label="Bài trước">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="hub-feat__arrow" data-dir="1" aria-label="Bài sau">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="hub-feat__rail">
+        {topPosts.map((p) => (
+          <a href={p.href} class="hub-featcard">
+            <div class="hub-featcard__media"><img src={p.img} alt={p.title} loading="lazy" onerror="this.closest('.hub-featcard__media').style.display='none'" /></div>
+            <span class="hub-featcard__tag">{p.catLabel}</span>
+            <h3 class="hub-featcard__title">{p.title}</h3>
+            <time class="hub-featcard__date">{p.date}</time>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHUYÊN ĐỀ · card lối vào J-1 Series (ảnh cover + gradient) ===== -->
+  <section class="o-section series-feature-sec">
+    <div class="container">
+      <a href="/news/j1-series" class="series-feature">
+        <div class="series-feature__body">
+          <span class="series-feature__badge"><span class="sf-dot" aria-hidden="true"></span> Chuyên đề · Series</span>
+          <h2 class="series-feature__title">J-1 Series</h2>
+          <p class="series-feature__desc">Trọn hành trình J-1 qua 4 giai đoạn và 5 hạng mục — từ hiểu visa đến ổn định cuộc sống ở Mỹ.</p>
+          <div class="series-feature__foot">
+            <span class="series-feature__meta">{posts.length} bài · 5 phần</span>
+            <span class="series-feature__cta">Khám phá series
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+        </div>
+        {seriesCover && (
+          <div class="series-feature__cover" aria-hidden="true"><img src={seriesCover} alt="" loading="lazy" onerror="this.closest('.series-feature__cover').style.display='none'" /></div>
+        )}
       </a>
     </div>
   </section>
@@ -386,34 +425,70 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
     letter-spacing: normal;
   }
 
-  /* ===== CHUYÊN ĐỀ nổi bật: banner lối vào J-1 Series ===== */
-  .series-promo-sec { padding-top: clamp(1rem, 2vw, 2rem); padding-bottom: 0; }
-  .series-promo-sec .container { max-width: none; width: 100%; padding-inline: clamp(1.5rem, 3.2vw, 3.25rem); }
-  .series-promo {
-    position: relative; display: flex; align-items: center; gap: clamp(1.5rem, 3vw, 3rem);
-    overflow: hidden; text-decoration: none;
-    border: 1px solid rgba(242, 66, 11, 0.35); border-radius: 28px;
-    padding: clamp(1.8rem, 3vw, 2.8rem) clamp(1.8rem, 3.2vw, 3rem);
-    background: linear-gradient(120deg, rgba(242, 66, 11, 0.14), rgba(255, 255, 255, 0.02) 62%);
+  /* ===== BÀI NỔI BẬT: carousel lướt ngang (desktop) ===== */
+  .hub-feat-sec { padding-top: clamp(1.5rem, 3vw, 2.6rem); padding-bottom: 0; }
+  .hub-feat-sec .container { max-width: none; width: 100%; padding-inline: clamp(1.5rem, 3.2vw, 3.25rem); }
+  .hub-feat__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: clamp(1.4rem, 2.2vw, 2rem); }
+  .hub-feat__eyebrow { display: block; font-family: var(--font-headline); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.24em; text-transform: uppercase; color: #f2420b; margin-bottom: 0.55rem; }
+  .hub-feat__title { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1; letter-spacing: -0.035em; color: #fff; margin: 0; }
+  .hub-feat__arrows { display: flex; gap: 0.6rem; flex: 0 0 auto; }
+  .hub-feat__arrow {
+    display: inline-flex; align-items: center; justify-content: center; width: 2.9rem; height: 2.9rem;
+    border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.18); background: rgba(255, 255, 255, 0.04);
+    color: #fff; cursor: pointer; transition: border-color .25s ease, background .25s ease, transform .18s ease;
+  }
+  .hub-feat__arrow:hover { border-color: #f2420b; background: rgba(242, 66, 11, 0.12); }
+  .hub-feat__arrow:active { transform: scale(0.94); }
+  .hub-feat__rail {
+    display: flex; gap: clamp(1rem, 1.6vw, 1.6rem); overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 0.5rem;
+  }
+  .hub-feat__rail::-webkit-scrollbar { display: none; }
+  .hub-featcard {
+    flex: 0 0 clamp(300px, 30%, 380px); scroll-snap-align: start; display: flex; flex-direction: column;
+    text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 24px; overflow: hidden;
+    background: transparent; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     transition: border-color .4s ease, transform .4s ease, box-shadow .4s ease;
   }
-  .series-promo:hover { border-color: #f2420b; transform: translateY(-3px); box-shadow: 0 30px 70px -30px rgba(242, 66, 11, 0.5); }
-  .series-promo__glow { position: absolute; right: -8%; top: 50%; transform: translateY(-50%); width: 520px; height: 420px; pointer-events: none; background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(255, 92, 38, 0.32), transparent 70%); filter: blur(52px); }
-  .series-promo__body { position: relative; z-index: 1; flex: 1; display: block; }
-  .series-promo__eyebrow { display: inline-block; font-family: var(--font-headline); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: #f2420b; margin-bottom: 0.9rem; }
-  .series-promo__title { display: block; font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(1.6rem, 2.6vw, 2.6rem); line-height: 1.1; letter-spacing: -0.025em; color: #fff; margin: 0 0 0.8rem; }
-  .series-promo__desc { display: block; font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(0.95rem, 1.2vw, 1.1rem); line-height: 1.6; color: rgba(255, 255, 255, 0.65); margin: 0; max-width: 60ch; }
-  .series-promo__cta {
-    position: relative; z-index: 1; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 0.6rem; white-space: nowrap;
-    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.02em; color: #fff;
-    background: linear-gradient(180deg, #ff5c26, #f2420b); padding: 0.9rem 1.5rem; border-radius: 999px;
-    box-shadow: 0 12px 30px -10px rgba(242, 66, 11, 0.5); transition: gap .3s ease;
+  .hub-featcard:hover { border-color: #f2420b; transform: translateY(-4px); box-shadow: 0 26px 60px -24px rgba(0, 0, 0, 0.5); }
+  .hub-featcard__media { aspect-ratio: 16 / 10; background: linear-gradient(160deg, #2a1109, #160a05); overflow: hidden; }
+  .hub-featcard__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.16, 1, .3, 1); }
+  .hub-featcard:hover .hub-featcard__media img { transform: scale(1.05); }
+  .hub-featcard__tag { align-self: flex-start; margin: 1.2rem 1.3rem 0; font-family: var(--font-headline); font-weight: 600; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b; border: 1px solid rgba(242, 66, 11, 0.4); border-radius: 999px; padding: 0.25rem 0.7rem; }
+  .hub-featcard__title { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 1.15rem; line-height: 1.3; letter-spacing: -0.015em; color: #fff; margin: 0.8rem 1.3rem 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .hub-featcard__date { margin: 0.65rem 1.3rem 1.4rem; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.8rem; color: rgba(255, 255, 255, 0.45); }
+
+  /* ===== CHUYÊN ĐỀ: card J-1 Series (split ảnh cover + gradient) ===== */
+  .series-feature-sec { padding-top: clamp(2.5rem, 5vw, 4.5rem); padding-bottom: 0; }
+  .series-feature-sec .container { max-width: none; width: 100%; padding-inline: clamp(1.5rem, 3.2vw, 3.25rem); }
+  .series-feature {
+    position: relative; display: flex; align-items: stretch; min-height: 300px; overflow: hidden; text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 28px; background: #150806;
+    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+    transition: border-color .4s ease, transform .4s ease, box-shadow .4s ease;
   }
-  .series-promo:hover .series-promo__cta { gap: 0.9rem; }
-  @media (max-width: 720px) {
-    .series-promo { flex-direction: column; align-items: flex-start; gap: 1.4rem; padding: 1.6rem; }
-    .series-promo__cta { align-self: stretch; justify-content: center; }
+  .series-feature:hover { border-color: rgba(242, 66, 11, 0.6); transform: translateY(-3px); box-shadow: 0 34px 74px -26px rgba(0, 0, 0, 0.65); }
+  .series-feature::after { content: ''; position: absolute; left: 42%; top: 50%; transform: translateY(-50%); width: 440px; height: 380px; pointer-events: none; z-index: 1; background: radial-gradient(ellipse at center, rgba(242, 66, 11, 0.30), transparent 70%); filter: blur(64px); }
+  .series-feature__body { position: relative; z-index: 2; flex: 1 1 56%; display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem, 3.6vw, 3.4rem); }
+  .series-feature__badge { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--font-headline); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: #f2420b; margin-bottom: 1.1rem; }
+  .sf-dot { width: 6px; height: 6px; border-radius: 999px; background: #f2420b; box-shadow: 0 0 10px #f2420b; }
+  .series-feature__title { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(2rem, 3.4vw, 3.2rem); line-height: 1; letter-spacing: -0.03em; color: #fff; margin: 0 0 1rem; }
+  .series-feature__desc { font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(0.98rem, 1.2vw, 1.12rem); line-height: 1.6; color: rgba(255, 255, 255, 0.66); margin: 0 0 1.7rem; max-width: 44ch; }
+  .series-feature__foot { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
+  .series-feature__meta { font-family: var(--font-headline); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.55); }
+  .series-feature__cta { display: inline-flex; align-items: center; gap: 0.55rem; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.95rem; color: #fff; background: linear-gradient(180deg, #ff5c26, #f2420b); padding: 0.8rem 1.4rem; border-radius: 999px; box-shadow: 0 12px 28px -10px rgba(242, 66, 11, 0.5); transition: gap .3s ease; }
+  .series-feature:hover .series-feature__cta { gap: 0.85rem; }
+  .series-feature__cover { position: relative; flex: 1 1 44%; overflow: hidden; }
+  .series-feature__cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .series-feature__cover::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #150806 0%, rgba(21, 8, 6, 0.55) 32%, rgba(21, 8, 6, 0.12) 62%, transparent 100%); }
+  @media (max-width: 760px) {
+    .series-feature { flex-direction: column; }
+    .series-feature__cover { order: -1; flex: none; width: 100%; height: 170px; }
+    .series-feature__cover::before { background: linear-gradient(0deg, #150806 0%, rgba(21, 8, 6, 0.35) 55%, transparent 100%); }
+    .series-feature::after { left: 50%; top: 30%; }
+    .series-feature__body { padding: 1.7rem; }
   }
+  @media (max-width: 680px) { .hub-feat-sec { display: none; } } /* mobile: magazine đã có carousel riêng */
 
   /* ===== BLOG GRID (Omni style: toolbar lọc + tìm kiếm + card ảnh) ===== */
   /* Bỏ tiêu đề "ĐỌC GÌ HÔM NAY" -> siết top để vào là thấy tin tức luôn */
@@ -979,6 +1054,19 @@ const CAP = 4; // overview: mỗi chủ đề chỉ hiện 4 bài mới nhất, 
       apply();
     }));
     if (search) search.addEventListener('input', apply);
+  })();
+
+  /* Carousel "BÀI NỔI BẬT" (desktop): nút mũi tên cuộn ngang 1 card */
+  (function () {
+    var rail = document.querySelector('.hub-feat__rail');
+    if (!rail) return;
+    var card = rail.querySelector('.hub-featcard');
+    Array.prototype.forEach.call(document.querySelectorAll('.hub-feat__arrow'), function (btn) {
+      btn.addEventListener('click', function () {
+        var step = (card ? card.getBoundingClientRect().width : 320) + 20;
+        rail.scrollBy({ left: step * parseInt(btn.getAttribute('data-dir'), 10), behavior: 'smooth' });
+      });
+    });
   })();
 
   /* Magazine mobile: chip đổi chủ đề (lọc) + nút "Xem tất cả" + chấm carousel nổi bật */
