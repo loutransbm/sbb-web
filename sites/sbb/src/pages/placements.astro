@@ -1,0 +1,800 @@
+---
+import PageLayout from '@ui/layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+// ===== ĐƠN APPLY GỬI VỀ ĐÂU =====
+// Chưa gắn Google Form -> tạm dùng mailto: nút Apply mở email của học sinh, soạn sẵn gửi về hòm thư SBB.
+// KHI CÓ Google Form: điền APPLY_FORM_URL = link "viewform" -> nút Gửi sẽ mở Form đó (mở tab mới).
+const APPLY_EMAIL = 'loutran.edugate@gmail.com';
+const APPLY_FORM_URL = ''; // vd: 'https://docs.google.com/forms/d/e/XXXX/viewform'
+
+const TYPE_LABELS = {
+  'j1-intern': 'J-1 Intern', 'j1-trainee': 'J-1 Trainee', '407': 'Visa 407', 'other': 'Khác',
+};
+const fmtDate = (dt) => dt.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+const entries = await getCollection('jobs');
+const jobs = entries
+  .map((e) => ({ slug: e.id, ...e.data, typeLabel: TYPE_LABELS[e.data.type] || e.data.type }))
+  .sort((a, b) => (Number(!!b.featured) - Number(!!a.featured)) || (b.published.getTime() - a.published.getTime()));
+
+// Bộ lọc suy ra từ dữ liệu
+const typeOrder = ['j1-intern', 'j1-trainee', '407', 'other'];
+const types = typeOrder.filter((t) => jobs.some((j) => j.type === t));
+const fields = Array.from(new Set(jobs.map((j) => j.field))).sort();
+const countries = Array.from(new Set(jobs.map((j) => j.country)));
+const openCount = jobs.length;
+---
+
+<PageLayout
+  title="Placements"
+  description="Bảng tin việc làm J-1 và 407 của SBB: vị trí thực tập và đào tạo tại khách sạn, nhà hàng ở Mỹ và Úc. Xem chi tiết và nộp đơn ngay trên trang."
+  site="sbb"
+  currentPath="/placements"
+>
+  <!-- ===== HERO ===== -->
+  <section class="pl-hero">
+    <div class="pl-hero__glow" aria-hidden="true"></div>
+    <div class="container pl-hero__inner">
+      <span class="pl-hero__eyebrow">SBB Placements</span>
+      <h1 class="pl-hero__title"><span class="cs-text-white">FIND YOUR</span> <span class="pl-hero__accent">PLACEMENT</span></h1>
+      <p class="pl-hero__lead">Bảng tin việc làm J-1 và 407 của SBB. Vị trí thực tập và đào tạo tại khách sạn, nhà hàng ở Mỹ và Úc. Xem chi tiết và nộp đơn ngay trên trang.</p>
+      <div class="pl-hero__stats">
+        <span class="pl-stat"><b>{openCount}</b> vị trí đang mở</span>
+        <span class="pl-stat"><b>{countries.length}</b> quốc gia</span>
+        <span class="pl-stat"><b>{fields.length}</b> ngành nghề</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== JOBS BOARD ===== -->
+  <section class="o-section pl-board">
+    <div class="container">
+      <!-- Toolbar: lọc loại visa + tìm kiếm -->
+      <div class="pl-toolbar">
+        <div class="pl-filters" role="group" aria-label="Lọc theo chương trình">
+          <button type="button" class="pl-filter is-active" data-filter-type="all">Tất cả</button>
+          {types.map((t) => (
+            <button type="button" class="pl-filter" data-filter-type={t}>{TYPE_LABELS[t]}</button>
+          ))}
+        </div>
+        <label class="pl-search">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.2-4.2"/></svg>
+          <input type="search" id="plSearch" placeholder="Tìm vị trí, công ty, nơi làm..." autocomplete="off" aria-label="Tìm việc làm" />
+        </label>
+      </div>
+      <!-- Lọc phụ theo ngành -->
+      <div class="pl-fields" role="group" aria-label="Lọc theo ngành">
+        <button type="button" class="pl-fieldchip is-active" data-filter-field="all">Mọi ngành</button>
+        {fields.map((f) => (
+          <button type="button" class="pl-fieldchip" data-filter-field={f}>{f}</button>
+        ))}
+      </div>
+
+      <!-- Lưới job -->
+      <div class="pl-grid">
+        {jobs.map((j) => (
+          <article class="pl-card" data-type={j.type} data-field={j.field} data-text={`${j.title} ${j.company} ${j.location} ${j.field}`.toLowerCase()}>
+            {j.featured && <span class="pl-card__flag">Nổi bật</span>}
+            <div class="pl-card__top">
+              {j.logo
+                ? <span class="pl-card__logo pl-card__logo--img"><img src={j.logo} alt={j.company} loading="lazy" onerror="this.closest('.pl-card__logo').classList.remove('pl-card__logo--img');this.remove()" /></span>
+                : <span class="pl-card__logo">{j.company.trim().slice(0, 1)}</span>}
+              <div class="pl-card__co">
+                <span class="pl-card__company">{j.company}</span>
+                <span class="pl-card__loc">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                  {j.location}
+                </span>
+              </div>
+            </div>
+            <h3 class="pl-card__title">{j.title}</h3>
+            <div class="pl-card__badges">
+              <span class="pl-badge pl-badge--type">{j.typeLabel}</span>
+              <span class="pl-badge">{j.field}</span>
+            </div>
+            {j.summary && <p class="pl-card__summary">{j.summary}</p>}
+            <div class="pl-card__facts">
+              {j.pay && (<span class="pl-fact"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 10a2.5 2 0 0 1 5 0c0 2.5-5 1.5-5 4a2.5 2 0 0 0 5 0"/></svg>{j.pay}</span>)}
+              {j.duration && (<span class="pl-fact"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>{j.duration}</span>)}
+              {j.positions && (<span class="pl-fact"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="3"/><path d="M3 20a6 6 0 0 1 12 0M16 7a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4-5.6"/></svg>{j.positions} suất</span>)}
+            </div>
+            <div class="pl-card__foot">
+              <span class="pl-card__deadline">{j.deadline ? `Hạn nộp: ${fmtDate(j.deadline)}` : 'Tuyển liên tục'}</span>
+              <button type="button" class="pl-apply-btn" data-apply data-job={j.title} data-company={j.company}>
+                Apply
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="pl-empty" hidden>Chưa có vị trí khớp bộ lọc. Thử bỏ bớt điều kiện nhé.</p>
+    </div>
+  </section>
+
+  <!-- ===== APPLY MODAL ===== -->
+  <div class="pl-modal" id="applyModal" hidden>
+    <div class="pl-modal__overlay" data-close aria-hidden="true"></div>
+    <div class="pl-modal__panel" role="dialog" aria-modal="true" aria-labelledby="applyTitle">
+      <button type="button" class="pl-modal__close" data-close aria-label="Đóng">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <span class="pl-modal__eyebrow">Nộp đơn ứng tuyển</span>
+      <h2 class="pl-modal__title" id="applyTitle">Apply</h2>
+      <p class="pl-modal__job" id="applyJobLine"></p>
+      <form class="pl-apply-form" id="applyForm" novalidate>
+        <input type="hidden" name="job" id="applyJobInput" />
+        <div class="pl-af-row">
+          <label class="pl-af-field"><span>Họ tên <i>*</i></span><input name="name" type="text" required autocomplete="name" placeholder="Nguyễn Văn A" /></label>
+          <label class="pl-af-field"><span>Email <i>*</i></span><input name="email" type="email" required autocomplete="email" placeholder="ban@email.com" /></label>
+        </div>
+        <div class="pl-af-row">
+          <label class="pl-af-field"><span>Số điện thoại <i>*</i></span><input name="phone" type="tel" required autocomplete="tel" placeholder="+84 9xx xxx xxx" /></label>
+          <label class="pl-af-field"><span>Link CV (Drive / PDF)</span><input name="cv" type="url" placeholder="https://..." /></label>
+        </div>
+        <label class="pl-af-field"><span>Lời nhắn</span><textarea name="note" rows="3" placeholder="Vài dòng giới thiệu bản thân, vì sao bạn hợp vị trí này..."></textarea></label>
+        <button type="submit" class="pl-af-submit">
+          Gửi đơn ứng tuyển
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7 17 17"/><path d="M17 7v10H7"/></svg>
+        </button>
+        <p class="pl-af-hint">Đơn của bạn sẽ được gửi trực tiếp tới đội tuyển dụng SBB.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ FINAL CTA · "READY TO SHINE BEYOND BORDERS" (giống Omni "READY TO GROW & SCALE") ============ -->
+  <section class="cta-final" id="get-started">
+    <div class="container cta-final-inner">
+      <!-- Cascade trái: READY / TO SHINE (+pill) / BEYOND BORDERS? — bê y hệt homepage -->
+      <div class="cs-header cta-header">
+        <div class="cs-line cs-line-1">
+          <span class="cs-text-white">READY</span>
+        </div>
+        <div class="cta-line-2">
+          <span class="cta-verb">TO SHINE</span>
+          <div class="cs-glass-pill">
+            <span class="cs-glass-title">LET'S TALK</span>
+            <span class="cs-glass-sub">Tư vấn miễn phí 30 phút, cùng SBB vẽ lộ trình rõ ràng cho bạn.</span>
+          </div>
+        </div>
+        <div class="cta-line-3">
+          <span class="cta-tail"><span class="cs-text-white">BEYOND BORDERS?</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEAD FORM · (giống Omni contact form: 2 cột, label in hoa, input gạch chân, dropdown, nút pill) ============ -->
+  <section class="lead-form" id="lead-form">
+    <div class="container">
+      <form class="lf-grid" action="#" method="POST" novalidate>
+        <!-- Hàng 1: Họ tên | Số điện thoại -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-name">HỌ TÊN CỦA BẠN<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-name" name="name" type="text" required autocomplete="name" placeholder="Nguyễn Văn A" />
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-phone">SỐ ĐIỆN THOẠI<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+84 9xx xxx xxx" />
+        </div>
+
+        <!-- Hàng 2: Email | Bạn đang là -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-email">EMAIL CỦA BẠN<span class="lf-req">*</span></label>
+          <input class="lf-input" id="lf-email" name="email" type="email" required autocomplete="email" placeholder="ban@email.com" />
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-role">BẠN ĐANG LÀ?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-role" name="role">
+              <option value="" disabled selected>Chọn vai trò</option>
+              <option>Sinh viên</option>
+              <option>Người đi làm</option>
+              <option>Phụ huynh</option>
+              <option>Khác</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Hàng 3: Chương trình quan tâm | Mục tiêu -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-program">BẠN QUAN TÂM CHƯƠNG TRÌNH NÀO?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-program" name="program">
+              <option value="" disabled selected>Chọn chương trình</option>
+              <option>GRP — Global Readiness</option>
+              <option>Internship J-1</option>
+              <option>Office Tour</option>
+              <option>407 Training</option>
+              <option>Chưa rõ — cần tư vấn</option>
+            </select>
+          </div>
+        </div>
+        <div class="lf-field">
+          <label class="lf-label" for="lf-goal">MỤC TIÊU CỦA BẠN LÀ GÌ?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-goal" name="goal">
+              <option value="" disabled selected>Chọn mục tiêu</option>
+              <option>Du học</option>
+              <option>Thực tập quốc tế</option>
+              <option>Làm việc ở nước ngoài</option>
+              <option>Định cư lâu dài</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Hàng 4: Mốc thời gian | Nút gửi -->
+        <div class="lf-field">
+          <label class="lf-label" for="lf-timeline">BẠN DỰ ĐỊNH ĐI KHI NÀO?</label>
+          <div class="lf-select-wrap">
+            <select class="lf-input lf-select" id="lf-timeline" name="timeline">
+              <option value="" disabled selected>Chọn mốc thời gian</option>
+              <option>Trong 6 tháng tới</option>
+              <option>6 – 12 tháng</option>
+              <option>Hơn 1 năm</option>
+              <option>Chưa xác định</option>
+            </select>
+          </div>
+        </div>
+        <div class="lf-field lf-field--submit">
+          <button class="lf-submit" type="submit">
+            <span class="lf-submit-label">GỬI THÔNG TIN</span>
+            <span class="lf-submit-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M7 7 17 17"/><path d="M17 7v10H7"/></svg>
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  /* ===== Cascade heading (bê từ news) ===== */
+  .cs-header { margin-bottom: 0; font-weight: 500; line-height: 0.95; letter-spacing: -0.045em; font-family: 'Inter', sans-serif; }
+    .cs-line { display: flex; align-items: center; gap: 1.5rem; }
+    .cs-line-1 { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; white-space: nowrap; position: relative; z-index: 10; }
+  .about-line-2 { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; margin-top: 0.5rem; }
+    .about-verb { font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9; white-space: nowrap; margin-left: clamp(2.5rem, 7.5vw, 7.5rem); }
+  .about-tail { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; line-height: 0.92; text-align: right; }
+    .about-tail span { display: block; white-space: nowrap; }
+
+  .cs-text-white { color: #ffffff !important; }
+  /* PILL KÍNH = Y HỆT about/programs (dark) */
+  .cs-glass-pill {
+    display: inline-flex; flex-direction: column; flex-shrink: 0;
+    gap: var(--space-2);
+    background: rgba(255, 255, 255, 0.045);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: var(--space-4) var(--space-5);
+    width: 240px; min-height: 7.25rem;
+    justify-content: center; text-align: left;
+    box-shadow:
+      0 30px 44px -10px rgba(0, 0, 0, 0.78),
+      0 14px 24px -8px rgba(0, 0, 0, 0.55),
+      0 0 40px rgba(242, 66, 11, 0.12),
+      inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  }
+  .cs-glass-title {
+    font-family: var(--font-headline);
+    font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+    font-weight: 600; color: #ffffff; line-height: 1;
+    letter-spacing: -0.01em;
+    white-space: nowrap; text-transform: uppercase;
+  }
+  .cs-glass-sub {
+    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 11px;
+    line-height: 1.45; color: rgba(255, 255, 255, 0.62); white-space: normal;
+    max-width: 25ch; margin: 0;
+    letter-spacing: normal;
+  }
+
+  /* ============================================================
+     PLACEMENTS — hero + jobs board + card + apply modal (dark fire)
+     ============================================================ */
+  .pl-hero { position: relative; padding: clamp(9rem, 12vw, 13rem) 0 clamp(3rem, 5vw, 5rem); overflow: hidden; }
+  .pl-hero__glow { position: absolute; top: 28%; left: 74%; transform: translateX(-50%); width: 1100px; height: 760px; pointer-events: none; z-index: 0; filter: blur(80px);
+    background: radial-gradient(ellipse 50% 50% at 50% 42%, rgba(255,112,60,0.5) 0%, rgba(248,82,26,0.3) 26%, rgba(242,66,11,0.13) 52%, transparent 80%); }
+  .pl-hero__inner, .pl-board .container { position: relative; z-index: 1; max-width: none; width: 100%; padding-inline: clamp(1.5rem, 3.2vw, 3.25rem); }
+  .pl-hero__eyebrow { display: inline-block; font-family: var(--font-headline); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.28em; text-transform: uppercase; color: #f2420b; margin-bottom: 1.2rem; }
+  .pl-hero__title { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(3rem, 9vw, 8rem); line-height: 0.95; letter-spacing: -0.05em; margin: 0 0 1.6rem; }
+  .pl-hero__title .cs-text-white { color: #fff; }
+  .pl-hero__accent { color: #f2420b; }
+  .pl-hero__lead { font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.65; color: rgba(255,255,255,0.66); max-width: 58ch; margin: 0 0 2.2rem; }
+  .pl-hero__stats { display: flex; flex-wrap: wrap; gap: clamp(1.6rem, 3.5vw, 3.2rem); }
+  .pl-stat { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.95rem; color: rgba(255,255,255,0.6); }
+  .pl-stat b { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.7rem; color: #fff; margin-right: 0.45rem; letter-spacing: -0.02em; }
+
+  .pl-board { padding-top: clamp(1rem, 2vw, 2rem); }
+  /* Toolbar: lọc chương trình + tìm kiếm */
+  .pl-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 1.5rem; margin-bottom: 1.2rem; }
+  .pl-filters { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .pl-filter { font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: rgba(255,255,255,0.78); cursor: pointer; padding: 0.6rem 1.2rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); transition: background .25s ease, border-color .25s ease, color .25s ease; }
+  .pl-filter:hover { border-color: rgba(242,66,11,0.5); background: rgba(242,66,11,0.10); color: #fff; }
+  .pl-filter.is-active { border-color: transparent; color: #fff; background: linear-gradient(180deg, #ff5c26 0%, #f2420b 100%); box-shadow: 0 12px 30px -10px rgba(242,66,11,0.45), inset 0 1px 1px rgba(255,255,255,0.25); }
+  .pl-search { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.55rem 1.1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.55); min-width: min(300px, 100%); transition: border-color .25s ease, color .25s ease; }
+  .pl-search:focus-within { border-color: rgba(242,66,11,0.55); color: #fff; }
+  .pl-search input { border: 0; background: transparent; outline: none; color: #fff; width: 100%; font-family: 'Inter', sans-serif; font-size: 0.92rem; }
+  .pl-search input::placeholder { color: rgba(255,255,255,0.45); }
+  /* Lọc phụ theo ngành */
+  .pl-fields { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: clamp(2rem, 3.5vw, 3rem); padding-bottom: clamp(1.6rem, 2.5vw, 2.4rem); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .pl-fieldchip { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; color: rgba(255,255,255,0.6); cursor: pointer; padding: 0.42rem 0.9rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.10); background: transparent; transition: border-color .25s ease, color .25s ease, background .25s ease; }
+  .pl-fieldchip:hover { color: #fff; border-color: rgba(242,66,11,0.4); }
+  .pl-fieldchip.is-active { color: #f2420b; border-color: rgba(242,66,11,0.5); background: rgba(242,66,11,0.08); }
+
+  /* Lưới job */
+  .pl-grid { display: grid; gap: clamp(1.3rem, 2vw, 2rem); grid-template-columns: repeat(3, 1fr); }
+  .pl-card { position: relative; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.10); border-radius: 24px; background: transparent; padding: clamp(1.6rem, 2.2vw, 2.1rem); box-shadow: 0 8px 24px rgba(0,0,0,0.4); transition: border-color .4s ease, transform .4s ease, box-shadow .4s ease; }
+  .pl-card:hover { border-color: rgba(242,66,11,0.55); transform: translateY(-4px); box-shadow: 0 26px 60px -24px rgba(0,0,0,0.5); }
+  .pl-card__flag { position: absolute; top: 1.2rem; right: 1.2rem; font-family: var(--font-headline); font-weight: 600; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b; background: rgba(242,66,11,0.12); border: 1px solid rgba(242,66,11,0.4); border-radius: 999px; padding: 0.24rem 0.6rem; }
+  .pl-card__top { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.1rem; }
+  .pl-card__logo { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.2rem; color: #fff; background: linear-gradient(150deg, #f2420b, #7a1f05); overflow: hidden; }
+  .pl-card__logo--img { background: #1a0d08; }
+  .pl-card__logo img { width: 100%; height: 100%; object-fit: cover; }
+  .pl-card__co { min-width: 0; display: flex; flex-direction: column; gap: 0.15rem; }
+  .pl-card__company { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.95rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pl-card__loc { display: inline-flex; align-items: center; gap: 0.35rem; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+  .pl-card__loc svg { flex: 0 0 auto; }
+  .pl-card__title { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(1.25rem, 1.6vw, 1.5rem); line-height: 1.25; letter-spacing: -0.02em; color: #fff; margin: 0 0 0.9rem; }
+  .pl-card__badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+  .pl-badge { font-family: var(--font-headline); font-weight: 600; font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; padding: 0.28rem 0.7rem; }
+  .pl-badge--type { color: #f2420b; border-color: rgba(242,66,11,0.45); }
+  .pl-card__summary { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.58); margin: 0 0 1.2rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .pl-card__facts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; margin-bottom: 1.3rem; }
+  .pl-fact { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.82rem; color: rgba(255,255,255,0.72); }
+  .pl-fact svg { flex: 0 0 auto; color: #f2420b; }
+  .pl-card__foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1.1rem; border-top: 1px solid rgba(255,255,255,0.08); }
+  .pl-card__deadline { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+  .pl-apply-btn { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.02em; color: #fff; background: linear-gradient(180deg, #ff5c26, #f2420b); border: 0; border-radius: 999px; padding: 0.6rem 1.1rem; box-shadow: 0 10px 24px -10px rgba(242,66,11,0.5); transition: gap .25s ease, transform .2s ease; }
+  .pl-apply-btn:hover { gap: 0.65rem; transform: translateY(-1px); }
+  .pl-card[hidden] { display: none !important; }
+  .pl-empty { text-align: center; color: rgba(255,255,255,0.55); padding: 2.5rem 0 0; font-size: 1rem; }
+  @media (max-width: 980px) { .pl-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .pl-grid { grid-template-columns: 1fr; } }
+
+  /* Apply modal */
+  .pl-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+  .pl-modal[hidden] { display: none; }
+  .pl-modal__overlay { position: absolute; inset: 0; background: rgba(6,3,2,0.72); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  .pl-modal__panel { position: relative; z-index: 1; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; border: 1px solid rgba(255,255,255,0.12); border-radius: 24px; background: #150806; padding: clamp(1.8rem, 3vw, 2.6rem); box-shadow: 0 40px 90px -30px rgba(0,0,0,0.8); }
+  .pl-modal__close { position: absolute; top: 1.1rem; right: 1.1rem; display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.7); cursor: pointer; transition: border-color .25s ease, color .25s ease; }
+  .pl-modal__close:hover { border-color: rgba(242,66,11,0.5); color: #fff; }
+  .pl-modal__eyebrow { display: inline-block; font-family: var(--font-headline); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: #f2420b; margin-bottom: 0.6rem; }
+  .pl-modal__title { font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.1; letter-spacing: -0.02em; color: #fff; margin: 0 0 0.4rem; }
+  .pl-modal__job { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.95rem; color: rgba(255,255,255,0.6); margin: 0 0 1.6rem; }
+  .pl-modal__job b { color: #f2420b; font-weight: 500; }
+  .pl-apply-form { display: flex; flex-direction: column; gap: 1rem; }
+  .pl-af-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .pl-af-field { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+  .pl-af-field > span { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.76rem; letter-spacing: 0.02em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+  .pl-af-field > span i { color: #f2420b; font-style: normal; }
+  .pl-af-field input, .pl-af-field textarea { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.95rem; padding: 0.7rem 0.9rem; transition: border-color .25s ease, background .25s ease; }
+  .pl-af-field textarea { resize: vertical; min-height: 84px; }
+  .pl-af-field input::placeholder, .pl-af-field textarea::placeholder { color: rgba(255,255,255,0.35); }
+  .pl-af-field input:focus, .pl-af-field textarea:focus { outline: none; border-color: rgba(242,66,11,0.6); background: rgba(242,66,11,0.05); }
+  .pl-af-submit { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer; margin-top: 0.5rem; color: #fff; background: linear-gradient(180deg, #ff5c26, #f2420b); border: 0; border-radius: 999px; padding: 0.95rem 1.5rem; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 14px 34px -12px rgba(242,66,11,0.55); transition: transform .25s ease, box-shadow .25s ease; }
+  .pl-af-submit:hover { transform: translateY(-2px); box-shadow: 0 20px 44px -14px rgba(242,66,11,0.6); }
+  .pl-af-hint { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.8rem; color: rgba(255,255,255,0.45); text-align: center; margin: 0.3rem 0 0; }
+  @media (max-width: 520px) { .pl-af-row { grid-template-columns: 1fr; } }
+
+  /* ============================================
+     FINAL CTA  (giống Omni "READY TO GROW & SCALE") — bê từ news
+     ============================================ */
+  .cta-final {
+    position: relative;
+    margin-top: -1px;
+    background:
+      radial-gradient(60% 780px at 41% -250px, rgba(242, 66, 11, 0.12) 0%, rgba(242, 66, 11, 0.07) 32%, rgba(242, 66, 11, 0.04) 60%, rgba(242, 66, 11, 0.02) 78%, transparent 92%),
+      #D9D1CA;
+    padding: var(--sec-pad) 0 clamp(2rem, 4vw, 3.5rem);
+    overflow: hidden;
+    text-align: left;
+  }
+  .cta-final::before {
+    content: ''; position: absolute; left: 28%; top: 56%;
+    transform: translate(-50%, -50%);
+    width: 95%; height: 120%; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse 50% 44% at 40% 60%, rgba(242, 66, 11, 0.06) 0%, transparent 62%);
+  }
+  .cta-final-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; }
+  .cta-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  /* Tiêu đề CTA phá khung ra 2rem-từ-mép-màn-hình (đồng bộ HOMEPAGE) */
+  @media (min-width: 992px) {
+    .cta-final .cs-header {
+      width: calc(100vw - var(--sbw, 0px) - 4rem);
+      max-width: 120rem;
+      margin-left: calc(50% - (50vw - var(--sbw, 0px) / 2) + 2rem);
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+  }
+  /* Cascade trái: READY / TO SHINE (+pill đè lên SHINE) / BEYOND BORDERS? — bê y hệt homepage */
+  .cta-line-2 { display: flex; align-items: flex-start; gap: 1.5rem; margin-top: 0.5rem; }
+  .cta-verb {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(8.5rem, 12vw, 11rem); letter-spacing: -0.085em; line-height: 0.9;
+    color: #f2420b; white-space: nowrap;
+  }
+  .cta-line-3 { margin-top: 0.5rem; }
+  .cta-tail {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(3rem, 5vw, 6.5rem); letter-spacing: -0.07em; line-height: 0.9;
+  }
+  .cta-tail span { display: block; }
+  .cta-final .cs-glass-pill { transform: translateY(2.6rem); width: 210px; margin-left: -4rem; }
+
+  /* ============================================
+     LEAD FORM (giống Omni contact form) — bê từ news
+     ============================================ */
+  .lead-form {
+    position: relative;
+    background: #D9D1CA;
+    padding: clamp(2rem, 4vw, 4rem) 0 var(--sec-pad);
+    overflow: visible;
+  }
+  .lead-form::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background: radial-gradient(58% 42% at 32% 30%, rgba(242, 66, 11, 0.04) 0%, transparent 60%);
+  }
+  .lead-form .container { position: relative; z-index: 1; }
+  .lf-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    column-gap: clamp(2.5rem, 6vw, 7rem);
+    row-gap: clamp(2.2rem, 4vw, 3.4rem);
+  }
+  .lf-field { display: flex; flex-direction: column; min-width: 0; }
+  .lf-label {
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1.05rem, 1.7vw, 1.65rem); line-height: 1.15;
+    letter-spacing: -0.01em; text-transform: uppercase;
+    color: #1a1a1a; margin: 0 0 clamp(1rem, 1.8vw, 1.7rem);
+  }
+  .lf-req { color: var(--accent); margin-left: 0.12em; }
+  .lf-input {
+    width: 100%; box-sizing: border-box;
+    background: transparent; border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+    color: #1a1a1a; font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1rem, 1.25vw, 1.15rem);
+    padding: 0.55rem 0 0.95rem; line-height: 1.4;
+    transition: border-color 0.25s ease;
+  }
+  .lf-input::placeholder { color: #A7A7A7; }
+  .lf-input:focus { outline: none; border-bottom-color: var(--accent); }
+  .lf-select-wrap { position: relative; }
+  .lf-select-wrap::after {
+    content: ''; position: absolute; right: 0.25rem; top: 42%;
+    width: 0.62rem; height: 0.62rem; pointer-events: none;
+    border-right: 1.5px solid rgba(0, 0, 0, 0.45);
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.45);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .lf-select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    padding-right: 2rem; cursor: pointer; border-radius: 0;
+  }
+  .lf-select option { color: #16100c; }
+  /* ===== Dropdown CUSTOM ===== */
+  .lf-select-wrap.is-enhanced > .lf-select { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+  .lf-select-wrap.is-enhanced::after { display: none; }
+  .lf-dd { position: relative; }
+  .lf-dd-trigger {
+    width: 100%; box-sizing: border-box;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: transparent; border: none; border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+    color: #1a1a1a; font-family: 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.4;
+    padding: 0.55rem 0 0.95rem; cursor: pointer; text-align: left;
+    transition: border-color 0.25s ease;
+  }
+  .lf-dd-trigger:focus-visible, .lf-dd.is-open .lf-dd-trigger { outline: none; border-bottom-color: var(--accent); }
+  .lf-dd-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lf-dd-value.is-placeholder { color: #A7A7A7; }
+  .lf-dd-caret { display: flex; flex: 0 0 auto; color: rgba(0, 0, 0, 0.45); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease; }
+  .lf-dd-caret svg { width: 1.15rem; height: 1.15rem; }
+  .lf-dd.is-open .lf-dd-caret { transform: rotate(180deg); color: var(--accent); }
+  .lf-dd-panel {
+    list-style: none; margin: 0; padding: 0.4rem;
+    position: absolute; top: calc(100% + 0.6rem); left: 0; right: 0; z-index: 60;
+    background: rgba(255, 255, 255, 0.98);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.10); border-radius: 14px;
+    box-shadow: 0 26px 64px -20px rgba(0, 0, 0, 0.18), 0 4px 14px rgba(0, 0, 0, 0.10);
+    max-height: 16rem; overflow-y: auto; overscroll-behavior: contain;
+    opacity: 0; transform: translateY(-8px) scale(0.985); transform-origin: top center; pointer-events: none;
+    transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .lf-dd.is-open .lf-dd-panel { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .lf-dd-option {
+    padding: 0.8rem 0.95rem; border-radius: 9px; cursor: pointer;
+    color: #1a1a1a; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.25;
+    transition: background 0.16s ease, color 0.16s ease;
+  }
+  .lf-dd-option:hover, .lf-dd-option.is-active { background: rgba(242, 66, 11, 0.10); color: #f2420b; }
+  .lf-dd-option.is-selected { color: var(--accent); font-weight: 500; }
+  .lf-dd-panel::-webkit-scrollbar { width: 8px; }
+  .lf-dd-panel::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.18); border-radius: 8px; }
+  .lf-field--submit { justify-content: flex-end; }
+  .lf-submit {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    width: 100%; cursor: pointer; color: #fff; background: var(--accent);
+    border: 1px solid var(--accent); border-radius: 100px;
+    padding: clamp(1.1rem, 1.6vw, 1.5rem) clamp(1.8rem, 2.4vw, 2.4rem);
+    font-family: 'Inter', sans-serif; font-weight: 600;
+    font-size: clamp(0.95rem, 1.1vw, 1.1rem); letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .lf-submit:hover {
+    background: var(--accent-2); border-color: var(--accent-2); transform: translateY(-2px);
+    box-shadow: 0 16px 44px -16px rgba(242, 66, 11, 0.5);
+  }
+  .lf-submit-arrow { display: flex; }
+  /* Đẩy form về BÊN PHẢI + thu hẹp (giống Omni) */
+  @media (min-width: 1024px) {
+    .lf-grid { width: 78%; margin-left: auto; }
+  }
+  @media (max-width: 720px) {
+    .lf-grid { grid-template-columns: 1fr; row-gap: 2rem; }
+    .lf-field--submit { margin-top: 0.5rem; }
+  }
+
+  /* ============================================
+     DARK OVERRIDE cho CTA + FORM (bê từ news/about) — community là dark theme
+     ============================================ */
+  .cta-final { overflow: visible !important; }
+  /* quầng sáng cam của tiêu đề CTA (spotlight) */
+  .cta-final::before {
+    display: block !important;
+    width: 100vw !important; height: 130% !important;
+    left: 50% !important; top: 50% !important;
+    background: radial-gradient(circle 470px at 25% 45%,
+      rgba(255, 112, 60, 0.80) 0%,
+      rgba(248, 82, 26, 0.70) 30%,
+      rgba(242, 66, 11, 0.50) 55%,
+      rgba(20, 10, 5, 0.85) 85%,
+      rgba(10, 5, 2, 0.95) 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%) !important;
+  }
+  /* Form + CTA: nền TRANSPARENT (lộ nền tối body) -> chữ trắng đọc được */
+  .cta-final, .lead-form { background: transparent !important; background-image: none !important; }
+  /* Form: KHÔNG đánh sáng — bỏ hẳn quầng cam (form phẳng) */
+  .lead-form::before { display: none !important; }
+  /* CTA động từ phụ trắng */
+  .cta-verb { color: #ffffff !important; }
+  /* FORM CHỮ TRẮNG */
+  .lf-label, .lf-input, .lf-dd-trigger, .lf-dd-option { color: #ffffff !important; }
+  .lf-input::placeholder, .lf-dd-value.is-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-input, .lf-dd-trigger { border-bottom-color: rgba(255, 255, 255, 0.2) !important; }
+  .lf-select-wrap::after { border-right-color: rgba(255, 255, 255, 0.5) !important; border-bottom-color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-dd-caret { color: rgba(255, 255, 255, 0.5) !important; }
+  .lf-dd-panel { background: rgba(20, 10, 5, 0.85) !important; border-color: rgba(255, 255, 255, 0.1) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important; }
+  .lf-dd-option:hover { background: rgba(255, 255, 255, 0.1) !important; }
+  .lf-dd-option.is-selected { background: rgba(242, 66, 11, 0.2) !important; color: #ffffff !important; }
+
+  @media (max-width: 991px) {
+    .cs-line { flex-wrap: wrap; gap: 0.4rem; }
+  }
+  /* ===== CTA "READY TO SHINE" mobile — bê Y HỆT homepage (scope #get-started) ===== */
+  @media (max-width: 768px) {
+    #get-started .cs-line-1 { flex-direction: column !important; align-items: flex-start !important; font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; line-height: 0.9 !important; letter-spacing: -0.097em !important; white-space: nowrap !important; }
+    #get-started .cs-line { max-width: 100% !important; }
+    #get-started .cs-glass-title { font-size: 0.92rem !important; font-weight: 700 !important; letter-spacing: 0.015em !important; color: #ffffff !important; white-space: normal !important; line-height: 1.05 !important; }
+    #get-started .cs-glass-sub { font-size: 0.7rem !important; line-height: 1.35 !important; letter-spacing: normal !important; color: rgba(255,255,255,0.5) !important; max-width: 100% !important; }
+    #get-started .cta-header { margin-left: -1.1rem !important; margin-right: -1.1rem !important; }
+    #get-started .cta-verb { font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; letter-spacing: -0.097em !important; line-height: 0.9 !important; margin-left: 0 !important; }
+    #get-started .cta-tail { font-size: clamp(2rem, 10vw, 2.9rem) !important; letter-spacing: -0.045em !important; line-height: 0.96 !important; margin-right: 0 !important; white-space: nowrap !important; }
+    #get-started .cta-line-2 { flex-direction: column !important; align-items: flex-start !important; width: 100% !important; gap: 0 !important; margin-top: 0.35rem !important; position: relative !important; }
+    #get-started .cta-line-3 { margin-top: 0.35rem !important; }
+    #get-started .cs-glass-pill { transform: none !important; position: absolute !important; right: 0 !important; left: auto !important; bottom: 2.6rem !important; margin: 0 !important; }
+  }
+</style>
+
+<script define:vars={{ APPLY_EMAIL, APPLY_FORM_URL }}>
+  /* Placements: lọc theo chương trình + ngành + tìm kiếm; modal apply gửi mailto (hoặc Google Form nếu có URL) */
+  (function () {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.pl-card'));
+    var typeBtns = Array.prototype.slice.call(document.querySelectorAll('.pl-filter'));
+    var fieldBtns = Array.prototype.slice.call(document.querySelectorAll('.pl-fieldchip'));
+    var search = document.getElementById('plSearch');
+    var empty = document.querySelector('.pl-empty');
+    var actType = 'all', actField = 'all';
+
+    function apply() {
+      var q = ((search && search.value) || '').trim().toLowerCase();
+      var shown = 0;
+      cards.forEach(function (c) {
+        var okType = actType === 'all' || c.getAttribute('data-type') === actType;
+        var okField = actField === 'all' || c.getAttribute('data-field') === actField;
+        var okText = !q || (c.getAttribute('data-text') || '').indexOf(q) !== -1;
+        var show = okType && okField && okText;
+        c.hidden = !show;
+        if (show) shown++;
+      });
+      if (empty) empty.hidden = shown !== 0;
+    }
+    typeBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        typeBtns.forEach(function (x) { x.classList.remove('is-active'); });
+        b.classList.add('is-active');
+        actType = b.getAttribute('data-filter-type') || 'all';
+        apply();
+      });
+    });
+    fieldBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        fieldBtns.forEach(function (x) { x.classList.remove('is-active'); });
+        b.classList.add('is-active');
+        actField = b.getAttribute('data-filter-field') || 'all';
+        apply();
+      });
+    });
+    if (search) search.addEventListener('input', apply);
+
+    /* ===== Modal apply ===== */
+    var modal = document.getElementById('applyModal');
+    var jobInput = document.getElementById('applyJobInput');
+    var jobLine = document.getElementById('applyJobLine');
+    var form = document.getElementById('applyForm');
+    var lastFocus = null;
+    if (!modal || !form) return;
+
+    function openModal(job, company) {
+      jobInput.value = job + (company ? ' @ ' + company : '');
+      jobLine.innerHTML = 'Vị trí: <b>' + job + '</b>' + (company ? ' · ' + company : '');
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var first = form.querySelector('input[name="name"]');
+      if (first) first.focus();
+    }
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-apply]'), function (b) {
+      b.addEventListener('click', function () { openModal(b.getAttribute('data-job') || 'Vị trí', b.getAttribute('data-company') || ''); });
+    });
+    Array.prototype.forEach.call(modal.querySelectorAll('[data-close]'), function (b) { b.addEventListener('click', closeModal); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var d = new FormData(form);
+      var job = d.get('job') || '';
+      if (APPLY_FORM_URL) { window.open(APPLY_FORM_URL, '_blank', 'noopener'); closeModal(); return; }
+      var subject = 'Ứng tuyển: ' + job;
+      var body = [
+        'Vị trí: ' + job,
+        'Họ tên: ' + (d.get('name') || ''),
+        'Email: ' + (d.get('email') || ''),
+        'SĐT: ' + (d.get('phone') || ''),
+        'Link CV: ' + (d.get('cv') || '(không có)'),
+        '', 'Lời nhắn:', (d.get('note') || '')
+      ].join('\r\n');
+      window.location.href = 'mailto:' + APPLY_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      closeModal();
+    });
+  })();
+</script>
+
+<script>
+  /* Dropdown CUSTOM cho form (clean & smooth) — progressive enhancement:
+     GIỮ <select> thật (ẩn) để submit + fallback; vẽ UI riêng có animation mượt thay popup native thô. */
+  (function () {
+    function enhance(select) {
+      const wrap = select.closest('.lf-select-wrap');
+      if (!wrap || wrap.classList.contains('is-enhanced')) return;
+
+      const opts = Array.prototype.slice.call(select.options);
+      const placeholder = opts.filter(function (o) { return o.disabled; })[0] || null;
+      const choices = opts.filter(function (o) { return !o.disabled; });
+
+      const dd = document.createElement('div');
+      dd.className = 'lf-dd';
+
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'lf-dd-trigger';
+      trigger.setAttribute('aria-haspopup', 'listbox');
+      trigger.setAttribute('aria-expanded', 'false');
+
+      const valueEl = document.createElement('span');
+      valueEl.className = 'lf-dd-value';
+
+      const caret = document.createElement('span');
+      caret.className = 'lf-dd-caret';
+      caret.setAttribute('aria-hidden', 'true');
+      caret.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+
+      trigger.appendChild(valueEl);
+      trigger.appendChild(caret);
+
+      const panel = document.createElement('ul');
+      panel.className = 'lf-dd-panel';
+      panel.setAttribute('role', 'listbox');
+
+      let activeIdx = -1;
+
+      function syncDisplay() {
+        const sel = select.options[select.selectedIndex];
+        const isPlaceholder = !!(sel && sel.disabled);
+        valueEl.textContent = sel ? sel.text : (placeholder ? placeholder.text : '');
+        valueEl.classList.toggle('is-placeholder', isPlaceholder);
+        const curVal = sel ? sel.value : '';
+        Array.prototype.forEach.call(panel.children, function (li) {
+          li.classList.toggle('is-selected', !isPlaceholder && li.getAttribute('data-value') === curVal);
+        });
+      }
+      function choose(opt) {
+        select.value = opt.value;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        syncDisplay();
+      }
+      choices.forEach(function (opt) {
+        const li = document.createElement('li');
+        li.className = 'lf-dd-option';
+        li.setAttribute('role', 'option');
+        li.setAttribute('data-value', opt.value);
+        li.textContent = opt.text;
+        li.addEventListener('click', function () { choose(opt); closeDd(); trigger.focus(); });
+        panel.appendChild(li);
+      });
+      function setActive(i) {
+        activeIdx = i;
+        Array.prototype.forEach.call(panel.children, function (li, idx) { li.classList.toggle('is-active', idx === i); });
+        if (i >= 0 && panel.children[i]) panel.children[i].scrollIntoView({ block: 'nearest' });
+      }
+      function openDd() {
+        dd.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        let selIdx = -1;
+        const cur = select.options[select.selectedIndex];
+        if (cur && !cur.disabled) selIdx = choices.map(function (o) { return o.value; }).indexOf(cur.value);
+        setActive(selIdx >= 0 ? selIdx : 0);
+      }
+      function closeDd() { dd.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); setActive(-1); }
+      function isOpen() { return dd.classList.contains('is-open'); }
+
+      trigger.addEventListener('click', function (e) { e.stopPropagation(); isOpen() ? closeDd() : openDd(); });
+      trigger.addEventListener('keydown', function (e) {
+        switch (e.key) {
+          case 'ArrowDown': e.preventDefault(); isOpen() ? setActive(Math.min(choices.length - 1, activeIdx + 1)) : openDd(); break;
+          case 'ArrowUp': e.preventDefault(); isOpen() ? setActive(Math.max(0, activeIdx - 1)) : openDd(); break;
+          case 'Enter': case ' ': e.preventDefault(); if (!isOpen()) openDd(); else if (activeIdx >= 0) { choose(choices[activeIdx]); closeDd(); } break;
+          case 'Escape': if (isOpen()) { e.preventDefault(); closeDd(); } break;
+          case 'Tab': if (isOpen()) closeDd(); break;
+        }
+      });
+      document.addEventListener('click', function (e) { if (isOpen() && !dd.contains(e.target)) closeDd(); });
+
+      dd.appendChild(trigger);
+      dd.appendChild(panel);
+      wrap.appendChild(dd);
+      /* Astro scope CSS theo attr data-astro-cid-* (gắn lúc build). Element tạo bằng JS KHÔNG có attr này
+         → style scoped không "ăn". Copy cid từ .lf-select-wrap sang mọi element vừa tạo để khớp selector scoped. */
+      var cidAttr = null;
+      for (var i = 0; i < wrap.attributes.length; i++) { if (wrap.attributes[i].name.indexOf('data-astro-cid-') === 0) { cidAttr = wrap.attributes[i].name; break; } }
+      if (cidAttr) { dd.setAttribute(cidAttr, ''); var all = dd.querySelectorAll('*'); for (var j = 0; j < all.length; j++) all[j].setAttribute(cidAttr, ''); }
+      wrap.classList.add('is-enhanced');
+      syncDisplay();
+    }
+    function init() { Array.prototype.forEach.call(document.querySelectorAll('.lf-select'), enhance); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+
+  /* --sbw = bề rộng scrollbar dọc -> break-out tiêu đề CTA sát 2 mép CHUẨN như homepage (tránh lệch do 100vw tính cả scrollbar) */
+  (function () {
+    var setSbw = function () {
+      document.documentElement.style.setProperty('--sbw', (window.innerWidth - document.documentElement.clientWidth) + 'px');
+    };
+    setSbw();
+    window.addEventListener('resize', setSbw, { passive: true });
+  })();
+</script>

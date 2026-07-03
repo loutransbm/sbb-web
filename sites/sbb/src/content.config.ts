@@ -71,4 +71,27 @@ const news = defineCollection({
   })
 });
 
-export const collections = { grp, grp2, grp3, news };
+// Jobs / Placements — bảng tin việc làm (mỗi job 1 file). Trang /placements liệt kê + lọc + apply.
+const jobs = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/jobs' }),
+  schema: z.object({
+    title: z.string(),                 // chức danh, vd "Culinary Intern"
+    company: z.string(),               // host/nhà tuyển dụng
+    logo: z.string().optional(),       // logo host (optional; thiếu -> monogram)
+    location: z.string(),              // "Orlando, FL, USA"
+    country: z.string().default('Mỹ'), // để lọc theo nước
+    type: z.enum(['j1-intern', 'j1-trainee', '407', 'other']), // chương trình/visa
+    field: z.string(),                 // ngành: Hospitality / Culinary / F&B / Front Office...
+    pay: z.string().optional(),        // "$15/giờ" hoặc "$2,600/tháng"
+    duration: z.string().optional(),   // "12 tháng"
+    positions: z.number().optional(),  // số suất
+    deadline: z.coerce.date().optional(),
+    summary: z.string().optional(),    // mô tả ngắn (card)
+    requirements: z.array(z.string()).optional(),
+    benefits: z.array(z.string()).optional(),
+    featured: z.boolean().optional(),
+    published: z.coerce.date(),
+  }),
+});
+
+export const collections = { grp, grp2, grp3, news, jobs };
