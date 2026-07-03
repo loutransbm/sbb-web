@@ -28,6 +28,8 @@ published: 2026-05-23
 
 ## Các lựa chọn đi lại
 
+![Đồ họa các lựa chọn đi lại ở Mỹ](/images/j1-37/graphic-1.webp)
+
 - **Giao thông công cộng.** Xe buýt, tàu điện, phổ biến và rẻ ở thành phố lớn.
 - **Ứng dụng gọi xe.** Tiện cho quãng ngắn hoặc khi không có tuyến công cộng.
 - **Đi bộ và xe đạp.** Rẻ nhất nếu ở gần chỗ làm.
@@ -48,6 +50,8 @@ published: 2026-05-23
 <a id="lai-xe"></a>
 
 ## Lái xe ở Mỹ
+
+![Khối lưu ý về bằng lái và lái xe ở Mỹ](/images/j1-37/graphic-2.webp)
 
 Đây là phần nhiều người hiểu sai, và quy định khác nhau theo từng bang.
 

@@ -28,6 +28,8 @@ published: 2026-05-24
 
 ## Các kiểu chỗ ở
 
+![Đồ họa các kiểu chỗ ở cho người đi J-1](/images/j1-36/graphic-1.webp)
+
 - **Chỗ ở do host hỗ trợ.** An toàn và tiện nhất cho người mới, nên hỏi host trước.
 - **Ở ghép, có bạn cùng phòng.** Chia tiền nhà, rẻ hơn thuê riêng, phổ biến nhất.
 - **Thuê căn hộ riêng.** Tốn hơn, thường cần lịch sử tín dụng hoặc người bảo lãnh.
@@ -58,6 +60,8 @@ Trước khi ký, đọc kỹ và hỏi rõ:
 <a id="lua-dao"></a>
 
 ## Dấu hiệu lừa đảo cần tránh
+
+![Khối dấu hiệu lừa đảo thuê nhà](/images/j1-36/graphic-2.webp)
 
 Lừa đảo thuê nhà nhắm vào người mới sang. Các cờ đỏ:
 

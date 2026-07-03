@@ -28,6 +28,8 @@ published: 2026-05-22
 
 ## Các cách gửi tiền
 
+![Đồ họa các cách gửi tiền từ Mỹ về Việt Nam](/images/j1-38/graphic-1.webp)
+
 - **Chuyển khoản quốc tế từ ngân hàng.** An toàn nhưng phí thường cao và tỉ giá kém hơn.
 - **Dịch vụ chuyển tiền chuyên dụng.** Các nền tảng và ứng dụng chuyển tiền quốc tế thường rẻ và nhanh hơn, nhận tại Việt Nam qua tài khoản ngân hàng hoặc điểm nhận tiền.
 - **Tránh các kênh không chính thức.** Đổi tiền qua cá nhân không cấp phép tiềm ẩn rủi ro mất tiền và pháp lý.
@@ -52,6 +54,8 @@ Cách so đúng: nhập cùng một số tiền vào vài dịch vụ, xem ngư�
 <a id="cac-buoc"></a>
 
 ## Các bước gửi tiền
+
+![Đồ họa các bước gửi tiền về Việt Nam](/images/j1-38/graphic-2.webp)
 
 1. **Chọn dịch vụ được cấp phép** và so tổng chi phí giữa vài lựa chọn.
 2. **Tạo tài khoản và xác minh danh tính** theo yêu cầu của dịch vụ.

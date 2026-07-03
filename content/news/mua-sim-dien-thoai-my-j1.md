@@ -28,6 +28,8 @@ published: 2026-05-25
 
 ## Prepaid hay postpaid
 
+![Đồ họa so sánh sim trả trước và trả sau](/images/j1-35/graphic-1.webp)
+
 - **Trả trước (prepaid).** Trả tiền trước theo tháng, không hợp đồng, không cần SSN hay lịch sử tín dụng. Phù hợp người mới sang. Dừng lúc nào cũng được.
 - **Trả sau (postpaid).** Tính cước cuối tháng, thường rẻ hơn nếu dùng nhiều, nhưng hay yêu cầu SSN hoặc đặt cọc lớn với người chưa có lịch sử tín dụng.
 
@@ -45,6 +47,8 @@ Lời khuyên: bắt đầu bằng prepaid, sau vài tháng ổn định và có
 <a id="cac-buoc"></a>
 
 ## Các bước có sim và dùng được
+
+![Đồ họa các bước kích hoạt sim ở Mỹ](/images/j1-35/graphic-2.webp)
 
 1. **Kiểm tra điện thoại đã mở mạng chưa.** Nếu khóa, liên hệ nhà mạng Việt Nam để mở trước khi đi.
 2. **Chọn nhà mạng hoặc nhà mạng giá rẻ (MVNO)** phù hợp khu vực host. Các nhà mạng lớn gồm những tên quen thuộc, ngoài ra có nhiều MVNO giá rẻ chạy trên cùng hạ tầng.
