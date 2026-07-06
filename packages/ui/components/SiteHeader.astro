@@ -9,17 +9,32 @@ export interface Props {
   overlay?: boolean;
 }
 
+import { toLang, toViPath, localizePath, hasTranslation, useTranslations } from '../i18n/ui';
+
 const { site, currentPath = '', overlay = false } = Astro.props;
 
-const sbbLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About SBB', href: '/about' },
-  { label: 'Programs', href: '/programs' },
-  { label: 'News', href: '/news' },
-  { label: 'Learn', href: '/learn' },
-  { label: 'Placements', href: '/placements' },
-  { label: 'Liên hệ', href: '/apply' },
-];
+// ---- Song ngữ: xác định ngôn ngữ hiện tại + đường dẫn VI chuẩn (bóc tiền tố /en) ----
+const lang = toLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const viPath = toViPath(currentPath || Astro.url.pathname);
+const otherLang = lang === 'en' ? 'vi' : 'en';
+const langSwitchHref = localizePath(viPath, otherLang);
+
+// nav SBB: key nhãn (i18n) + href VI chuẩn; href sẽ tự thêm /en nếu trang đã dịch
+const sbbNav = [
+  { key: 'nav.home', href: '/' },
+  { key: 'nav.about', href: '/about' },
+  { key: 'nav.programs', href: '/programs' },
+  { key: 'nav.news', href: '/news' },
+  { key: 'nav.learn', href: '/learn' },
+  { key: 'nav.placements', href: '/placements' },
+  { key: 'nav.contact', href: '/apply' },
+] as const;
+const sbbLinks = sbbNav.map((n) => ({
+  label: t(n.key),
+  href: localizePath(n.href, lang),
+  active: viPath === n.href,
+}));
 
 const newsLinks = [
   { label: 'Trang chủ News', href: '/' },
@@ -28,7 +43,7 @@ const newsLinks = [
   { label: 'Tiếng nói SV', href: '/student-voices' },
   { label: 'Learn', href: 'https://learn.sbb.vn' },
   { label: 'SBB', href: 'https://sbb.vn' },
-];
+].map((n) => ({ ...n, active: currentPath === n.href }));
 
 const learnLinks = [
   { label: 'Trang chủ Learn', href: '/' },
@@ -37,7 +52,7 @@ const learnLinks = [
   { label: 'Phụ huynh', href: '/parent-corner' },
   { label: 'News', href: 'https://news.sbb.vn' },
   { label: 'SBB', href: 'https://sbb.vn' },
-];
+].map((n) => ({ ...n, active: currentPath === n.href }));
 
 const allLinks = site === 'sbb' ? sbbLinks : site === 'news' ? newsLinks : learnLinks;
 // Tách link cuối thành nút CTA bên phải — kiểu omni
@@ -57,18 +72,21 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
     <!-- Menu giữa -->
     <nav class="nav-desktop" aria-label="Menu chính">
       {links.map((link) => (
-        <a href={link.href} class:list={['nav-link', { 'is-active': currentPath === link.href }]}>{link.label}</a>
+        <a href={link.href} class:list={['nav-link', { 'is-active': link.active }]}>{link.label}</a>
       ))}
     </nav>
 
-    <!-- Phải: CTA + nút menu mobile -->
+    <!-- Phải: chuyển ngữ + CTA + nút menu mobile -->
     <div class="header-right">
+      {site === 'sbb' && (
+        <a href={langSwitchHref} class="lang-switch" hreflang={otherLang} title={t('lang.toggleTitle')} aria-label={t('lang.toggleTitle')}>{t('lang.toggle')}</a>
+      )}
       {ctaLink && <a href={ctaLink.href} class="nav-cta">{ctaLink.label}</a>}
       <button
         type="button"
         class="menu-toggle"
         id="menu-toggle"
-        aria-label="Mở menu"
+        aria-label={t('menu.open')}
         aria-expanded="false"
         aria-controls="mobile-drawer"
       >
@@ -87,8 +105,11 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
         <img src="/brand/sbb-logo-light.svg" alt="SBB — Shine Beyond Borders" class="logo-img" width="124" height="32" />
       </a>
       <div class="mobile-drawer__top-right">
+        {site === 'sbb' && (
+          <a href={langSwitchHref} class="lang-switch lang-switch--drawer" hreflang={otherLang} title={t('lang.toggleTitle')} aria-label={t('lang.toggleTitle')}>{t('lang.toggle')}</a>
+        )}
         {ctaLink && <a href={ctaLink.href} class="nav-cta nav-cta--drawer">{ctaLink.label}</a>}
-        <button type="button" class="drawer-close" id="drawer-close" aria-label="Đóng menu">
+        <button type="button" class="drawer-close" id="drawer-close" aria-label={t('menu.close')}>
           <span></span><span></span>
         </button>
       </div>
@@ -97,7 +118,7 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
       {links.map((link, i) => (
         <a
           href={link.href}
-          class:list={['mobile-nav__link', { 'is-active': currentPath === link.href }]}
+          class:list={['mobile-nav__link', { 'is-active': link.active }]}
           style={`--i:${i}`}
         >{link.label}</a>
       ))}
@@ -294,6 +315,35 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
     box-shadow: 0 8px 20px -6px rgba(242, 66, 11, 0.35);
   }
   /* Mobile: pill CTA "Liên hệ" VẪN hiện cạnh hamburger (giống Omni) — không ẩn */
+
+  /* ---- Nút chuyển ngữ VI ⇄ EN (viền mảnh, chữ kem, khớp nav) ---- */
+  .lang-switch {
+    font-family: var(--font-headline);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.1rem;
+    height: 2rem;
+    padding: 0 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out),
+                background-color var(--duration-fast) var(--ease-out);
+  }
+  .lang-switch:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+  .lang-switch--drawer { height: 2.3rem; }
 
   /* ====== Hamburger (mobile) — 2 gạch trần kiểu Omni ====== */
   .menu-toggle {

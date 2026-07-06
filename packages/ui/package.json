@@ -6,6 +6,7 @@
   "exports": {
     "./tokens/*": "./tokens/*",
     "./components/*": "./components/*",
-    "./layouts/*": "./layouts/*"
+    "./layouts/*": "./layouts/*",
+    "./i18n/*": "./i18n/*"
   }
 }

@@ -1,0 +1,65 @@
+---
+// Office Tour — COMING SOON. Trang tạm đóng nội dung, đang hoàn thiện.
+// Hệ dark-fire đồng bộ hub/trang chủ. KHÔNG card trắng.
+import PageLayout from '@ui/layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Office Tour — Coming Soon"
+  description="SBB's Office Tour is being finalized. Full details will be announced soon."
+  site="sbb"
+  currentPath="/programs/office-tour"
+>
+  <!-- ===== COMING SOON ===== -->
+  <section class="ot-soon">
+    <div class="ot-beam" aria-hidden="true"></div>
+    <div class="ot-wrap">
+      <span class="ot-badge">Coming soon</span>
+      <div class="cs-header ot-title">
+        <div class="cs-line cs-line-1"><span class="cs-text-white">OFFICE</span></div>
+        <div class="cs-line cs-line-1"><span class="cs-text-white">TOUR</span></div>
+      </div>
+      <p class="ot-lead">This program is being finalized. Full details about the Office Tour will be announced soon.</p>
+      <a href="/programs" class="ot-btn">← See other programs</a>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .ot-soon {
+    position: relative; overflow: clip;
+    min-height: 88vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: clamp(7rem, 9vw, 11rem) 2rem clamp(4rem, 7vw, 7rem);
+  }
+  .ot-beam {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 1100px; height: 760px; max-width: 130vw; pointer-events: none; z-index: 0; filter: blur(80px);
+    background: radial-gradient(ellipse 50% 50% at 50% 50%,
+      rgba(255,112,60,0.42) 0%, rgba(248,82,26,0.30) 24%, rgba(242,66,11,0.16) 46%, rgba(242,66,11,0.06) 66%, transparent 84%);
+  }
+  .ot-wrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; max-width: 60rem; }
+  .ot-badge {
+    display: inline-flex; align-items: center;
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #ffb59c; background: rgba(242,66,11,0.12); border: 1px solid rgba(242,66,11,0.35); border-radius: 999px;
+    padding: 0.55rem 1.3rem; margin-bottom: clamp(1.6rem, 3vw, 2.4rem);
+  }
+  .cs-header { font-family: 'Inter', sans-serif; font-weight: 500; line-height: 0.9; letter-spacing: -0.045em; }
+  .cs-line { display: flex; align-items: center; justify-content: center; gap: 1.5rem; }
+  .cs-line-1 { font-size: clamp(4rem, 13vw, 12rem); letter-spacing: -0.085em; line-height: 0.9; white-space: nowrap; }
+  .cs-text-white { color: #ffffff; }
+  .ot-lead {
+    margin: clamp(1.8rem, 3vw, 2.6rem) auto 0; max-width: 44ch;
+    font-family: 'Inter', sans-serif; font-weight: 300; font-size: clamp(0.95rem, 1.15vw, 1.1rem); line-height: 1.65; color: rgba(255,255,255,0.66);
+  }
+  .ot-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; margin-top: clamp(2rem, 4vw, 3rem);
+    font-family: var(--font-headline); font-weight: 400; font-size: 0.92rem; text-decoration: none;
+    color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.55); border-radius: 999px; padding: 0.85rem 1.7rem;
+    transition: background .25s ease, border-color .25s ease, transform .25s ease;
+  }
+  .ot-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(242,66,11,0.55); transform: translateY(-2px); }
+  @media (max-width: 600px) {
+    .ot-title .cs-line-1 { font-size: clamp(3.5rem, 19vw, 5rem) !important; letter-spacing: -0.06em !important; }
+  }
+</style>
