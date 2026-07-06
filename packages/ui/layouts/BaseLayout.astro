@@ -169,7 +169,7 @@ const orgSchema = {
     <script is:inline set:html={`(function(){
       var EN=new Set(${enRoutesJson});
       function strip(p){return p.length>1&&p.charAt(p.length-1)==='/'?p.slice(0,-1):p;}
-      var links=document.querySelectorAll('a[href^="/"]:not([href^="//"])');
+      var links=document.querySelectorAll('a[href^="/"]:not([href^="//"]):not([data-i18n-exempt])');
       for(var i=0;i<links.length;i++){
         var a=links[i], href=a.getAttribute('href');
         if(!href||href.indexOf('/en')===0)continue;

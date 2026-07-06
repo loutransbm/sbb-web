@@ -79,7 +79,7 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
     <!-- Phải: chuyển ngữ + CTA + nút menu mobile -->
     <div class="header-right">
       {site === 'sbb' && (
-        <a href={langSwitchHref} class="lang-switch" hreflang={otherLang} title={t('lang.toggleTitle')} aria-label={t('lang.toggleTitle')}>{t('lang.toggle')}</a>
+        <a href={langSwitchHref} class="lang-switch" hreflang={otherLang} data-i18n-exempt title={t('lang.toggleTitle')} aria-label={t('lang.toggleTitle')}>{t('lang.toggle')}</a>
       )}
       {ctaLink && <a href={ctaLink.href} class="nav-cta">{ctaLink.label}</a>}
       <button
@@ -106,7 +106,7 @@ const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
       </a>
       <div class="mobile-drawer__top-right">
         {site === 'sbb' && (
-          <a href={langSwitchHref} class="lang-switch lang-switch--drawer" hreflang={otherLang} title={t('lang.toggleTitle')} aria-label={t('lang.toggleTitle')}>{t('lang.toggle')}</a>
+          <a href={langSwitchHref} class="lang-switch lang-switch--drawer" hreflang={otherLang} data-i18n-exempt title={t('lang.toggleTitle')} aria-label={t('lang.toggleTitle')}>{t('lang.toggle')}</a>
         )}
         {ctaLink && <a href={ctaLink.href} class="nav-cta nav-cta--drawer">{ctaLink.label}</a>}
         <button type="button" class="drawer-close" id="drawer-close" aria-label={t('menu.close')}>
