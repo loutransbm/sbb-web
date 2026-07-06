@@ -4842,6 +4842,9 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
     background:
       radial-gradient(ellipse 70% 42% at 50% 26%, rgba(242, 66, 11, 0.18) 0%, transparent 60%),
       radial-gradient(ellipse 90% 50% at 50% 90%, rgba(242, 66, 11, 0.10) 0%, transparent 65%) !important;
+    /* Fade quầng ::before về 0 TRƯỚC mép đáy section -> không còn cạnh cứng bị cắt = hết đường kẻ ranh giới Programs↔Case-studies */
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 80%) !important;
+    mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 80%) !important;
   }
   .services-catalog-section::after {
     display: block !important;
