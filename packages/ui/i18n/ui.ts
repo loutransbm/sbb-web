@@ -42,21 +42,23 @@ function stripTrailing(path: string): string {
   return path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
 }
 
-/** Trả về đường dẫn VI chuẩn cho một pathname bất kỳ (bóc tiền tố /en). */
+/** Trả về đường dẫn VI chuẩn cho một pathname bất kỳ (bóc tiền tố /en, /vi). */
 export function toViPath(pathname: string): string {
   const p = stripTrailing(pathname || '/');
   if (p === '/en') return '/';
   if (p.startsWith('/en/')) return p.slice(3); // '/en/about' -> '/about'
+  if (p === '/vi') return '/';                 // trang chủ VI dời sang /vi ('/' -> redirect sang /en/)
   return p === '' ? '/' : p;
 }
 
 /**
  * Dựng URL cho một đường dẫn VI chuẩn theo ngôn ngữ yêu cầu.
- * Với EN: chỉ thêm tiền tố khi trang đã có bản dịch, ngược lại giữ bản VI (fallback).
+ * - EN: thêm tiền tố /en khi trang đã có bản dịch, ngược lại giữ bản VI (fallback).
+ * - VI: trang chủ ở /vi (vì '/' redirect sang tiếng Anh); các trang khác giữ ở gốc.
  */
 export function localizePath(viPath: string, lang: Lang): string {
   const p = stripTrailing(viPath) || '/';
-  if (lang !== 'en') return p;
+  if (lang !== 'en') return p === '/' ? '/vi' : p;
   if (!EN_ROUTES.has(p)) return p; // chưa dịch -> ở lại bản tiếng Việt
   return p === '/' ? '/en/' : `/en${p}`;
 }

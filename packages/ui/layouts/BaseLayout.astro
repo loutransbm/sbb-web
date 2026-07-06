@@ -12,7 +12,7 @@ export interface Props {
   schemaType?: 'Organization' | 'Article' | 'WebPage';
 }
 
-import { toLang, toViPath, hasTranslation, EN_ROUTES } from '../i18n/ui';
+import { toLang, toViPath, hasTranslation, localizePath, EN_ROUTES } from '../i18n/ui';
 
 const SITE_URL = 'https://sbb.edu.vn';
 const enRoutesJson = JSON.stringify([...EN_ROUTES]);
@@ -32,8 +32,8 @@ const htmlLang = lang === 'en' ? 'en' : 'vi';
 const ogLocale = lang === 'en' ? 'en_US' : 'vi_VN';
 const viPath = toViPath(Astro.url.pathname);
 const hasEn = site === 'sbb' && hasTranslation(viPath);
-const viHref = `${SITE_URL}${viPath}`;
-const enHref = `${SITE_URL}${viPath === '/' ? '/en/' : `/en${viPath}`}`;
+const viHref = `${SITE_URL}${localizePath(viPath, 'vi')}`;
+const enHref = `${SITE_URL}${localizePath(viPath, 'en')}`;
 
 const siteNames: Record<string, string> = {
   sbb: 'SBB',
@@ -163,24 +163,30 @@ const orgSchema = {
 <body>
   <slot />
 
-  <!-- Song ngữ: trên trang /en/, tự nâng link nội bộ sang bản EN nếu trang đó ĐÃ có bản dịch
-       (danh sách EN_ROUTES). Nhờ vậy file EN chỉ cần khác file VI ở phần chữ, không phải sửa href. -->
-  {htmlLang === 'en' && (
-    <script is:inline set:html={`(function(){
-      var EN=new Set(${enRoutesJson});
-      function strip(p){return p.length>1&&p.charAt(p.length-1)==='/'?p.slice(0,-1):p;}
-      var links=document.querySelectorAll('a[href^="/"]:not([href^="//"]):not([data-i18n-exempt])');
-      for(var i=0;i<links.length;i++){
-        var a=links[i], href=a.getAttribute('href');
-        if(!href||href.indexOf('/en')===0)continue;
-        var hash='',qs='',path=href;
-        var h=path.indexOf('#'); if(h>=0){hash=path.slice(h);path=path.slice(0,h);}
-        var q=path.indexOf('?'); if(q>=0){qs=path.slice(q);path=path.slice(0,q);}
-        var key=strip(path)||'/';
+  <!-- Song ngữ: tự nâng link nội bộ theo ngôn ngữ trang.
+       - Trang /en/: link tới trang ĐÃ dịch (EN_ROUTES) -> thêm tiền tố /en.
+       - Trang tiếng Việt: link trang chủ '/' -> '/vi' (vì '/' redirect sang tiếng Anh); các trang VN khác giữ ở gốc.
+       Nhờ vậy file trang chỉ cần khác nhau ở phần chữ, không phải sửa href. Nút chuyển ngữ có data-i18n-exempt nên được bỏ qua. -->
+  <script is:inline set:html={`(function(){
+    var EN=new Set(${enRoutesJson});
+    var lang=document.documentElement.lang;
+    function strip(p){return p.length>1&&p.charAt(p.length-1)==='/'?p.slice(0,-1):p;}
+    var links=document.querySelectorAll('a[href^="/"]:not([href^="//"]):not([data-i18n-exempt])');
+    for(var i=0;i<links.length;i++){
+      var a=links[i], href=a.getAttribute('href');
+      if(!href)continue;
+      var hash='',qs='',path=href;
+      var h=path.indexOf('#'); if(h>=0){hash=path.slice(h);path=path.slice(0,h);}
+      var q=path.indexOf('?'); if(q>=0){qs=path.slice(q);path=path.slice(0,q);}
+      var key=strip(path)||'/';
+      if(lang==='en'){
+        if(href.indexOf('/en')===0)continue;
         if(EN.has(key)){ a.setAttribute('href', (key==='/'?'/en/':'/en'+key)+qs+hash); }
+      } else {
+        if(key==='/'){ a.setAttribute('href','/vi'+qs+hash); }
       }
-    })();`} />
-  )}
+    }
+  })();`} />
 
   <!-- --sbw = bề rộng scrollbar dọc -> để break-out cụm tiêu đề sát 2 mép CHUẨN như thanh nav (tránh lệch do 100vw tính cả scrollbar). Dùng chung mọi trang nội dung. -->
   <script is:inline>

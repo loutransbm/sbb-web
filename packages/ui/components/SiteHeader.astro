@@ -58,7 +58,7 @@ const allLinks = site === 'sbb' ? sbbLinks : site === 'news' ? newsLinks : learn
 // Tách link cuối thành nút CTA bên phải — kiểu omni
 const ctaLink = site === 'sbb' ? allLinks[allLinks.length - 1] : null;
 const links = ctaLink ? allLinks.slice(0, -1) : allLinks;
-const logoHref = site === 'sbb' ? '/' : 'https://sbb.vn';
+const logoHref = site === 'sbb' ? localizePath('/', lang) : 'https://sbb.vn';
 const subLabel = site === 'news' ? 'News' : site === 'learn' ? 'Learn' : '';
 ---
 
