@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Đi học F-1 trong lúc còn vướng 212(e) được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường được, vì F-1 không bị 212(e) chặn. Nhưng để tiến tới H-1B hay thẻ xanh thì vẫn phải xử lý 212(e) trước."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Waiver 212(e) có chắc được duyệt không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không chắc. Tùy cơ sở và hồ sơ, và thường mất 4 tới 12 tháng."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "212(e) có chặn visa du lịch hay du học không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không. 212(e) không chặn F-1, du lịch hay diện O nếu đủ điều kiện. Nó chặn H-1B, L, K và thẻ xanh."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

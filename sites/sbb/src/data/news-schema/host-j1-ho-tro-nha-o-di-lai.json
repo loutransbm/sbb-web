@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Chỗ ở host J-1 lo có bị trừ vào lương không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tùy host. Có nơi miễn phí, có nơi trừ một phần. Hỏi cho rõ con số."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Host không hỗ trợ nhà ở thì sao?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bạn tự lo nhà ở. Nên chọn nơi chi phí hợp lý và ở ghép để tiết kiệm."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Phúc lợi host có ghi trong giấy tờ không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nên có trong thư mời hoặc trao đổi bằng văn bản. Tránh chỉ hứa miệng."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

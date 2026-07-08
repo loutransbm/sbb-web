@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "DS-2019 và visa J-1 khác nhau thế nào?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DS-2019 là giấy đủ điều kiện do sponsor cấp. Visa là con dấu trong hộ chiếu do Lãnh sự quán cấp sau phỏng vấn. Cần cả hai."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Mất DS-2019 thì sao?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Báo sponsor để xin cấp lại, có thể phát sinh phí và thời gian. Nên giữ kỹ và có bản chụp lưu."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Về nước giữa chương trình rồi quay lại Mỹ cần gì?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường cần chữ ký xác nhận đi lại trên DS-2019. Hỏi sponsor trước khi đi."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Đi J-1 tôi có được chọn thành phố không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tùy host nào nhận bạn. Nhưng bạn có thể ưu tiên tìm host ở nơi chi phí hợp lý."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Thành phố nào dễ để dành tiền khi đi J-1?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thành phố hạng trung thường tối ưu, cân bằng giữa lương và chi phí. Thành phố nhỏ rẻ hơn nhưng ít nhộn nhịp."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "So sánh hai thư mời J-1 thế nào cho đúng?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "So theo số dư thật: lương tháng trừ tiền nhà, ăn uống, đi lại tại mỗi nơi, không so lương giờ một mình."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

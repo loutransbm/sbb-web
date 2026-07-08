@@ -1,0 +1,68 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Gửi tiền về Việt Nam cách nào rẻ nhất?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "So tổng chi phí giữa vài dịch vụ, xem người nhận thực nhận bao nhiêu đồng. Dịch vụ chuyên dụng thường rẻ hơn ngân hàng."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vì sao phí thấp mà gửi tiền vẫn đắt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vì dịch vụ có thể bù vào tỉ giá. Tổng chi phí thật là phí cộng phần chênh lệch tỉ giá."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Đổi tiền qua người quen trên mạng có an toàn không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không. Đây là kiểu lừa phổ biến. Chỉ dùng dịch vụ được cấp phép."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Gửi tiền từ Mỹ về Việt Nam",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Chọn dịch vụ cấp phép",
+        "text": "Chọn dịch vụ được cấp phép và so tổng chi phí giữa vài lựa chọn."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Xác minh danh tính",
+        "text": "Tạo tài khoản và xác minh danh tính theo yêu cầu."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Nhập thông tin người nhận",
+        "text": "Nhập chính xác tên và số tài khoản người nhận ở Việt Nam."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Xem thực nhận",
+        "text": "Nhập số tiền và xem người nhận thực nhận bao nhiêu trước khi xác nhận."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Thanh toán",
+        "text": "Trả từ tài khoản hoặc thẻ ở Mỹ."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Lưu biên nhận",
+        "text": "Lưu mã giao dịch và theo dõi tới khi người nhà nhận được."
+      }
+    ]
+  }
+}

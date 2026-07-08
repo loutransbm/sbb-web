@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Nên chọn lương cao hay ngành đúng nghề khi đi J-1?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ưu tiên ngành khớp mục tiêu nghề lâu dài, rồi mới tối ưu lương trong ngành đó."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ngành IT đi J-1 có nhiều suất không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có suất, nhưng cạnh tranh hơn hospitality và cần host khớp ngành."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Lương cao ở thành phố lớn có đáng không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Phải trừ chi phí sống cao tại đó. Đôi khi để dành ít hơn vị trí lương vừa ở nơi rẻ."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

@@ -1,0 +1,68 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Trong 30 ngày grace có được đi du lịch bang khác không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Được, miễn ở trong nước Mỹ. Ra khỏi Mỹ thì không quay lại bằng J-1."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Trong grace period có được làm nốt vài ca ở host cũ không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không. Không được làm việc trong grace period, kể cả host cũ."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Grace period J-1 tính từ ngày nào?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Từ ngày kết thúc ghi trên DS-2019."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Thu xếp rời Mỹ trong 30 ngày grace sau J-1",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Đặt vé sớm",
+        "text": "Đặt vé máy bay trong giới hạn 30 ngày sau ngày kết thúc."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Trả nhà",
+        "text": "Báo chủ nhà, lấy lại cọc, chụp ảnh hiện trạng."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Xử lý tài khoản",
+        "text": "Tất toán hoặc giữ tài khoản tùy nhu cầu, cập nhật địa chỉ nhận thư."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Xin thư giới thiệu",
+        "text": "Xin thư giới thiệu từ host và lưu liên hệ đồng nghiệp."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Giữ giấy tờ thuế",
+        "text": "Giữ giấy tờ thuế và địa chỉ nhận W-2 để khai thuế sau."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Rời Mỹ đúng hạn",
+        "text": "Rời Mỹ trước khi hết 30 ngày, giữ vé và giấy tờ xuất cảnh."
+      }
+    ]
+  }
+}

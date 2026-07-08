@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Làm thêm quán khác ngoài host được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không. Bạn chỉ làm tại host và vị trí ghi trong DS-7002."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vì sao chăm trẻ và chăm già bị cấm trong diện Intern và Trainee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Đây là các lĩnh vực có quy định riêng, không thuộc diện Intern và Trainee. Có diện J-1 khác cho việc chăm trẻ, ví dụ au pair."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Làm sao biết một vị trí J-1 có hợp lệ trước khi nhận?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Đọc kỹ DS-7002, hỏi tỉ lệ thời gian từng việc, và xem có lộ trình kỹ năng rõ không."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

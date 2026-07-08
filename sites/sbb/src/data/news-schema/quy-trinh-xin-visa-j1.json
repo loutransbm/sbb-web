@@ -1,0 +1,68 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Đóng phí SEVIS ở đâu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tại trang chính thức fmjfee.com. In biên lai để mang đi phỏng vấn."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Khai DS-160 ở đâu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tại ceac.state.gov, sau đó in trang xác nhận có mã vạch để mang theo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Tự làm hồ sơ J-1 được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DS-2019 phải do sponsor cấp, bạn không tự xin. Phần lớn ứng viên đi qua đơn vị hỗ trợ."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Xin visa J-1 từ lúc nộp tới lúc bay",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Khớp host",
+        "text": "Được sponsor và host nhận, xây kế hoạch đào tạo DS-7002 khớp ngành."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Đóng phí SEVIS",
+        "text": "Đóng phí I-901 tại fmjfee.com và in biên lai."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Nhận DS-2019",
+        "text": "Sponsor cấp DS-2019 và DS-7002, kiểm tra kỹ thông tin."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Khai DS-160",
+        "text": "Khai tại ceac.state.gov, in trang xác nhận, đóng phí visa."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Đặt lịch và phỏng vấn",
+        "text": "Đặt lịch qua ustraveldocs.com/vn và đi phỏng vấn tại Lãnh sự quán."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Nhận visa và bay",
+        "text": "Nhận visa, nhập cảnh sớm nhất 30 ngày trước ngày bắt đầu."
+      }
+    ]
+  }
+}

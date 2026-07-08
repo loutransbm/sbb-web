@@ -1,0 +1,73 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Việc nào cần làm trước nhất khi tới Mỹ theo J-1?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Trình diện sponsor để kích hoạt SEVIS. Nhiều thủ tục sau, gồm xin SSN, phụ thuộc bước này."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Chưa có SSN thì mở tài khoản ngân hàng được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Được. Phần lớn ngân hàng mở với hộ chiếu, I-94, DS-2019 và giấy địa chỉ."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Bao giờ thì xin SSN được?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Từ khoảng ngày thứ 10 sau nhập cảnh và sau khi SEVIS hoạt động. Đi sớm quá sẽ bị từ chối."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Ổn định những tuần đầu ở Mỹ theo diện J-1",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Kích hoạt SEVIS",
+        "text": "Trình diện sponsor để kích hoạt SEVIS, việc số một."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Ổn định chỗ ở",
+        "text": "Nhận chỗ ở host lo hoặc tự thuê cẩn thận lừa đảo."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Mua sim",
+        "text": "Mua sim prepaid để có liên lạc ngay."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Mở tài khoản ngân hàng",
+        "text": "Mang hộ chiếu, I-94, DS-2019, giấy địa chỉ ra quầy."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Nắm đi lại",
+        "text": "Tìm tuyến giao thông từ nhà tới chỗ làm."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Xin SSN",
+        "text": "Từ khoảng ngày thứ 10, sau khi SEVIS hoạt động."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Cập nhật lương",
+        "text": "Đưa SSN và số tài khoản cho bộ phận lương."
+      }
+    ]
+  }
+}

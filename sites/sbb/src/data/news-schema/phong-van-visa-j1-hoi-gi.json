@@ -1,0 +1,63 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Phỏng vấn visa J-1 bằng tiếng Anh hay tiếng Việt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường bằng tiếng Anh. Một số trường hợp viên chức có thể dùng tiếng Việt, nhưng nên chuẩn bị tiếng Anh."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Có nên học thuộc câu trả lời phỏng vấn J-1 không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không nên học vẹt. Hiểu ý chính và nói tự nhiên, vì viên chức nhận ra ngay câu trả lời thuộc lòng."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Nói gì khi được hỏi có muốn ở lại Mỹ không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Trả lời trung thực theo đúng bản chất J-1 là chương trình có thời hạn, và nêu kế hoạch quay về của bạn."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Luyện phỏng vấn visa J-1 trong một tuần",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Viết câu trả lời thật",
+        "text": "Viết câu trả lời cho ba nhóm câu hỏi, ngắn gọn và trung thực."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Nói to và nghe lại",
+        "text": "Nói trước gương hoặc ghi âm, cắt bớt phần thừa."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Tập với người đóng vai",
+        "text": "Nhờ người hỏi ngẫu nhiên để tập trả lời tự nhiên."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Rà giấy tờ",
+        "text": "Sắp giấy tờ theo thứ tự, chuẩn bị trang phục gọn gàng."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Nghỉ trước ngày phỏng vấn",
+        "text": "Đọc lại câu trả lời một lần, không học vẹt."
+      }
+    ]
+  }
+}

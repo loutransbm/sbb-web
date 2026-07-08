@@ -1,0 +1,68 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Mua sim Mỹ có cần SSN không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim prepaid không cần SSN. Gói postpaid thường cần SSN hoặc đặt cọc."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Điện thoại Việt Nam dùng được ở Mỹ không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Được nếu máy đã mở mạng. Máy khóa theo nhà mạng Việt cần mở trước khi đi."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Giữ số Việt Nam khi sang Mỹ thế nào?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dùng máy hai sim hoặc eSIM để giữ sim Việt song song, hoặc bật roaming có kiểm soát."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Mua và kích hoạt sim ở Mỹ cho người đi J-1",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Kiểm tra mở mạng",
+        "text": "Kiểm tra điện thoại đã mở mạng chưa, nếu khóa thì mở trước khi đi."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Chọn nhà mạng",
+        "text": "Chọn nhà mạng hoặc MVNO phù hợp phủ sóng khu vực host."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Mua sim hoặc eSIM",
+        "text": "Mua tại cửa hàng, siêu thị, sân bay, hoặc đăng ký eSIM online."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Chọn gói prepaid",
+        "text": "Chọn gói trả trước có dung lượng data phù hợp."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Kích hoạt",
+        "text": "Lắp sim hoặc quét mã eSIM và làm theo hướng dẫn."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Kiểm tra",
+        "text": "Thử gọi, nhắn, và data trước khi rời cửa hàng."
+      }
+    ]
+  }
+}

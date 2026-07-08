@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Lương J-1 ghi ở đâu để biết chắc?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Trong thư mời và kế hoạch DS-7002 của host. Đây là nguồn đáng tin hơn mọi quảng cáo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Đi J-1 có vị trí không lương không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có một số vị trí thiên về đào tạo có thể không lương hoặc lương thấp, nhưng vẫn cần chứng minh tài chính."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Lương J-1 có theo lương tối thiểu của bang không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vị trí có trả lương phải tuân thủ luật lương của bang và liên bang. Mức cụ thể tùy bang."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

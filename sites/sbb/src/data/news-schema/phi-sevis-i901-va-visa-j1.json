@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Bị từ chối visa J-1 có lấy lại phí không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không. Phí SEVIS và phí visa không hoàn lại theo kết quả."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Phỏng vấn lại có đóng lại phí SEVIS không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nếu nộp lại trong 12 tháng, cùng diện và cùng mã SEVIS, thường không phải đóng lại SEVIS. Phí MRV thì đóng lại mỗi lần nộp."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Visa Integrity Fee đã thu chưa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Khoản khoảng 250 đô này đã luật hóa nhưng đầu năm 2026 chưa thu trên thực tế. Cần kiểm tra thông tin chính thức trước khi đi."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

@@ -1,0 +1,91 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Mở tài khoản ngân hàng Mỹ có cần SSN không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không bắt buộc. Phần lớn ngân hàng mở với hộ chiếu, I-94, DS-2019 và giấy địa chỉ. Nếu cần, dùng W-8BEN hoặc ITIN."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Lấy bản in I-94 ở đâu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In miễn phí tại trang chính thức i94.cbp.dhs.gov sau khi nhập cảnh."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Có mở tài khoản online trước khi bay không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Người chưa có SSN thường phải mở trực tiếp tại quầy ở Mỹ. Một số ngân hàng có bước đăng ký online nhưng vẫn cần tới quầy."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Mở tài khoản ngân hàng ở Mỹ cho người đi J-1",
+    "inLanguage": "vi-VN",
+    "supply": [
+      {
+        "@type": "HowToSupply",
+        "name": "Hộ chiếu kèm visa J-1"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "Bản in I-94"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "Mẫu DS-2019"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "Giấy chứng minh địa chỉ ở Mỹ"
+      }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Xác nhận yêu cầu chi nhánh",
+        "text": "Gọi hoặc xem web chi nhánh, hỏi có nhận người chưa có SSN không và cần mang gì."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Đặt lịch hẹn",
+        "text": "Đặt hẹn nếu có thể để đỡ chờ, dù nhiều chi nhánh cho mở vãng lai."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Tới quầy với đủ giấy tờ",
+        "text": "Dành 1 tới 2 tiếng, nhân viên xác minh danh tính và nhập thông tin."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Chọn loại tài khoản",
+        "text": "Mở tài khoản checking để nhận lương, có thể mở thêm savings."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Nạp tiền mở tài khoản",
+        "text": "Một số tài khoản yêu cầu số tiền tối thiểu ban đầu."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Lấy số tài khoản và số định tuyến",
+        "text": "Ghi lại account number và routing number để nhận lương."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Kích hoạt ngân hàng trực tuyến",
+        "text": "Cài ứng dụng, nhận thẻ ghi nợ, bật cảnh báo giao dịch."
+      }
+    ]
+  }
+}

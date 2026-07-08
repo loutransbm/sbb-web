@@ -18,6 +18,8 @@ export interface Props {
   currentPath?: string;
   /** Header trong suốt, overlay lên hero full-bleed (dùng cho trang chủ kiểu omni) */
   overlay?: boolean;
+  /** Schema JSON-LD riêng của trang, chuyển thẳng xuống BaseLayout. */
+  jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
 const {
@@ -29,6 +31,7 @@ const {
   schemaType,
   currentPath = '',
   overlay = false,
+  jsonLd,
 } = Astro.props;
 ---
 
@@ -39,6 +42,7 @@ const {
   canonical={canonical}
   site={site}
   schemaType={schemaType}
+  jsonLd={jsonLd}
 >
   <SiteHeader site={site} currentPath={currentPath} overlay={currentPath === '/' || currentPath === ''} />
   <main id="main-content">

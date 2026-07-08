@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Về nước rồi mới thấy khó áp dụng kinh nghiệm J-1 thì sao?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hãy dịch kỹ năng sang ngôn ngữ nhà tuyển dụng trong nước hiểu. Kỹ năng dịch vụ, vận hành, làm việc đa văn hóa đều có giá trị rõ ràng."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Khi nào nên xin thư giới thiệu từ host?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Trước khi kết thúc chương trình, lúc người giám sát còn nhớ rõ về bạn."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Sốc văn hóa ngược khi về có thật không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có. Cho mình thời gian thích nghi lại, và dùng giai đoạn đó để sắp xếp kế hoạch nghề."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

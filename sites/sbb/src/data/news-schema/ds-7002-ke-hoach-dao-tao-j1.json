@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Tôi có được góp ý vào DS-7002 không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có. Đây là kế hoạch cho chính bạn, nên trao đổi để nó phản ánh đúng mục tiêu nghề của bạn."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Công việc thực tế lệch DS-7002 thì sao?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Báo sponsor. Lệch kế hoạch đào tạo có thể ảnh hưởng tình trạng J-1, và sponsor cần biết để xử lý."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Làm sao biết kế hoạch DS-7002 đủ tốt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Xem có lộ trình kỹ năng tăng dần, người giám sát cụ thể, và cách đánh giá rõ không. Nếu chung chung, hãy hỏi thêm."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

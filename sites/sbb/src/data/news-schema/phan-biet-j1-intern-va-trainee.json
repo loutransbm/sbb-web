@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Tốt nghiệp 18 tháng rồi còn đi Intern được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Quá 12 tháng kể từ khi tốt nghiệp thì không còn hợp Intern. Lúc đó xét Trainee nếu đủ kinh nghiệm."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kinh nghiệm làm ở Mỹ có tính cho Trainee không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không. Kinh nghiệm phải tích lũy ngoài nước Mỹ."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Trainee có bắt buộc đúng ngành không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có. Kinh nghiệm trước đó và kế hoạch đào tạo phải cùng một lĩnh vực."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

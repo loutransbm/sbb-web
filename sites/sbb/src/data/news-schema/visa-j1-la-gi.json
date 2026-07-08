@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "J-1 có được đi làm thêm bên ngoài không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không. Bạn chỉ được làm tại vị trí và host ghi trong DS-7002."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "J-1 có dẫn thẳng tới thẻ xanh không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không tự động. J-1 là visa không định cư và có thể vướng quy định 212(e)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ai cấp DS-2019?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tổ chức bảo trợ được chỉ định cấp. Ứng viên không tự xin mẫu này."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

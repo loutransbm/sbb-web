@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Hết hạn J-1 rồi gia hạn thêm được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Chỉ trong giới hạn tối đa của diện. Hết 12 tháng Intern hoặc 18 tháng Trainee thì không kéo dài thêm trên cùng chương trình đó."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "30 ngày sau khi kết thúc J-1 có được đi du lịch Mỹ không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Được, đi trong nước Mỹ. Ra khỏi Mỹ trong thời gian này thì không quay lại bằng J-1."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vì sao có nơi nói J-1 đi được 3 năm?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường là nhầm loại hình khác hoặc gộp nhiều chương trình. Với Intern và Trainee, mức trần là 12 và 18 tháng."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

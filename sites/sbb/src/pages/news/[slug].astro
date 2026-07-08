@@ -1,6 +1,17 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { NEWS_AUTHOR, NEWS_PUBLISHER, SITE_URL } from '../../data/news-author';
+
+// Schema riêng từng bài (FAQPage + HowTo) — nội dung không suy ra được từ frontmatter.
+// Article dựng động bên dưới từ frontmatter + hằng số nên ngày/URL/tác giả luôn khớp.
+const schemaModules = import.meta.glob('../../data/news-schema/*.json', { eager: true });
+const schemaBySlug = Object.fromEntries(
+  Object.entries(schemaModules).map(([p, m]) => [
+    p.split('/').pop().replace('.json', ''),
+    (m as any).default ?? m,
+  ])
+);
 
 export async function getStaticPaths() {
   const all = await getCollection('news');
@@ -35,9 +46,34 @@ const cumLabel = cumLabels[d.cum_chinh] || d.cum_chinh;
 const loaiLabel = loaiLabels[d.loai] || d.loai;
 const dateStr = d.published.toLocaleDateString('vi-VN', { year: 'numeric', month: 'long', day: 'numeric' });
 const dateISO = d.published.toISOString().slice(0, 10);
+
+// ===== Schema JSON-LD của bài =====
+const slug = entry.id;
+const pageUrl = `${SITE_URL}/news/${slug}`;
+const heroAbs = d.hero ? `${SITE_URL}${d.hero}` : undefined;
+const dateModISO = dateISO; // mặc định = ngày đăng; đổi khi cập nhật nội dung
+
+const articleNode: Record<string, any> = {
+  '@type': 'Article',
+  headline: d.title,
+  inLanguage: 'vi-VN',
+  ...(d.description ? { description: d.description } : {}),
+  author: { '@type': 'Person', name: NEWS_AUTHOR.name, jobTitle: NEWS_AUTHOR.title, url: NEWS_AUTHOR.url },
+  publisher: NEWS_PUBLISHER,
+  datePublished: dateISO,
+  dateModified: dateModISO,
+  mainEntityOfPage: pageUrl,
+  ...(heroAbs ? { image: heroAbs } : {}),
+};
+
+const schemaExtra = schemaBySlug[slug] || {};
+const graph: Record<string, any>[] = [articleNode];
+if (schemaExtra.faqPage) graph.push(schemaExtra.faqPage);
+if (schemaExtra.howTo) graph.push(schemaExtra.howTo);
+const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
 ---
 
-<PageLayout title={d.title} description={d.description || ''} site="sbb" currentPath="/news" schemaType="Article">
+<PageLayout title={d.title} description={d.description || ''} site="sbb" currentPath="/news" schemaType="Article" jsonLd={jsonLd}>
   <article class="na">
     <div class="na-glow" aria-hidden="true"></div>
     <div class="na-wrap">
@@ -52,6 +88,15 @@ const dateISO = d.published.toISOString().slice(0, 10);
       </div>
 
       <h1 class="na-title">{d.title}</h1>
+
+      <div class="na-byline">
+        <img class="na-byline-av" src={NEWS_AUTHOR.avatar} alt={NEWS_AUTHOR.name} width="36" height="36" loading="lazy" />
+        <span class="na-byline-txt">
+          <span class="na-byline-name">{NEWS_AUTHOR.name}</span>
+          <span class="na-byline-role">{NEWS_AUTHOR.title}</span>
+        </span>
+      </div>
+
       {d.description && <p class="na-lead">{d.description}</p>}
 
       {d.hero && (
@@ -63,6 +108,14 @@ const dateISO = d.published.toISOString().slice(0, 10);
       <div class="na-prose">
         <Content />
       </div>
+
+      <aside class="na-author" aria-label="Về tác giả">
+        <img class="na-author-av" src={NEWS_AUTHOR.avatar} alt={NEWS_AUTHOR.name} width="56" height="56" loading="lazy" />
+        <div class="na-author-body">
+          <p class="na-author-name">{NEWS_AUTHOR.name} <span class="na-author-role">— {NEWS_AUTHOR.title}</span></p>
+          <p class="na-author-bio">{NEWS_AUTHOR.bio}</p>
+        </div>
+      </aside>
 
       <p class="na-disclaimer">Nội dung mang tính tham khảo, cập nhật theo thời điểm và có thể thay đổi theo từng chương trình. Không thay thế tư vấn pháp lý cho trường hợp cụ thể.</p>
 
@@ -133,6 +186,32 @@ const dateISO = d.published.toISOString().slice(0, 10);
     color: rgba(255,255,255,0.66); margin: 0 0 clamp(2.4rem, 4vw, 3.2rem);
     padding-bottom: clamp(2rem, 3.5vw, 2.8rem); border-bottom: 1px solid rgba(255,255,255,0.1);
   }
+
+  /* Byline (dưới tiêu đề) */
+  .na-byline { display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1.4rem; }
+  .na-byline-av {
+    flex: 0 0 auto; width: 2.4rem; height: 2.4rem; border-radius: 999px;
+    object-fit: cover; object-position: center 30%; display: block;
+    border: 1px solid rgba(242,66,11,0.5);
+  }
+  .na-byline-txt { display: flex; flex-direction: column; line-height: 1.25; }
+  .na-byline-name { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.95rem; color: #fff; }
+  .na-byline-role { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+  /* Author card (cuối bài) */
+  .na-author {
+    display: flex; gap: 1.1rem; align-items: flex-start;
+    margin: clamp(2.6rem, 4vw, 3.4rem) 0 0; padding: clamp(1.3rem, 2.5vw, 1.7rem);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; background: rgba(255,255,255,0.02);
+  }
+  .na-author-av {
+    flex: 0 0 auto; width: 3.4rem; height: 3.4rem; border-radius: 999px;
+    object-fit: cover; object-position: center 30%; display: block;
+    border: 1px solid rgba(242,66,11,0.5);
+  }
+  .na-author-name { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 1rem; color: #fff; margin: 0 0 0.35rem; }
+  .na-author-role { font-weight: 300; color: rgba(255,255,255,0.55); }
+  .na-author-bio { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.66); margin: 0; }
   .na-hero { margin: clamp(2rem, 3.5vw, 2.8rem) 0 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: linear-gradient(160deg, #2a1109, #160a05); aspect-ratio: 16 / 9; }
   .na-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
 

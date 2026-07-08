@@ -1,0 +1,68 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Không có thu nhập có phải khai thuế J-1 không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường vẫn nộp Form 8843. Đây là bản giải trình tình trạng, không phải tờ khai thu nhập."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Người không cư trú có được khoản giảm trừ tiêu chuẩn không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường không. Đây là lý do nên dùng đúng công cụ cho người không cư trú."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "W-2 của J-1 lấy ở đâu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nơi trả lương cấp sau khi kết thúc năm thuế. Giữ địa chỉ liên hệ để nhận được kể cả khi đã về nước."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Khai thuế cuối kỳ cho người đi J-1",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Gom giấy tờ",
+        "text": "Chuẩn bị W-2, hộ chiếu, DS-2019, và ngày ra vào Mỹ."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Xác định tình trạng cư trú",
+        "text": "Xác định bạn là người không cư trú hay cư trú cho năm đó."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Chọn công cụ",
+        "text": "Dùng phần mềm cho người không cư trú như Sprintax, hoặc chuyên gia."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Hoàn thành mẫu",
+        "text": "Nộp Form 8843, và Form 1040-NR nếu có thu nhập."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Khai tờ bang",
+        "text": "Khai thêm tờ của bang nếu bang có thuế thu nhập."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Nộp trước hạn",
+        "text": "Nộp trước hạn giữa tháng 4 và lưu bản sao."
+      }
+    ]
+  }
+}

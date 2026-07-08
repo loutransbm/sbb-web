@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "J-1 có được hoàn thuế cuối kỳ không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có thể, tùy thu nhập và khoản đã khấu trừ. Cuối kỳ bạn khai thuế đúng mẫu để xem có được hoàn không."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vì sao không nói được con số để dành chính xác?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vì để dành phụ thuộc lương, thành phố và lối sống của mỗi người. Con số cố định nào cũng nên nghi ngờ."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ở ghép có tiết kiệm được nhiều không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có. Tiền nhà là khoản lớn nhất, ở ghép thường giảm mạnh khoản này."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

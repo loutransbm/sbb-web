@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Xử lý hành chính khi xin visa J-1 là bị từ chối à?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không hẳn. Đó là kiểm tra thêm trước khi quyết định, thời gian khó đoán."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "DS-2019 lâu là do đâu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường do khâu chốt host và hoàn thiện kế hoạch đào tạo chưa xong. Càng rõ ràng thì giấy ra càng nhanh."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Tổng thời gian xin visa J-1 là bao lâu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường 6 tới 12 tuần tính cả giấy tờ và phỏng vấn, tùy mùa và mức chuẩn bị."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

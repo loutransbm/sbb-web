@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "212(e) bắt về nước liền 2 năm liên tục à?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không nhất thiết liên tục. Là tổng cộng 2 năm có mặt ở nước mình, có thể cộng dồn."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Việt Nam ra khỏi Skills List nghĩa là gì với người đi J-1?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nếu đi tự túc và không thuộc nhóm y khoa sau đại học, khả năng cao bạn không bị áp 212(e) vì lý do ngành."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "DS-2019 ghi thuộc 212(e) thì chắc chắn bị áp à?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không hẳn. Đó là nhận định ban đầu. Bạn có thể xin Advisory Opinion từ Bộ Ngoại giao Mỹ để xác định chính thức."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

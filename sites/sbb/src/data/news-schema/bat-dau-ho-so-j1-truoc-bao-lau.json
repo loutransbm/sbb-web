@@ -1,0 +1,63 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Còn 2 tháng nữa mới bay, làm hồ sơ J-1 kịp không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có thể gấp, tùy mùa và mức sẵn sàng của host. Trao đổi thẳng để biết có kịp đặt lịch phỏng vấn không."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Nhận DS-2019 mất bao lâu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường 1 tới 3 tuần sau khi chốt host và hoàn thiện kế hoạch đào tạo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Mùa nào nên tránh nộp hồ sơ J-1 gấp?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mùa cao điểm khoảng tháng 3 tới tháng 7, lịch phỏng vấn thường lâu hơn."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Đếm lùi lịch chuẩn bị hồ sơ J-1",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "4 tới 5 tháng trước",
+        "text": "Chốt diện, chuẩn bị hồ sơ, khớp host, luyện tiếng Anh."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "2 tới 3 tháng trước",
+        "text": "Hoàn thiện DS-7002, chờ DS-2019, chuẩn bị giấy tờ tài chính."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "6 tới 10 tuần trước",
+        "text": "Đóng SEVIS, khai DS-160, đóng phí visa, đặt lịch."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "3 tới 6 tuần trước",
+        "text": "Luyện phỏng vấn, rà giấy tờ, đi phỏng vấn."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "1 tới 3 tuần trước",
+        "text": "Nhận visa, đặt vé, thu xếp hành lý và chỗ ở ban đầu."
+      }
+    ]
+  }
+}

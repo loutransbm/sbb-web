@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Đi J-1 vé máy bay ai lo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường là bạn lo, trừ khi chương trình ghi khác. Hỏi rõ trước."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Chi phí J-1 có khoản nào hoàn lại không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Phí nhà nước thường không hoàn. Phí chương trình tùy điều khoản hợp đồng, đọc kỹ phần hoàn và hủy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Làm sao tránh phí ẩn khi đi J-1?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yêu cầu bảng chi phí tách khoản và hỏi rõ khoản nào chưa gồm. Tránh gói gộp chung không giải thích được."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

@@ -1,0 +1,73 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Có nên cọc nhà trước khi sang Mỹ không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Rất rủi ro. Không chuyển tiền khi chưa thấy nhà thật hoặc chưa có người tin cậy xác minh."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Người mới đi J-1 nên ở kiểu gì?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ưu tiên chỗ ở host hỗ trợ, hoặc ở ghép. Cả hai an toàn và tiết kiệm hơn cho người chưa quen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Gặp dấu hiệu lừa đảo thuê nhà thì làm gì?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dừng giao dịch, không chuyển tiền, tìm chỗ khác qua kênh uy tín, và báo host hoặc sponsor."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Thuê nhà an toàn ở Mỹ cho người đi J-1",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Xác định ngân sách và khu vực",
+        "text": "Chốt ngân sách tối đa và khu vực gần chỗ làm hoặc giao thông."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Tìm qua kênh uy tín",
+        "text": "Hỏi host, sponsor hoặc cộng đồng, ưu tiên nguồn có người xác minh."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Xem nhà tận nơi",
+        "text": "Xem trực tiếp hoặc nhờ người tin cậy xem giúp qua video."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Xác minh người cho thuê",
+        "text": "Xác minh tính hợp lệ trước khi nói chuyện tiền."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Đọc kỹ hợp đồng",
+        "text": "Hỏi rõ thời hạn, tiền cọc, điện nước, chính sách hủy."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Chuyển tiền có dấu vết",
+        "text": "Chỉ chuyển tiền qua kênh có dấu vết sau khi ký hợp đồng."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Chụp hiện trạng khi nhận",
+        "text": "Chụp ảnh hiện trạng nhà và giữ mọi biên nhận."
+      }
+    ]
+  }
+}

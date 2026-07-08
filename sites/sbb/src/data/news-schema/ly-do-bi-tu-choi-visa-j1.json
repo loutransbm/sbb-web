@@ -1,0 +1,68 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Trượt 214(b) visa J-1 là gì?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Là bị từ chối vì chưa thuyết phục được viên chức rằng bạn sẽ quay về sau chương trình."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Trượt visa J-1 rồi nộp lại cần đổi gì?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Củng cố phần còn yếu, thường là ràng buộc về nước và sự rõ ràng của chương trình. DS-2019 còn hiệu lực thường dùng lại được."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Bị 221(g) thì làm gì?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Làm theo hướng dẫn bổ sung của Lãnh sự quán. Đây là tạm hoãn để hoàn tất, không phải từ chối hẳn."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Nộp lại visa J-1 sau khi bị từ chối",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Hỏi rõ lý do",
+        "text": "Xác định bạn rớt 214(b) hay bị 221(g)."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Đánh giá điểm yếu",
+        "text": "Thường là ràng buộc về nước hoặc sự rõ ràng của chương trình."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Củng cố hồ sơ",
+        "text": "Bổ sung bằng chứng ràng buộc, làm rõ kế hoạch sau khi về."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Kiểm tra DS-2019",
+        "text": "Còn hiệu lực thì dùng lại, hết hạn thì xin sponsor cấp lại."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Khai DS-160 mới",
+        "text": "Khai DS-160 mới và đóng phí visa mới."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Phỏng vấn lại",
+        "text": "Đặt lịch và phỏng vấn khi đã chuẩn bị tốt hơn."
+      }
+    ]
+  }
+}

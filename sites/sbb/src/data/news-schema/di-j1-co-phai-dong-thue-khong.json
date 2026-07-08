@@ -1,0 +1,40 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Không cư trú về thuế thì có phải đóng thuế không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có. Người đi J-1 vẫn nộp thuế thu nhập trên lương kiếm ở Mỹ. Không cư trú chỉ đổi cách tính và biểu mẫu, không miễn nghĩa vụ."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "J-1 có được miễn thuế FICA không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Phần lớn intern và trainee được miễn FICA trong 2 năm đầu khi còn là người không cư trú về thuế, nếu làm đúng phạm vi chương trình."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Việt Nam có hiệp định thuế với Mỹ không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hiệp định ký năm 2015 nhưng chưa có hiệu lực tính tới giữa năm 2026, nên thường không có ưu đãi theo hiệp định để áp dụng."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "J-1 khai thuế bằng mẫu nào?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường nộp Form 8843, và Form 1040-NR nếu có thu nhập chịu thuế, cộng tờ khai bang nếu bang đó có thuế thu nhập."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

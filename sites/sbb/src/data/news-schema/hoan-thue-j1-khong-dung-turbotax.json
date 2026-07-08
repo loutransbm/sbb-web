@@ -1,0 +1,68 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Đã về nước rồi còn xin hoàn thuế J-1 được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Được, miễn bạn khai đúng mẫu và còn trong thời hạn. Cần W-2 và thông tin tài khoản để nhận tiền."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vì sao J-1 không nên dùng TurboTax?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "TurboTax cho người cư trú, không hỗ trợ 1040-NR, dễ áp khoản giảm trừ không được hưởng dẫn tới khai sai."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Đòi lại FICA bị trừ nhầm thế nào?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Trước hết qua nơi trả lương. Nếu không xong, xin lại bằng Form 843 kèm Form 8316. Đây là khoản riêng, không nằm trong 1040-NR."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Xin hoàn thuế sau J-1",
+    "inLanguage": "vi-VN",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Nhận W-2",
+        "text": "Nhận W-2 từ nơi trả lương sau khi kết thúc năm thuế."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Chọn phần mềm không cư trú",
+        "text": "Dùng Sprintax hoặc một chuyên gia thuế."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Khai 1040-NR",
+        "text": "Khai Form 1040-NR kèm 8843 và tờ bang nếu cần."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Chọn cách nhận hoàn",
+        "text": "Chọn chuyển khoản hoặc séc, điền thông tin chính xác."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Nộp trước hạn",
+        "text": "Nộp trước hạn giữa tháng 4."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Theo dõi và lưu hồ sơ",
+        "text": "Theo dõi tình trạng hoàn và lưu bản sao."
+      }
+    ]
+  }
+}

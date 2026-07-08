@@ -1,0 +1,95 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Xin SSN cho J-1 có mất phí không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không. SSN miễn phí. Đừng trả tiền cho dịch vụ hứa xin nhanh."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Khi nào đi xin SSN được?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sau khi SEVIS hoạt động và đã ở Mỹ ít nhất khoảng 10 ngày. Đi sớm quá sẽ bị từ chối."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Xin SSN mất bao lâu để có thẻ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thường 4 tới 6 tuần sau khi nộp đơn, gửi về địa chỉ bạn khai."
+        }
+      }
+    ]
+  },
+  "howTo": {
+    "@type": "HowTo",
+    "name": "Xin SSN khi đi J-1",
+    "inLanguage": "vi-VN",
+    "supply": [
+      {
+        "@type": "HowToSupply",
+        "name": "Mẫu SS-5"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "Hộ chiếu kèm visa J-1"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "Mẫu DS-2019"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "Bản in I-94"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "Thư sponsor hoặc host"
+      }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Kích hoạt SEVIS",
+        "text": "Trình diện sponsor để kích hoạt SEVIS ngay khi tới Mỹ."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Đợi đủ thời gian",
+        "text": "Ít nhất khoảng 10 ngày sau nhập cảnh và vài ngày sau khi SEVIS hoạt động."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Tìm văn phòng SSA",
+        "text": "Tra văn phòng gần nhất trên ssa.gov."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Điền SS-5",
+        "text": "Điền mẫu SS-5 trước cho nhanh."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Tới SSA trực tiếp",
+        "text": "Mang đủ giấy tờ bản gốc tới văn phòng SSA."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Nộp hồ sơ",
+        "text": "Nộp đơn, nhân viên kiểm tra giấy tờ và nhập đơn."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Chờ thẻ",
+        "text": "Thẻ gửi về trong khoảng 4 tới 6 tuần."
+      }
+    ]
+  }
+}

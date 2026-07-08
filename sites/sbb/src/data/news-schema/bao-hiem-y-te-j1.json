@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Bảo hiểm J-1 có gồm khám răng và mắt không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mức tối thiểu tập trung vào y tế, cấp cứu, vận chuyển và hồi hương. Khám răng, mắt thường không nằm trong phần bắt buộc."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Người thân đi cùng diện J-2 có cần bảo hiểm không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có. J-2 cần bảo hiểm đạt chuẩn riêng cho suốt thời gian ở Mỹ."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Để bảo hiểm gián đoạn có sao không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có. Khoảng trống bảo hiểm là vi phạm tình trạng J-1 và có thể dẫn tới chấm dứt chương trình."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

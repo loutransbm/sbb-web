@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Không học ngành nhà hàng khách sạn có đi J-1 được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Được. Miễn ngành học hoặc nghề của bạn khớp một nhóm ngành được phép và có host nhận."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ngành y, điều dưỡng đi J-1 Intern được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Các vị trí chăm sóc hoặc tiếp xúc bệnh nhân không thuộc diện Intern và Trainee. Cần xét hướng khác."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ngành IT đi J-1 có dễ không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có suất, nhưng cạnh tranh hơn hospitality và cần host phù hợp, hồ sơ khớp ngành."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

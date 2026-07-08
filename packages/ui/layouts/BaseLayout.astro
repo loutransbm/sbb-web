@@ -10,6 +10,8 @@ export interface Props {
   canonical?: string;
   site?: 'sbb' | 'news' | 'learn';
   schemaType?: 'Organization' | 'Article' | 'WebPage';
+  /** Schema JSON-LD riêng của trang (Article/FAQPage/HowTo…). Object hoặc mảng object; mỗi cái thành 1 <script type="application/ld+json"> trong <head>. */
+  jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
 import { toLang, toViPath, hasTranslation, localizePath, EN_ROUTES } from '../i18n/ui';
@@ -24,7 +26,10 @@ const {
   canonical = '',
   site = 'sbb',
   schemaType = 'WebPage',
+  jsonLd,
 } = Astro.props;
+
+const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
 // ---- Song ngữ ----
 const lang = toLang(Astro.currentLocale);
@@ -159,6 +164,10 @@ const orgSchema = {
   {site === 'sbb' && (
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
   )}
+  <!-- Schema riêng của trang (Article + FAQPage + HowTo…) -->
+  {jsonLdList.map((s) => (
+    <script type="application/ld+json" set:html={JSON.stringify(s)} />
+  ))}
 </head>
 <body>
   <slot />

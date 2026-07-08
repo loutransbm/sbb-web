@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "J-1 có vô ích cho mục tiêu dài hạn không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không. J-1 cho bạn kinh nghiệm quốc tế thật, mạng lưới, và một hồ sơ mạnh hơn, dù bạn về nước hay đi tiếp con đường hợp pháp khác."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Có nên chọn đơn vị hứa lo định cư qua J-1 không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nên cảnh giác. Một đơn vị minh bạch sẽ nói rõ giới hạn, không hứa chắc điều mà luật không cho phép."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "J-1 chuyển thẳng sang H-1B được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không thẳng, và nếu thuộc 212(e) còn bị chặn. Đây là các hồ sơ riêng với điều kiện riêng."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Bằng lái Việt Nam dùng ở Mỹ được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ở nhiều bang được trong thời gian ngắn nếu kèm IDP, nhưng quy định khác nhau theo bang. Kiểm tra DMV của bang đó."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Giấy phép lái xe quốc tế IDP xin ở đâu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Xin tại Việt Nam trước khi đi. IDP đi kèm bằng gốc, không thay thế bằng."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Đi J-1 có cần mua xe không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không bắt buộc. Phần lớn intern dùng giao thông công cộng và gọi xe. Mua xe kèm chi phí bảo hiểm và bảo dưỡng."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

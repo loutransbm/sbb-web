@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Bị trừ nhầm FICA khi đi J-1 thì làm sao?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Trước hết đề nghị nơi trả lương điều chỉnh. Nếu không xong, xin lại với cơ quan thuế bằng Form 843 kèm Form 8316."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Miễn FICA có ảnh hưởng quyền lợi sau này không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vì không đóng nên không tích lũy quyền lợi An sinh xã hội cho giai đoạn đó. Đây là hệ quả bình thường."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Intern có được miễn FICA dài như sinh viên không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không. Intern và trainee tính theo nhóm không phải sinh viên, mốc hai năm."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

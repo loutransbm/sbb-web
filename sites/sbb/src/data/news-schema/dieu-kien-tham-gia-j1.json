@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Học lực trung bình có đi J-1 được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Được. J-1 xét điều kiện chương trình và sự phù hợp ngành, không yêu cầu trường top."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Cần chứng minh bao nhiêu tiền để đi J-1?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tùy sponsor, mặt bằng quanh mức tối thiểu khoảng 2.000 đô một tháng. Đây là bằng chứng năng lực tài chính, không phải tiền nộp."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Trái ngành hoàn toàn có đi J-1 được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Rất khó, vì cả hai diện đòi khớp ngành. Vị trí lệch hẳn ngành học hay nghề sẽ vướng khi duyệt kế hoạch."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}

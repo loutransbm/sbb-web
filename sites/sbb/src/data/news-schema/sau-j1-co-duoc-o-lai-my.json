@@ -1,0 +1,32 @@
+{
+  "faqPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Đang là J-1 có xin thẳng thẻ xanh được không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Không phải con đường thẳng. J-1 là không định cư, và nếu thuộc 212(e) còn bị chặn cho tới khi xử lý xong."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ở quá 30 ngày grace sau J-1 có sao không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Có. Đó là quá hạn và vi phạm tình trạng, ảnh hưởng xấu tới hồ sơ nhập cảnh sau này."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Tôi có thuộc 212(e) không?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Phần lớn ứng viên Việt tự túc hiện không bị áp do Việt Nam đã ra khỏi Skills List, nhưng nên xác nhận tình trạng cụ thể của bạn."
+        }
+      }
+    ]
+  },
+  "howTo": null
+}
