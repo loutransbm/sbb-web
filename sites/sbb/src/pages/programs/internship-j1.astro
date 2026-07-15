@@ -69,6 +69,7 @@ const benefits = [
           <div class="cs-line cs-line-1 cs-line-2"><span class="cs-int-wrap"><span class="cs-text-white">J-1 USA</span></span></div>
         </div>
       </div>
+      <a class="pr-hero__cta" href="/programs/roi-j1"><span>Tính ROI chương trình J-1</span><svg class="pr-hero__cta-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
       <div class="hero-stats">
         {stats.map((s) => (
           <div class="hero-stat">
@@ -324,32 +325,7 @@ const benefits = [
             </div>
           ))}
         </div>
-        <p class="rm-note"><strong>Về chi phí:</strong> SBB không đưa ra biểu giá chung chung. Chi phí thực tế phụ thuộc vào ngành nghề, thời lượng và bang bạn làm việc, và sẽ được minh bạch chi tiết ngay từ buổi trao đổi đầu tiên.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== VISA GALLERY ===== -->
-  <section class="pr-sec visa-sec">
-    <div class="pr-wrap">
-      <div class="visa-head">
-        <span class="pr-eyebrow">Our Students</span>
-        <div class="cs-header">
-          <div class="cs-line cs-line-1"><span class="cs-text-white">VISA</span></div>
-          <div class="cs-line cs-line-1"><span class="cs-text-white">APPROVED</span></div>
-        </div>
-      </div>
-      <div class="visa-grid">
-        <div class="visa-item"><img src="/images/VISA/1782194675749_8339191593526479459_8339191593526479459_59c6c29560f95dfb82b72913008716f4.jpg" alt="Visa approved" loading="lazy" /></div>
-        <div class="visa-item"><img src="/images/VISA/1782194675797_8339191593526479459_8339191593526479459_d885dd514d61d6876416ce99ea6a7bd6.jpg" alt="Visa approved" loading="lazy" /></div>
-        <div class="visa-item"><img src="/images/VISA/1782194675810_8339191593526479459_8339191593526479459_30e51e8c11b95cd49bf5a25edf09006e.jpg" alt="Visa approved" loading="lazy" /></div>
-        <div class="visa-item"><img src="/images/VISA/1782360233362_789313747082018093_7552048111139923223_a3b1ca0bcbced58d08f53b6f4ae1da55.jpg" alt="Visa approved" loading="lazy" /></div>
-        <div class="visa-item"><img src="/images/VISA/1782360233396_789313747082018093_7552048111139923223_41cc518ec58be9f7c6820465f1ca08de.jpg" alt="Visa approved" loading="lazy" /></div>
-        <div class="visa-item"><img src="/images/VISA/1782360233419_789313747082018093_7552048111139923223_eed3a9481acda7a10cb5d9344d992c7d.jpg" alt="Visa approved" loading="lazy" /></div>
-        <div class="visa-item"><img src="/images/VISA/1782360233436_789313747082018093_7552048111139923223_2bd0805b790ad0ffdc4173435040b264.jpg" alt="Visa approved" loading="lazy" /></div>
-        <div class="visa-item"><img src="/images/VISA/1782360233450_789313747082018093_7552048111139923223_1bc6c07e2c5ab0d86217d5acb2f89431.jpg" alt="Visa approved" loading="lazy" /></div>
-        <div class="visa-item"><img src="/images/VISA/1782360233486_789313747082018093_7552048111139923223_68a564381f5fdcf2601965e3472843f6.jpg" alt="Visa approved" loading="lazy" /></div>
-        <div class="visa-item"><img src="/images/VISA/1782360233507_789313747082018093_7552048111139923223_b539ff14be0811e3a1bacfc8e4dbe6a9.jpg" alt="Visa approved" loading="lazy" /></div>
+        <p class="rm-note"><strong>Về chi phí:</strong> SBB không đưa ra biểu giá chung chung. Chi phí thực tế phụ thuộc vào ngành nghề, thời lượng và bang bạn làm việc, và sẽ được minh bạch chi tiết ngay từ buổi trao đổi đầu tiên.<br /><a class="rm-note__link" href="/programs/roi-j1">Tự tính ROI chương trình J-1 →</a></p>
       </div>
     </div>
   </section>
@@ -593,6 +569,10 @@ const benefits = [
   .cs-glass-sub { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 400; color: var(--ink-soft); line-height: 1.45; letter-spacing: normal; white-space: normal; margin: 0; }
 
   /* ===== Hàng STAT CARD kiểu Omni (quầng lửa cam bốc từ góc dưới-trái, số TRẮNG) ===== */
+  .pr-hero__cta { display: inline-flex; align-items: center; gap: 0.6rem; margin: clamp(1.4rem, 2.5vw, 2rem) 0 clamp(1.8rem, 3vw, 2.4rem); font-family: var(--font-headline); font-weight: 700; font-size: clamp(0.95rem, 1.3vw, 1.08rem); color: #fff; text-decoration: none; padding: 0.95rem 1.7rem; border-radius: 999px; background: #f2420b; box-shadow: 0 16px 40px -14px rgba(242,66,11,0.7); transition: background .25s ease, transform .25s ease, box-shadow .25s ease; }
+  .pr-hero__cta:hover { background: #ff5c26; transform: translateY(-2px); box-shadow: 0 20px 48px -14px rgba(242,66,11,0.8); }
+  .pr-hero__cta-arrow { transition: transform .25s ease; }
+  .pr-hero__cta:hover .pr-hero__cta-arrow { transform: translateX(4px); }
   .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.9rem, 1.4vw, 1.4rem); }
   .hero-stat {
     position: relative; overflow: hidden;
@@ -721,6 +701,8 @@ const benefits = [
   .rm-step:nth-child(even) .rm-body { margin-right: auto; max-width: 27rem; }
   .rm-note { margin: clamp(2.5rem, 4vw, 3.75rem) auto 0; padding-top: clamp(1.5rem, 2.5vw, 2rem); border-top: 1px solid rgba(255,255,255,0.08); max-width: 52rem; text-align: center; font-family: var(--font-body); font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
   .rm-note strong { color: #ff7a52; font-weight: 700; }
+  .rm-note__link { display: inline-block; margin-top: 0.9rem; color: #ff7a52; font-weight: 700; text-decoration: none; border-bottom: 1px solid rgba(255,122,82,0.45); transition: color .2s ease, border-color .2s ease; }
+  .rm-note__link:hover { color: #ff5c26; border-color: #ff5c26; }
   @media (max-width: 760px) {
     .rm-timeline::before { left: calc(var(--node) / 2); }
     .rm-step { grid-template-columns: var(--node) 1fr; column-gap: clamp(1.1rem, 3vw, 1.6rem); align-items: start; }
@@ -903,6 +885,7 @@ const benefits = [
   @media (max-width: 768px) {
     .pr-wrap, .pr-hero__wrap { width: calc(100% - 1rem) !important; }
   }
+
   /* ===== FAQ — bê thiết kế y hệt homepage (bản DARK FIRE: card lửa tối, chữ trắng) ===== */
   .faq-section { position: relative; padding: var(--sec-pad) 0; background: transparent; overflow: visible; }
   .faq-section::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 62% 300px at 50% 0%, rgba(242,66,11,0.10) 0%, rgba(242,66,11,0.04) 45%, transparent 76%); }

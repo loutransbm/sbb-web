@@ -1,0 +1,446 @@
+---
+// ROI CALCULATOR — J-1 USA program (EN clone of /programs/roi-j1). Only copy is translated;
+// CSS + logic are identical to the VI version. SBB has no fixed pricing -> user enters the cost.
+import PageLayout from '@ui/layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="J-1 Program ROI Calculator"
+  description="Estimate your earnings, take-home savings and return on investment (ROI) for a J-1 paid internship/training season in the USA with SBB. You enter your own quoted cost — this tool is for reference only."
+  site="sbb"
+  currentPath="/programs/roi-j1"
+>
+  <!-- ===== HERO ===== -->
+  <section class="roi-hero">
+    <div class="container">
+      <a class="roi-eyebrow roi-eyebrow--back" href="/programs/internship-j1">← J-1 Program</a>
+      <h1 class="roi-title">J-1 PROGRAM<br />ROI CALCULATOR</h1>
+      <p class="roi-sub">
+        Drag the sliders to match your situation and estimate the <strong>earnings</strong>,
+        <strong>take-home savings</strong> and <strong>return on investment (ROI)</strong> of a J-1 season in the USA.
+        The program cost is <strong>yours to enter</strong> — use the figure SBB quoted for your own profile.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CALCULATOR ===== -->
+  <section class="roi-calc">
+    <div class="container">
+      <div class="roi-grid">
+
+        <!-- ---- LEFT: INPUTS ---- -->
+        <div class="roi-panel roi-inputs">
+          <h2 class="roi-panel__title">Your numbers</h2>
+
+          <!-- Duration -->
+          <div class="roi-field">
+            <div class="roi-field__head"><label>Program length</label></div>
+            <div class="roi-seg" id="segDuration" role="group" aria-label="Program length">
+              <button type="button" class="roi-seg__btn" data-months="6">6 months</button>
+              <button type="button" class="roi-seg__btn is-active" data-months="12">12 months</button>
+              <button type="button" class="roi-seg__btn" data-months="18">18 months</button>
+            </div>
+          </div>
+
+          <!-- Hourly wage -->
+          <div class="roi-field">
+            <div class="roi-field__head">
+              <label for="rWage">Hourly wage</label>
+              <output class="roi-field__val" id="outWage">$18.0</output>
+            </div>
+            <input type="range" id="rWage" min="15" max="25" step="0.5" value="18" />
+            <div class="roi-field__scale"><span>$15</span><span>$25+</span></div>
+          </div>
+
+          <!-- Hours/week -->
+          <div class="roi-field">
+            <div class="roi-field__head">
+              <label for="rHours">Hours per week</label>
+              <output class="roi-field__val" id="outHours">36 hrs</output>
+            </div>
+            <input type="range" id="rHours" min="30" max="40" step="1" value="36" />
+            <div class="roi-field__scale"><span>30</span><span>40</span></div>
+          </div>
+
+          <!-- Living cost/month -->
+          <div class="roi-field">
+            <div class="roi-field__head">
+              <label for="rLiving">Living cost / month</label>
+              <output class="roi-field__val" id="outLiving">$1,100</output>
+            </div>
+            <input type="range" id="rLiving" min="600" max="2000" step="50" value="1100" />
+            <div class="roi-field__scale"><span>$600</span><span>$2,000</span></div>
+          </div>
+
+          <!-- Estimated tax -->
+          <div class="roi-field">
+            <div class="roi-field__head">
+              <label for="rTax">Income tax withheld (estimate)</label>
+              <output class="roi-field__val" id="outTax">10%</output>
+            </div>
+            <input type="range" id="rTax" min="0" max="20" step="1" value="10" />
+            <div class="roi-field__scale"><span>0%</span><span>20%</span></div>
+            <p class="roi-hint">J-1 holders are exempt from Social Security &amp; Medicare (FICA); federal/state income tax withheld is often partly refunded at tax time.</p>
+          </div>
+
+          <hr class="roi-div" />
+
+          <!-- Program cost (VND) -->
+          <div class="roi-field">
+            <div class="roi-field__head">
+              <label for="rCost">Program cost SBB quoted you</label>
+              <span class="roi-field__val roi-field__val--usd" id="outCostUsd">≈ $6,300</span>
+            </div>
+            <div class="roi-money">
+              <input type="text" inputmode="numeric" id="rCost" value="160,000,000" aria-label="Program cost (VND)" />
+              <span class="roi-money__unit">₫</span>
+            </div>
+            <p class="roi-hint">SBB has no one-size-fits-all pricing — enter the exact figure you were quoted for your profile. Leave blank if you don't have a quote yet.</p>
+          </div>
+
+          <!-- Exchange rate -->
+          <div class="roi-field">
+            <div class="roi-field__head">
+              <label for="rRate">Exchange rate</label>
+              <span class="roi-field__unit">VND / USD</span>
+            </div>
+            <div class="roi-money">
+              <input type="text" inputmode="numeric" id="rRate" value="25,500" aria-label="VND per USD exchange rate" />
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- RIGHT: RESULTS ---- -->
+        <div class="roi-panel roi-results">
+          <div class="roi-headline">
+            <span class="roi-headline__label">Estimated savings after the program</span>
+            <span class="roi-headline__big" id="outNetUsd">$0</span>
+            <span class="roi-headline__vnd" id="outNetVnd">≈ 0 ₫</span>
+          </div>
+
+          <div class="roi-kpis">
+            <div class="roi-kpi">
+              <span class="roi-kpi__num" id="outRoi">0%</span>
+              <span class="roi-kpi__label">ROI on cost</span>
+            </div>
+            <div class="roi-kpi">
+              <span class="roi-kpi__num" id="outBreakeven">—</span>
+              <span class="roi-kpi__label">Break-even time</span>
+            </div>
+            <div class="roi-kpi">
+              <span class="roi-kpi__num" id="outGross">$0</span>
+              <span class="roi-kpi__label">Gross earnings</span>
+            </div>
+          </div>
+
+          <!-- Cash flow: waterfall -->
+          <div class="roi-flow">
+            <span class="roi-flow__title">Program cash flow</span>
+
+            <div class="roi-bar roi-bar--gross">
+              <div class="roi-bar__fill" id="barGross" style="width:100%"></div>
+              <div class="roi-bar__row"><span>Gross earnings</span><span id="valGross">$0</span></div>
+            </div>
+            <div class="roi-bar roi-bar--minus">
+              <div class="roi-bar__fill" id="barTax" style="width:0%"></div>
+              <div class="roi-bar__row"><span>− Tax withheld</span><span id="valTax">$0</span></div>
+            </div>
+            <div class="roi-bar roi-bar--minus">
+              <div class="roi-bar__fill" id="barLiving" style="width:0%"></div>
+              <div class="roi-bar__row"><span>− Living in the US</span><span id="valLiving">$0</span></div>
+            </div>
+            <div class="roi-bar roi-bar--minus">
+              <div class="roi-bar__fill" id="barCost" style="width:0%"></div>
+              <div class="roi-bar__row"><span>− Program cost</span><span id="valCost">$0</span></div>
+            </div>
+            <div class="roi-bar roi-bar--net">
+              <div class="roi-bar__fill" id="barNet" style="width:0%"></div>
+              <div class="roi-bar__row"><span>= Savings</span><span id="valNet">$0</span></div>
+            </div>
+          </div>
+
+          <p class="roi-note" id="roiNote"></p>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <p class="roi-disclaimer">
+        <strong>Note:</strong> This is an estimation tool, not an income guarantee. Real wages depend on the state,
+        field, position and host company; tax, exchange rates and living costs change over time. Break-even counts
+        program cash flow only — it doesn't price in the value of your experience, English and professional network.
+        SBB has no standard price list; talk to us directly for the exact roadmap and cost for your profile.
+      </p>
+
+      <!-- CTA -->
+      <div class="roi-cta">
+        <a class="roi-cta__btn" href="/apply">Get your roadmap &amp; an exact quote →</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  /* ===== HERO ===== */
+  .roi-hero { padding: clamp(7rem, 12vw, 10rem) 0 clamp(1.5rem, 3vw, 2.5rem); }
+  .roi-eyebrow {
+    display: inline-block; font-family: var(--font-headline); font-weight: 700;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #ff6a3d; text-decoration: none; margin-bottom: 1.4rem;
+  }
+  .roi-eyebrow--back:hover { color: #ff5c26; }
+  .roi-title {
+    font-family: var(--font-headline); font-weight: 500;
+    font-size: clamp(2.6rem, 7vw, 5.5rem); line-height: 0.98; letter-spacing: -0.02em;
+    text-transform: uppercase; color: #fff; margin: 0;
+  }
+  .roi-sub {
+    margin: clamp(1.2rem, 2.5vw, 1.8rem) 0 0; max-width: 60ch;
+    font-family: var(--font-body); font-weight: 300; font-size: clamp(1rem, 1.4vw, 1.18rem);
+    line-height: 1.7; color: rgba(255, 255, 255, 0.72);
+  }
+  .roi-sub strong { color: #fff; font-weight: 500; }
+
+  /* ===== CALCULATOR LAYOUT ===== */
+  .roi-calc { padding: 0 0 clamp(4rem, 8vw, 7rem); }
+  .roi-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(1.2rem, 2.4vw, 2rem); align-items: start; }
+  .roi-panel {
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 26px; padding: clamp(1.4rem, 2.6vw, 2.4rem);
+  }
+  .roi-panel__title {
+    font-family: var(--font-headline); font-weight: 600; font-size: 1.15rem;
+    color: #fff; margin: 0 0 1.6rem; letter-spacing: -0.01em;
+  }
+
+  /* ===== FIELDS ===== */
+  .roi-field { margin-bottom: 1.55rem; }
+  .roi-field__head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.7rem; }
+  .roi-field__head label {
+    font-family: var(--font-body); font-weight: 400; font-size: 0.95rem; color: rgba(255, 255, 255, 0.86);
+  }
+  .roi-field__val {
+    font-family: var(--font-headline); font-weight: 700; font-size: 1.05rem; color: #ff6a3d; white-space: nowrap;
+  }
+  .roi-field__val--usd { font-size: 0.9rem; color: rgba(255, 255, 255, 0.55); font-weight: 600; }
+  .roi-field__unit { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; }
+  .roi-field__scale { display: flex; justify-content: space-between; margin-top: 0.4rem; font-size: 0.72rem; color: rgba(255, 255, 255, 0.38); font-family: var(--font-mono); }
+  .roi-hint { margin: 0.6rem 0 0; font-size: 0.8rem; line-height: 1.55; color: rgba(255, 255, 255, 0.5); }
+
+  /* Range slider (dark fire) */
+  input[type="range"] {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12); outline: none; cursor: pointer;
+    background-image: linear-gradient(#ff6a3d, #ff6a3d); background-repeat: no-repeat; background-size: 50% 100%;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%;
+    background: #ff6a3d; border: 3px solid #1a0a04; box-shadow: 0 2px 10px rgba(242, 66, 11, 0.5); cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+  input[type="range"]::-moz-range-thumb {
+    width: 18px; height: 18px; border-radius: 50%; background: #ff6a3d; border: 3px solid #1a0a04;
+    box-shadow: 0 2px 10px rgba(242, 66, 11, 0.5); cursor: pointer;
+  }
+  input[type="range"]::-moz-range-progress { background: #ff6a3d; height: 6px; border-radius: 999px; }
+
+  /* Segmented control */
+  .roi-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+  .roi-seg__btn {
+    font-family: var(--font-headline); font-weight: 600; font-size: 0.92rem; cursor: pointer;
+    padding: 0.75rem 0.5rem; border-radius: 12px; color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.2s ease;
+  }
+  .roi-seg__btn:hover { border-color: rgba(242, 66, 11, 0.5); color: #fff; }
+  .roi-seg__btn.is-active { background: #f2420b; border-color: #f2420b; color: #fff; box-shadow: 0 10px 24px -12px rgba(242, 66, 11, 0.7); }
+
+  /* Money inputs */
+  .roi-div { border: 0; height: 1px; background: rgba(255, 255, 255, 0.1); margin: 1.8rem 0; }
+  .roi-money { position: relative; }
+  .roi-money input {
+    width: 100%; font-family: var(--font-headline); font-weight: 700; font-size: 1.2rem; color: #fff;
+    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 12px;
+    padding: 0.8rem 2rem 0.8rem 1rem; outline: none; transition: border-color 0.2s ease;
+  }
+  .roi-money input:focus { border-color: rgba(242, 66, 11, 0.6); }
+  .roi-money__unit { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: rgba(255, 255, 255, 0.5); font-weight: 700; }
+
+  /* ===== RESULTS ===== */
+  .roi-results { position: sticky; top: 5.5rem; background: linear-gradient(180deg, rgba(242, 66, 11, 0.08), rgba(255, 255, 255, 0.03) 42%); }
+  .roi-headline { text-align: center; padding: 0.5rem 0 1.6rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 1.6rem; }
+  .roi-headline__label { display: block; font-family: var(--font-body); font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); margin-bottom: 0.5rem; }
+  .roi-headline__big { display: block; font-family: var(--font-headline); font-weight: 700; font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1; letter-spacing: -0.02em; color: #ff6a3d; }
+  .roi-headline__big.is-loss { color: #ff6b6b; }
+  .roi-headline__vnd { display: block; margin-top: 0.5rem; font-family: var(--font-headline); font-weight: 600; font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); }
+
+  .roi-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 1.8rem; }
+  .roi-kpi { text-align: center; padding: 1rem 0.4rem; border-radius: 14px; background: rgba(255, 255, 255, 0.035); border: 1px solid rgba(255, 255, 255, 0.08); }
+  .roi-kpi__num { display: block; font-family: var(--font-headline); font-weight: 700; font-size: clamp(1.1rem, 2vw, 1.5rem); color: #fff; line-height: 1.1; }
+  .roi-kpi__label { display: block; margin-top: 0.35rem; font-size: 0.74rem; color: rgba(255, 255, 255, 0.55); line-height: 1.3; }
+
+  /* Waterfall */
+  .roi-flow { margin-top: 0.5rem; }
+  .roi-flow__title { display: block; font-family: var(--font-headline); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); margin-bottom: 1rem; }
+  .roi-bar { position: relative; margin-bottom: 0.6rem; border-radius: 10px; overflow: hidden; background: rgba(255, 255, 255, 0.04); }
+  .roi-bar__fill { position: absolute; inset: 0 auto 0 0; border-radius: 10px; transition: width 0.5s cubic-bezier(.16,1,.3,1); }
+  .roi-bar--gross .roi-bar__fill { background: linear-gradient(90deg, rgba(242, 66, 11, 0.55), rgba(255, 106, 61, 0.4)); }
+  .roi-bar--minus .roi-bar__fill { background: rgba(255, 255, 255, 0.1); }
+  .roi-bar--net .roi-bar__fill { background: linear-gradient(90deg, #f2420b, #ff6a3d); }
+  .roi-bar__row { position: relative; display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0.95rem; font-family: var(--font-body); font-size: 0.9rem; }
+  .roi-bar__row span:first-child { color: rgba(255, 255, 255, 0.82); }
+  .roi-bar__row span:last-child { font-family: var(--font-headline); font-weight: 700; color: #fff; white-space: nowrap; }
+  .roi-bar--net .roi-bar__row span:first-child { color: #fff; font-weight: 600; }
+
+  .roi-note { margin: 1.4rem 0 0; font-size: 0.85rem; line-height: 1.6; color: rgba(255, 255, 255, 0.6); text-align: center; min-height: 1px; }
+  .roi-note.is-good { color: #7fe0a8; }
+
+  /* Disclaimer + CTA */
+  .roi-disclaimer {
+    margin: clamp(1.6rem, 3vw, 2.4rem) 0 0; padding: 1.2rem 1.4rem; border-radius: 16px;
+    background: rgba(255, 255, 255, 0.025); border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.85rem; line-height: 1.7; color: rgba(255, 255, 255, 0.58);
+  }
+  .roi-disclaimer strong { color: rgba(255, 255, 255, 0.85); }
+  .roi-cta { text-align: center; margin-top: clamp(1.6rem, 3vw, 2.4rem); }
+  .roi-cta__btn {
+    display: inline-block; font-family: var(--font-headline); font-weight: 700; font-size: 1rem;
+    color: #fff; text-decoration: none; padding: 1rem 2rem; border-radius: 999px;
+    background: #f2420b; box-shadow: 0 16px 40px -14px rgba(242, 66, 11, 0.7); transition: all 0.25s ease;
+  }
+  .roi-cta__btn:hover { background: #ff5c26; transform: translateY(-2px); }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 880px) {
+    .roi-grid { grid-template-columns: 1fr; }
+    .roi-results { position: static; }
+  }
+  @media (max-width: 480px) {
+    .roi-kpis { grid-template-columns: 1fr; }
+    .roi-seg__btn { font-size: 0.82rem; padding: 0.7rem 0.3rem; }
+  }
+</style>
+
+<script>
+  (() => {
+    const $ = (id: string) => document.getElementById(id) as HTMLElement;
+    const WEEKS_PER_MONTH = 4.333;
+
+    const fmtUsd = (n: number) =>
+      (n < 0 ? '−$' : '$') + new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Math.abs(Math.round(n)));
+    const fmtVnd = (n: number) =>
+      (n < 0 ? '− ' : '') + new Intl.NumberFormat('vi-VN').format(Math.abs(Math.round(n))) + ' ₫';
+    const parseNum = (s: string) => Number((s || '').replace(/[^\d]/g, '')) || 0;
+
+    let months = 12;
+
+    const els = {
+      wage: $('rWage') as HTMLInputElement,
+      hours: $('rHours') as HTMLInputElement,
+      living: $('rLiving') as HTMLInputElement,
+      tax: $('rTax') as HTMLInputElement,
+      cost: $('rCost') as HTMLInputElement,
+      rate: $('rRate') as HTMLInputElement,
+    };
+
+    const paintRange = (el: HTMLInputElement) => {
+      const min = +el.min, max = +el.max, v = +el.value;
+      const pct = ((v - min) / (max - min)) * 100;
+      el.style.backgroundSize = pct + '% 100%';
+    };
+
+    const compute = () => {
+      const wage = +els.wage.value;
+      const hours = +els.hours.value;
+      const living = +els.living.value;
+      const taxPct = +els.tax.value;
+      const rate = parseNum(els.rate.value) || 25500;
+      const costVnd = parseNum(els.cost.value);
+      const costUsd = costVnd / rate;
+
+      const weeks = months * WEEKS_PER_MONTH;
+      const gross = wage * hours * weeks;
+      const tax = gross * (taxPct / 100);
+      const livingTotal = living * months;
+      const takeHome = gross - tax - livingTotal;
+      const net = takeHome - costUsd;
+      const roi = costUsd > 0 ? (net / costUsd) * 100 : 0;
+
+      const weeklyNet = wage * hours * (1 - taxPct / 100) - living / WEEKS_PER_MONTH;
+      const breakevenWeeks = weeklyNet > 0 ? costUsd / weeklyNet : Infinity;
+
+      ($('outWage')).textContent = '$' + wage.toFixed(1);
+      ($('outHours')).textContent = hours + ' hrs';
+      ($('outLiving')).textContent = fmtUsd(living);
+      ($('outTax')).textContent = taxPct + '%';
+      ($('outCostUsd')).textContent = costVnd > 0 ? '≈ ' + fmtUsd(costUsd) : '—';
+
+      const bigEl = $('outNetUsd');
+      bigEl.textContent = fmtUsd(net);
+      bigEl.classList.toggle('is-loss', net < 0);
+      ($('outNetVnd')).textContent = '≈ ' + fmtVnd(net * rate);
+
+      ($('outRoi')).textContent = costUsd > 0 ? Math.round(roi) + '%' : '—';
+      ($('outGross')).textContent = fmtUsd(gross);
+      if (costUsd <= 0) {
+        ($('outBreakeven')).textContent = '—';
+      } else if (!isFinite(breakevenWeeks)) {
+        ($('outBreakeven')).textContent = 'Never';
+      } else {
+        const m = breakevenWeeks / WEEKS_PER_MONTH;
+        ($('outBreakeven')).textContent = m < 1.5
+          ? Math.round(breakevenWeeks) + ' wks'
+          : '~' + (m < 6 ? m.toFixed(1) : Math.round(m)) + ' mo';
+      }
+
+      const base = Math.max(gross, 1);
+      const pct = (v: number) => Math.max(0, Math.min(100, (v / base) * 100));
+      ($('barGross')).style.width = '100%';
+      ($('barTax')).style.width = pct(tax) + '%';
+      ($('barLiving')).style.width = pct(livingTotal) + '%';
+      ($('barCost')).style.width = pct(costUsd) + '%';
+      ($('barNet')).style.width = pct(Math.max(net, 0)) + '%';
+      ($('valGross')).textContent = fmtUsd(gross);
+      ($('valTax')).textContent = '−' + fmtUsd(tax).replace('−', '');
+      ($('valLiving')).textContent = '−' + fmtUsd(livingTotal).replace('−', '');
+      ($('valCost')).textContent = costUsd > 0 ? '−' + fmtUsd(costUsd).replace('−', '') : '$0';
+      ($('valNet')).textContent = fmtUsd(net);
+
+      const note = $('roiNote');
+      if (costUsd <= 0) {
+        note.textContent = 'Enter your program cost to see ROI and break-even.';
+        note.className = 'roi-note';
+      } else if (net >= 0) {
+        note.textContent = `After every cost, you'd save an estimated ${fmtUsd(net)} and pay back the program with J-1 earnings alone.`;
+        note.className = 'roi-note is-good';
+      } else {
+        note.textContent = "At these numbers, earnings don't yet cover the cost — try a longer term, higher wage or lower living cost.";
+        note.className = 'roi-note';
+      }
+    };
+
+    [els.wage, els.hours, els.living, els.tax].forEach((el) => {
+      el.addEventListener('input', () => { paintRange(el); compute(); });
+      paintRange(el);
+    });
+
+    const formatMoneyInput = (el: HTMLInputElement) => {
+      const n = parseNum(el.value);
+      el.value = n ? new Intl.NumberFormat('en-US').format(n) : '';
+    };
+    [els.cost, els.rate].forEach((el) => {
+      el.addEventListener('input', () => { formatMoneyInput(el); compute(); });
+    });
+
+    document.querySelectorAll<HTMLButtonElement>('#segDuration .roi-seg__btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#segDuration .roi-seg__btn').forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        months = +(btn.dataset.months || '12');
+        compute();
+      });
+    });
+
+    compute();
+  })();
+</script>

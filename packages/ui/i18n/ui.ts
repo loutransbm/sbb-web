@@ -30,6 +30,7 @@ export const EN_ROUTES = new Set<string>([
   '/programs/career-training',
   '/programs/internship-j1',
   '/programs/j1-trainee',
+  '/programs/roi-j1',
   '/programs/407',
   '/programs/office-tour',
   '/placements',

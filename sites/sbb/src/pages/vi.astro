@@ -256,7 +256,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
       
       <div class="services-grid" data-reveal-stagger>
         <div class="services-row services-row--top">
-        <div class="service-card s-pos-1">
+        <a class="service-card s-pos-1" href="/programs/global-internship">
           <div class="s-card-number">01</div>
           <div class="s-card-icon-wrapper">
             <img loading="lazy" decoding="async" src="/global-3d-nobg.png" alt="Global Internship 3D" class="s-icon-image" />
@@ -265,9 +265,9 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
             <h3 class="s-card-title">GLOBAL INTERNSHIP</h3>
             <p class="s-card-desc">Thực tập có trả lương tại doanh nghiệp Mỹ qua chương trình J‑1 , bước đệm thực chất để khởi động sự nghiệp toàn cầu.</p>
           </div>
-        </div>
+        </a>
         
-        <div class="service-card s-pos-2">
+        <a class="service-card s-pos-2" href="/programs/office-tour">
           <div class="s-card-number">02</div>
           <div class="s-card-icon-wrapper">
             <img loading="lazy" decoding="async" src="/plane-3d-nobg.png" alt="Office Tour 3D Plane" class="s-icon-image" />
@@ -276,11 +276,11 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
             <h3 class="s-card-title">OFFICE TOUR</h3>
             <p class="s-card-desc">Đồng sáng lập cùng Career Mates: bước vào văn phòng các tập đoàn toàn cầu (JP Morgan…), trải nghiệm thực tế kết hợp khám phá.</p>
           </div>
-        </div>
+        </a>
         </div>
 
         <div class="services-row services-row--bottom">
-        <div class="service-card s-pos-3">
+        <a class="service-card s-pos-3" href="/learn">
           <div class="s-card-number">03</div>
           <div class="s-card-icon-wrapper">
             <img loading="lazy" decoding="async" src="/grp-3d-globe-nobg.png" alt="GRP Foundation 3D" class="s-icon-image" />
@@ -289,9 +289,9 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
             <h3 class="s-card-title">GLOBAL READINESS</h3>
             <p class="s-card-desc">Global Readiness Programme (GRP): chuẩn hóa năng lực hội nhập theo tiêu chí UNESCO (SDG4 &amp; SDG8), kiểm định bởi ABE.</p>
           </div>
-        </div>
+        </a>
 
-        <div class="service-card s-pos-4">
+        <a class="service-card s-pos-4" href="/programs/career-training">
           <div class="s-card-number">04</div>
           <div class="s-card-icon-wrapper">
             <img loading="lazy" decoding="async" src="/career-3d-nobg-v2.png" alt="Career Training 3D" class="s-icon-image" />
@@ -300,7 +300,7 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
             <h3 class="s-card-title">CAREER TRAINING GLOBAL</h3>
             <p class="s-card-desc">Đào tạo nghề quốc tế có trả lương: J‑1 (Mỹ) và visa 407 (Úc): Hospitality, Aged Care, Childcare.</p>
           </div>
-        </div>
+        </a>
         </div>
       </div>
       <div class="services-dots" aria-hidden="true">
@@ -3002,6 +3002,8 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   .services-row--bottom { justify-content: center; gap: 3rem; }
 
   /* Card rộng cố định để 2 hàng flex căn đúng (bố cục so le: 1·2 ngoài, 3·4 giữa) */
+  /* Card program giờ là <a> link → gỡ style link mặc định */
+  a.service-card { text-decoration: none; color: inherit; cursor: pointer; }
   .service-card { flex: 0 0 400px; width: 400px; max-width: 400px; }
 
   .service-card {
