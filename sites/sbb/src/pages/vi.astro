@@ -1,5 +1,6 @@
 ---
 import PageLayout from '@ui/layouts/PageLayout.astro';
+import HomeNews from '../components/HomeNews.astro';
 ---
 
 <PageLayout
@@ -720,6 +721,29 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
         <button class="tm-nav tm-nav--prev" id="tm-prev" type="button" aria-label="Đối tác trước">&#8249;</button>
         <button class="tm-nav tm-nav--next" id="tm-next" type="button" aria-label="Đối tác sau">&#8250;</button>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ LATEST NEWS · tin hoạt động + bài mới (tự lấy từ News, xem components/HomeNews.astro) ============ -->
+  <section class="news-home-section" id="latest-news">
+    <div class="container">
+      <div class="cs-header">
+        <div class="cs-line cs-line-1">
+          <span class="cs-text-white">LATEST NEWS</span>
+          <div class="cs-glass-pill">
+            <span class="cs-glass-title">REAL ACTIVITY</span>
+            <span class="cs-glass-sub">Tin tức và hợp tác</span>
+          </div>
+        </div>
+        <div class="cs-header-bottom">
+          <a href="/news" class="nh-all">Xem tất cả tin <span aria-hidden="true">→</span></a>
+          <div class="cs-right-block nh-right">
+            <div class="cs-line cs-line-2"><span class="cs-text-white">FROM SBB</span></div>
+            <p class="nh-desc">Hoạt động mới nhất của SBB cùng các trường đại học và đối tác trong, ngoài nước, kèm các bài hướng dẫn mới cho hành trình J-1.</p>
+          </div>
+        </div>
+      </div>
+      <div class="nh-stage"><HomeNews lang="vi" /></div>
     </div>
   </section>
 
@@ -5208,46 +5232,62 @@ import PageLayout from '@ui/layouts/PageLayout.astro';
   });
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<style>
+  /* ===== LATEST NEWS (trang chủ) — tin hoạt động + bài mới, thẻ do <HomeNews/> render =====
+     Tiêu đề dùng ĐÚNG cascade cs-* của trang; rule mobile mirror #testimonials/#case-studies. */
+  .news-home-section { position: relative; padding: var(--sec-pad) 0; }
+  .news-home-section .cs-header { margin-bottom: clamp(3rem, 5vw, 5rem); }
+  .nh-desc {
+    max-width: 42ch; margin: clamp(1.1rem, 1.6vw, 1.6rem) 0 0;
+    font-family: 'Inter', sans-serif; font-size: clamp(0.85rem, 1vw, 1rem); font-weight: 400; line-height: 1.65;
+    color: rgba(255, 255, 255, 0.80);
+  }
+  .nh-all {
+    display: inline-flex; align-items: center; gap: 0.55rem; white-space: nowrap; text-decoration: none;
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.92rem; color: #fff;
+    padding: 0.85rem 1.5rem; border-radius: 999px;
+    background: linear-gradient(180deg, #ff5c26 0%, #f2420b 100%);
+    box-shadow: 0 12px 30px -10px rgba(242, 66, 11, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    transition: gap .3s ease, transform .3s ease;
+  }
+  .nh-all:hover { gap: 0.85rem; transform: translateY(-2px); }
+  /* "FROM SBB" canh TRÁI thẳng cột REAL GROWTH / SAY ABOUT US / BORDERS (cùng cơ chế #testimonials margin-right theo em). FROM SBB hẹp hơn -> bù 2.13em. Chỉ desktop: ≤1200 header xếp dọc, tự canh trái. */
+  @media (min-width: 1201px) { #latest-news .cs-line-2 .cs-text-white { margin-right: 2.13em; } }
+  /* Lưới thẻ trải rộng bằng tiêu đề, thẳng mép thanh nav (CÙNG break-out với .tm-stage / .cs-cards-wrapper) */
+  @media (min-width: 992px) {
+    .nh-stage {
+      width: calc(100vw - var(--sbw, 0px) - 4rem) !important;
+      max-width: 120rem !important;
+      margin-left: calc(50% - (50vw - var(--sbw, 0px) / 2) + 2rem) !important;
+      margin-right: auto !important;
+      box-sizing: border-box;
+    }
+  }
+  @media (max-width: 768px) {
+    #latest-news .cs-line-1 {
+      flex-direction: column !important; align-items: flex-start !important;
+      font-size: clamp(3.5rem, 16.8vw, 4.55rem) !important; line-height: 0.9 !important;
+      letter-spacing: -0.097em !important; white-space: nowrap !important;
+    }
+    #latest-news .cs-glass-pill {
+      order: -1 !important; margin: 0 0 -1.3rem 1.6rem !important;
+      width: 34vw !important; min-width: 138px !important; max-width: 168px !important;
+      padding: 0.7rem 0.95rem !important; gap: 0.3rem !important; position: relative; z-index: 5;
+    }
+    #latest-news .cs-glass-title {
+      font-size: 0.92rem !important; font-weight: 700 !important; letter-spacing: 0.015em !important;
+      color: #ffffff !important; white-space: normal !important; line-height: 1.05 !important;
+    }
+    #latest-news .cs-glass-sub {
+      font-size: 0.7rem !important; line-height: 1.35 !important; letter-spacing: normal !important;
+      color: rgba(255, 255, 255, 0.5) !important; max-width: 100% !important;
+    }
+    #latest-news .cs-line-2 {
+      font-size: clamp(2.4rem, 11.4vw, 3.2rem) !important; line-height: 0.96 !important;
+      letter-spacing: -0.045em !important; white-space: nowrap !important;
+    }
+    #latest-news .cs-line { max-width: 100% !important; }
+    #latest-news .nh-right { width: 100% !important; max-width: 100% !important; }
+    #latest-news .nh-desc { max-width: none !important; }
+  }
+</style>

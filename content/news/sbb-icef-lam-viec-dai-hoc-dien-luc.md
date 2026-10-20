@@ -1,6 +1,8 @@
 ---
 title: "SBB và ICEF làm việc với Trường Đại học Điện lực về chương trình thực tập tại Hoa Kỳ"
 description: "Chiều 15/10/2026, Trường Đại học Điện lực (EPU) làm việc với SBB Institute và ICEF, Inc. (Hoa Kỳ) về việc kết nối sinh viên EPU với chương trình thực tập và đào tạo nghề tại Mỹ diện visa J-1 Intern và Trainee."
+title_en: "SBB and ICEF meet Electric Power University on U.S. internship pathways"
+description_en: "SBB Institute and ICEF, Inc. met Electric Power University (EPU) on October 15, 2026 to discuss bringing EPU students into J-1 Intern and Trainee programs in the United States."
 image: /images/epu-icef-2026/thumb.webp
 hero: /images/epu-icef-2026/hero.webp
 cum_chinh: internship-j1

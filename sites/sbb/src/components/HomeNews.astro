@@ -1,0 +1,172 @@
+---
+/**
+ * HomeNews — khối thẻ tin trên trang chủ (dưới Testimonials, trên CTA).
+ * Tự lấy từ content collection `news`: thẻ LỚN = tin hoạt động mới nhất (loai: update),
+ * 2 thẻ nhỏ = 2 bài mới nhất còn lại. Đăng bài mới là trang chủ tự cập nhật.
+ * Bản EN dùng title_en / description_en nếu có, thiếu thì hiện bản tiếng Việt.
+ * Tiêu đề section (cascade) nằm trong trang để ăn đúng style cs-* của trang chủ.
+ */
+import { getCollection } from 'astro:content';
+
+interface Props { lang?: 'vi' | 'en'; }
+const { lang = 'vi' } = Astro.props;
+const en = lang === 'en';
+
+const all = (await getCollection('news')).sort(
+  (a, b) => b.data.published.getTime() - a.data.published.getTime(),
+);
+const lead = all.find((e) => e.data.loai === 'update') ?? all[0];
+const side = all.filter((e) => e.id !== lead?.id).slice(0, 2);
+
+const fmt = (d: Date) =>
+  en
+    ? d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    : d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+const items = [lead, ...side].filter(Boolean).map((e) => ({
+  href: `/news/${e.id}`,
+  img: e.data.image || e.data.hero || '/brand/og-cover.png',
+  title: en ? e.data.title_en || e.data.title : e.data.title,
+  desc: en ? e.data.description_en || e.data.description || '' : e.data.description || '',
+  tag: e.data.loai === 'update' ? (en ? 'SBB News' : 'Tin SBB') : (en ? 'J-1 Guide' : 'Kiến thức J-1'),
+  date: fmt(e.data.published),
+  iso: e.data.published.toISOString().slice(0, 10),
+}));
+const [first, ...rest] = items;
+---
+
+{first && (
+  <div class="hn-grid">
+    <a class="hn-card hn-lead" href={first.href}>
+      <div class="hn-lead__media">
+        <img src={first.img} alt="" width="1200" height="630" loading="lazy" decoding="async" />
+      </div>
+      <div class="hn-lead__body">
+        <span class="hn-tag">{first.tag}</span>
+        <h3 class="hn-lead__title">{first.title}</h3>
+        {first.desc && <p class="hn-lead__desc">{first.desc}</p>}
+        <div class="hn-foot">
+          <time datetime={first.iso}>{first.date}</time>
+          <span class="hn-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </span>
+        </div>
+      </div>
+    </a>
+
+    {rest.length > 0 && (
+      <div class="hn-side">
+        {rest.map((p) => (
+          <a class="hn-card hn-item" href={p.href}>
+            <div class="hn-item__media">
+              <img src={p.img} alt="" width="1200" height="630" loading="lazy" decoding="async" />
+            </div>
+            <div class="hn-item__body">
+              <span class="hn-tag">{p.tag}</span>
+              <h3 class="hn-item__title">{p.title}</h3>
+              <div class="hn-foot">
+                <time datetime={p.iso}>{p.date}</time>
+                <span class="hn-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+)}
+
+<style>
+  /* Dark fire, KHÔNG card trắng: viền mảnh tối, chỉ bừng cam khi hover (đồng bộ card trang News) */
+  .hn-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 2vw, 2.4rem);
+  }
+  .hn-card {
+    position: relative; display: flex; text-decoration: none; overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.10); border-radius: 28px;
+    background: transparent; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    transition: border-color .4s ease, background .4s ease, box-shadow .4s ease, transform .4s ease;
+  }
+  .hn-card:hover {
+    background: radial-gradient(180% 150% at 100% 100%,
+      rgba(255, 126, 72, 0.90) 0%, rgba(255, 100, 30, 0.80) 25%, rgba(242, 66, 11, 0.60) 50%,
+      rgba(20, 10, 5, 0.90) 80%, rgba(10, 5, 2, 0.98) 100%);
+    border-color: #f2420b;
+    box-shadow: 0 26px 64px -24px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px);
+  }
+  .hn-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.16, 1, .3, 1); }
+  .hn-card:hover img { transform: scale(1.04); }
+
+  .hn-tag {
+    display: inline-block; align-self: flex-start;
+    font-family: var(--font-headline); font-weight: 600; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #f2420b;
+    border: 1px solid rgba(242, 66, 11, 0.4); border-radius: 999px; padding: 0.28rem 0.75rem;
+    transition: color .3s ease, border-color .3s ease;
+  }
+  .hn-card:hover .hn-tag { color: #fff; border-color: rgba(255, 255, 255, 0.5); }
+  .hn-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .hn-foot time { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 0.8rem; color: rgba(255, 255, 255, 0.5); }
+  .hn-card:hover .hn-foot time { color: rgba(255, 255, 255, 0.8); }
+  .hn-arrow {
+    flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+    width: 2.4rem; height: 2.4rem; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18); color: rgba(255, 255, 255, 0.85);
+    transition: background .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .hn-card:hover .hn-arrow { border-color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.08); color: #fff; }
+
+  /* Thẻ lớn: ảnh trên, chữ dưới */
+  .hn-lead { flex-direction: column; padding: clamp(1.4rem, 2vw, 2rem); }
+  .hn-lead__media {
+    border-radius: 18px; overflow: hidden; aspect-ratio: 1200 / 630;
+    background: linear-gradient(160deg, #2a1109, #160a05);
+  }
+  .hn-lead__body { display: flex; flex-direction: column; flex: 1; gap: 0.95rem; padding: clamp(1.4rem, 2vw, 1.9rem) 0.3rem 0.2rem; }
+  .hn-lead__title {
+    margin: 0; font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(1.35rem, 2vw, 1.9rem); line-height: 1.25; letter-spacing: -0.02em;
+    color: #fff; text-transform: none;
+  }
+  .hn-lead__desc {
+    margin: 0 0 0.6rem; font-family: 'Inter', sans-serif; font-weight: 300;
+    font-size: 0.95rem; line-height: 1.6; color: rgba(255, 255, 255, 0.65);
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .hn-card:hover .hn-lead__desc { color: rgba(255, 255, 255, 0.85); }
+
+  /* 2 thẻ nhỏ: xếp dọc, chia đều chiều cao thẻ lớn; trong thẻ ảnh trái / chữ phải */
+  .hn-side { display: flex; flex-direction: column; gap: clamp(1.5rem, 2vw, 2.4rem); }
+  .hn-item { flex: 1; align-items: stretch; gap: clamp(1rem, 1.4vw, 1.4rem); padding: clamp(1rem, 1.4vw, 1.3rem); }
+  .hn-item__media {
+    flex: 0 0 42%; border-radius: 16px; overflow: hidden; min-height: 150px;
+    background: linear-gradient(160deg, #2a1109, #160a05);
+  }
+  .hn-item__body { display: flex; flex-direction: column; gap: 0.8rem; flex: 1; min-width: 0; padding: 0.3rem 0.2rem 0.1rem 0; }
+  /* Không cho flex co tag/tiêu đề (co lại -> dòng cuối bị cắt nửa); thẻ tự cao theo chữ */
+  .hn-item__body > .hn-tag, .hn-item__title { flex-shrink: 0; }
+  .hn-item__title {
+    margin: 0; font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.3; letter-spacing: -0.015em;
+    color: #fff; text-transform: none;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  @media (max-width: 900px) {
+    .hn-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .hn-card { border-radius: 22px; }
+    .hn-lead { padding: 1.1rem; }
+    .hn-lead__body { padding: 1.2rem 0.2rem 0.1rem; }
+    .hn-item { padding: 0.85rem; gap: 0.9rem; }
+    .hn-item__media { flex-basis: 38%; min-height: 118px; border-radius: 12px; }
+    .hn-item__title { font-size: 0.98rem; }
+    .hn-arrow { width: 2.1rem; height: 2.1rem; }
+  }
+</style>

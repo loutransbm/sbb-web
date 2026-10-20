@@ -47,6 +47,9 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
+    // Tiêu đề / mô tả tiếng Anh (tuỳ chọn) — chỉ dùng cho thẻ tin trên trang chủ bản EN; thiếu thì hiện bản Việt
+    title_en: z.string().optional(),
+    description_en: z.string().optional(),
     image: z.string().optional(),   // thumbnail (card)
     hero: z.string().optional(),    // ảnh đầu bài
     cum_chinh: z.enum([
