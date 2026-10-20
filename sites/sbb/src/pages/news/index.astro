@@ -9,7 +9,8 @@ const cumLabels = {
   'office-tour': 'Office Tour', 'tieng-noi-hanh-trinh': 'Tiếng nói hành trình',
 };
 // Gom bài J-1 theo chủ đề cho bộ lọc gọn; bài cụm khác dùng nhãn cụm.
-function themeOf(slug, cum) {
+function themeOf(slug, cum, loai) {
+  if (loai === 'update') return 'Tin SBB'; // tin tức / hợp tác của SBB (không phải bài kiến thức)
   if (cum !== 'internship-j1') return cumLabels[cum] || 'Khác';
   if (/thue|fica|hoan-thue|khai-thue|luong|thuc-nhan|chi-phi|gui-tien/.test(slug)) return 'Chi phí & Thuế';
   if (/sau-j1|212e|ve-nuoc|dinh-cu|grace/.test(slug)) return 'Sau chương trình';
@@ -25,14 +26,14 @@ const posts = entries
     img: e.data.image,
     title: e.data.title,
     desc: e.data.description || '',
-    cat: themeOf(e.id, e.data.cum_chinh),
-    catLabel: themeOf(e.id, e.data.cum_chinh),
+    cat: themeOf(e.id, e.data.cum_chinh, e.data.loai),
+    catLabel: themeOf(e.id, e.data.cum_chinh, e.data.loai),
     date: fmtDate(e.data.published),
     ts: e.data.published.getTime(),
     href: `/news/${e.id}`,
   }))
   .sort((a, b) => b.ts - a.ts);
-const catOrder = ['Visa & Hồ sơ', 'Ngành & Công việc', 'Chi phí & Thuế', 'Cuộc sống ở Mỹ', 'Sau chương trình'];
+const catOrder = ['Tin SBB', 'Visa & Hồ sơ', 'Ngành & Công việc', 'Chi phí & Thuế', 'Cuộc sống ở Mỹ', 'Sau chương trình'];
 const present = Array.from(new Set(posts.map((p) => p.cat)));
 present.sort((a, b) => ((catOrder.indexOf(a) + 1) || 99) - ((catOrder.indexOf(b) + 1) || 99));
 const blogCats = [{ id: 'all', label: 'Tất cả' }, ...present.map((c) => ({ id: c, label: c }))];

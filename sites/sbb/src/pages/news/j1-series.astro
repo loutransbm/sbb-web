@@ -18,7 +18,8 @@ function themeOf(slug, cum) {
   return 'Visa & Hồ sơ';
 }
 const fmtDate = (dt) => dt.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
-const entries = await getCollection('news');
+// Chuỗi J-1 chỉ gồm bài kiến thức; bỏ bài tin tức SBB (loai: update).
+const entries = (await getCollection('news')).filter((e) => e.data.loai !== 'update');
 const posts = entries
   .map((e) => ({
     slug: e.id,
